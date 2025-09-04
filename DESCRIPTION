@@ -1,44 +1,15 @@
 Package: tikatuwq
 Type: Package
-Title: Ferramentas para AnÃƒÂ¡lise de Qualidade da ÃƒÂgua no Brasil (IQA, IET, CONAMA)
+Title: Ferramentas para Análise de Qualidade da Água (Brasil)
 Version: 0.4.1
-Authors@R: c(
-  person(given = "Vinicius", family = "Saraiva Santos", role = c("aut","cre"),
-         email = "contato@tikatu.com.br"),
-  person(given = "ChatGPT", family = "DevSenior", role = "aut")
-)
-Description: FunÃƒÂ§ÃƒÂµes para importaÃƒÂ§ÃƒÂ£o, validaÃƒÂ§ÃƒÂ£o, cÃƒÂ¡lculo de ÃƒÂ­ndices (IQA, IET, NSFWQI),
-    verificaÃƒÂ§ÃƒÂ£o de conformidade com a ResoluÃƒÂ§ÃƒÂ£o CONAMA 357/2005,
-    visualizaÃƒÂ§ÃƒÂµes e geraÃƒÂ§ÃƒÂ£o de relatÃƒÂ³rio (Quarto/R Markdown). Inclui mÃƒÂ³dulo de
-    texto analÃƒÂ­tico automÃƒÂ¡tico (rule-based) sem uso de IA.
+Authors@R: person("Vinicius Saraiva", "Santos", role = c("aut","cre"))
+Description: Indices de Qualidade da Agua (IQA CETESB/NSF), checagens CONAMA 357/2005 e relatorios.
 License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1)
+Imports: dplyr, readr, tibble, rlang, stats, utils, ggplot2, tidyr, lubridate, stringr, glue, scales, broom, purrr
+Suggests: testthat (>= 3.0.0), rmarkdown, knitr, pkgdown
 URL: https://github.com/tikatuwq/tikatuwq, https://tikatuwq.github.io/tikatuwq/
 BugReports: https://github.com/tikatuwq/tikatuwq/issues
-Encoding: UTF-8
-Depends: R (>= 4.2.0)
-Imports:
-    dplyr,
-    tidyr,
-    readr,
-    stringr,
-    lubridate,
-    ggplot2,
-    sf,
-    units,
-    rmarkdown,
-    knitr,
-    glue,
-    scales,
-    broom,
-    tibble, 
-    rlang, 
-    stats, 
-    utils,
-    purrr
-Suggests:
-    testthat (>= 3.0.0), rmarkdown, knitr, pkgdown,
-    quarto
-Config/testthat/edition: 3
-LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+Config/testthat/edition: 3
