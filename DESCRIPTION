@@ -2,20 +2,37 @@ Package: tikatuwq
 Type: Package
 Title: Ferramentas para Análise de Qualidade da Água (Brasil)
 Version: 0.4.1
-Authors@R: c(
-    person(given = "Vinicius Saraiva",
-           family = "Santos",
-           email = "vinisaraiva@gmail.com",
-           role = c("aut","cre"),
-           comment = c(ORCID = "0000-0000-0000-0000"))
-)
+Authors@R:
+    c(person(given = "Vinicius Saraiva",
+             family = "Santos",
+             email = "vinisaraiva@gmail.com",
+             role = c("aut","cre"),
+             comment = c(ORCID = "0000-0000-0000-0000")))
 Maintainer: Vinicius Saraiva Santos <vinisaraiva@gmail.com>
 Description: Indices de Qualidade da Agua (IQA CETESB/NSF), checagens CONAMA 357/2005 e relatorios.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1)
-Imports: dplyr, readr, tibble, rlang, stats, utils, ggplot2, tidyr, lubridate, stringr, glue, scales, broom, purrr
-Suggests: testthat (>= 3.0.0), rmarkdown, knitr, pkgdown
+Imports:
+    dplyr,
+    readr,
+    tibble,
+    rlang,
+    stats,
+    utils,
+    ggplot2,
+    tidyr,
+    lubridate,
+    stringr,
+    glue,
+    scales,
+    broom,
+    purrr
+Suggests:
+    testthat (>= 3.0.0),
+    rmarkdown,
+    knitr,
+    pkgdown
 URL: https://github.com/tikatuwq/tikatuwq, https://tikatuwq.github.io/tikatuwq/
 BugReports: https://github.com/tikatuwq/tikatuwq/issues
 Roxygen: list(markdown = TRUE)
