@@ -1,0 +1,20 @@
+---
+title: "Fluxo básico com tikatuwq"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fluxo básico com tikatuwq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tikatuwq)
+```
+
+## Exemplo rápido
+```{r}
+path <- system.file("extdata","exemplo_chamagunga.csv", package = "tikatuwq")
+df <- read_wq(path) |> validate_wq() |> iqa(na_rm = TRUE)
+plot_iqa(df)
+```

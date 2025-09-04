@@ -1,0 +1,9 @@
+citHeader("Para citar o pacote tikatuwq:")
+citEntry(
+  entry = "Manual",
+  title = "tikatuwq: Ferramentas para Análise de Qualidade da Água (Brasil)",
+  author = person("Vinicius Saraiva", "Santos"),
+  year = "2025",
+  note = "Versão 0.4.1",
+  url  = "https://github.com/tikatuwq/tikatuwq"
+)

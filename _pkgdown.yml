@@ -1,0 +1,11 @@
+url: https://tikatuwq.github.io/tikatuwq/
+template:
+  bootstrap: 5
+navbar:
+  structure:
+    left:  [reference, articles]
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/tikatuwq/tikatuwq

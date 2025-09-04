@@ -1,0 +1,38 @@
+classe,parametro,unidade,min,max,observacao,status,contexto
+1,pH,unid,6.0,9.0,,ok,Águas doces classe 1
+1,od,mg/L,6.0,,mínimo em qualquer amostra,ok,Águas doces classe 1
+1,turbidez,UNT,,40,,ok,Águas doces classe 1
+1,dbo,mg/L,,3.0,DBO5 a 20°C,ok,Águas doces classe 1
+1,coliformes,NMP/100mL,,200,<=200 em 80% de ≥6 amostras/ano (demais usos); balneabilidade segue CONAMA 274/2000,ok,Águas doces classe 1
+1,clorofila_a,µg/L,,10,,ok,Águas doces classe 1
+1,cianobactérias,cel/mL,,20000,ou 2 mm3/L,ok,Águas doces classe 1
+1,p_total,mg/L,,0.020,Ambiente lêntico,ok,Águas doces classe 1
+1,p_total,mg/L,,0.025,Ambiente intermediário/tributários de ambiente lêntico,ok,Águas doces classe 1
+1,p_total,mg/L,,0.10,Ambiente lótico e tributários de ambientes intermediários,ok,Águas doces classe 1
+1,tds,mg/L,,500,,ok,Águas doces classe 1
+2,pH,unid,6.0,9.0,,ok,Águas doces classe 2
+2,od,mg/L,5.0,,mínimo em qualquer amostra,ok,Águas doces classe 2
+2,turbidez,UNT,,100,,ok,Águas doces classe 2
+2,dbo,mg/L,,5.0,DBO5 a 20°C,ok,Águas doces classe 2
+2,coliformes,NMP/100mL,,1000,<=1000 em 80% de ≥6 amostras/ano (demais usos); balneabilidade segue CONAMA 274/2000,ok,Águas doces classe 2
+2,clorofila_a,µg/L,,30,,ok,Águas doces classe 2
+2,cianobactérias,cel/mL,,50000,ou 5 mm3/L,ok,Águas doces classe 2
+2,p_total,mg/L,,0.030,Ambiente lêntico,ok,Águas doces classe 2
+2,p_total,mg/L,,0.050,Ambiente intermediário/tributários de ambiente lêntico,ok,Águas doces classe 2
+2,cor,mg Pt/L,,75,Cor verdadeira,ok,Águas doces classe 2
+3,pH,unid,6.0,9.0,,ok,Águas doces classe 3
+3,od,mg/L,4.0,,mínimo em qualquer amostra,ok,Águas doces classe 3
+3,turbidez,UNT,,100,,ok,Águas doces classe 3
+3,dbo,mg/L,,10.0,DBO5 a 20°C,ok,Águas doces classe 3
+3,coliformes,NMP/100mL,,2500,recreação de contato secundário: <=2500 em 80% de ≥6 amostras/ano,ok,Águas doces classe 3
+3,coliformes,NMP/100mL,,1000,dessedentação de animais: <=1000 em 80% de ≥6 amostras/ano,ok,Águas doces classe 3
+3,coliformes,NMP/100mL,,4000,demais usos: <=4000 em 80% de ≥6 amostras/ano,ok,Águas doces classe 3
+3,clorofila_a,µg/L,,60,,ok,Águas doces classe 3
+3,cianobactérias,cel/mL,,100000,ou 10 mm3/L,ok,Águas doces classe 3
+3,tds,mg/L,,500,,ok,Águas doces classe 3
+3,cor,mg Pt/L,,75,Cor verdadeira,ok,Águas doces classe 3
+3,p_total,mg/L,,0.050,Ambiente lêntico,ok,Águas doces classe 3
+3,p_total,mg/L,,0.075,Ambiente intermediário/tributários de ambiente lêntico,ok,Águas doces classe 3
+3,p_total,mg/L,,0.15,Ambiente lótico e tributários de ambientes intermediários,ok,Águas doces classe 3
+4,pH,unid,6.0,9.0,,ok,Águas doces classe 4
+4,od,mg/L,2.0,,mínimo em qualquer amostra,ok,Águas doces classe 4

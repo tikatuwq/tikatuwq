@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Se usar este pacote, por favor cite:"
+title: "tikatuwq: Ferramentas para Análise de Qualidade da Água (Brasil)"
+version: 0.4.1
+date-released: 2025-09-04
+authors:
+  - family-names: Santos
+    given-names: Vinicius Saraiva
+repository-code: "https://github.com/tikatuwq/tikatuwq"
+license: MIT
+preferred-citation:
+  type: article
+  title: "tikatuwq: Ferramentas para Análise de Qualidade da Água (Brasil)"
+  authors:
+    - family-names: Santos
+      given-names: Vinicius Saraiva
+  year: 2025
+  notes: "Capítulo de tese (em preparação)."

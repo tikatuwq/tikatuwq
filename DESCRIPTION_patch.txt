@@ -1,0 +1,5 @@
+# Acrescente/ajuste estas linhas no DESCRIPTION:
+
+URL: https://github.com/tikatuwq/tikatuwq, https://tikatuwq.github.io/tikatuwq/
+BugReports: https://github.com/tikatuwq/tikatuwq/issues
+License: MIT + file LICENSE

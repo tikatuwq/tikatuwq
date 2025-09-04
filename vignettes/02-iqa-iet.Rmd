@@ -1,0 +1,28 @@
+---
+title: "Índices: IET (Lamparelli) e NSFWQI"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Índices: IET (Lamparelli) e NSFWQI}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tikatuwq)
+```
+
+## NSFWQI (protótipo)
+```{r}
+path <- system.file("extdata","exemplo_chamagunga.csv", package = "tikatuwq")
+df <- read_wq(path)
+df$do  <- df$od; df$fc <- df$coliformes; df$ph <- df$pH; df$bod <- df$dbo; df$sst <- df$tds
+df_nsf <- nsfwqi(df, na_rm = TRUE)
+head(df_nsf[, c("ponto","NSFWQI")])
+```
+
+## IET Lamparelli (estrutura)
+```{r}
+iet_ex <- iet_lamparelli(tp = c(20, 40, 80), chla = c(5, 10, 20), sd = c(2, 1, 0.5), ambiente = "reservatorio")
+iet_ex
+```

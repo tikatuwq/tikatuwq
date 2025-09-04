@@ -1,0 +1,48 @@
+---
+title: "Relatório de Qualidade da Água"
+format: html
+params:
+  data: NULL
+  meta: NULL
+---
+
+```{r}
+df <- params$data
+meta <- params$meta
+if (!"IQA" %in% names(df)) df <- tikatuwq::iqa(df, na_rm = TRUE)
+```
+
+## Contexto
+Rio: `r meta$rio`  
+Período: `r meta$periodo`
+
+## Sumário dos dados
+```{r}
+summary(df)
+```
+
+## Conformidade CONAMA (Classe 2)
+```{r}
+conf <- tikatuwq::conama_check(df, classe = "2")
+head(conf)
+```
+
+## Gráfico de IQA por ponto
+```{r, fig.width=7, fig.height=4}
+if("ponto" %in% names(df)){
+  print(tikatuwq::plot_iqa(df))
+} else {
+  cat("Coluna 'ponto' não encontrada.")
+}
+```
+
+## Análise automática (texto)
+```{r}
+pars <- tikatuwq::generate_analysis(df,
+  classe_conama = "2",
+  incluir_tendencia = TRUE,
+  parametros_tendencia = c("turbidez","od","pH"),
+  contexto = meta
+)
+cat(paste(pars, collapse = "\n\n"))
+```

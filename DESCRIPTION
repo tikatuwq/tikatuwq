@@ -1,0 +1,40 @@
+Package: tikatuwq
+Type: Package
+Title: Ferramentas para Análise de Qualidade da Água no Brasil (IQA, IET, CONAMA)
+Version: 0.4.1
+Authors@R: c(
+  person(given = "Vinicius", family = "Saraiva Santos", role = c("aut","cre"),
+         email = "contato@tikatu.com.br"),
+  person(given = "ChatGPT", family = "DevSenior", role = "aut")
+)
+Description: Funções para importação, validação, cálculo de índices (IQA, IET, NSFWQI),
+    verificação de conformidade com a Resolução CONAMA 357/2005,
+    visualizações e geração de relatório (Quarto/R Markdown). Inclui módulo de
+    texto analítico automático (rule-based) sem uso de IA.
+License: MIT + file LICENSE
+URL: https://github.com/tikatuwq/tikatuwq, https://tikatuwq.github.io/tikatuwq/
+BugReports: https://github.com/tikatuwq/tikatuwq/issues
+Encoding: UTF-8
+Depends: R (>= 4.2.0)
+Imports:
+    dplyr,
+    tidyr,
+    readr,
+    stringr,
+    lubridate,
+    ggplot2,
+    sf,
+    units,
+    rmarkdown,
+    knitr,
+    glue,
+    scales,
+    broom,
+    purrr
+Suggests:
+    testthat (>= 3.0.0),
+    quarto
+Config/testthat/edition: 3
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
