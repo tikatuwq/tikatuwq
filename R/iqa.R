@@ -9,7 +9,7 @@ iqa <- function(df,
   method <- match.arg(method)
   req <- names(pesos)
   if(!all(req %in% names(df))){
-    stop("Faltam colunas necessÃ¡rias: ", paste(setdiff(req, names(df)), collapse=", "))
+    stop("Faltam colunas necessÃƒÂ¡rias: ", paste(setdiff(req, names(df)), collapse=", "))
   }
 
   curves <- iqa_curve_table(method = method)
@@ -17,7 +17,7 @@ iqa <- function(df,
   qi_df <- as.data.frame(lapply(names(pesos), qi_col))
   names(qi_df) <- names(pesos)
 
-  if (!na_rm && any(is.na(qi_df))) stop("HÃ¡ NA nos parÃ¢metros. Use na_rm=TRUE para ignorar linhas incompletas.")
+  if (!na_rm && any(is.na(qi_df))) stop("HÃƒÂ¡ NA nos parÃƒÂ¢metros. Use na_rm=TRUE para ignorar linhas incompletas.")
 
   w <- matrix(rep(unname(pesos), each = nrow(qi_df)), ncol = length(pesos))
   denom <- rowSums(!is.na(qi_df) * rep(unname(pesos), each = nrow(qi_df)))

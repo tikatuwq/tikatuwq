@@ -7,7 +7,7 @@ conama_limits <- function(){
   df
 }
 
-#' Checagem de conformidade (Classe padrÃ£o = "2")
+#' Checagem de conformidade (Classe padrÃƒÂ£o = "2")
 #' @export
 conama_check <- function(df, classe = "2"){
   lim <- conama_limits() |> dplyr::filter(.data$classe == !!as.character(classe))

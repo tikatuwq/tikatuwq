@@ -1,6 +1,6 @@
-# CETESB/NSF â€“ qi por parÃ¢metro (equaÃ§Ãµes publicadas)
-# ReferÃªncias: curvas e pesos (CETESB, ApÃªndice D); equaÃ§Ãµes qi (compilaÃ§Ã£o citando CETESB/Von Sperling). 
-# OD usa % de saturaÃ§Ã£o: Cs = f(temp, altitude). Ver fontes no README.
+# CETESB/NSF Ã¢â‚¬â€œ qi por parÃƒÂ¢metro (equaÃƒÂ§ÃƒÂµes publicadas)
+# ReferÃƒÂªncias: curvas e pesos (CETESB, ApÃƒÂªndice D); equaÃƒÂ§ÃƒÂµes qi (compilaÃƒÂ§ÃƒÂ£o citando CETESB/Von Sperling). 
+# OD usa % de saturaÃƒÂ§ÃƒÂ£o: Cs = f(temp, altitude). Ver fontes no README.
 
 .qi_do_sat <- function(od, temp, altitude_m = 0){
   Cs <- (14.62 - 0.3898*temp + 0.006969*temp^2 - 0.00005898*temp^3) * (1 - 0.0000228675*altitude_m)^5.167
@@ -80,11 +80,11 @@
   pmin(pmax(out, 0), 100)
 }
 
-#' IQA oficial (produto geomÃ©trico) com qi CETESB/NSF
+#' IQA oficial (produto geomÃƒÂ©trico) com qi CETESB/NSF
 #' @param df cols: pH, turbidez, od, dbo, nt_total, p_total, tds, temperatura, coliformes
 #' @param pesos pesos oficiais (ANA/CETESB)
 #' @param altitude_m altitude (m) p/ %sat de OD
-#' @param na_rm reescala pesos nos parÃ¢metros presentes
+#' @param na_rm reescala pesos nos parÃƒÂ¢metros presentes
 #' @export
 iqa <- function(df,
   pesos = c(od=.17, coliformes=.15, pH=.12, dbo=.10, nt_total=.10, p_total=.10, turbidez=.08, tds=.08, temperatura=.10),
@@ -108,7 +108,7 @@ iqa <- function(df,
   if(all(c("od","temperatura") %in% names(df))) {
     Q$od <- .qi_do_sat(df$od, df$temperatura, altitude_m)
   } else if ("temperatura" %in% names(df)) {
-    Q$temperatura <- rep(94, nrow(df))  # suposiÃ§Ã£o CETESB para Î”T
+    Q$temperatura <- rep(94, nrow(df))  # suposiÃƒÂ§ÃƒÂ£o CETESB para ÃŽâ€T
   }
 
   qi_df <- as.data.frame(Q)

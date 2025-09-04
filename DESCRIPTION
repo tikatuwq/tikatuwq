@@ -1,16 +1,16 @@
 Package: tikatuwq
 Type: Package
-Title: Ferramentas para AnÃ¡lise de Qualidade da Ãgua no Brasil (IQA, IET, CONAMA)
+Title: Ferramentas para AnÃƒÂ¡lise de Qualidade da ÃƒÂgua no Brasil (IQA, IET, CONAMA)
 Version: 0.4.1
 Authors@R: c(
   person(given = "Vinicius", family = "Saraiva Santos", role = c("aut","cre"),
          email = "contato@tikatu.com.br"),
   person(given = "ChatGPT", family = "DevSenior", role = "aut")
 )
-Description: FunÃ§Ãµes para importaÃ§Ã£o, validaÃ§Ã£o, cÃ¡lculo de Ã­ndices (IQA, IET, NSFWQI),
-    verificaÃ§Ã£o de conformidade com a ResoluÃ§Ã£o CONAMA 357/2005,
-    visualizaÃ§Ãµes e geraÃ§Ã£o de relatÃ³rio (Quarto/R Markdown). Inclui mÃ³dulo de
-    texto analÃ­tico automÃ¡tico (rule-based) sem uso de IA.
+Description: FunÃƒÂ§ÃƒÂµes para importaÃƒÂ§ÃƒÂ£o, validaÃƒÂ§ÃƒÂ£o, cÃƒÂ¡lculo de ÃƒÂ­ndices (IQA, IET, NSFWQI),
+    verificaÃƒÂ§ÃƒÂ£o de conformidade com a ResoluÃƒÂ§ÃƒÂ£o CONAMA 357/2005,
+    visualizaÃƒÂ§ÃƒÂµes e geraÃƒÂ§ÃƒÂ£o de relatÃƒÂ³rio (Quarto/R Markdown). Inclui mÃƒÂ³dulo de
+    texto analÃƒÂ­tico automÃƒÂ¡tico (rule-based) sem uso de IA.
 License: MIT + file LICENSE
 URL: https://github.com/tikatuwq/tikatuwq, https://tikatuwq.github.io/tikatuwq/
 BugReports: https://github.com/tikatuwq/tikatuwq/issues

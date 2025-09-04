@@ -1,4 +1,4 @@
-#' Ãndice do Estado TrÃ³fico (Carlson) - bÃ¡sico
+#' ÃƒÂndice do Estado TrÃƒÂ³fico (Carlson) - bÃƒÂ¡sico
 #' @export
 iet_carlson <- function(secchi = NULL, clorofila = NULL, tp = NULL){
   res <- list()

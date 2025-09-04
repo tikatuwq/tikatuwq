@@ -1,4 +1,4 @@
-#' NSF Water Quality Index (protÃ³tipo v0.2.1)
+#' NSF Water Quality Index (protÃƒÂ³tipo v0.2.1)
 #' @export
 nsfwqi <- function(df,
   pesos = c(do=0.17, fc=0.16, ph=0.11, bod=0.11, temp_change=0.10,
@@ -22,12 +22,12 @@ nsfwqi <- function(df,
   }
 
   req <- intersect(names(pesos), names(df))
-  if(!length(req)) stop("Nenhuma coluna disponÃ­vel para NSFWQI dentre: ", paste(names(pesos), collapse=", "))
+  if(!length(req)) stop("Nenhuma coluna disponÃƒÂ­vel para NSFWQI dentre: ", paste(names(pesos), collapse=", "))
 
   qi <- lapply(req, function(p) vapply(df[[p]], function(x) qi_fun(p, x), numeric(1)))
   qi <- as.data.frame(qi); names(qi) <- req
 
-  if (!na_rm && any(is.na(qi))) stop("HÃ¡ NA nos parÃ¢metros. Use na_rm=TRUE para ignorar linhas incompletas.")
+  if (!na_rm && any(is.na(qi))) stop("HÃƒÂ¡ NA nos parÃƒÂ¢metros. Use na_rm=TRUE para ignorar linhas incompletas.")
 
   w <- pesos[req]; w <- w / sum(w)
   nsf_val <- as.numeric(qi %*% w)
