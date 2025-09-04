@@ -1,4 +1,4 @@
-#' Leitura padrão de dados de qualidade da água
+#' Leitura padrÃ£o de dados de qualidade da Ã¡gua
 #' @export
 read_wq <- function(path, locale = readr::locale(decimal_mark = ","), tz = "America/Bahia"){
   df <- readr::read_csv(path, locale = locale, show_col_types = FALSE)
@@ -13,7 +13,7 @@ read_wq <- function(path, locale = readr::locale(decimal_mark = ","), tz = "Amer
 #' @export
 clean_units <- function(df, units_map = NULL){ df }
 
-#' Valida presença de colunas mínimas
+#' Valida presenÃ§a de colunas mÃ­nimas
 #' @export
 validate_wq <- function(df, required = c("ph","turbidez","od","dbo","nt_total","p_total","tds","temperatura","coliformes")){
   miss <- setdiff(required, names(df))

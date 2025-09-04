@@ -1,8 +1,8 @@
 ---
-title: "Índices: IET (Lamparelli) e NSFWQI"
+title: "Ãndices: IET (Lamparelli) e NSFWQI"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Índices: IET (Lamparelli) e NSFWQI}
+  %\VignetteIndexEntry{Ãndices: IET (Lamparelli) e NSFWQI}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tikatuwq)
 ```
 
-## NSFWQI (protótipo)
+## NSFWQI (protÃ³tipo)
 ```{r}
 path <- system.file("extdata","exemplo_chamagunga.csv", package = "tikatuwq")
 df <- read_wq(path)
