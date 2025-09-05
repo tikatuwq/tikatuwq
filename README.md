@@ -1,4 +1,4 @@
-# tikatuwq
+# Tikatu Water Quality (tikatuwq)
 
 Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).
 
@@ -33,7 +33,7 @@ cat(paste(pars, collapse = "
 - Estruturas para `iet_lamparelli()` e `nsfwqi()` (curvas oficiais a incorporar).
 
 
-## InstalaÃƒÂ§ÃƒÂ£o via GitHub
+## Instalação via GitHub
 
 ```r
 install.packages("remotes")  # ou devtools
