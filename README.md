@@ -1,15 +1,15 @@
 # tikatuwq
 
-Pacote R para anÃƒÂ¡lises de qualidade da ÃƒÂ¡gua no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizaÃƒÂ§ÃƒÂµes, relatÃƒÂ³rio e texto analÃƒÂ­tico automÃƒÂ¡tico (rule-based).
+Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).
 
-## InstalaÃƒÂ§ÃƒÂ£o (desenvolvimento)
+## Instalação (desenvolvimento)
 ```r
 install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr","readr","lubridate","stringr","glue","scales","broom","purrr"))
 devtools::load_all("tikatuwq")
 devtools::check("tikatuwq")
 ```
 
-## Fluxo bÃƒÂ¡sico
+## Fluxo básico
 ```r
 df <- read_wq(system.file("extdata","exemplo_chamagunga.csv", package="tikatuwq")) |>
   validate_wq() |>
@@ -17,7 +17,7 @@ df <- read_wq(system.file("extdata","exemplo_chamagunga.csv", package="tikatuwq"
 
 plot_iqa(df)
 
-# Texto analÃƒÂ­tico (sem IA)
+# Texto analítico (sem IA)
 pars <- generate_analysis(df, classe_conama = "2",
                           incluir_tendencia = TRUE,
                           parametros_tendencia = c("turbidez","od","pH"),
@@ -28,8 +28,8 @@ cat(paste(pars, collapse = "
 ```
 
 ## Novidades v0.2.1
-- `generate_analysis()` Ã¢â‚¬â€ parÃƒÂ¡grafos automÃƒÂ¡ticos (rule-based).
-- Template de relatÃƒÂ³rio atualizado incluindo anÃƒÂ¡lise textual.
+- `generate_analysis()` — parágrafos automáticos (rule-based).
+- Template de relatório atualizado incluindo análise textual.
 - Estruturas para `iet_lamparelli()` e `nsfwqi()` (curvas oficiais a incorporar).
 
 
@@ -39,7 +39,7 @@ cat(paste(pars, collapse = "
 install.packages("remotes")  # ou devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
-# versÃƒÂ£o estÃƒÂ¡vel (por tag)
+# versão estável (por tag)
 remotes::install_github("tikatuwq/tikatuwq@v0.4.1", build_vignettes = TRUE)
 ```
 

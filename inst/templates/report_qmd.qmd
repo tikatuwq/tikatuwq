@@ -1,5 +1,5 @@
 ---
-title: "RelatÃƒÂ³rio de Qualidade da ÃƒÂgua"
+title: "Relatório de Qualidade da Água"
 format: html
 params:
   data: NULL
@@ -14,7 +14,7 @@ if (!"IQA" %in% names(df)) df <- tikatuwq::iqa(df, na_rm = TRUE)
 
 ## Contexto
 Rio: `r meta$rio`  
-PerÃƒÂ­odo: `r meta$periodo`
+Período: `r meta$periodo`
 
 ## SumÃƒÂ¡rio dos dados
 ```{r}
@@ -27,16 +27,16 @@ conf <- tikatuwq::conama_check(df, classe = "2")
 head(conf)
 ```
 
-## GrÃƒÂ¡fico de IQA por ponto
+## Gráfico de IQA por ponto
 ```{r, fig.width=7, fig.height=4}
 if("ponto" %in% names(df)){
   print(tikatuwq::plot_iqa(df))
 } else {
-  cat("Coluna 'ponto' nÃƒÂ£o encontrada.")
+  cat("Coluna 'ponto' não encontrada.")
 }
 ```
 
-## AnÃƒÂ¡lise automÃƒÂ¡tica (texto)
+## Análise automática (texto)
 ```{r}
 pars <- tikatuwq::generate_analysis(df,
   classe_conama = "2",

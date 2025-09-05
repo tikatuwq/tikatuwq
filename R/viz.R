@@ -1,4 +1,4 @@
-#' SÃƒÂ©ries temporais por parÃƒÂ¢metro
+#' Séries temporais por parâmetro
 #' @export
 plot_series <- function(df, parametro, facet = NULL){
   p <- ggplot2::ggplot(df, ggplot2::aes_string(x = "data", y = parametro, color = facet)) +
@@ -29,10 +29,10 @@ plot_iqa <- function(df){
     ggplot2::theme_minimal()
 }
 
-#' Heatmap tempo x parÃƒÂ¢metro (formato longo)
+#' Heatmap tempo x parâmetro (formato longo)
 #' @export
 plot_heatmap <- function(df_long){
   ggplot2::ggplot(df_long, ggplot2::aes(x = data, y = parametro, fill = valor)) +
     ggplot2::geom_tile() + ggplot2::theme_minimal() +
-    ggplot2::labs(x="Data", y="ParÃƒÂ¢metro", fill="Valor")
+    ggplot2::labs(x="Data", y="Parâmetro", fill="Valor")
 }

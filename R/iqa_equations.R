@@ -1,6 +1,6 @@
-# CETESB/NSF Ã¢â‚¬â€œ qi por parÃƒÂ¢metro (equaÃƒÂ§ÃƒÂµes publicadas)
-# ReferÃƒÂªncias: curvas e pesos (CETESB, ApÃƒÂªndice D); equaÃƒÂ§ÃƒÂµes qi (compilaÃƒÂ§ÃƒÂ£o citando CETESB/Von Sperling). 
-# OD usa % de saturaÃƒÂ§ÃƒÂ£o: Cs = f(temp, altitude). Ver fontes no README.
+# CETESB/NSF — qi por parâmetro (equações publicadas)
+# Referências: curvas e pesos (CETESB, Apêndice D); equações qi (compilação citando CETESB/Von Sperling). 
+# OD usa % de saturação: Cs = f(temp, altitude). Ver fontes no README.
 
 .qi_do_sat <- function(od, temp, altitude_m = 0){
   Cs <- (14.62 - 0.3898*temp + 0.006969*temp^2 - 0.00005898*temp^3) * (1 - 0.0000228675*altitude_m)^5.167
@@ -108,7 +108,7 @@ iqa <- function(df,
   if(all(c("od","temperatura") %in% names(df))) {
     Q$od <- .qi_do_sat(df$od, df$temperatura, altitude_m)
   } else if ("temperatura" %in% names(df)) {
-    Q$temperatura <- rep(94, nrow(df))  # suposiÃƒÂ§ÃƒÂ£o CETESB para ÃŽâ€T
+    Q$temperatura <- rep(94, nrow(df))  # suposição CETESB para ΔT
   }
 
   qi_df <- as.data.frame(Q)

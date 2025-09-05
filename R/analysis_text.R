@@ -1,4 +1,4 @@
-#' GeraÃƒÂ§ÃƒÂ£o de parÃƒÂ¡grafos analÃƒÂ­ticos (sem IA)
+#' Geração de parágrafos analíticos (sem IA)
 #' @export
 generate_analysis <- function(df,
                               classe_conama = "2",
@@ -17,7 +17,7 @@ generate_analysis <- function(df,
 
   class_iqa <- function(x){
     cut(x, breaks = c(-Inf,25,50,70,90,Inf),
-        labels = c("muito baixa","baixa","mÃƒÂ©dia","boa","excelente"), right = TRUE)
+        labels = c("muito baixa","baixa","média","boa","excelente"), right = TRUE)
   }
 
   iqa_mean <- safe_mean(conf$IQA)
@@ -34,7 +34,7 @@ generate_analysis <- function(df,
   worst <- by_point$ponto[nrow(by_point)]; worst_val <- by_point$IQA_med[nrow(by_point)]
 
   p1 <- glue::glue(
-    "Avaliando o ÃƒÂndice de Qualidade da ÃƒÂgua (IQA) {if (!is.na(contexto$rio)) glue::glue('no rio {contexto$rio} ') else ''}{if (!is.na(contexto$periodo)) glue::glue('em {contexto$periodo} ') else ''}observou-se mÃƒÂ©dia de {scales::number(iqa_mean, accuracy = 0.1)}, variando de {scales::number(iqa_min, accuracy = 0.1)} a {scales::number(iqa_max, accuracy = 0.1)}. A classe dominante foi {dom_class}. O ponto com melhor desempenho foi {best} (IQAÃ¢â€°Ë†{scales::number(best_val, accuracy = 0.1)}), enquanto {worst} apresentou o menor valor (IQAÃ¢â€°Ë†{scales::number(worst_val, accuracy = 0.1)})."
+    "Avaliando o Índice de Qualidade da Água (IQA) {if (!is.na(contexto$rio)) glue::glue('no rio {contexto$rio} ') else ''}{if (!is.na(contexto$periodo)) glue::glue('em {contexto$periodo} ') else ''}observou-se média de {scales::number(iqa_mean, accuracy = 0.1)}, variando de {scales::number(iqa_min, accuracy = 0.1)} a {scales::number(iqa_max, accuracy = 0.1)}. A classe dominante foi {dom_class}. O ponto com melhor desempenho foi {best} (IQA≈{scales::number(best_val, accuracy = 0.1)}), enquanto {worst} apresentou o menor valor (IQA≈{scales::number(worst_val, accuracy = 0.1)})."
   )
 
   ok_cols <- grep("_ok$", names(conf), value = TRUE)
@@ -58,11 +58,11 @@ generate_analysis <- function(df,
 
   if (nrow(viol)) {
     p2 <- glue::glue(
-      "Quanto ÃƒÂ  conformidade com a ResoluÃƒÂ§ÃƒÂ£o CONAMA 357/2005 (classe {classe_conama}), foram registradas violaÃƒÂ§ÃƒÂµes, com destaque para {top_viol_param$parametro[1]} como parÃƒÂ¢metro mais crÃƒÂ­tico e o ponto {top_viol_point$ponto[1]} concentrando o maior nÃƒÂºmero de ocorrÃƒÂªncias."
+      "Quanto à conformidade com a Resolução CONAMA 357/2005 (classe {classe_conama}), foram registradas violações, com destaque para {top_viol_param$parametro[1]} como parâmetro mais crítico e o ponto {top_viol_point$ponto[1]} concentrando o maior número de ocorrências."
     )
   } else {
     p2 <- glue::glue(
-      "Todos os registros avaliados atenderam aos limites estabelecidos pela ResoluÃƒÂ§ÃƒÂ£o CONAMA 357/2005 (classe {classe_conama}) nos parÃƒÂ¢metros checados."
+      "Todos os registros avaliados atenderam aos limites estabelecidos pela Resolução CONAMA 357/2005 (classe {classe_conama}) nos parâmetros checados."
     )
   }
 
@@ -74,30 +74,30 @@ generate_analysis <- function(df,
         dplyr::arrange(dplyr::desc(abs(beta))) |>
         dplyr::slice(1:min(2, n()))
       itens <- apply(top, 1, function(r){
-        dir <- ifelse(as.numeric(r["beta"]) > 0, "tendÃƒÂªncia de aumento", "tendÃƒÂªncia de reduÃƒÂ§ÃƒÂ£o")
+        dir <- ifelse(as.numeric(r["beta"]) > 0, "tendência de aumento", "tendência de redução")
         sig <- ifelse(as.numeric(r["p_value"]) < 0.05, " (significativa, p<0,05)", "")
         glue::glue("{r['parametro']} em {r['ponto']}: {dir}{sig}")
       })
-      p3 <- glue::glue("A anÃƒÂ¡lise temporal indicou {paste(itens, collapse='; ')}.")
+      p3 <- glue::glue("A análise temporal indicou {paste(itens, collapse='; ')}.")
     }
   }
 
   range_iqa <- iqa_max - iqa_min
-  p4 <- glue::glue("A variaÃƒÂ§ÃƒÂ£o espacial do IQA foi de aproximadamente {scales::number(range_iqa, accuracy = 0.1)} pontos entre os extremos.")
+  p4 <- glue::glue("A variação espacial do IQA foi de aproximadamente {scales::number(range_iqa, accuracy = 0.1)} pontos entre os extremos.")
 
   recs <- c()
   if (nrow(viol)) {
     if ("coliformes_ok" %in% ok_cols && any(conf$coliformes_ok == FALSE, na.rm = TRUE)) {
-      recs <- c(recs, "reforÃƒÂ§ar controle de fontes fecais difusas e saneamento local;")
+      recs <- c(recs, "reforçar controle de fontes fecais difusas e saneamento local;")
     }
     if ("od_ok" %in% ok_cols && any(conf$od_ok == FALSE, na.rm = TRUE)) {
-      recs <- c(recs, "avaliar aporte orgÃƒÂ¢nico/DBO e reaeraÃƒÂ§ÃƒÂ£o nos trechos afetados;")
+      recs <- c(recs, "avaliar aporte orgânico/DBO e reaeração nos trechos afetados;")
     }
     if ("turbidez_ok" %in% ok_cols && any(conf$turbidez_ok == FALSE, na.rm = TRUE)) {
-      recs <- c(recs, "inspecionar erosÃƒÂ£o de margens e manejo do solo na bacia;")
+      recs <- c(recs, "inspecionar erosão de margens e manejo do solo na bacia;")
     }
   }
-  p5 <- if (length(recs)) glue::glue("Recomenda-se {paste(recs, collapse = ' ')} priorizando os pontos crÃƒÂ­ticos.") else NULL
+  p5 <- if (length(recs)) glue::glue("Recomenda-se {paste(recs, collapse = ' ')} priorizando os pontos críticos.") else NULL
 
   purrr::compact(c(p1, p2, p3, p4, p5))
 }
