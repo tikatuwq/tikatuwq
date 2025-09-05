@@ -11,6 +11,9 @@
 #' @importFrom readr read_lines read_delim parse_number cols col_character locale
 #' @importFrom stringr str_count str_replace_all
 #' @importFrom lubridate ymd dmy
+#' @importFrom tibble as_tibble
+#' @importFrom rlang warn
+#' @importFrom scales label_number label_percent
 "_PACKAGE"
 
 # Silencia NOTEs de variaveis NSE usadas com dplyr/ggplot2
