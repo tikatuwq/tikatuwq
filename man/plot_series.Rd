@@ -2,10 +2,10 @@
 % Please edit documentation in R/viz.R
 \name{plot_series}
 \alias{plot_series}
-\title{SÃƒÂ©ries temporais por parÃƒÂ¢metro}
+\title{Séries temporais por parâmetro}
 \usage{
 plot_series(df, parametro, facet = NULL)
 }
 \description{
-SÃƒÂ©ries temporais por parÃƒÂ¢metro
+Séries temporais por parâmetro
 }

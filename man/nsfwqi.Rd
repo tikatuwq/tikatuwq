@@ -2,7 +2,7 @@
 % Please edit documentation in R/nsfwqi.R
 \name{nsfwqi}
 \alias{nsfwqi}
-\title{NSF Water Quality Index (protÃƒÂ³tipo v0.2.1)}
+\title{NSF Water Quality Index (protótipo v0.2.1)}
 \usage{
 nsfwqi(
   df,
@@ -12,5 +12,5 @@ nsfwqi(
 )
 }
 \description{
-NSF Water Quality Index (protÃƒÂ³tipo v0.2.1)
+NSF Water Quality Index (protótipo v0.2.1)
 }

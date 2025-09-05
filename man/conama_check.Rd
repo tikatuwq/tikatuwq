@@ -2,10 +2,10 @@
 % Please edit documentation in R/conama.R
 \name{conama_check}
 \alias{conama_check}
-\title{Checagem de conformidade (Classe padrÃƒÂ£o = "2")}
+\title{Checagem de conformidade (Classe padrão = "2")}
 \usage{
 conama_check(df, classe = "2")
 }
 \description{
-Checagem de conformidade (Classe padrÃƒÂ£o = "2")
+Checagem de conformidade (Classe padrão = "2")
 }

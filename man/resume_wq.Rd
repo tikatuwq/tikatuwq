@@ -2,10 +2,10 @@
 % Please edit documentation in R/summaries.R
 \name{resume_wq}
 \alias{resume_wq}
-\title{SumÃƒÂ¡rios descritivos por grupo}
+\title{Sumários descritivos por grupo}
 \usage{
 resume_wq(df, by = c("ponto", "mes"), funs = c("mean", "median", "sd"))
 }
 \description{
-SumÃƒÂ¡rios descritivos por grupo
+Sumários descritivos por grupo
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/viz.R
 \name{plot_heatmap}
 \alias{plot_heatmap}
-\title{Heatmap tempo x parÃƒÂ¢metro (formato longo)}
+\title{Heatmap tempo x parâmetro (formato longo)}
 \usage{
 plot_heatmap(df_long)
 }
 \description{
-Heatmap tempo x parÃƒÂ¢metro (formato longo)
+Heatmap tempo x parâmetro (formato longo)
 }

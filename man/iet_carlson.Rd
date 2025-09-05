@@ -2,10 +2,10 @@
 % Please edit documentation in R/iet.R
 \name{iet_carlson}
 \alias{iet_carlson}
-\title{ÃƒÂndice do Estado TrÃƒÂ³fico (Carlson) - bÃƒÂ¡sico}
+\title{Índice do Estado Trófico (Carlson) - básico}
 \usage{
 iet_carlson(secchi = NULL, clorofila = NULL, tp = NULL)
 }
 \description{
-ÃƒÂndice do Estado TrÃƒÂ³fico (Carlson) - bÃƒÂ¡sico
+Índice do Estado Trófico (Carlson) - básico
 }

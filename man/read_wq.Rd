@@ -2,10 +2,21 @@
 % Please edit documentation in R/io_clean.R
 \name{read_wq}
 \alias{read_wq}
-\title{Leitura padrÃƒÂ£o de dados de qualidade da ÃƒÂ¡gua}
+\title{Leitura padrao de dados de qualidade da agua}
 \usage{
-read_wq(path, locale = readr::locale(decimal_mark = ","), tz = "America/Bahia")
+read_wq(path, tz = "America/Bahia")
+}
+\arguments{
+\item{path}{Caminho do arquivo CSV.}
+
+\item{tz}{Fuso para datas (mantido por compatibilidade; datas sao Date).}
+}
+\value{
+Um \code{tibble} com colunas normalizadas.
 }
 \description{
-Leitura padrÃƒÂ£o de dados de qualidade da ÃƒÂ¡gua
+Aceita CSV com \strong{virgula ou ponto} como separador decimal e ignora texto
+de unidades (ex.: "0,04 mg/L"). Lê tudo como texto, normaliza nomes e
+converte colunas numericas de forma robusta. Aplica um ajuste de seguranca
+em pH evidentemente fora da faixa (ex.: 72 -> 7.2).
 }

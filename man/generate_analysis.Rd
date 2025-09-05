@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis_text.R
 \name{generate_analysis}
 \alias{generate_analysis}
-\title{GeraÃƒÂ§ÃƒÂ£o de parÃƒÂ¡grafos analÃƒÂ­ticos (sem IA)}
+\title{Geração de parágrafos analíticos (sem IA)}
 \usage{
 generate_analysis(
   df,
@@ -13,5 +13,5 @@ generate_analysis(
 )
 }
 \description{
-GeraÃƒÂ§ÃƒÂ£o de parÃƒÂ¡grafos analÃƒÂ­ticos (sem IA)
+Geração de parágrafos analíticos (sem IA)
 }

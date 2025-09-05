@@ -6,6 +6,15 @@
 \usage{
 clean_units(df, units_map = NULL)
 }
+\arguments{
+\item{df}{data.frame/tibble de entrada.}
+
+\item{units_map}{opcional; mapa de unidades.}
+}
+\value{
+O mesmo \code{df} (placeholder).
+}
 \description{
-Padroniza/unifica unidades (esqueleto)
+Ponto de extensao para normalizar unidades (mg/L, uS/cm, etc.).
+Por ora retorna o data.frame sem alteracoes.
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/report.R
 \name{render_report}
 \alias{render_report}
-\title{Gera relatÃƒÂ³rio (R Markdown / Quarto) a partir de template}
+\title{Gera relatório (R Markdown / Quarto) a partir de template}
 \usage{
 render_report(
   df,
-  meta = list(rio = "BuranhÃƒÂ©m", periodo = "2025-01"),
+  meta = list(rio = "Buranhém", periodo = "2025-01"),
   output = "wq_report.html",
   template = system.file("templates", "report_qmd.qmd", package = "tikatuwq")
 )
 }
 \description{
-Gera relatÃƒÂ³rio (R Markdown / Quarto) a partir de template
+Gera relatório (R Markdown / Quarto) a partir de template
 }

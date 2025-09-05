@@ -2,7 +2,7 @@
 % Please edit documentation in R/io_clean.R
 \name{validate_wq}
 \alias{validate_wq}
-\title{Valida presenÃƒÂ§a de colunas mÃƒÂ­nimas}
+\title{Valida presenca de colunas minimas}
 \usage{
 validate_wq(
   df,
@@ -10,6 +10,14 @@ validate_wq(
     "temperatura", "coliformes")
 )
 }
+\arguments{
+\item{df}{data.frame/tibble de entrada.}
+
+\item{required}{vetor de nomes de colunas obrigatorias.}
+}
+\value{
+O \code{df} de entrada se estiver valido; caso contrario, erro.
+}
 \description{
-Valida presenÃƒÂ§a de colunas mÃƒÂ­nimas
+Garante que o conjunto minimo de colunas exista no dataset.
 }
