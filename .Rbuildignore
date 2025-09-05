@@ -1,10 +1,8 @@
 ^\.github$
-^_pkgdown\.yml$
-^CITATION\.cff$
-^README_install\.md$
 ^docs$
-^pkgdown$
-^\.vscode$
-^\.devcontainer$
-^.*\.Rproj$
-^\.Rproj\.user$
+^pkgdown\.yml$
+^_pkgdown\.yml$
+^vignettes_off$
+^DESCRIPTION_patch\.txt$
+^README_install\.md$
+^\.nojekyll$
