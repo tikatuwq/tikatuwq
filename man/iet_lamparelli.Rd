@@ -2,7 +2,7 @@
 % Please edit documentation in R/iet_lamparelli.R
 \name{iet_lamparelli}
 \alias{iet_lamparelli}
-\title{IET - Lamparelli (estrutura v0.2.1)}
+\title{Trophic State Index - Lamparelli (skeleton v0.2.1)}
 \usage{
 iet_lamparelli(
   tp = NULL,
@@ -11,6 +11,18 @@ iet_lamparelli(
   ambiente = c("rio", "reservatorio")
 )
 }
+\arguments{
+\item{tp}{Numeric total phosphorus (mg/L)}
+
+\item{chla}{Numeric chlorophyll-a (µg/L)}
+
+\item{sd}{Numeric Secchi disk depth (m)}
+
+\item{ambiente}{Environment type: 'rio' or 'reservatorio'}
+}
+\value{
+Data frame with IET components and overall Lamparelli index
+}
 \description{
-IET - Lamparelli (estrutura v0.2.1)
+Trophic State Index - Lamparelli (skeleton v0.2.1)
 }

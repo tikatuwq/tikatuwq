@@ -9,3 +9,11 @@ navbar:
     github:
       icon: fab fa-github
       href: https://github.com/tikatuwq/tikatuwq
+  reference:
+    - title: Conformidade CONAMA
+      contents:
+        - conama_limits
+        - conama_check
+        - conama_summary
+        - conama_report
+        - conama_text

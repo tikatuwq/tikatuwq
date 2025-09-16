@@ -1,4 +1,13 @@
-#' IQA com curvas (v0.3.0 - aproximado)
+#' Water Quality Index (WQI / IQA)
+#'
+#' @description Computes IQA/WQI for each site/date (or grouping).
+#'
+#' @param df Data frame with the required parameters.
+#' @param na_rm Logical; remove NAs before aggregation?
+#'
+#' @return A tibble/data frame with columns such as \code{site}, \code{date},
+#'   \code{iqa} (numeric score), and \code{class} (qualitative label).
+#'
 #' @export
 iqa <- function(df,
   pesos = c(od=.17, coliformes=.15, dbo=.10, nt_total=.10, p_total=.10,
@@ -9,7 +18,7 @@ iqa <- function(df,
   method <- match.arg(method)
   req <- names(pesos)
   if(!all(req %in% names(df))){
-    stop("Faltam colunas necessárias: ", paste(setdiff(req, names(df)), collapse=", "))
+    stop("Missing required columns: ", paste(setdiff(req, names(df)), collapse=", "))
   }
 
   curves <- iqa_curve_table(method = method)
@@ -17,7 +26,7 @@ iqa <- function(df,
   qi_df <- as.data.frame(lapply(names(pesos), qi_col))
   names(qi_df) <- names(pesos)
 
-  if (!na_rm && any(is.na(qi_df))) stop("Há NA nos parâmetros. Use na_rm=TRUE para ignorar linhas incompletas.")
+  if (!na_rm && any(is.na(qi_df))) stop("There are NA values in parameters. Use na_rm=TRUE to ignore incomplete rows.")
 
   w <- matrix(rep(unname(pesos), each = nrow(qi_df)), ncol = length(pesos))
   denom <- rowSums(!is.na(qi_df) * rep(unname(pesos), each = nrow(qi_df)))

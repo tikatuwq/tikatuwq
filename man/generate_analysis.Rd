@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis_text.R
 \name{generate_analysis}
 \alias{generate_analysis}
-\title{Geração de parágrafos analíticos (sem IA)}
+\title{Analytical paragraphs generation (rule-based, no AI)}
 \usage{
 generate_analysis(
   df,
@@ -12,6 +12,22 @@ generate_analysis(
   contexto = list(rio = NA, periodo = NA, cidade = NA)
 )
 }
+\arguments{
+\item{df}{Data frame with columns including at least \code{ponto}, and preferably
+parameters used by CONAMA checks and IQA computation}
+
+\item{classe_conama}{Character scalar with CONAMA class (e.g. "2")}
+
+\item{incluir_tendencia}{Logical; whether to compute simple time trends}
+
+\item{parametros_tendencia}{Character vector of parameter names to test trends}
+
+\item{contexto}{List with optional metadata, accepting PT or EN keys:
+\code{rio}/\code{river}, \code{periodo}/\code{period}, \code{cidade}}
+}
+\value{
+Character vector of 3-5 analytical paragraphs
+}
 \description{
-Geração de parágrafos analíticos (sem IA)
+Analytical paragraphs generation (rule-based, no AI)
 }

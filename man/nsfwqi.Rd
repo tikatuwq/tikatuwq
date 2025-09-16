@@ -2,7 +2,7 @@
 % Please edit documentation in R/nsfwqi.R
 \name{nsfwqi}
 \alias{nsfwqi}
-\title{NSF Water Quality Index (protótipo v0.2.1)}
+\title{NSF Water Quality Index (prototype v0.2.1)}
 \usage{
 nsfwqi(
   df,
@@ -11,6 +11,16 @@ nsfwqi(
   na_rm = FALSE
 )
 }
+\arguments{
+\item{df}{Data frame containing columns compatible with NSFWQI mapping}
+
+\item{pesos}{Named numeric vector with parameter weights}
+
+\item{na_rm}{Logical; allow NA and rescale weights}
+}
+\value{
+Data frame with an added 'NSFWQI' column
+}
 \description{
-NSF Water Quality Index (protótipo v0.2.1)
+NSF Water Quality Index (prototype v0.2.1)
 }

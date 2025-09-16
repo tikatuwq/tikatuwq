@@ -2,10 +2,16 @@
 % Please edit documentation in R/viz.R
 \name{plot_iqa}
 \alias{plot_iqa}
-\title{Barras de IQA por ponto}
+\title{Plot IQA by site/date}
 \usage{
 plot_iqa(df)
 }
+\arguments{
+\item{df}{Data frame returned by \code{iqa()} (or with equivalent columns).}
+}
+\value{
+A ggplot object (class \code{ggplot}) representing IQA across sites/dates.
+}
 \description{
-Barras de IQA por ponto
+Plot IQA by site/date
 }

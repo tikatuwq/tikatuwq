@@ -6,3 +6,15 @@
 ^DESCRIPTION_patch\.txt$
 ^README_install\.md$
 ^\.nojekyll$
+^.*\.Rproj$
+^\.Rproj\.user$
+^CITATION\.cff$
+^LICENSE\.md$
+^atualiza-cran\.md$
+^README\.Rmd$
+^pkgdown$
+^cran-comments\.md$
+^CODE_OF_CONDUCT\.md$
+^\.lintr$
+^\.devcontainer$
+^CRAN-SUBMISSION$

@@ -2,10 +2,33 @@
 % Please edit documentation in R/conama.R
 \name{conama_check}
 \alias{conama_check}
-\title{Checagem de conformidade (Classe padrão = "2")}
+\title{Conformity check (default Class = "2") - detailed}
 \usage{
 conama_check(df, classe = "2")
 }
+\arguments{
+\item{df}{tibble/data.frame com colunas de parametros (ph, turbidez, od, dbo, etc.).}
+
+\item{classe}{string da classe ("especial", "1", "2", "3", "4" ou conforme tabela).}
+}
+\value{
+\code{df} com colunas adicionais por parametro.
+}
 \description{
-Checagem de conformidade (Classe padrão = "2")
+For each parameter present in \code{df}, adds columns:
+\itemize{
+\item \verb{*_ok} (TRUE/FALSE),
+\item \verb{*_status} ("ok", "acima_do_maximo", "abaixo_do_minimo"),
+\item \verb{*__lim_min} and \verb{*__lim_max} (limits used),
+\item \verb{*__delta} (difference to the relevant limit; >0 if above max,
+<0 if below min, 0 if ok).
+}
+}
+\details{
+Se existirem multiplas linhas de limite para o mesmo parametro, a funcao:
+\itemize{
+\item considera \verb{*_ok} como TRUE se QUALQUER linha for atendida; e
+\item escolhe, para \code{status/lim_min/lim_max/delta}, a primeira linha que atende;
+se nenhuma atende, escolhe a que produz a menor violacao (menor |delta|).
+}
 }

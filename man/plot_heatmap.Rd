@@ -2,10 +2,16 @@
 % Please edit documentation in R/viz.R
 \name{plot_heatmap}
 \alias{plot_heatmap}
-\title{Heatmap tempo x parâmetro (formato longo)}
+\title{Heatmap of parameters vs. sites}
 \usage{
 plot_heatmap(df_long)
 }
+\arguments{
+\item{df_long}{Long-format data frame (site/parameter/value).}
+}
+\value{
+A ggplot object (class \code{ggplot}) representing the heatmap.
+}
 \description{
-Heatmap tempo x parâmetro (formato longo)
+Heatmap of parameters vs. sites
 }

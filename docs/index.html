@@ -46,11 +46,11 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="tikatuwq">tikatuwq<a class="anchor" aria-label="anchor" href="#tikatuwq"></a>
+<div class="page-header"><h1 id="tikatu-water-quality-tikatuwq">Tikatu Water Quality (tikatuwq)<a class="anchor" aria-label="anchor" href="#tikatu-water-quality-tikatuwq"></a>
 </h1></div>
-<p>Pacote R para anÃƒÂ¡lises de qualidade da ÃƒÂ¡gua no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizaÃƒÂ§ÃƒÂµes, relatÃƒÂ³rio e texto analÃƒÂ­tico automÃƒÂ¡tico (rule-based).</p>
+<p>Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).</p>
 <div class="section level2">
-<h2 id="instalaãƒâãƒâo-desenvolvimento">InstalaÃƒÂ§ÃƒÂ£o (desenvolvimento)<a class="anchor" aria-label="anchor" href="#instala%C3%A3%C6%92%C3%A2%C3%A3%C6%92%C3%A2o-desenvolvimento"></a>
+<h2 id="instalação-desenvolvimento">Instalação (desenvolvimento)<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o-desenvolvimento"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"devtools"</span>,<span class="st">"testthat"</span>,<span class="st">"rmarkdown"</span>,<span class="st">"ggplot2"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,<span class="st">"readr"</span>,<span class="st">"lubridate"</span>,<span class="st">"stringr"</span>,<span class="st">"glue"</span>,<span class="st">"scales"</span>,<span class="st">"broom"</span>,<span class="st">"purrr"</span><span class="op">)</span><span class="op">)</span></span>
@@ -58,7 +58,7 @@
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="fluxo-bãƒâsico">Fluxo bÃƒÂ¡sico<a class="anchor" aria-label="anchor" href="#fluxo-b%C3%A3%C6%92%C3%A2sico"></a>
+<h2 id="fluxo-básico">Fluxo básico<a class="anchor" aria-label="anchor" href="#fluxo-b%C3%A1sico"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -67,7 +67,7 @@
 <span></span>
 <span><span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Texto analÃƒÂ­tico (sem IA)</span></span>
+<span><span class="co"># Texto analítico (sem IA)</span></span>
 <span><span class="va">pars</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_analysis.html">generate_analysis</a></span><span class="op">(</span><span class="va">df</span>, classe_conama <span class="op">=</span> <span class="st">"2"</span>,</span>
 <span>                          incluir_tendencia <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                          parametros_tendencia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turbidez"</span>,<span class="st">"od"</span>,<span class="st">"pH"</span><span class="op">)</span>,</span>
@@ -81,22 +81,59 @@
 </h2>
 <ul>
 <li>
-<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> Ã¢â‚¬â€ parÃƒÂ¡grafos automÃƒÂ¡ticos (rule-based).</li>
-<li>Template de relatÃƒÂ³rio atualizado incluindo anÃƒÂ¡lise textual.</li>
+<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> — parágrafos automáticos (rule-based).</li>
+<li>Template de relatório atualizado incluindo análise textual.</li>
 <li>Estruturas para <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> e <code><a href="reference/nsfwqi.html">nsfwqi()</a></code> (curvas oficiais a incorporar).</li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="instalaãƒâãƒâo-via-github">InstalaÃƒÂ§ÃƒÂ£o via GitHub<a class="anchor" aria-label="anchor" href="#instala%C3%A3%C6%92%C3%A2%C3%A3%C6%92%C3%A2o-via-github"></a>
+<h2 id="instalação-via-github">Instalação via GitHub<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o-via-github"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>  <span class="co"># ou devtools</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># versÃƒÂ£o estÃƒÂ¡vel (por tag)</span></span>
+<span><span class="co"># versão estável (por tag)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.4.1"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>Badge (opcional):</p>
-<pre><code>[![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml)</code></pre>
+<div class="section level3">
+<h3 id="conformidade-conama-classe-2">Conformidade CONAMA (classe 2)<a class="anchor" aria-label="anchor" href="#conformidade-conama-classe-2"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_wq</span>(<span class="fu">system.file</span>(<span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, <span class="at">package=</span><span class="st">"tikatuwq"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># Tabela só com infrações, pronta para laudo</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">conama_report</span>(df, <span class="st">"2"</span>, <span class="at">only_violations =</span> <span class="cn">TRUE</span>, <span class="at">pretty =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Resumo textual curto</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="fu">conama_text</span>(df, <span class="st">"2"</span>, <span class="at">only_violations =</span> <span class="cn">TRUE</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="fu">Badge</span> (opcional)<span class="sc">:</span></span></code></pre></div>
+<p><a href="https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
+<pre><code>## Principais funções
+
+- read_wq(path) — leitura de dados de qualidade da água (CSV).
+- validate_wq(df) — validação/normalização de colunas e unidades.
+- iqa(df, na_rm = TRUE, ...) — IQA (CETESB/NSF).
+- iet_carlson(df) / iet_lamparelli(df) — Índice do Estado Trófico.
+- nsfwqi(df) — NSFWQI (estrutura pronta).
+- conama_limits(classe) — limites da Res. CONAMA 357/2005.
+- conama_check(df, classe) — conformidade por parâmetro (*_ok).
+- Visualizações: plot_iqa(), plot_series(), plot_box(), plot_heatmap().
+- Relatórios/texto: generate_analysis(), render_report().
+- Dados de exemplo: system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq").
+
+## Documentação e suporte
+
+- Site (pkgdown): https://tikatuwq.github.io/tikatuwq/
+
+- Issues/sugestões: https://github.com/tikatuwq/tikatuwq/issues
+
+- Releases: https://github.com/tikatuwq/tikatuwq/releases
+
+## Como Citar
+```r
+citation("tikatuwq")</code></pre>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -110,9 +147,8 @@
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -127,7 +163,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Vinicius Saraiva Santos <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0000-0000-0000" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Vinicius Saraiva Santos <br><small class="roles"> Author, maintainer </small>   </li>
 </ul>
 </div>
 

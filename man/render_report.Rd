@@ -2,15 +2,31 @@
 % Please edit documentation in R/report.R
 \name{render_report}
 \alias{render_report}
-\title{Gera relatório (R Markdown / Quarto) a partir de template}
+\title{Render a report (R Markdown / Quarto) from the internal template}
 \usage{
 render_report(
   df,
-  meta = list(rio = "Buranhém", periodo = "2025-01"),
-  output = "wq_report.html",
-  template = system.file("templates", "report_qmd.qmd", package = "tikatuwq")
+  meta = list(river = NA, period = NA),
+  output_file = "wq_report.html",
+  output_dir = tempdir(),
+  template = system.file("templates", "report_rmd.Rmd", package = "tikatuwq")
 )
 }
+\arguments{
+\item{df}{Data frame with input data used by the template}
+
+\item{meta}{Named list with contextual metadata (e.g., river, period)}
+
+\item{output_file}{Output file name (default 'wq_report.html')}
+
+\item{output_dir}{Directory where the file will be written (default tempdir())}
+
+\item{template}{Path to the internal template file}
+}
+\value{
+Invisible character path to the generated report
+}
 \description{
-Gera relatório (R Markdown / Quarto) a partir de template
+By default, writes to a temporary directory to comply with CRAN policies.
+The function returns the full path to the generated file.
 }

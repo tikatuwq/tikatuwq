@@ -1,0 +1,57 @@
+---
+title: "tikatuwq: basic workflow"
+author: "tikatuwq authors"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tikatuwq: basic workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7, fig.height = 4,
+  dpi = 96
+)
+```
+
+## Load demo dataset
+
+```{r}
+utils::data("wq_demo", package = "tikatuwq")
+head(wq_demo)
+```
+
+## Compute IQA and check CONAMA compliance
+
+```{r}
+library(tikatuwq)
+
+df <- wq_demo |>
+  validate_wq() |>
+  iqa(na_rm = TRUE)
+
+conf <- conama_check(df, classe = "2")
+head(conf)
+```
+
+## Summaries and plots
+
+```{r}
+plot_iqa(df)
+```
+
+```{r}
+conf_long <- conama_summary(df, classe = "2")
+head(conf_long)
+```
+
+## Render a report (writes to a temporary directory)
+
+```{r, eval=FALSE}
+# Avoid running nested rendering during vignette build on CRAN
+out_file <- render_report(df)
+out_file
+```

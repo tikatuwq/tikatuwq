@@ -2,10 +2,20 @@
 % Please edit documentation in R/viz.R
 \name{plot_series}
 \alias{plot_series}
-\title{Séries temporais por parâmetro}
+\title{Time series by parameter}
 \usage{
 plot_series(df, parametro, facet = NULL)
 }
+\arguments{
+\item{df}{Data frame with a \code{data} column (Date/POSIXct) and the chosen parameter column.}
+
+\item{parametro}{Character; parameter to plot (name of the numeric column).}
+
+\item{facet}{Character or \code{NULL}; optional grouping column name to facet/color.}
+}
+\value{
+A ggplot object (class \code{ggplot}) showing the time series.
+}
 \description{
-Séries temporais por parâmetro
+Time series by parameter
 }

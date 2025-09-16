@@ -9,19 +9,32 @@
   if (is.numeric(x)) return(x)
   x <- as.character(x)
 
+  # Heuristica: qual separador aparece mais nas strings?
+  n_comma <- sum(grepl("\\d,\\d", x))
+  n_dot   <- sum(grepl("\\d\\.\\d", x))
+
+  if (n_comma > n_dot) {
+    return(suppressWarnings(readr::parse_number(
+      x, locale = readr::locale(decimal_mark = ","), na = c("", "NA", "NaN")
+    )))
+  }
+  if (n_dot > n_comma) {
+    return(suppressWarnings(readr::parse_number(
+      x, locale = readr::locale(decimal_mark = "."), na = c("", "NA", "NaN")
+    )))
+  }
+
+  # Empate: tenta os dois; se empatar de novo, prefere ponto
   v1 <- suppressWarnings(readr::parse_number(
-    x,
-    locale = readr::locale(decimal_mark = ","),
-    na = c("", "NA", "NaN")
+    x, locale = readr::locale(decimal_mark = ","), na = c("", "NA", "NaN")
   ))
   v2 <- suppressWarnings(readr::parse_number(
-    x,
-    locale = readr::locale(decimal_mark = "."),
-    na = c("", "NA", "NaN")
+    x, locale = readr::locale(decimal_mark = "."), na = c("", "NA", "NaN")
   ))
-
-  if (sum(is.na(v1)) <= sum(is.na(v2))) v1 else v2
+  n1 <- sum(is.na(v1)); n2 <- sum(is.na(v2))
+  if (n1 < n2) v1 else if (n2 < n1) v2 else v2
 }
+
 
 # Ajuste conservador: se pH vier claro fora da faixa (ex.: 72 -> 7.2)
 .fix_ph_if_needed <- function(ph_vec) {
@@ -29,8 +42,8 @@
   if (any(idx, na.rm = TRUE)) {
     ph_vec[idx] <- ph_vec[idx] / 10
     rlang::warn(
-      paste0("pH > 14 ajustado dividindo por 10 em ", sum(idx),
-             " linha(s) — verifique virgula vs. ponto no CSV.")
+      paste0("pH > 14 adjusted by dividing by 10 in ", sum(idx),
+             " row(s) - check comma vs. dot decimal separator in the CSV.")
     )
   }
   ph_vec
@@ -136,6 +149,6 @@ validate_wq <- function(
   required = c("ph","turbidez","od","dbo","nt_total","p_total","tds","temperatura","coliformes")
 ) {
   miss <- setdiff(required, names(df))
-  if (length(miss)) stop("Colunas ausentes: ", paste(miss, collapse = ", "))
+  if (length(miss)) stop("Missing columns: ", paste(miss, collapse = ", "))
   df
 }

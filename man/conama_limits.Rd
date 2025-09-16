@@ -2,10 +2,32 @@
 % Please edit documentation in R/conama.R
 \name{conama_limits}
 \alias{conama_limits}
-\title{Limites CONAMA 357/2005 (CSV interno)}
+\title{Limits for Brazilian CONAMA 357/2005}
 \usage{
-conama_limits()
+conama_limits(class)
+}
+\arguments{
+\item{class}{Integer or character. Target class (e.g., 1, 2, 3, 4 or "special"),
+according to CONAMA 357/2005.}
+}
+\value{
+A tibble/data frame with one row per parameter and the regulatory thresholds.
+Typical columns:
+\itemize{
+\item \code{parameter}: parameter name (character)
+\item \code{class}: CONAMA class label (character/integer)
+\item \code{limit_min}: minimum allowed value (numeric, may be \code{NA})
+\item \code{limit_max}: maximum allowed value (numeric, may be \code{NA})
+\item \code{unit}: measurement unit (character)
+\item \code{criterion}: textual rule if applicable (character)
+}
 }
 \description{
-Limites CONAMA 357/2005 (CSV interno)
+Returns the parameter limits defined by CONAMA Resolution 357/2005
+for a given water-use class.
+}
+\examples{
+# class 2 thresholds
+head(conama_limits(2))
+
 }

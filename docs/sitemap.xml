@@ -3,10 +3,14 @@
 <url><loc>https://tikatuwq.github.io/tikatuwq/authors.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/index.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/LICENSE-text.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/LICENSE.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/README_install.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/clean_units.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_check.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_limits.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_report.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_summary.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_text.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/generate_analysis.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/iet_carlson.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/iet_lamparelli.html</loc></url>
@@ -22,6 +26,7 @@
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/read_wq.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/render_report.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/resume_wq.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/tikatuwq-package.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/validate_wq.html</loc></url>
 </urlset>
 

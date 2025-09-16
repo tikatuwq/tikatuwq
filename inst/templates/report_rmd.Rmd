@@ -1,0 +1,56 @@
+---
+title: "Water Quality Report"
+output: html_document
+params:
+  data: NULL
+  meta: NULL
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+df <- params$data
+meta <- params$meta
+if (!"IQA" %in% names(df)) df <- tikatuwq::iqa(df, na_rm = TRUE)
+```
+
+## Context
+
+River: `r if (!is.null(meta) && !is.null(meta$river)) meta$river else if (!is.null(meta) && !is.null(meta$rio)) meta$rio else ''`  
+Period: `r if (!is.null(meta) && !is.null(meta$period)) meta$period else if (!is.null(meta) && !is.null(meta$periodo)) meta$periodo else ''`
+
+## Data summary
+
+```{r}
+summary(df)
+```
+
+## CONAMA compliance (Class 2)
+
+```{r}
+conf <- tikatuwq::conama_check(df, classe = "2")
+head(conf)
+```
+
+## IQA by point
+
+```{r, fig.width=7, fig.height=4}
+if ("ponto" %in% names(df)) {
+  print(tikatuwq::plot_iqa(df))
+}
+```
+
+## Automatic analysis (text)
+
+```{r}
+pars <- tikatuwq::generate_analysis(
+  df,
+  classe_conama = "2",
+  incluir_tendencia = TRUE,
+  parametros_tendencia = c("turbidez","od","pH"),
+  contexto = meta
+)
+cat(paste(pars, collapse = "\n\n"))
+```

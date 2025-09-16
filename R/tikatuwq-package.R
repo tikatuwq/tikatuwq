@@ -19,5 +19,5 @@
 # Silencia NOTEs de variaveis NSE usadas com dplyr/ggplot2
 utils::globalVariables(c(
   ".data","IQA","IQA_med","param_ok","ok","parametro","n_viol","total",
-  "ponto","data","valor"
+  "ponto","data","valor","status","viol","delta","idx","lim_min","lim_max"
 ))

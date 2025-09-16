@@ -1,4 +1,10 @@
-#' IET - Lamparelli (estrutura v0.2.1)
+#' Trophic State Index - Lamparelli (skeleton v0.2.1)
+#'
+#' @param tp Numeric total phosphorus (mg/L)
+#' @param chla Numeric chlorophyll-a (µg/L)
+#' @param sd Numeric Secchi disk depth (m)
+#' @param ambiente Environment type: 'rio' or 'reservatorio'
+#' @return Data frame with IET components and overall Lamparelli index
 #' @export
 iet_lamparelli <- function(tp = NULL, chla = NULL, sd = NULL, ambiente = c('rio','reservatorio')){
   ambiente <- match.arg(ambiente)

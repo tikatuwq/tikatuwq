@@ -2,10 +2,20 @@
 % Please edit documentation in R/viz.R
 \name{plot_box}
 \alias{plot_box}
-\title{Boxplot por grupo}
+\title{Boxplots by site/parameter}
 \usage{
 plot_box(df, parametro, by = "ponto")
 }
+\arguments{
+\item{df}{Data frame with water quality data.}
+
+\item{parametro}{Character; parameter column name.}
+
+\item{by}{Character; grouping column (e.g., "site").}
+}
+\value{
+A ggplot object (class \code{ggplot}) representing the boxplot.
+}
 \description{
-Boxplot por grupo
+Boxplots by site/parameter
 }

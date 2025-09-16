@@ -60,6 +60,18 @@ remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 remotes::install_github("tikatuwq/tikatuwq@v0.4.1", build_vignettes = TRUE)
 ```
 
+### Conformidade CONAMA (classe 2)
+
+```r
+df <- read_wq(system.file("extdata","exemplo_chamagunga.csv", package="tikatuwq"))
+
+# Tabela só com infrações, pronta para laudo
+conama_report(df, "2", only_violations = TRUE, pretty = TRUE)
+
+# Resumo textual curto
+cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
+
+
 Badge (opcional):
 ```
 [![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/iqa.R, R/iqa_equations.R
 \name{iqa}
 \alias{iqa}
-\title{IQA com curvas (v0.3.0 - aproximado)}
+\title{Water Quality Index (WQI / IQA)}
 \usage{
 iqa(
   df,
@@ -29,8 +29,10 @@ iqa(
 
 \item{na_rm}{reescala pesos nos parÃƒÂ¢metros presentes}
 }
+\value{
+A tibble/data frame with columns such as \code{site}, \code{date},
+\code{iqa} (numeric score), and \code{class} (qualitative label).
+}
 \description{
-IQA com curvas (v0.3.0 - aproximado)
-
-IQA oficial (produto geomÃƒÂ©trico) com qi CETESB/NSF
+Computes IQA/WQI for each site/date (or grouping).
 }

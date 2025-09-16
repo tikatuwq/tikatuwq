@@ -2,10 +2,20 @@
 % Please edit documentation in R/iet.R
 \name{iet_carlson}
 \alias{iet_carlson}
-\title{Índice do Estado Trófico (Carlson) - básico}
+\title{Trophic State Index (Carlson) - basic}
 \usage{
 iet_carlson(secchi = NULL, clorofila = NULL, tp = NULL)
 }
+\arguments{
+\item{secchi}{Numeric vector with Secchi depth (m)}
+
+\item{clorofila}{Numeric vector with chlorophyll-a (µg/L)}
+
+\item{tp}{Numeric vector with total phosphorus (µg/L)}
+}
+\value{
+Data frame with TSI components and overall IET
+}
 \description{
-Índice do Estado Trófico (Carlson) - básico
+Trophic State Index (Carlson) - basic
 }

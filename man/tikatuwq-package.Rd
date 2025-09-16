@@ -19,7 +19,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Vinicius Saraiva Santos \email{vinisaraiva@gmail.com}
+\strong{Maintainer}: Vinicius Saraiva Santos \email{vinisaraiva@gmail.com} (\href{https://orcid.org/0009-0007-1387-7927}{ORCID})
 
 }
 \keyword{internal}

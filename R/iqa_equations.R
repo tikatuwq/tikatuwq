@@ -94,7 +94,7 @@ iqa <- function(df,
   req <- names(pesos)
   missing <- setdiff(req, names(df))
   if(length(missing) && !na_rm)
-    stop("Faltam colunas: ", paste(missing, collapse=", "), ". Use na_rm=TRUE para reescalar.")
+    stop("Missing columns: ", paste(missing, collapse=", "), ". Use na_rm=TRUE to rescale.")
 
   Q <- list()
   if("coliformes" %in% names(df)) Q$coliformes <- .qi_fc(df$coliformes)

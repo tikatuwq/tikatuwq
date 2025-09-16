@@ -2,10 +2,20 @@
 % Please edit documentation in R/summaries.R
 \name{resume_wq}
 \alias{resume_wq}
-\title{Sumários descritivos por grupo}
+\title{Descriptive summaries by group}
 \usage{
 resume_wq(df, by = c("ponto", "mes"), funs = c("mean", "median", "sd"))
 }
+\arguments{
+\item{df}{Data frame}
+
+\item{by}{Character vector of grouping columns}
+
+\item{funs}{Character vector of summary functions (kept for compatibility)}
+}
+\value{
+Grouped summary data frame
+}
 \description{
-Sumários descritivos por grupo
+Descriptive summaries by group
 }

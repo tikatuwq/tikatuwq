@@ -1,4 +1,9 @@
-#' Índice do Estado Trófico (Carlson) - básico
+#' Trophic State Index (Carlson) - basic
+#'
+#' @param secchi Numeric vector with Secchi depth (m)
+#' @param clorofila Numeric vector with chlorophyll-a (µg/L)
+#' @param tp Numeric vector with total phosphorus (µg/L)
+#' @return Data frame with TSI components and overall IET
 #' @export
 iet_carlson <- function(secchi = NULL, clorofila = NULL, tp = NULL){
   res <- list()
