@@ -27,7 +27,7 @@ iqa(
 
 \item{altitude_m}{altitude (m) p/ \%sat de OD}
 
-\item{na_rm}{reescala pesos nos parÃƒÂ¢metros presentes}
+\item{na_rm}{reescala pesos nos parâmetros presentes}
 }
 \value{
 A tibble/data frame with columns such as \code{site}, \code{date},

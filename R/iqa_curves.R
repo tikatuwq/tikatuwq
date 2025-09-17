@@ -1,4 +1,4 @@
-#' Tabela de curvas Qi (IQA) por parÃƒÂ¢metro (estrutura CETESB/NSF)
+#' Tabela de curvas Qi (IQA) por parâmetro (estrutura CETESB/NSF)
 #' @keywords internal
 iqa_curve_table <- function(method = c("CETESB_approx")){
   method <- match.arg(method)

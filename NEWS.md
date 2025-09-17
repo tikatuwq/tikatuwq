@@ -1,4 +1,6 @@
-# tikatuwq 0.4.4
+# tikatuwq 0.4.5
+- Fix DESCRIPTION URLs per CRAN: updated Lamparelli (2004) and CONAMA 357/2005 links to valid HTTPS targets.
+
 
 - Expanded all acronyms in DESCRIPTION (WQI ↔ IQA, TSI ↔ IET, CONAMA, NSF).
 - Added references with <doi:...> and <https:...> in DESCRIPTION.

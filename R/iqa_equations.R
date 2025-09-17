@@ -84,7 +84,7 @@
 #' @param df cols: pH, turbidez, od, dbo, nt_total, p_total, tds, temperatura, coliformes
 #' @param pesos pesos oficiais (ANA/CETESB)
 #' @param altitude_m altitude (m) p/ %sat de OD
-#' @param na_rm reescala pesos nos parÃƒÂ¢metros presentes
+#' @param na_rm reescala pesos nos parâmetros presentes
 #' @export
 iqa <- function(df,
   pesos = c(od=.17, coliformes=.15, pH=.12, dbo=.10, nt_total=.10, p_total=.10, turbidez=.08, tds=.08, temperatura=.10),

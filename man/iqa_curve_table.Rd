@@ -2,11 +2,11 @@
 % Please edit documentation in R/iqa_curves.R
 \name{iqa_curve_table}
 \alias{iqa_curve_table}
-\title{Tabela de curvas Qi (IQA) por parÃƒÂ¢metro (estrutura CETESB/NSF)}
+\title{Tabela de curvas Qi (IQA) por parâmetro (estrutura CETESB/NSF)}
 \usage{
 iqa_curve_table(method = c("CETESB_approx"))
 }
 \description{
-Tabela de curvas Qi (IQA) por parÃƒÂ¢metro (estrutura CETESB/NSF)
+Tabela de curvas Qi (IQA) por parâmetro (estrutura CETESB/NSF)
 }
 \keyword{internal}
