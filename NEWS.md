@@ -1,4 +1,5 @@
-# tikatuwq 0.4.5
+# tikatuwq 0.4.6
+- DESCRIPTION rewritten to English-only to avoid CRAN “Possibly misspelled words” NOTE.
 - Fix DESCRIPTION URLs per CRAN (Lamparelli 2004, CONAMA 357/2005).
 - Spell-check workflow: updated inst/WORDLIST (Portuguese terms & acronyms).
 
