@@ -1,9 +1,8 @@
 ## Resubmission (0.4.5)
+- Fixed two DESCRIPTION URLs flagged as 404 (Lamparelli 2004, CONAMA 357/2005).
+- Updated inst/WORDLIST to silence false positives (package documented in Portuguese).
+- No code changes; local R CMD check --as-cran clean.
 
-- Fixed two DESCRIPTION URLs flagged as 404:
-  * Lamparelli (2004) -> USP PDF stable URL.
-  * CONAMA 357/2005 -> CONAMA/MMA download page.
-- No code changes; package still passes R CMD check --as-cran with 0 errors | 0 warnings | 0 notes.
 
 
 This is a resubmission after CRAN feedback.

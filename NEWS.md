@@ -1,5 +1,7 @@
 # tikatuwq 0.4.5
-- Fix DESCRIPTION URLs per CRAN: updated Lamparelli (2004) and CONAMA 357/2005 links to valid HTTPS targets.
+- Fix DESCRIPTION URLs per CRAN (Lamparelli 2004, CONAMA 357/2005).
+- Spell-check workflow: updated inst/WORDLIST (Portuguese terms & acronyms).
+
 
 
 - Expanded all acronyms in DESCRIPTION (WQI ↔ IQA, TSI ↔ IET, CONAMA, NSF).

@@ -26,7 +26,6 @@ LazyDataCompression: xz
 Depends: R (>= 4.1)
 Imports:
     dplyr,
-    spelling,
     readr,
     tibble,
     rlang,
@@ -42,6 +41,7 @@ Imports:
     purrr
 Suggests:
     testthat (>= 3.0.0),
+    spelling,
     rmarkdown,
     knitr,
     pkgdown
