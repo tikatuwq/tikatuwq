@@ -72,3 +72,5 @@ Badge (opcional):
 ```r
 citation("tikatuwq")
 ```
+
+[![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
