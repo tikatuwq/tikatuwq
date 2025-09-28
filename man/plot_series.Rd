@@ -30,3 +30,6 @@ p2 <- plot_series(wq_demo, "turbidez", facet = "ponto")
 }
 
 }
+\seealso{
+\code{\link[=plot_box]{plot_box()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}, \code{\link[=iqa]{iqa()}}
+}

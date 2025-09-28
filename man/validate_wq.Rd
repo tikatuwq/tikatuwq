@@ -31,3 +31,6 @@ df_ex <- data.frame(
 validate_wq(df_ex)
 
 }
+\seealso{
+\code{\link[=read_wq]{read_wq()}}, \code{\link[=conama_check]{conama_check()}}
+}

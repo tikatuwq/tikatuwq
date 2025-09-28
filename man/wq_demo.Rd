@@ -42,7 +42,7 @@ head(wq_demo)
 
 }
 \seealso{
-\code{\link{iqa}}, \code{\link{conama_check}}, \code{\link{plot_series}},
-\code{\link{plot_box}}, \code{\link{plot_iqa}}, \code{\link{plot_heatmap}}
+\code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=plot_series]{plot_series()}},
+\code{\link[=plot_box]{plot_box()}}, \code{\link[=plot_iqa]{plot_iqa()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}
 }
 \keyword{datasets}

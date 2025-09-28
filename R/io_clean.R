@@ -84,8 +84,7 @@
 #' "solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet",
 #' "iet_carlson","iet_lamparelli","nsfwqi","vazao")}
 #'
-#' @seealso [=clean_units]{clean_units()}, [=validate_wq]{validate_wq()},
-#'   [=conama_check]{conama_check()}, [=iqa]{iqa()}
+#' @seealso [clean_units()], [validate_wq()], [conama_check()], [iqa()]
 #'
 #' @examples
 #' \dontrun{
@@ -196,7 +195,7 @@ clean_units <- function(df, units_map = NULL) {
 #'
 #' @return The input \code{df} if valid; otherwise, an error is thrown.
 #'
-#' @seealso [=read_wq]{read_wq()}, [=conama_check]{conama_check()}
+#' @seealso [read_wq()], [conama_check()]
 #'
 #' @examples
 #' df_ex <- data.frame(

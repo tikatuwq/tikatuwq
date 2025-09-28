@@ -26,8 +26,8 @@
 #'
 #' @source Simulated for package examples.
 #'
-#' @seealso [=iqa]{iqa()}, [=conama_check]{conama_check()}, [=plot_series]{plot_series()},
-#'   [=plot_box]{plot_box()}, [=plot_iqa]{plot_iqa()}, [=plot_heatmap]{plot_heatmap()}
+#' @seealso [iqa()], [conama_check()], [plot_series()],
+#'   [plot_box()], [plot_iqa()], [plot_heatmap()]
 #'
 #' @examples
 #' data("wq_demo", package = "tikatuwq")

@@ -23,3 +23,6 @@ plot_iqa(d)
 }
 
 }
+\seealso{
+\code{\link[=iqa]{iqa()}}, \code{\link[=plot_series]{plot_series()}}, \code{\link[=plot_box]{plot_box()}}
+}

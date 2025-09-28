@@ -34,9 +34,9 @@
 #' \href{https://tikatuwq.github.io/tikatuwq/}{tikatuwq website}.
 #'
 #' @seealso
-#' [=read_wq]{read_wq()}, [=conama_check]{conama_check()}, [=iqa]{iqa()},
-#' [=iet_carlson]{iet_carlson()}, [=iet_lamparelli]{iet_lamparelli()},
-#' [=plot_series]{plot_series()}, [=render_report]{render_report()}
+#' [read_wq()], [conama_check()], [iqa()],
+#' [iet_carlson()], [iet_lamparelli()],
+#' [plot_series()], [render_report()]
 #'
 #' @references
 #' Carlson (1977) <doi:10.4319/lo.1977.22.2.0361>  

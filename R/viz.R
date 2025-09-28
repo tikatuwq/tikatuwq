@@ -12,7 +12,7 @@
 #'
 #' @return A ggplot object (class `ggplot`) showing the time series.
 #'
-#' @seealso [=plot_box]{plot_box()}, [=plot_heatmap]{plot_heatmap()}, [=iqa]{iqa()}
+#' @seealso [plot_box()], [plot_heatmap()], [iqa()]
 #'
 #' @examples
 #' \donttest{
@@ -57,7 +57,7 @@ plot_series <- function(df, parametro, facet = NULL) {
 #'
 #' @return A ggplot object (class `ggplot`) representing the boxplot.
 #'
-#' @seealso [=plot_series]{plot_series()}, [=plot_heatmap]{plot_heatmap()}, [=iqa]{iqa()}
+#' @seealso [plot_series()], [plot_heatmap()], [iqa()]
 #'
 #' @examples
 #' \donttest{
@@ -88,7 +88,7 @@ plot_box <- function(df, parametro, by = "ponto") {
 #'
 #' @return A ggplot object (class `ggplot`) representing IQA across sites/dates.
 #'
-#' @seealso [=iqa]{iqa()}, [=plot_series]{plot_series()}, [=plot_box]{plot_box()}
+#' @seealso [iqa()], [plot_series()], [plot_box()]
 #'
 #' @examples
 #' \donttest{

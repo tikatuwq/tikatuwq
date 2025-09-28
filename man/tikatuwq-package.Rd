@@ -50,7 +50,9 @@ NSF WQI \url{https://www.nsf.org/education/nsf-water-quality-index}
 CONAMA 357/2005 \url{https://www.icmbio.gov.br/cma/images/stories/biblioteca/legislacao/RESOLUCAO_CONAMA_357_2005.pdf}
 }
 \seealso{
-\code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=conama_limits]{conama_limits()}}, \code{\link[=plot_series]{plot_series()}}, \code{\link[=render_report]{render_report()}}
+\code{\link[=read_wq]{read_wq()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=iqa]{iqa()}},
+\code{\link[=iet_carlson]{iet_carlson()}}, \code{\link[=iet_lamparelli]{iet_lamparelli()}},
+\code{\link[=plot_series]{plot_series()}}, \code{\link[=render_report]{render_report()}}
 }
 \author{
 \strong{Maintainer}: Vinicius Saraiva Santos \email{vinisaraiva@gmail.com} (\href{https://orcid.org/0009-0007-1387-7927}{ORCID})

@@ -26,3 +26,6 @@ plot_box(wq_demo, "turbidez", by = "ponto")
 }
 
 }
+\seealso{
+\code{\link[=plot_series]{plot_series()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}, \code{\link[=iqa]{iqa()}}
+}
