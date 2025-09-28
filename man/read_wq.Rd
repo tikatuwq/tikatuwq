@@ -2,21 +2,55 @@
 % Please edit documentation in R/io_clean.R
 \name{read_wq}
 \alias{read_wq}
-\title{Leitura padrao de dados de qualidade da agua}
+\title{Read water-quality CSV (robust parsing)}
 \usage{
 read_wq(path, tz = "America/Bahia")
 }
 \arguments{
-\item{path}{Caminho do arquivo CSV.}
+\item{path}{Path to the CSV file.}
 
-\item{tz}{Fuso para datas (mantido por compatibilidade; datas sao Date).}
+\item{tz}{Time zone for dates (kept for compatibility; dates are \code{Date}).}
 }
 \value{
-Um \code{tibble} com colunas normalizadas.
+A tibble with:
+\itemize{
+\item normalized, lowercase column names (spaces to \verb{_}, non-alnum removed);
+\item numeric columns parsed ignoring unit strings;
+\item \code{data} parsed to \code{Date} (tries \code{ymd} then \code{dmy});
+\item \code{ponto} coerced to character (if present).
+}
 }
 \description{
-Aceita CSV com \strong{virgula ou ponto} como separador decimal e ignora texto
-de unidades (ex.: "0,04 mg/L"). Lê tudo como texto, normaliza nomes e
-converte colunas numericas de forma robusta. Aplica um ajuste de seguranca
-em pH evidentemente fora da faixa (ex.: 72 -> 7.2).
+Reads a CSV file with \strong{comma or semicolon delimiter} and \strong{comma or dot}
+as decimal mark, ignoring unit suffixes (e.g., \code{"0,04 mg/L"}). Everything
+is read as text first, column names are normalized, and likely numeric
+columns are parsed robustly. A conservative safeguard adjusts obviously
+out-of-range pH values (e.g., \code{72 -> 7.2}).
+}
+\section{Parsed numeric candidates}{
+
+\code{c("ph","od","turbidez","dbo","coliformes","p_total","ptotal",
+"fosforo_total","temperatura","ec","condutividade","n_nitrato","n_nitrito",
+"amonia","nt_total","n_total","ntk","nkjeldahl","nitrogenio_total",
+"solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet",
+"iet_carlson","iet_lamparelli","nsfwqi","vazao")}
+}
+
+\examples{
+\dontrun{
+# Minimal example (write a small CSV and read it):
+tmp <- tempfile(fileext = ".csv")
+writeLines(
+  c("ponto;data;ph;od;turbidez",
+    "R1_01;2025-01-20;7,2;6,8;5,1",
+    "R1_01;21/01/2025;7.1;7.0;4.8 mg/L"),
+  tmp
+)
+x <- read_wq(tmp)
+str(x)
+}
+
+}
+\seealso{
+\code{\link[=clean_units]{clean_units()}}, \code{\link[=validate_wq]{validate_wq()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=iqa]{iqa()}}
 }

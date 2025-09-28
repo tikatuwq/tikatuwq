@@ -5,18 +5,18 @@
 \alias{wq_demo}
 \title{Demo water quality dataset}
 \format{
-A data frame with 20 rows and 11 variables:
+A data frame (tibble) with 20 rows and 11 columns:
 \describe{
-\item{ponto}{chr, monitoring point id}
+\item{ponto}{character, monitoring point id}
 \item{data}{Date, sampling date}
-\item{ph}{numeric}
+\item{ph}{numeric, pH}
 \item{od}{numeric, dissolved oxygen (mg/L)}
 \item{turbidez}{numeric, NTU}
 \item{dbo}{numeric, mg/L}
 \item{coliformes}{integer, MPN/100 mL}
-\item{p_total}{numeric, mg/L}
-\item{nt_total}{numeric, mg/L}
-\item{temperatura}{numeric, Celsius}
+\item{p_total}{numeric, total phosphorus (mg/L)}
+\item{nt_total}{numeric, total nitrogen (mg/L)}
+\item{temperatura}{numeric, degrees Celsius}
 \item{tds}{numeric, total dissolved solids (mg/L)}
 }
 }
@@ -27,7 +27,22 @@ Simulated for package examples.
 data(wq_demo)
 }
 \description{
-A tiny example dataset used in examples and the vignette. Columns are
-aligned with the package functions (Portuguese variable names).
+A tiny example dataset used in examples and vignettes. Column names follow
+the package's Portuguese conventions (e.g., \code{ponto}, \code{data}, \code{turbidez}).
+}
+\details{
+The dataset is simulated for illustrative purposes and is suitable for
+quick examples of \code{iqa()}, \code{conama_check()}, and plotting helpers.
+}
+\examples{
+data("wq_demo", package = "tikatuwq")
+head(wq_demo)
+# quick IQA example:
+# iqa(wq_demo, na_rm = TRUE)
+
+}
+\seealso{
+\code{\link{iqa}}, \code{\link{conama_check}}, \code{\link{plot_series}},
+\code{\link{plot_box}}, \code{\link{plot_iqa}}, \code{\link{plot_heatmap}}
 }
 \keyword{datasets}

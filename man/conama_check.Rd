@@ -2,33 +2,38 @@
 % Please edit documentation in R/conama.R
 \name{conama_check}
 \alias{conama_check}
-\title{Conformity check (default Class = "2") - detailed}
+\title{CONAMA conformity check (detailed; default class = "2")}
 \usage{
 conama_check(df, classe = "2")
 }
 \arguments{
-\item{df}{tibble/data.frame com colunas de parametros (ph, turbidez, od, dbo, etc.).}
+\item{df}{A tibble/data.frame with parameter columns (e.g., ph, turbidez, od, dbo).}
 
-\item{classe}{string da classe ("especial", "1", "2", "3", "4" ou conforme tabela).}
+\item{classe}{Character class label (e.g., "especial", "1", "2", "3", "4").}
 }
 \value{
-\code{df} com colunas adicionais por parametro.
+The input \code{df} with additional columns per parameter as described.
 }
 \description{
 For each parameter present in \code{df}, adds columns:
 \itemize{
-\item \verb{*_ok} (TRUE/FALSE),
-\item \verb{*_status} ("ok", "acima_do_maximo", "abaixo_do_minimo"),
-\item \verb{*__lim_min} and \verb{*__lim_max} (limits used),
-\item \verb{*__delta} (difference to the relevant limit; >0 if above max,
-<0 if below min, 0 if ok).
+\item \code{*_ok} (logical),
+\item \code{*_status} one of \code{"ok"}, \code{"acima_do_maximo"}, \code{"abaixo_do_minimo"},
+\item \code{*__lim_min} and \code{*__lim_max} (thresholds used),
+\item \code{*__delta} (difference to the relevant limit; >0 above max, <0 below min, 0 if ok).
 }
+If multiple limit rows exist for the same parameter, \code{*_ok} is TRUE if
+any row is satisfied; for \code{status/lim_min/lim_max/delta}, the first
+satisfied row is chosen; if none satisfy, the row with the smallest
+absolute violation (min |delta|) is used.
 }
-\details{
-Se existirem multiplas linhas de limite para o mesmo parametro, a funcao:
-\itemize{
-\item considera \verb{*_ok} como TRUE se QUALQUER linha for atendida; e
-\item escolhe, para \code{status/lim_min/lim_max/delta}, a primeira linha que atende;
-se nenhuma atende, escolhe a que produz a menor violacao (menor |delta|).
+\examples{
+\dontrun{
+data("wq_demo", package = "tikatuwq")
+head(conama_check(wq_demo, classe = "2"))
 }
+
+}
+\seealso{
+\code{\link[=conama_limits]{conama_limits()}}, \code{\link[=conama_summary]{conama_summary()}}, \code{\link[=conama_report]{conama_report()}}, \code{\link[=conama_text]{conama_text()}}
 }

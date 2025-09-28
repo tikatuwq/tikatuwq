@@ -9,19 +9,17 @@
 #' @param class Integer or character. Target class (e.g., 1, 2, 3, 4 or "special"),
 #'   according to CONAMA 357/2005.
 #'
-#' @return A tibble/data frame with one row per parameter and the regulatory thresholds.
+#' @return A tibble/data frame with one row per parameter and regulatory thresholds.
 #'   Typical columns:
 #'   \itemize{
-#'     \item \code{parameter}: parameter name (character)
-#'     \item \code{class}: CONAMA class label (character/integer)
-#'     \item \code{limit_min}: minimum allowed value (numeric, may be \code{NA})
-#'     \item \code{limit_max}: maximum allowed value (numeric, may be \code{NA})
-#'     \item \code{unit}: measurement unit (character)
-#'     \item \code{criterion}: textual rule if applicable (character)
+#'     \item \code{parametro}: parameter name (character, normalized to snake_case)
+#'     \item \code{classe}: class label (character)
+#'     \item \code{min}/\code{max} (or equivalents): numeric thresholds (may be \code{NA})
+#'     \item other metadata columns if present (e.g., unit, criterion)
 #'   }
 #'
 #' @examples
-#' # class 2 thresholds
+#' # Class 2 thresholds (first rows)
 #' head(conama_limits(2))
 #'
 #' @export
@@ -29,23 +27,21 @@ conama_limits <- function(class){
   path <- system.file("extdata","conama_limits.csv", package = "tikatuwq")
   df <- readr::read_csv(path, show_col_types = FALSE, na = c("", "NA"))
   df$classe <- as.character(df$classe)
-  # normaliza nomes de parametros para casar com colunas do df
+  # normalize parameter names to match data columns
   df$parametro <- df$parametro |>
     tolower() |>
     stringr::str_replace_all("\\s+", "_") |>
     stringr::str_replace_all("[^a-z0-9_]", "")
   if (missing(class)) return(df)
-  # filtra pela classe informada (aceita numero/char)
+  # filter by class (accepts numeric/character)
   df[as.character(df$classe) == as.character(class), , drop = FALSE]
 }
 
+# Internal helpers -------------------------------------------------------------
 
-# Helpers internos -------------------------------------------------------------
-
-# pega, de um data.frame de limites (linhas do parametro), os valores min/max
+# extract min/max from a limit row (supports multiple column name variants)
 .get_minmax <- function(row) {
   nms <- names(row)
-  # tenta diferentes nomes possiveis
   minv <- NA_real_
   maxv <- NA_real_
   mmn <- intersect(c("min", "minimo", "lim_min"), nms)
@@ -55,7 +51,7 @@ conama_limits <- function(class){
   list(min = minv, max = maxv)
 }
 
-# calcula status/delta dado valor e min/max
+# status/delta given a value and min/max
 .status_delta_one <- function(val, minv, maxv) {
   if (is.na(val))          return(list(status = NA_character_, delta = NA_real_))
   if (!is.na(minv) && !is.na(maxv)) {
@@ -73,24 +69,35 @@ conama_limits <- function(class){
   }
 }
 
-#' Conformity check (default Class = "2") - detailed
+#' CONAMA conformity check (detailed; default class = "2")
 #'
-#' For each parameter present in `df`, adds columns:
-#' - `*_ok` (TRUE/FALSE),
-#' - `*_status` ("ok", "acima_do_maximo", "abaixo_do_minimo"),
-#' - `*__lim_min` and `*__lim_max` (limits used),
-#' - `*__delta` (difference to the relevant limit; >0 if above max,
-#'   <0 if below min, 0 if ok).
+#' @description For each parameter present in \code{df}, adds columns:
+#' \itemize{
+#'   \item \code{*_ok} (logical),
+#'   \item \code{*_status} one of \code{"ok"}, \code{"acima_do_maximo"}, \code{"abaixo_do_minimo"},
+#'   \item \code{*__lim_min} and \code{*__lim_max} (thresholds used),
+#'   \item \code{*__delta} (difference to the relevant limit; >0 above max, <0 below min, 0 if ok).
+#' }
+#' If multiple limit rows exist for the same parameter, \code{*_ok} is TRUE if
+#' any row is satisfied; for \code{status/lim_min/lim_max/delta}, the first
+#' satisfied row is chosen; if none satisfy, the row with the smallest
+#' absolute violation (min |delta|) is used.
 #'
-#' Se existirem multiplas linhas de limite para o mesmo parametro, a funcao:
-#' - considera `*_ok` como TRUE se QUALQUER linha for atendida; e
-#' - escolhe, para `status/lim_min/lim_max/delta`, a primeira linha que atende;
-#'   se nenhuma atende, escolhe a que produz a menor violacao (menor |delta|).
+#' @param df A tibble/data.frame with parameter columns (e.g., ph, turbidez, od, dbo).
+#' @param classe Character class label (e.g., "especial", "1", "2", "3", "4").
 #'
-#' @param df tibble/data.frame com colunas de parametros (ph, turbidez, od, dbo, etc.).
-#' @param classe string da classe ("especial", "1", "2", "3", "4" ou conforme tabela).
-#' @return `df` com colunas adicionais por parametro.
+#' @return The input \code{df} with additional columns per parameter as described.
+#'
+#' @seealso [conama_limits()], [conama_summary()], [conama_report()], [conama_text()]
+#'
+#' @examples
+#' \dontrun{
+#' data("wq_demo", package = "tikatuwq")
+#' head(conama_check(wq_demo, classe = "2"))
+#' }
+#'
 #' @export
+#' @importFrom rlang .data
 conama_check <- function(df, classe = "2") {
   lim_all <- conama_limits()
   lim <- lim_all[as.character(lim_all$classe) == as.character(classe), , drop = FALSE]
@@ -103,7 +110,7 @@ conama_check <- function(df, classe = "2") {
   for (p in params_present) {
     v <- out[[p]]
 
-    # garantir numerico (usa helper do leitor, se existir)
+    # coerce to numeric if needed (optional helper if available)
     if (!is.numeric(v)) {
       v_num <- suppressWarnings(as.numeric(v))
       if (all(is.na(v_num))) {
@@ -135,29 +142,24 @@ conama_check <- function(df, classe = "2") {
       lim_min_m[, j] <- rep(if (!is.na(minv)) minv else NA_real_, n)
       lim_max_m[, j] <- rep(if (!is.na(maxv)) maxv else NA_real_, n)
 
-      # ok por linha de limite
+      # row-wise satisfaction
       ok_j <- (is.na(minv) | (!is.na(v) & v >= minv)) &
               (is.na(maxv) | (!is.na(v) & v <= maxv))
       ok_mat[, j] <- ok_j
 
-      # status/delta por linha
+      # status/delta per row
       for (i in seq_len(n)) {
         sd <- .status_delta_one(v[i], minv, maxv)
         status_m[i, j] <- sd$status
         delta_m[i, j]  <- sd$delta
-        if (ok_j[i]) {
-          # normaliza delta ok para 0
-          delta_m[i, j] <- 0
-        }
+        if (ok_j[i]) delta_m[i, j] <- 0
       }
     }
 
-    # combinacao por observacao: escolhe a linha aplicavel
+    # combine rows for each observation
     ok_any <- apply(ok_mat, 1, any)
-    # indice da primeira linha ok (ou NA se nenhuma)
     first_ok_idx <- apply(ok_mat, 1, function(x) { w <- which(x); if (length(w)) w[1] else NA_integer_ })
 
-    # vetores finais
     lim_min_vec <- rep(NA_real_, n)
     lim_max_vec <- rep(NA_real_, n)
     status_vec  <- rep(NA_character_, n)
@@ -171,10 +173,8 @@ conama_check <- function(df, classe = "2") {
         status_vec[i]  <- "ok"
         delta_vec[i]   <- 0
       } else {
-        # nenhuma linha atende: escolha pela menor |delta|
         deltas <- delta_m[i, ]
         if (all(is.na(deltas))) {
-          # nao ha como decidir
           lim_min_vec[i] <- NA_real_
           lim_max_vec[i] <- NA_real_
           status_vec[i]  <- NA_character_
@@ -199,13 +199,25 @@ conama_check <- function(df, classe = "2") {
   out
 }
 
-# (Opcional) resumo em formato "longo" -----------------------------------------
-
-#' Conformity summary (long format)
-#' @param df dados de entrada
-#' @param classe classe CONAMA
-#' @return tibble com: parametro, valor, lim_min, lim_max, status, ok, delta
+#' CONAMA conformity summary (long format)
+#'
+#' @param df Input data
+#' @param classe CONAMA class label
+#'
+#' @return A tibble with columns:
+#'   \code{parametro}, \code{valor}, \code{lim_min}, \code{lim_max},
+#'   \code{status}, \code{ok}, \code{delta}.
+#'
+#' @seealso [conama_check()], [conama_report()], [conama_text()]
+#'
+#' @examples
+#' \dontrun{
+#' data("wq_demo", package = "tikatuwq")
+#' head(conama_summary(wq_demo, classe = "2"))
+#' }
+#'
 #' @export
+#' @importFrom rlang .data
 conama_summary <- function(df, classe = "2") {
   chk <- conama_check(df, classe = classe)
   lim <- conama_limits()
@@ -233,48 +245,114 @@ conama_summary <- function(df, classe = "2") {
   })
 }
 
-#' Conformity report (table)
-#' @param df dados de entrada
-#' @param classe classe CONAMA (ex.: "2")
-#' @param only_violations se TRUE, retorna apenas linhas com status != "ok"
-#' @return tibble com: parametro, valor, lim_min, lim_max, status, delta
+#' CONAMA conformity report (table)
+#'
+#' @param df Input data
+#' @param classe CONAMA class label (e.g., "2")
+#' @param only_violations If TRUE, returns only rows with \code{status != "ok"}
+#' @param pretty If TRUE, returns formatted numeric columns for display
+#' @param decimal_mark Decimal separator (default \code{","})
+#' @param big_mark Thousands separator (default \code{"."})
+#'
+#' @return A tibble. When \code{pretty = FALSE}:
+#'   \code{parametro}, \code{valor}, \code{lim_min}, \code{lim_max},
+#'   \code{status}, \code{delta}. When \code{pretty = TRUE}, numeric columns
+#'   are formatted as character with "natural" decimals.
+#'
+#' @seealso [conama_summary()], [conama_text()]
+#'
+#' @examples
+#' \dontrun{
+#' data("wq_demo", package = "tikatuwq")
+#' conama_report(wq_demo, classe = "2", only_violations = TRUE)
+#' conama_report(wq_demo, classe = "2", only_violations = TRUE, pretty = TRUE)
+#' }
+#'
 #' @export
-conama_report <- function(df, classe = "2", only_violations = TRUE) {
+#' @importFrom rlang .data
+conama_report <- function(df, classe = "2",
+                          only_violations = TRUE,
+                          pretty = FALSE,
+                          decimal_mark = ",", big_mark = ".") {
+
   tb <- conama_summary(df, classe = classe)
+
   if (only_violations) {
     tb <- tb[!is.na(tb$status) & tb$status != "ok", , drop = FALSE]
   }
-  tb[order(tb$parametro), ]
+  tb <- tb[order(tb$parametro), ]
+
+  if (!pretty) return(tb)
+
+  # numeric formatting "natural" (ASCII-only)
+  decimals_for_one <- function(x) {
+    if (is.na(x)) return(NA_integer_)
+    if (abs(x - round(x)) < 1e-9 || abs(x) >= 1000) return(0L)
+    ax <- abs(x)
+    if (ax >= 1) return(1L)
+    if (ax >= 0.1) return(if (abs(round(x, 1) - x) < 1e-9) 1L else 2L)
+    if (ax >= 0.01) return(if (abs(round(x, 2) - x) < 1e-9) 2L else 3L)
+    3L
+  }
+  fmt_vec <- function(v) {
+    dec <- vapply(v, decimals_for_one, integer(1))
+    acc <- ifelse(is.na(dec) | dec == 0L, 1, 10^(-dec))
+    out <- character(length(v))
+    for (i in seq_along(v)) {
+      if (is.na(v[i])) { out[i] <- NA_character_; next }
+      out[i] <- scales::number(v[i], accuracy = acc[i],
+                               big.mark = big_mark, decimal.mark = decimal_mark,
+                               trim = TRUE)
+    }
+    out
+  }
+
+  dplyr::tibble(
+    parametro = tb$parametro,
+    valor     = fmt_vec(tb$valor),
+    lim_min   = fmt_vec(tb$lim_min),
+    lim_max   = fmt_vec(tb$lim_max),
+    status    = tb$status,
+    delta     = paste0(ifelse(tb$delta > 0, "+", ""), fmt_vec(tb$delta))
+  )
 }
 
 #' Text summary of conformity (bulleted, formatted)
-#' @param df dados de entrada
-#' @param classe classe CONAMA
-#' @param only_violations se TRUE, lista apenas parametros com violacao
-#' @param decimal_mark separador decimal (default ",")
-#' @param big_mark separador de milhar (default ".")
-#' @return character vector (linhas)
+#'
+#' @param df Input data
+#' @param classe CONAMA class label
+#' @param only_violations If TRUE, list only parameters with violation
+#' @param decimal_mark Decimal separator (default \code{","})
+#' @param big_mark Thousands separator (default \code{"."})
+#'
+#' @return Character vector of lines (first line is a header, the rest are bullets).
+#'
+#' @seealso [conama_summary()], [conama_report()]
+#'
+#' @examples
+#' \dontrun{
+#' data("wq_demo", package = "tikatuwq")
+#' cat(conama_text(wq_demo, classe = "2"), sep = "\n")
+#' }
+#'
 #' @export
+#' @importFrom rlang .data
 conama_text <- function(df, classe = "2",
                         only_violations = FALSE,
                         decimal_mark = ",", big_mark = ".") {
   tb <- conama_summary(df, classe = classe)
   if (!nrow(tb)) return("Sem parametros aplicaveis para a classe informada.")
-  tb <- dplyr::arrange(tb, parametro)
+  tb <- dplyr::arrange(tb, .data$parametro)
 
-  # casas decimais "inteligentes": inteiros sem ,0; 0.1 -> 0,1; 0.05 -> 0,05; 0.123 -> 0,123
+  # "natural" decimal places: integers without ,0; 0.1 -> 0,1; 0.05 -> 0,05; 0.123 -> 0,123
   decimals_for_one <- function(x) {
     if (is.na(x)) return(NA_integer_)
-    if (abs(x - round(x)) < 1e-9 || abs(x) >= 1000) return(0L)  # inteiros / milhares
+    if (abs(x - round(x)) < 1e-9 || abs(x) >= 1000) return(0L)
     ax <- abs(x)
     if (ax >= 1) return(1L)
-    if (ax >= 0.1) {
-      return(if (abs(round(x, 1) - x) < 1e-9) 1L else 2L)
-    }
-    if (ax >= 0.01) {
-      return(if (abs(round(x, 2) - x) < 1e-9) 2L else 3L)
-    }
-    return(3L)
+    if (ax >= 0.1)  return(if (abs(round(x, 1) - x) < 1e-9) 1L else 2L)
+    if (ax >= 0.01) return(if (abs(round(x, 2) - x) < 1e-9) 2L else 3L)
+    3L
   }
 
   fmt_vec <- function(v) {
@@ -282,7 +360,6 @@ conama_text <- function(df, classe = "2",
     out <- character(length(v))
     for (i in seq_along(v)) {
       if (is.na(v[i])) { out[i] <- NA_character_; next }
-      # accuracy coerente com o numero de casas; fallback para 0.001
       acc <- if (is.na(dec[i])) 0.001 else if (dec[i] == 0L) 1 else 10^(-dec[i])
       out[i] <- scales::number(v[i], accuracy = acc, big.mark = big_mark,
                                decimal.mark = decimal_mark, trim = TRUE)
@@ -291,16 +368,16 @@ conama_text <- function(df, classe = "2",
   }
 
   agg <- tb |>
-    dplyr::mutate(viol = !is.na(status) & status != "ok") |>
-    dplyr::group_by(parametro) |>
+    dplyr::mutate(viol = !is.na(.data$status) & .data$status != "ok") |>
+    dplyr::group_by(.data$parametro) |>
     dplyr::summarise(
       n      = dplyr::n(),
-      n_viol = sum(viol, na.rm = TRUE),
-      idx    = { w <- which(viol); if (length(w)) w[which.max(abs(delta[w]))] else NA_integer_ },
-      v  = ifelse(is.na(idx), NA_real_, valor[idx]),
-      mn = ifelse(is.na(idx), NA_real_, lim_min[idx]),
-      mx = ifelse(is.na(idx), NA_real_, lim_max[idx]),
-      dl = ifelse(is.na(idx), NA_real_, delta[idx]),
+      n_viol = sum(.data$viol, na.rm = TRUE),
+      idx    = { w <- which(.data$viol); if (length(w)) w[which.max(abs(.data$delta[w]))] else NA_integer_ },
+      v  = ifelse(is.na(.data$idx), NA_real_, .data$valor[.data$idx]),
+      mn = ifelse(is.na(.data$idx), NA_real_, .data$lim_min[.data$idx]),
+      mx = ifelse(is.na(.data$idx), NA_real_, .data$lim_max[.data$idx]),
+      dl = ifelse(is.na(.data$idx), NA_real_, .data$delta[.data$idx]),
       .groups = "drop"
     )
 
@@ -332,60 +409,5 @@ conama_text <- function(df, classe = "2",
   c(
     sprintf("Conformidade CONAMA classe %s:", classe),
     if (!nrow(agg)) "- todos os parametros avaliados estao conformes." else linhas
-  )
-}
-#' Relatorio de conformidade (tabela), com formato opcional
-#' @param df dados de entrada
-#' @param classe classe CONAMA
-#' @param only_violations se TRUE, retorna apenas linhas com status != "ok"
-#' @param pretty se TRUE, devolve colunas formatadas para exibicao
-#' @param decimal_mark separador decimal (default ",")
-#' @param big_mark separador de milhar (default ".")
-#' @return tibble
-#' @export
-conama_report <- function(df, classe = "2",
-                          only_violations = TRUE,
-                          pretty = FALSE,
-                          decimal_mark = ",", big_mark = ".") {
-
-  tb <- conama_summary(df, classe = classe)
-
-  if (only_violations) {
-    tb <- tb[!is.na(tb$status) & tb$status != "ok", , drop = FALSE]
-  }
-  tb <- tb[order(tb$parametro), ]
-
-  if (!pretty) return(tb)
-
-  # ---- formatacao numerica "natural" (ASCII-only) ---------------------------
-  decimals_for_one <- function(x) {
-    if (is.na(x)) return(NA_integer_)
-    if (abs(x - round(x)) < 1e-9 || abs(x) >= 1000) return(0L)  # inteiros/milhares
-    ax <- abs(x)
-    if (ax >= 1) return(1L)
-    if (ax >= 0.1) return(if (abs(round(x, 1) - x) < 1e-9) 1L else 2L)
-    if (ax >= 0.01) return(if (abs(round(x, 2) - x) < 1e-9) 2L else 3L)
-    3L
-  }
-  fmt_vec <- function(v) {
-    dec <- vapply(v, decimals_for_one, integer(1))
-    acc <- ifelse(is.na(dec) | dec == 0L, 1, 10^(-dec))
-    out <- character(length(v))
-    for (i in seq_along(v)) {
-      if (is.na(v[i])) { out[i] <- NA_character_; next }
-      out[i] <- scales::number(v[i], accuracy = acc[i],
-                               big.mark = big_mark, decimal.mark = decimal_mark,
-                               trim = TRUE)
-    }
-    out
-  }
-
-  dplyr::tibble(
-    parametro = tb$parametro,
-    valor     = fmt_vec(tb$valor),
-    lim_min   = fmt_vec(tb$lim_min),
-    lim_max   = fmt_vec(tb$lim_max),
-    status    = tb$status,
-    delta     = paste0(ifelse(tb$delta > 0, "+", ""), fmt_vec(tb$delta))
   )
 }

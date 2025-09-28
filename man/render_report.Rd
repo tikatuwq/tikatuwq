@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{render_report}
 \alias{render_report}
-\title{Render a report (R Markdown / Quarto) from the internal template}
+\title{Render a water-quality report from the internal R Markdown template}
 \usage{
 render_report(
   df,
@@ -13,20 +13,55 @@ render_report(
 )
 }
 \arguments{
-\item{df}{Data frame with input data used by the template}
+\item{df}{Data frame with the input data used by the template.}
 
-\item{meta}{Named list with contextual metadata (e.g., river, period)}
+\item{meta}{Named list with contextual metadata (e.g., \code{river}, \code{period}).}
 
-\item{output_file}{Output file name (default 'wq_report.html')}
+\item{output_file}{File name for the report (default \code{"wq_report.html"}).}
 
-\item{output_dir}{Directory where the file will be written (default tempdir())}
+\item{output_dir}{Directory where the file will be written (default \code{tempdir()}).
+It will be created if it does not exist.}
 
-\item{template}{Path to the internal template file}
+\item{template}{Path to the internal template file. Defaults to the package
+Rmd template shipped under \code{inst/templates/report_rmd.Rmd}.}
 }
 \value{
-Invisible character path to the generated report
+Invisible character string: the absolute path to the generated report.
 }
 \description{
-By default, writes to a temporary directory to comply with CRAN policies.
-The function returns the full path to the generated file.
+Renders an HTML report using the package's internal R Markdown template.
+By default, the output is written to a \strong{temporary directory} to comply
+with CRAN policies. The function returns (invisibly) the full path to the
+generated file.
 }
+\details{
+The template expects a data frame with columns compatible with the package
+(e.g., \code{ponto}, \code{data}, parameters used by IQA/CONAMA checks). You can pass
+optional metadata via \code{meta}, such as \code{river} and \code{period}.
+
+This function relies on \strong{rmarkdown} (listed in Suggests). If the package
+is not available, an informative error is thrown.
+}
+\section{Notes}{
+
+\itemize{
+\item The default output directory is \code{tempdir()} to avoid writing into the
+user's project folder during examples or automated checks.
+\item The template is an \strong{Rmd} (R Markdown). If you prefer Quarto, provide a
+custom \code{template} path to a \code{.qmd} and ensure your environment supports it.
+}
+}
+
+\examples{
+\donttest{
+# Minimal example (writes to a temporary directory)
+d <- wq_demo
+path <- render_report(d, meta = list(river = "Example River", period = "Jan–Feb"))
+file.exists(path)
+}
+
+}
+\seealso{
+\code{\link[rmarkdown:render]{rmarkdown::render()}}
+}
+\concept{reporting}

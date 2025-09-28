@@ -7,15 +7,26 @@
 plot_series(df, parametro, facet = NULL)
 }
 \arguments{
-\item{df}{Data frame with a \code{data} column (Date/POSIXct) and the chosen parameter column.}
+\item{df}{Data frame with a \code{data} column (Date/POSIXct) and the parameter column.}
 
-\item{parametro}{Character; parameter to plot (name of the numeric column).}
+\item{parametro}{Character; name of the numeric column to plot on Y.}
 
-\item{facet}{Character or \code{NULL}; optional grouping column name to facet/color.}
+\item{facet}{Character or \code{NULL}; optional grouping column name to color/facet.}
 }
 \value{
 A ggplot object (class \code{ggplot}) showing the time series.
 }
 \description{
-Time series by parameter
+Plot a time series for one numeric parameter, optionally
+colored/faceted by a grouping column.
+}
+\examples{
+\donttest{
+data(wq_demo)
+# Basic: time series of turbidity
+p <- plot_series(wq_demo, "turbidez")
+# With color/facet by sampling point
+p2 <- plot_series(wq_demo, "turbidez", facet = "ponto")
+}
+
 }

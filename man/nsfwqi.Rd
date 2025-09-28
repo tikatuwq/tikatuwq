@@ -2,7 +2,7 @@
 % Please edit documentation in R/nsfwqi.R
 \name{nsfwqi}
 \alias{nsfwqi}
-\title{NSF Water Quality Index (prototype v0.2.1)}
+\title{NSF Water Quality Index (NSF WQI, prototype)}
 \usage{
 nsfwqi(
   df,
@@ -12,15 +12,54 @@ nsfwqi(
 )
 }
 \arguments{
-\item{df}{Data frame containing columns compatible with NSFWQI mapping}
+\item{df}{Data frame containing columns compatible with the mapping above.}
 
-\item{pesos}{Named numeric vector with parameter weights}
+\item{pesos}{Named numeric vector with parameter weights. Defaults follow a
+common NSF WQI variant:
+\code{do=.17}, \code{fc=.16}, \code{ph=.11}, \code{bod=.11},
+\code{temp_change=.10}, \code{po4=.10}, \code{no3=.10},
+\code{turbidez=.08}, \code{sst=.07}.}
 
-\item{na_rm}{Logical; allow NA and rescale weights}
+\item{na_rm}{Logical; allow NA per row and rescale weights to available
+parameters (\code{TRUE}) or error on missing inputs (\code{FALSE}).}
 }
 \value{
-Data frame with an added 'NSFWQI' column
+The input \code{df} with an added numeric column \code{NSFWQI}.
 }
 \description{
-NSF Water Quality Index (prototype v0.2.1)
+Computes a \strong{prototype} NSF WQI as a weighted arithmetic mean of
+parameter sub-scores (Qi) using simple piecewise rules. This is intended
+for quick demonstrations and is \strong{not} a full replication of the original
+NSF curves.
+}
+\details{
+The function accepts both NSF-style column names and common Brazilian
+aliases. The mapping tried (if present) is:
+\itemize{
+\item \code{do}  <- \code{od}
+\item \code{fc}  <- \code{coliformes}
+\item \code{ph}  <- \code{pH} or \code{ph}
+\item \code{bod} <- \code{dbo}
+\item \code{turbidez} stays \code{turbidez}
+\item \code{sst} <- \code{solidos_suspensos}
+\item \code{po4} <- \code{po4} or \code{p_ortofosfato}
+\item \code{no3} <- \code{no3} or \code{n_nitrato}
+\item \code{temp_change} must be supplied as-is (delta T to reference)
+}
+
+If \code{na_rm = TRUE}, weights are rescaled \strong{per row} to the parameters
+available in that row. If \code{na_rm = FALSE} (default), any missing
+required input leads to an error.
+}
+\examples{
+d <- wq_demo
+# create minimal aliases so the prototype can run
+d$do  <- d$od
+d$fc  <- d$coliformes
+d$ph  <- d$ph
+d$bod <- d$dbo
+# others are missing; use na_rm = TRUE to rescale weights by row
+out <- nsfwqi(d, na_rm = TRUE)
+head(out$NSFWQI)
+
 }

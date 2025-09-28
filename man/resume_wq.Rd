@@ -7,15 +7,43 @@
 resume_wq(df, by = c("ponto", "mes"), funs = c("mean", "median", "sd"))
 }
 \arguments{
-\item{df}{Data frame}
+\item{df}{A data frame or tibble.}
 
-\item{by}{Character vector of grouping columns}
+\item{by}{Character vector with grouping column names (default \code{c("ponto","mes")}).
+Any names not present in \code{df} are ignored.}
 
-\item{funs}{Character vector of summary functions (kept for compatibility)}
+\item{funs}{\strong{Deprecated} (kept for compatibility; ignored). The function
+always computes \code{mean}, \code{median} and \code{sd} with \code{na.rm = TRUE}.}
 }
 \value{
-Grouped summary data frame
+A tibble with the grouping keys and one column per
+statistic/variable, named as \verb{\{var\}_\{stat\}} (e.g., \code{od_mean}, \code{od_median}, \code{od_sd}).
 }
 \description{
-Descriptive summaries by group
+Computes basic descriptive statistics (mean, median, sd) for all \strong{numeric}
+columns in \code{df}, grouped by one or more keys.
+}
+\details{
+\itemize{
+\item Grouping columns not found in \code{df} are silently dropped.
+\item If no grouping columns remain, an error is thrown.
+\item Only numeric columns are summarized; if none exist, an error is thrown.
+\item Missing values are ignored (\code{na.rm = TRUE}).
+}
+}
+\examples{
+\donttest{
+# Using the demo dataset shipped with the package
+d <- wq_demo
+# Example: group by point (ponto)
+s1 <- resume_wq(d, by = "ponto")
+head(s1)
+
+# Example: group by point and month (if 'mes' exists in your data)
+# s2 <- resume_wq(d, by = c("ponto", "mes"))
+}
+
+}
+\seealso{
+\code{\link[dplyr:summarise]{dplyr::summarise()}}, \code{\link[dplyr:across]{dplyr::across()}}
 }

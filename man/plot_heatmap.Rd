@@ -7,11 +7,26 @@
 plot_heatmap(df_long)
 }
 \arguments{
-\item{df_long}{Long-format data frame (site/parameter/value).}
+\item{df_long}{Long-format data frame with columns \code{data}, \code{parametro}, \code{valor}.}
 }
 \value{
 A ggplot object (class \code{ggplot}) representing the heatmap.
 }
 \description{
-Heatmap of parameters vs. sites
+Heatmap for long-format data (date x parameter).
+}
+\examples{
+\donttest{
+# Example: reshape wq_demo to long and plot
+data(wq_demo)
+library(tidyr)
+df_long <- tidyr::pivot_longer(
+  wq_demo,
+  cols = c("ph","od","turbidez","dbo"),
+  names_to = "parametro",
+  values_to = "valor"
+)
+plot_heatmap(df_long)
+}
+
 }

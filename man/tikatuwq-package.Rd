@@ -4,19 +4,53 @@
 \name{tikatuwq-package}
 \alias{tikatuwq}
 \alias{tikatuwq-package}
-\title{tikatuwq: Ferramentas para analise de qualidade da agua (Brasil)}
+\title{tikatuwq: Water quality tools for the Brazilian context}
 \description{
-Indices (IQA CETESB/NSF, IET Carlson/Lamparelli), checagem CONAMA 357/2005,
-visualizacoes e texto analitico automatico (rule-based).
+Utilities to import, clean, validate and analyze freshwater quality data.
+Includes indices (IQA/WQI, TSI/IET Carlson and Lamparelli), compliance
+checks against CONAMA 357/2005, visualizations, and rule-based analytical text.
 }
-\seealso{
-Useful links:
+\section{Main features}{
+
 \itemize{
-  \item \url{https://github.com/tikatuwq/tikatuwq}
-  \item \url{https://tikatuwq.github.io/tikatuwq/}
-  \item Report bugs at \url{https://github.com/tikatuwq/tikatuwq/issues}
+\item \strong{Indices}: IQA/WQI; TSI/IET (Carlson, Lamparelli); NSF WQI prototype.
+\item \strong{Compliance}: CONAMA 357/2005 limits and per-record status.
+\item \strong{Visualization}: time series, boxplots, heatmap, IQA bars.
+\item \strong{Reporting}: simple Rmd/Quarto report; analytical paragraphs (rule-based).
+}
 }
 
+\section{Quick start}{
+
+\preformatted{
+# demo data
+data(wq_demo)
+
+# compute IQA
+d1 <- iqa(wq_demo, na_rm = TRUE)
+
+# check compliance (CONAMA class "2")
+d2 <- conama_check(d1, classe = "2")
+
+# summary table (only violations)
+conama_report(d2, classe = "2", only_violations = TRUE)
+}
+}
+
+\section{Vignettes}{
+
+See the package website for walkthroughs and examples:
+\href{https://tikatuwq.github.io/tikatuwq/}{tikatuwq website}.
+}
+
+\references{
+Carlson (1977) \url{doi:10.4319/lo.1977.22.2.0361}
+Lamparelli (2004) \url{https://teses.usp.br/teses/disponiveis/41/41134/tde-20032006-164008/pt-br.php}
+NSF WQI \url{https://www.nsf.org/education/nsf-water-quality-index}
+CONAMA 357/2005 \url{https://www.icmbio.gov.br/cma/images/stories/biblioteca/legislacao/RESOLUCAO_CONAMA_357_2005.pdf}
+}
+\seealso{
+\code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=conama_limits]{conama_limits()}}, \code{\link[=plot_series]{plot_series()}}, \code{\link[=render_report]{render_report()}}
 }
 \author{
 \strong{Maintainer}: Vinicius Saraiva Santos \email{vinisaraiva@gmail.com} (\href{https://orcid.org/0009-0007-1387-7927}{ORCID})

@@ -2,20 +2,60 @@
 % Please edit documentation in R/iet.R
 \name{iet_carlson}
 \alias{iet_carlson}
-\title{Trophic State Index (Carlson) - basic}
+\title{Trophic State Index (Carlson)}
 \usage{
 iet_carlson(secchi = NULL, clorofila = NULL, tp = NULL)
 }
 \arguments{
-\item{secchi}{Numeric vector with Secchi depth (m)}
+\item{secchi}{Numeric vector with Secchi depth (m).}
 
-\item{clorofila}{Numeric vector with chlorophyll-a (µg/L)}
+\item{clorofila}{Numeric vector with chlorophyll-a (ug/L).}
 
-\item{tp}{Numeric vector with total phosphorus (µg/L)}
+\item{tp}{Numeric vector with total phosphorus (ug/L).}
 }
 \value{
-Data frame with TSI components and overall IET
+A data frame with columns (when applicable):
+\itemize{
+\item \code{TSI_Secchi} — component from Secchi depth.
+\item \code{TSI_Chla} — component from chlorophyll-a.
+\item \code{TSI_TP} — component from total phosphorus.
+\item \code{IET} — overall Carlson index (row mean).
+}
 }
 \description{
-Trophic State Index (Carlson) - basic
+Computes Carlson's Trophic State Index (TSI/IET) from Secchi depth,
+chlorophyll-a, and total phosphorus. Returns component scores and the
+overall IET as the row-wise mean of available components.
+}
+\details{
+Implemented component formulas (Carlson 1977):
+\itemize{
+\item \code{TSI_Secchi = 60 - 14.41 * log10(secchi)}
+\item \code{TSI_Chla  = 9.81 * log10(clorofila) + 30.6}
+\item \code{TSI_TP    = 14.42 * log10(tp) + 4.15}
+}
+
+Inputs may contain \code{NA} and are recycled according to R rules.
+The overall index \code{IET} is the row mean of the available components
+(\code{na.rm = TRUE}).
+}
+\examples{
+# Example data
+secchi <- c(1.2, 0.8, 0.4)        # m
+clorofila <- c(5, 12, 30)         # ug/L
+tp <- c(20, 40, 70)               # ug/L
+
+iet_carlson(secchi = secchi, clorofila = clorofila, tp = tp)
+
+# With only one component
+iet_carlson(secchi = secchi)
+
+}
+\references{
+Carlson, R. E. (1977). \emph{A trophic state index for lakes}.
+Limnology and Oceanography, 22(2), 361–369.
+doi:10.4319/lo.1977.22.2.0361
+}
+\seealso{
+\code{\link[=iet_lamparelli]{iet_lamparelli()}}, \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 }

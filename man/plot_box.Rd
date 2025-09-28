@@ -9,13 +9,20 @@ plot_box(df, parametro, by = "ponto")
 \arguments{
 \item{df}{Data frame with water quality data.}
 
-\item{parametro}{Character; parameter column name.}
+\item{parametro}{Character; name of the numeric parameter column.}
 
-\item{by}{Character; grouping column (e.g., "site").}
+\item{by}{Character; grouping column (e.g., "ponto").}
 }
 \value{
 A ggplot object (class \code{ggplot}) representing the boxplot.
 }
 \description{
-Boxplots by site/parameter
+Boxplots of one numeric parameter grouped by a categorical column.
+}
+\examples{
+\donttest{
+data(wq_demo)
+plot_box(wq_demo, "turbidez", by = "ponto")
+}
+
 }

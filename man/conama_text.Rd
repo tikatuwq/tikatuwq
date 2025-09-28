@@ -13,19 +13,29 @@ conama_text(
 )
 }
 \arguments{
-\item{df}{dados de entrada}
+\item{df}{Input data}
 
-\item{classe}{classe CONAMA}
+\item{classe}{CONAMA class label}
 
-\item{only_violations}{se TRUE, lista apenas parametros com violacao}
+\item{only_violations}{If TRUE, list only parameters with violation}
 
-\item{decimal_mark}{separador decimal (default ",")}
+\item{decimal_mark}{Decimal separator (default \code{","})}
 
-\item{big_mark}{separador de milhar (default ".")}
+\item{big_mark}{Thousands separator (default \code{"."})}
 }
 \value{
-character vector (linhas)
+Character vector of lines (first line is a header, the rest are bullets).
 }
 \description{
 Text summary of conformity (bulleted, formatted)
+}
+\examples{
+\dontrun{
+data("wq_demo", package = "tikatuwq")
+cat(conama_text(wq_demo, classe = "2"), sep = "\n")
+}
+
+}
+\seealso{
+\code{\link[=conama_summary]{conama_summary()}}, \code{\link[=conama_report]{conama_report()}}
 }

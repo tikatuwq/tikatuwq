@@ -1,7 +1,48 @@
-#' tikatuwq: Ferramentas para analise de qualidade da agua (Brasil)
+# R/tikatuwq-package.R
+# ASCII-only in code/comments.
+
+#' tikatuwq: Water quality tools for the Brazilian context
 #'
-#' Indices (IQA CETESB/NSF, IET Carlson/Lamparelli), checagem CONAMA 357/2005,
-#' visualizacoes e texto analitico automatico (rule-based).
+#' @description
+#' Utilities to import, clean, validate and analyze freshwater quality data.
+#' Includes indices (IQA/WQI, TSI/IET Carlson and Lamparelli), compliance
+#' checks against CONAMA 357/2005, visualizations, and rule-based analytical text.
+#'
+#' @section Main features:
+#' - **Indices**: IQA/WQI; TSI/IET (Carlson, Lamparelli); NSF WQI prototype.  
+#' - **Compliance**: CONAMA 357/2005 limits and per-record status.  
+#' - **Visualization**: time series, boxplots, heatmap, IQA bars.  
+#' - **Reporting**: simple Rmd/Quarto report; analytical paragraphs (rule-based).  
+#'
+#' @section Quick start:
+#' \preformatted{
+#' # demo data
+#' data(wq_demo)
+#'
+#' # compute IQA
+#' d1 <- iqa(wq_demo, na_rm = TRUE)
+#'
+#' # check compliance (CONAMA class "2")
+#' d2 <- conama_check(d1, classe = "2")
+#'
+#' # summary table (only violations)
+#' conama_report(d2, classe = "2", only_violations = TRUE)
+#' }
+#'
+#' @section Vignettes:
+#' See the package website for walkthroughs and examples:
+#' \href{https://tikatuwq.github.io/tikatuwq/}{tikatuwq website}.
+#'
+#' @seealso
+#' [=read_wq]{read_wq()}, [=conama_check]{conama_check()}, [=iqa]{iqa()},
+#' [=iet_carlson]{iet_carlson()}, [=iet_lamparelli]{iet_lamparelli()},
+#' [=plot_series]{plot_series()}, [=render_report]{render_report()}
+#'
+#' @references
+#' Carlson (1977) <doi:10.4319/lo.1977.22.2.0361>  
+#' Lamparelli (2004) <https://teses.usp.br/teses/disponiveis/41/41134/tde-20032006-164008/pt-br.php>  
+#' NSF WQI <https://www.nsf.org/education/nsf-water-quality-index>  
+#' CONAMA 357/2005 <https://www.icmbio.gov.br/cma/images/stories/biblioteca/legislacao/RESOLUCAO_CONAMA_357_2005.pdf>
 #'
 #' @keywords internal
 #'
@@ -14,10 +55,15 @@
 #' @importFrom tibble as_tibble
 #' @importFrom rlang warn
 #' @importFrom scales label_number label_percent
+#'
 "_PACKAGE"
 
-# Silencia NOTEs de variaveis NSE usadas com dplyr/ggplot2
+# Silence NSE notes for dplyr/ggplot2 columns/symbols
 utils::globalVariables(c(
-  ".data","IQA","IQA_med","param_ok","ok","parametro","n_viol","total",
-  "ponto","data","valor","status","viol","delta","idx","lim_min","lim_max"
+  ".data",
+  # analysis_text helpers
+  "IQA", "IQA_med", "param_ok", "ok", "parametro", "n_viol", "total",
+  "ponto", "data", "valor", "status", "viol", "delta", "idx", "lim_min", "lim_max",
+  # viz and summaries
+  "mes"
 ))

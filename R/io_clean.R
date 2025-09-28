@@ -1,10 +1,13 @@
 # R/io_clean.R
 # Funcoes de IO e limpeza para dados de qualidade da agua
-# (ASCII-only para evitar avisos de nao-ASCII no R CMD check)
+# (ASCII-only no codigo; textos/strings podem ser UTF-8)
 
-# Helpers ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Helpers internos (nao-exportados)
+# ------------------------------------------------------------------------------
 
 # Converte texto em numero detectando virgula ou ponto decimal e ignorando unidades
+#' @keywords internal
 .to_number_auto <- function(x) {
   if (is.numeric(x)) return(x)
   x <- as.character(x)
@@ -35,8 +38,8 @@
   if (n1 < n2) v1 else if (n2 < n1) v2 else v2
 }
 
-
 # Ajuste conservador: se pH vier claro fora da faixa (ex.: 72 -> 7.2)
+#' @keywords internal
 .fix_ph_if_needed <- function(ph_vec) {
   idx <- is.finite(ph_vec) & ph_vec > 14 & ph_vec <= 140
   if (any(idx, na.rm = TRUE)) {
@@ -49,16 +52,55 @@
   ph_vec
 }
 
-#' Leitura padrao de dados de qualidade da agua
+# ------------------------------------------------------------------------------
+# API publica
+# ------------------------------------------------------------------------------
+
+#' Read water-quality CSV (robust parsing)
 #'
-#' Aceita CSV com **virgula ou ponto** como separador decimal e ignora texto
-#' de unidades (ex.: "0,04 mg/L"). Lê tudo como texto, normaliza nomes e
-#' converte colunas numericas de forma robusta. Aplica um ajuste de seguranca
-#' em pH evidentemente fora da faixa (ex.: 72 -> 7.2).
+#' @description
+#' Reads a CSV file with **comma or semicolon delimiter** and **comma or dot**
+#' as decimal mark, ignoring unit suffixes (e.g., `"0,04 mg/L"`). Everything
+#' is read as text first, column names are normalized, and likely numeric
+#' columns are parsed robustly. A conservative safeguard adjusts obviously
+#' out-of-range pH values (e.g., `72 -> 7.2`).
 #'
-#' @param path Caminho do arquivo CSV.
-#' @param tz   Fuso para datas (mantido por compatibilidade; datas sao Date).
-#' @return Um `tibble` com colunas normalizadas.
+#' @param path Path to the CSV file.
+#' @param tz   Time zone for dates (kept for compatibility; dates are `Date`).
+#'
+#' @return
+#' A tibble with:
+#' \itemize{
+#'   \item normalized, lowercase column names (spaces to `_`, non-alnum removed);
+#'   \item numeric columns parsed ignoring unit strings;
+#'   \item \code{data} parsed to \code{Date} (tries \code{ymd} then \code{dmy});
+#'   \item \code{ponto} coerced to character (if present).
+#' }
+#'
+#' @section Parsed numeric candidates:
+#' \code{c("ph","od","turbidez","dbo","coliformes","p_total","ptotal",
+#' "fosforo_total","temperatura","ec","condutividade","n_nitrato","n_nitrito",
+#' "amonia","nt_total","n_total","ntk","nkjeldahl","nitrogenio_total",
+#' "solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet",
+#' "iet_carlson","iet_lamparelli","nsfwqi","vazao")}
+#'
+#' @seealso [=clean_units]{clean_units()}, [=validate_wq]{validate_wq()},
+#'   [=conama_check]{conama_check()}, [=iqa]{iqa()}
+#'
+#' @examples
+#' \dontrun{
+#' # Minimal example (write a small CSV and read it):
+#' tmp <- tempfile(fileext = ".csv")
+#' writeLines(
+#'   c("ponto;data;ph;od;turbidez",
+#'     "R1_01;2025-01-20;7,2;6,8;5,1",
+#'     "R1_01;21/01/2025;7.1;7.0;4.8 mg/L"),
+#'   tmp
+#' )
+#' x <- read_wq(tmp)
+#' str(x)
+#' }
+#'
 #' @export
 #' @importFrom readr read_lines read_delim parse_number cols col_character locale
 #' @importFrom stringr str_count str_replace_all
@@ -123,26 +165,47 @@ read_wq <- function(path, tz = "America/Bahia") {
   tibble::as_tibble(df)
 }
 
-#' Padroniza/unifica unidades (esqueleto)
+#' Normalize/standardize units (placeholder)
 #'
-#' Ponto de extensao para normalizar unidades (mg/L, uS/cm, etc.).
-#' Por ora retorna o data.frame sem alteracoes.
+#' @description
+#' Extension point to normalize units (e.g., mg/L, uS/cm). Currently returns
+#' \code{df} unchanged.
 #'
-#' @param df data.frame/tibble de entrada.
-#' @param units_map opcional; mapa de unidades.
-#' @return O mesmo `df` (placeholder).
+#' @param df Input data frame / tibble.
+#' @param units_map Optional mapping of units.
+#'
+#' @return The input \code{df} unchanged (placeholder).
+#' @seealso [read_wq()]
+#'
+#' @examples
+#' clean_units(data.frame(ph = c(7, 7.2), od = c(6.5, 7.0)))
+#'
 #' @export
 clean_units <- function(df, units_map = NULL) {
   df
 }
 
-#' Valida presenca de colunas minimas
+#' Validate presence of required columns
 #'
-#' Garante que o conjunto minimo de colunas exista no dataset.
+#' @description
+#' Ensures a minimal set of columns exists in the dataset; otherwise throws an
+#' error listing the missing names.
 #'
-#' @param df data.frame/tibble de entrada.
-#' @param required vetor de nomes de colunas obrigatorias.
-#' @return O `df` de entrada se estiver valido; caso contrario, erro.
+#' @param df Input data frame / tibble.
+#' @param required Character vector of required column names.
+#'
+#' @return The input \code{df} if valid; otherwise, an error is thrown.
+#'
+#' @seealso [=read_wq]{read_wq()}, [=conama_check]{conama_check()}
+#'
+#' @examples
+#' df_ex <- data.frame(
+#'   ph = 7, turbidez = 2, od = 7, dbo = 3,
+#'   nt_total = 0.8, p_total = 0.05, tds = 150,
+#'   temperatura = 24, coliformes = 200
+#' )
+#' validate_wq(df_ex)
+#'
 #' @export
 validate_wq <- function(
   df,

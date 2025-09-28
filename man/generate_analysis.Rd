@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis_text.R
 \name{generate_analysis}
 \alias{generate_analysis}
-\title{Analytical paragraphs generation (rule-based, no AI)}
+\title{Generate analytical paragraphs (rule-based)}
 \usage{
 generate_analysis(
   df,
@@ -13,21 +13,46 @@ generate_analysis(
 )
 }
 \arguments{
-\item{df}{Data frame with columns including at least \code{ponto}, and preferably
-parameters used by CONAMA checks and IQA computation}
+\item{df}{Data frame contendo ao menos a coluna \code{ponto}. Recomenda-se
+também as colunas necessárias para checagens CONAMA e para o cálculo do IQA.}
 
-\item{classe_conama}{Character scalar with CONAMA class (e.g. "2")}
+\item{classe_conama}{Character (ex. \code{"2"}). Classe‐alvo para a checagem da
+Resolução CONAMA 357/2005.}
 
-\item{incluir_tendencia}{Logical; whether to compute simple time trends}
+\item{incluir_tendencia}{Logical; se \code{TRUE}, calcula tendências lineares
+simples ao longo do tempo.}
 
-\item{parametros_tendencia}{Character vector of parameter names to test trends}
+\item{parametros_tendencia}{Character vector; nomes dos parâmetros para testar
+tendência temporal.}
 
-\item{contexto}{List with optional metadata, accepting PT or EN keys:
-\code{rio}/\code{river}, \code{periodo}/\code{period}, \code{cidade}}
+\item{contexto}{Lista com metadados opcionais (PT/EN), por exemplo
+\code{list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lençóis")}.
+As chaves aceitas são \code{rio}/\code{river}, \code{periodo}/\code{period}, \code{cidade}.}
 }
 \value{
-Character vector of 3-5 analytical paragraphs
+Vetor de \code{character} com 3 a 5 parágrafos analíticos prontos para relatório.
 }
 \description{
-Analytical paragraphs generation (rule-based, no AI)
+Produces 3–5 short, human-readable paragraphs summarizing water quality,
+using IQA/WQI, CONAMA-357 compliance and (optionally) simple time trends.
+It is \strong{rule-based} (não usa IA) e aceita metadados opcionais para compor o texto.
 }
+\examples{
+\dontrun{
+library(tikatuwq)
+data("wq_demo")
+txt <- generate_analysis(
+  df = wq_demo,
+  classe_conama = "2",
+  incluir_tendencia = TRUE,
+  parametros_tendencia = c("turbidez","od","pH"),
+  contexto = list(rio = "Rio Azul", periodo = "jan–jun/2025")
+)
+cat(paste(txt, collapse = "\n\n"))
+}
+
+}
+\seealso{
+\code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
+}
+\concept{reporting-tools}

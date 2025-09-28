@@ -11,15 +11,13 @@ conama_limits(class)
 according to CONAMA 357/2005.}
 }
 \value{
-A tibble/data frame with one row per parameter and the regulatory thresholds.
+A tibble/data frame with one row per parameter and regulatory thresholds.
 Typical columns:
 \itemize{
-\item \code{parameter}: parameter name (character)
-\item \code{class}: CONAMA class label (character/integer)
-\item \code{limit_min}: minimum allowed value (numeric, may be \code{NA})
-\item \code{limit_max}: maximum allowed value (numeric, may be \code{NA})
-\item \code{unit}: measurement unit (character)
-\item \code{criterion}: textual rule if applicable (character)
+\item \code{parametro}: parameter name (character, normalized to snake_case)
+\item \code{classe}: class label (character)
+\item \code{min}/\code{max} (or equivalents): numeric thresholds (may be \code{NA})
+\item other metadata columns if present (e.g., unit, criterion)
 }
 }
 \description{
@@ -27,7 +25,7 @@ Returns the parameter limits defined by CONAMA Resolution 357/2005
 for a given water-use class.
 }
 \examples{
-# class 2 thresholds
+# Class 2 thresholds (first rows)
 head(conama_limits(2))
 
 }

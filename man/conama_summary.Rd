@@ -2,18 +2,30 @@
 % Please edit documentation in R/conama.R
 \name{conama_summary}
 \alias{conama_summary}
-\title{Conformity summary (long format)}
+\title{CONAMA conformity summary (long format)}
 \usage{
 conama_summary(df, classe = "2")
 }
 \arguments{
-\item{df}{dados de entrada}
+\item{df}{Input data}
 
-\item{classe}{classe CONAMA}
+\item{classe}{CONAMA class label}
 }
 \value{
-tibble com: parametro, valor, lim_min, lim_max, status, ok, delta
+A tibble with columns:
+\code{parametro}, \code{valor}, \code{lim_min}, \code{lim_max},
+\code{status}, \code{ok}, \code{delta}.
 }
 \description{
-Conformity summary (long format)
+CONAMA conformity summary (long format)
+}
+\examples{
+\dontrun{
+data("wq_demo", package = "tikatuwq")
+head(conama_summary(wq_demo, classe = "2"))
+}
+
+}
+\seealso{
+\code{\link[=conama_check]{conama_check()}}, \code{\link[=conama_report]{conama_report()}}, \code{\link[=conama_text]{conama_text()}}
 }

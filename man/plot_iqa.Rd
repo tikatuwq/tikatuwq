@@ -13,5 +13,13 @@ plot_iqa(df)
 A ggplot object (class \code{ggplot}) representing IQA across sites/dates.
 }
 \description{
-Plot IQA by site/date
+Bar plot of IQA values per site/date. Requires an \code{IQA} column.
+}
+\examples{
+\donttest{
+data(wq_demo)
+d <- iqa(wq_demo, na_rm = TRUE)
+plot_iqa(d)
+}
+
 }

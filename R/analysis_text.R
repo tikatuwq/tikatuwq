@@ -1,13 +1,41 @@
-#' Analytical paragraphs generation (rule-based, no AI)
+#' Generate analytical paragraphs (rule-based)
 #'
-#' @param df Data frame with columns including at least `ponto`, and preferably
-#'   parameters used by CONAMA checks and IQA computation
-#' @param classe_conama Character scalar with CONAMA class (e.g. "2")
-#' @param incluir_tendencia Logical; whether to compute simple time trends
-#' @param parametros_tendencia Character vector of parameter names to test trends
-#' @param contexto List with optional metadata, accepting PT or EN keys:
-#'   `rio`/`river`, `periodo`/`period`, `cidade`
-#' @return Character vector of 3-5 analytical paragraphs
+#' @description
+#' Produces 3–5 short, human-readable paragraphs summarizing water quality,
+#' using IQA/WQI, CONAMA-357 compliance and (optionally) simple time trends.
+#' It is **rule-based** (não usa IA) e aceita metadados opcionais para compor o texto.
+#'
+#' @param df Data frame contendo ao menos a coluna `ponto`. Recomenda-se
+#'   também as colunas necessárias para checagens CONAMA e para o cálculo do IQA.
+#' @param classe_conama Character (ex. `"2"`). Classe‐alvo para a checagem da
+#'   Resolução CONAMA 357/2005.
+#' @param incluir_tendencia Logical; se `TRUE`, calcula tendências lineares
+#'   simples ao longo do tempo.
+#' @param parametros_tendencia Character vector; nomes dos parâmetros para testar
+#'   tendência temporal.
+#' @param contexto Lista com metadados opcionais (PT/EN), por exemplo
+#'   `list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lençóis")`.
+#'   As chaves aceitas são `rio`/`river`, `periodo`/`period`, `cidade`.
+#'
+#' @return
+#' Vetor de `character` com 3 a 5 parágrafos analíticos prontos para relatório.
+#'
+#' @examples
+#' \dontrun{
+#' library(tikatuwq)
+#' data("wq_demo")
+#' txt <- generate_analysis(
+#'   df = wq_demo,
+#'   classe_conama = "2",
+#'   incluir_tendencia = TRUE,
+#'   parametros_tendencia = c("turbidez","od","pH"),
+#'   contexto = list(rio = "Rio Azul", periodo = "jan–jun/2025")
+#' )
+#' cat(paste(txt, collapse = "\n\n"))
+#' }
+#'
+#' @seealso [iqa()], [conama_check()]
+#' @family reporting-tools
 #' @export
 generate_analysis <- function(df,
                               classe_conama = "2",
@@ -15,7 +43,7 @@ generate_analysis <- function(df,
                               parametros_tendencia = c("turbidez","od","pH"),
                               contexto = list(rio = NA, periodo = NA, cidade = NA)) {
   stopifnot("ponto" %in% names(df))
-  if(!"IQA" %in% names(df)) {
+  if (!"IQA" %in% names(df)) {
     df <- tikatuwq::iqa(df, na_rm = TRUE)
   }
   conf <- tikatuwq::conama_check(df, classe = classe_conama)
@@ -35,9 +63,9 @@ generate_analysis <- function(df,
   dom_class <- names(sort(table(class_iqa(conf$IQA)), decreasing = TRUE))[1]
 
   by_point <- conf |>
-    dplyr::group_by(ponto) |>
-    dplyr::summarise(IQA_med = mean(IQA, na.rm = TRUE), .groups = "drop") |>
-    dplyr::arrange(dplyr::desc(IQA_med))
+    dplyr::group_by(.data$ponto) |>
+    dplyr::summarise(IQA_med = mean(.data$IQA, na.rm = TRUE), .groups = "drop") |>
+    dplyr::arrange(dplyr::desc(.data$IQA_med))
 
   best <- by_point$ponto[1]; best_val <- by_point$IQA_med[1]
   worst <- by_point$ponto[nrow(by_point)]; worst_val <- by_point$IQA_med[nrow(by_point)]
@@ -63,20 +91,20 @@ generate_analysis <- function(df,
   ok_cols <- grep("_ok$", names(conf), value = TRUE)
   long_ok <- conf |>
     tidyr::pivot_longer(dplyr::all_of(ok_cols), names_to = "param_ok", values_to = "ok") |>
-    dplyr::mutate(parametro = gsub("_ok$", "", param_ok))
+    dplyr::mutate(parametro = gsub("_ok$", "", .data$param_ok))
 
   viol <- long_ok |>
-    dplyr::filter(!ok) |>
-    dplyr::count(ponto, parametro, name = "n_viol")
+    dplyr::filter(!.data$ok) |>
+    dplyr::count(.data$ponto, .data$parametro, name = "n_viol")
 
   top_viol_param <- if (nrow(viol)) viol |>
-    dplyr::count(parametro, wt = n_viol, name = "total") |>
-    dplyr::arrange(dplyr::desc(total)) |>
+    dplyr::count(.data$parametro, wt = .data$n_viol, name = "total") |>
+    dplyr::arrange(dplyr::desc(.data$total)) |>
     dplyr::slice(1) else NULL
 
   top_viol_point <- if (nrow(viol)) viol |>
-    dplyr::count(ponto, wt = n_viol, name = "total") |>
-    dplyr::arrange(dplyr::desc(total)) |>
+    dplyr::count(.data$ponto, wt = .data$n_viol, name = "total") |>
+    dplyr::arrange(dplyr::desc(.data$total)) |>
     dplyr::slice(1) else NULL
 
   if (nrow(viol)) {
@@ -94,8 +122,8 @@ generate_analysis <- function(df,
     tend <- calc_trends(conf, parametros = intersect(parametros_tendencia, names(conf)))
     if (nrow(tend)) {
       top <- tend |>
-        dplyr::arrange(dplyr::desc(abs(beta))) |>
-        dplyr::slice(1:min(2, n()))
+        dplyr::arrange(dplyr::desc(abs(.data$beta))) |>
+        dplyr::slice(1:min(2, dplyr::n()))
       itens <- apply(top, 1, function(r){
         dir <- ifelse(as.numeric(r["beta"]) > 0, "increasing trend", "decreasing trend")
         sig <- ifelse(as.numeric(r["p_value"]) < 0.05, " (significant, p<0.05)", "")
@@ -108,7 +136,7 @@ generate_analysis <- function(df,
   range_iqa <- iqa_max - iqa_min
   p4 <- glue::glue("The spatial variation of IQA was approximately {scales::number(range_iqa, accuracy = 0.1)} points between extremes.")
 
-  recs <- c()
+  recs <- character(0)
   if (nrow(viol)) {
     if ("coliformes_ok" %in% ok_cols && any(conf$coliformes_ok == FALSE, na.rm = TRUE)) {
       recs <- c(recs, "reinforce control of diffuse fecal sources and local sanitation;")
@@ -120,7 +148,9 @@ generate_analysis <- function(df,
       recs <- c(recs, "inspect bank erosion and soil management in the basin;")
     }
   }
-  p5 <- if (length(recs)) glue::glue("It is recommended to {paste(recs, collapse = ' ')} prioritizing critical points.") else NULL
+  p5 <- if (length(recs))
+    glue::glue("It is recommended to {paste(recs, collapse = ' ')} prioritizing critical points.")
+  else NULL
 
   purrr::compact(c(p1, p2, p3, p4, p5))
 }
@@ -132,8 +162,8 @@ calc_trends <- function(df, parametros){
   for (p in parametros) {
     if (!p %in% names(df)) next
     tmp <- df |>
-      dplyr::filter(!is.na(.data[[p]]), !is.na(data)) |>
-      dplyr::group_by(ponto) |>
+      dplyr::filter(!is.na(.data[[p]]), !is.na(.data$data)) |>
+      dplyr::group_by(.data$ponto) |>
       dplyr::group_map(~{
         if (nrow(.x) < 4) return(NULL)
         tnum <- as.numeric(.x$data) # dias

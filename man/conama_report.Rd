@@ -2,17 +2,8 @@
 % Please edit documentation in R/conama.R
 \name{conama_report}
 \alias{conama_report}
-\title{Conformity report (table)}
+\title{CONAMA conformity report (table)}
 \usage{
-conama_report(
-  df,
-  classe = "2",
-  only_violations = TRUE,
-  pretty = FALSE,
-  decimal_mark = ",",
-  big_mark = "."
-)
-
 conama_report(
   df,
   classe = "2",
@@ -23,25 +14,35 @@ conama_report(
 )
 }
 \arguments{
-\item{df}{dados de entrada}
+\item{df}{Input data}
 
-\item{classe}{classe CONAMA}
+\item{classe}{CONAMA class label (e.g., "2")}
 
-\item{only_violations}{se TRUE, retorna apenas linhas com status != "ok"}
+\item{only_violations}{If TRUE, returns only rows with \code{status != "ok"}}
 
-\item{pretty}{se TRUE, devolve colunas formatadas para exibicao}
+\item{pretty}{If TRUE, returns formatted numeric columns for display}
 
-\item{decimal_mark}{separador decimal (default ",")}
+\item{decimal_mark}{Decimal separator (default \code{","})}
 
-\item{big_mark}{separador de milhar (default ".")}
+\item{big_mark}{Thousands separator (default \code{"."})}
 }
 \value{
-tibble com: parametro, valor, lim_min, lim_max, status, delta
-
-tibble
+A tibble. When \code{pretty = FALSE}:
+\code{parametro}, \code{valor}, \code{lim_min}, \code{lim_max},
+\code{status}, \code{delta}. When \code{pretty = TRUE}, numeric columns
+are formatted as character with "natural" decimals.
 }
 \description{
-Conformity report (table)
+CONAMA conformity report (table)
+}
+\examples{
+\dontrun{
+data("wq_demo", package = "tikatuwq")
+conama_report(wq_demo, classe = "2", only_violations = TRUE)
+conama_report(wq_demo, classe = "2", only_violations = TRUE, pretty = TRUE)
+}
 
-Relatorio de conformidade (tabela), com formato opcional
+}
+\seealso{
+\code{\link[=conama_summary]{conama_summary()}}, \code{\link[=conama_text]{conama_text()}}
 }

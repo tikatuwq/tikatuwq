@@ -2,19 +2,26 @@
 % Please edit documentation in R/io_clean.R
 \name{clean_units}
 \alias{clean_units}
-\title{Padroniza/unifica unidades (esqueleto)}
+\title{Normalize/standardize units (placeholder)}
 \usage{
 clean_units(df, units_map = NULL)
 }
 \arguments{
-\item{df}{data.frame/tibble de entrada.}
+\item{df}{Input data frame / tibble.}
 
-\item{units_map}{opcional; mapa de unidades.}
+\item{units_map}{Optional mapping of units.}
 }
 \value{
-O mesmo \code{df} (placeholder).
+The input \code{df} unchanged (placeholder).
 }
 \description{
-Ponto de extensao para normalizar unidades (mg/L, uS/cm, etc.).
-Por ora retorna o data.frame sem alteracoes.
+Extension point to normalize units (e.g., mg/L, uS/cm). Currently returns
+\code{df} unchanged.
+}
+\examples{
+clean_units(data.frame(ph = c(7, 7.2), od = c(6.5, 7.0)))
+
+}
+\seealso{
+\code{\link[=read_wq]{read_wq()}}
 }
