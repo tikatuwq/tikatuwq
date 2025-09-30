@@ -1,6 +1,7 @@
 url: https://tikatuwq.github.io/tikatuwq/
 template:
   bootstrap: 5
+
 navbar:
   structure:
     left:  [reference, articles]
@@ -8,12 +9,51 @@ navbar:
   components:
     github:
       icon: fab fa-github
+      aria-label: GitHub
       href: https://github.com/tikatuwq/tikatuwq
-  reference:
-    - title: Conformidade CONAMA
-      contents:
-        - conama_limits
-        - conama_check
-        - conama_summary
-        - conama_report
-        - conama_text
+
+reference:
+  - title: Leitura e validação
+    contents:
+      - read_wq
+      - validate_wq
+      - clean_units
+      - resume_wq
+
+  - title: Índices de qualidade
+    contents:
+      - iqa
+      - iet_carlson
+      - iet_lamparelli
+      - nsfwqi
+
+  - title: Conformidade CONAMA
+    contents:
+      - conama_limits
+      - conama_check
+      - conama_summary
+      - conama_report
+      - conama_text
+
+  - title: Visualizações
+    contents:
+      - plot_iqa
+      - plot_series
+      - plot_box
+      - plot_heatmap
+      - plot_map
+
+  - title: Relatórios e texto
+    contents:
+      - generate_analysis
+    # se quiser listar também:
+      - render_report
+
+  - title: Dados de exemplo
+    contents:
+      - wq_demo
+
+articles:
+  - title: Tutorials
+    contents:
+      - tikatuwq

@@ -14,7 +14,7 @@ plot_series(df, parametro, facet = NULL)
 \item{facet}{Character or \code{NULL}; optional grouping column name to color/facet.}
 }
 \value{
-A ggplot object (class \code{ggplot}) showing the time series.
+A \code{ggplot} object.
 }
 \description{
 Plot a time series for one numeric parameter, optionally

@@ -85,7 +85,7 @@ Badge (opcional):
 - nsfwqi(df) — NSFWQI (estrutura pronta).
 - conama_limits(classe) — limites da Res. CONAMA 357/2005.
 - conama_check(df, classe) — conformidade por parâmetro (*_ok).
-- Visualizações: plot_iqa(), plot_series(), plot_box(), plot_heatmap().
+- Visualizações: plot_iqa(), plot_series(), plot_box(), plot_heatmap(), plot_map().
 - Relatórios/texto: generate_analysis(), render_report().
 - Dados de exemplo: system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq").
 

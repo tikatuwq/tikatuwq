@@ -10,9 +10,9 @@
 #' @param parametro Character; name of the numeric column to plot on Y.
 #' @param facet Character or `NULL`; optional grouping column name to color/facet.
 #'
-#' @return A ggplot object (class `ggplot`) showing the time series.
+#' @returns A \code{ggplot} object.
 #'
-#' @seealso [plot_box()], [plot_heatmap()], [iqa()]
+#' @seealso \code{\link[=plot_box]{plot_box()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}, \code{\link[=iqa]{iqa()}}
 #'
 #' @examples
 #' \donttest{
@@ -55,9 +55,9 @@ plot_series <- function(df, parametro, facet = NULL) {
 #' @param parametro Character; name of the numeric parameter column.
 #' @param by Character; grouping column (e.g., "ponto").
 #'
-#' @return A ggplot object (class `ggplot`) representing the boxplot.
+#' @returns A \code{ggplot} object.
 #'
-#' @seealso [plot_series()], [plot_heatmap()], [iqa()]
+#' @seealso \code{\link[=plot_series]{plot_series()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}, \code{\link[=iqa]{iqa()}}
 #'
 #' @examples
 #' \donttest{
@@ -86,9 +86,9 @@ plot_box <- function(df, parametro, by = "ponto") {
 #'
 #' @param df Data frame returned by `iqa()` (or with equivalent columns).
 #'
-#' @return A ggplot object (class `ggplot`) representing IQA across sites/dates.
+#' @returns A \code{ggplot} object.
 #'
-#' @seealso [iqa()], [plot_series()], [plot_box()]
+#' @seealso \code{\link[=iqa]{iqa()}}, \code{\link[=plot_series]{plot_series()}}, \code{\link[=plot_box]{plot_box()}}
 #'
 #' @examples
 #' \donttest{
@@ -123,7 +123,7 @@ plot_iqa <- function(df) {
 #'
 #' @param df_long Long-format data frame with columns `data`, `parametro`, `valor`.
 #'
-#' @return A ggplot object (class `ggplot`) representing the heatmap.
+#' @returns A \code{ggplot} object.
 #'
 #' @examples
 #' \donttest{

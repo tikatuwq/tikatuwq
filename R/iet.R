@@ -21,7 +21,7 @@
 #' The overall index \code{IET} is the row mean of the available components
 #' (\code{na.rm = TRUE}).
 #'
-#' @return
+#' @returns
 #' A data frame with columns (when applicable):
 #' \itemize{
 #'   \item \code{TSI_Secchi} — component from Secchi depth.
@@ -35,7 +35,7 @@
 #' Limnology and Oceanography, 22(2), 361–369.
 #' doi:10.4319/lo.1977.22.2.0361
 #'
-#' @seealso [iet_lamparelli()], [iqa()], [conama_check()]
+#' @seealso \code{\link[=iet_lamparelli]{iet_lamparelli()}}, \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 #'
 #' @examples
 #' # Example data

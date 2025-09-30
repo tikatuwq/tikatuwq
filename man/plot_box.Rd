@@ -14,7 +14,7 @@ plot_box(df, parametro, by = "ponto")
 \item{by}{Character; grouping column (e.g., "ponto").}
 }
 \value{
-A ggplot object (class \code{ggplot}) representing the boxplot.
+A \code{ggplot} object.
 }
 \description{
 Boxplots of one numeric parameter grouped by a categorical column.

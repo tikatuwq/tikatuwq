@@ -25,7 +25,7 @@
 #' @param template Path to the internal template file. Defaults to the package
 #'   Rmd template shipped under `inst/templates/report_rmd.Rmd`.
 #'
-#' @return Invisible character string: the absolute path to the generated report.
+#' @returns Invisible character string: the absolute path to the generated report.
 #'
 #' @section Notes:
 #' - The default output directory is `tempdir()` to avoid writing into the
@@ -41,7 +41,7 @@
 #' file.exists(path)
 #' }
 #'
-#' @seealso [rmarkdown::render()]
+#' @seealso \code{rmarkdown::render()}
 #' @family reporting
 #' @export
 render_report <- function(

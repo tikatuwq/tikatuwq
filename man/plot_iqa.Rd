@@ -10,7 +10,7 @@ plot_iqa(df)
 \item{df}{Data frame returned by \code{iqa()} (or with equivalent columns).}
 }
 \value{
-A ggplot object (class \code{ggplot}) representing IQA across sites/dates.
+A \code{ggplot} object.
 }
 \description{
 Bar plot of IQA values per site/date. Requires an \code{IQA} column.

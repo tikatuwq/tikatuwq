@@ -1,8 +1,9 @@
 pandoc: '3.4'
 pkgdown: 2.1.3
 pkgdown_sha: ~
-articles: {}
-last_built: 2025-09-10T00:37Z
+articles:
+  tikatuwq: tikatuwq.html
+last_built: 2025-09-30T14:02Z
 urls:
   reference: https://tikatuwq.github.io/tikatuwq/reference
   article: https://tikatuwq.github.io/tikatuwq/articles

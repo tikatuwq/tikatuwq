@@ -1,9 +1,12 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://tikatuwq.github.io/tikatuwq/404.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/articles/index.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/articles/tikatuwq.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/authors.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/index.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/LICENSE-text.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/LICENSE.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/news/index.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/README_install.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/clean_units.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_check.html</loc></url>
@@ -21,6 +24,7 @@
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/plot_box.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/plot_heatmap.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/plot_iqa.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/plot_map.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/plot_series.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/qi_interp.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/read_wq.html</loc></url>
@@ -28,5 +32,6 @@
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/resume_wq.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/tikatuwq-package.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/validate_wq.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/wq_demo.html</loc></url>
 </urlset>
 

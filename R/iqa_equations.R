@@ -113,7 +113,7 @@
 #'   parameters per row (rescaling weights to sum to 1 for present Qi).
 #'   If \code{FALSE} (default), missing required columns cause an error.
 #'
-#' @return The input \code{df} with an added numeric column \code{IQA}.
+#' @returns The input \code{df} with an added numeric column \code{IQA}.
 #'
 #' @details
 #' Column compatibility: if your data frame has column \code{ph} (lowercase),

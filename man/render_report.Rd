@@ -62,6 +62,6 @@ file.exists(path)
 
 }
 \seealso{
-\code{\link[rmarkdown:render]{rmarkdown::render()}}
+\code{rmarkdown::render()}
 }
 \concept{reporting}

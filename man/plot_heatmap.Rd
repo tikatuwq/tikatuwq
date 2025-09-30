@@ -10,7 +10,7 @@ plot_heatmap(df_long)
 \item{df_long}{Long-format data frame with columns \code{data}, \code{parametro}, \code{valor}.}
 }
 \value{
-A ggplot object (class \code{ggplot}) representing the heatmap.
+A \code{ggplot} object.
 }
 \description{
 Heatmap for long-format data (date x parameter).

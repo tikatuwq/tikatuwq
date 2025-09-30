@@ -25,7 +25,7 @@
 #' practitioners should confirm the most appropriate equations/coefficients for
 #' the specific waterbody type and region before regulatory use.
 #'
-#' @return
+#' @returns
 #' A data frame with columns (when applicable):
 #' \itemize{
 #'   \item \code{IET_TP} — component from total phosphorus.
@@ -42,7 +42,7 @@
 #' Lamparelli, M. C. (2004). \emph{Graus de trofia em corpos d’água do Estado
 #' de São Paulo}. (Tese de Doutorado). Instituto de Biociências, USP.
 #'
-#' @seealso [iet_carlson()], [iqa()], [conama_check()]
+#' @seealso \code{\link[=iet_carlson]{iet_carlson()}}, \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 #'
 #' @examples
 #' # Vectors (can include NA)

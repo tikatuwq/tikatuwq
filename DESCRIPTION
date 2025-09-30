@@ -38,7 +38,8 @@ Imports:
     glue,
     scales,
     broom,
-    purrr
+    purrr,
+    leaflet
 Suggests:
     testthat (>= 3.0.0),
     spelling,

@@ -68,7 +68,7 @@
 #' @param path Path to the CSV file.
 #' @param tz   Time zone for dates (kept for compatibility; dates are `Date`).
 #'
-#' @return
+#' @returns
 #' A tibble with:
 #' \itemize{
 #'   \item normalized, lowercase column names (spaces to `_`, non-alnum removed);
@@ -173,8 +173,8 @@ read_wq <- function(path, tz = "America/Bahia") {
 #' @param df Input data frame / tibble.
 #' @param units_map Optional mapping of units.
 #'
-#' @return The input \code{df} unchanged (placeholder).
-#' @seealso [read_wq()]
+#' @returns The input \code{df} unchanged (placeholder).
+#' @seealso \code{\link[=read_wq]{read_wq()}}
 #'
 #' @examples
 #' clean_units(data.frame(ph = c(7, 7.2), od = c(6.5, 7.0)))
@@ -193,9 +193,9 @@ clean_units <- function(df, units_map = NULL) {
 #' @param df Input data frame / tibble.
 #' @param required Character vector of required column names.
 #'
-#' @return The input \code{df} if valid; otherwise, an error is thrown.
+#' @returns The input \code{df} if valid; otherwise, an error is thrown.
 #'
-#' @seealso [read_wq()], [conama_check()]
+#' @seealso \code{\link[=read_wq]{read_wq()}}, \code{\link[=conama_check]{conama_check()}}
 #'
 #' @examples
 #' df_ex <- data.frame(

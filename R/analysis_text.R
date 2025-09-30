@@ -17,7 +17,7 @@
 #'   `list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lençóis")`.
 #'   As chaves aceitas são `rio`/`river`, `periodo`/`period`, `cidade`.
 #'
-#' @return
+#' @returns
 #' Vetor de `character` com 3 a 5 parágrafos analíticos prontos para relatório.
 #'
 #' @examples
@@ -34,7 +34,7 @@
 #' cat(paste(txt, collapse = "\n\n"))
 #' }
 #'
-#' @seealso [iqa()], [conama_check()]
+#' @seealso \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 #' @family reporting-tools
 #' @export
 generate_analysis <- function(df,

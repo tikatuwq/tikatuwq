@@ -9,7 +9,7 @@
 #' @param class Integer or character. Target class (e.g., 1, 2, 3, 4 or "special"),
 #'   according to CONAMA 357/2005.
 #'
-#' @return A tibble/data frame with one row per parameter and regulatory thresholds.
+#' @returns A tibble/data frame with one row per parameter and regulatory thresholds.
 #'   Typical columns:
 #'   \itemize{
 #'     \item \code{parametro}: parameter name (character, normalized to snake_case)
@@ -86,9 +86,9 @@ conama_limits <- function(class){
 #' @param df A tibble/data.frame with parameter columns (e.g., ph, turbidez, od, dbo).
 #' @param classe Character class label (e.g., "especial", "1", "2", "3", "4").
 #'
-#' @return The input \code{df} with additional columns per parameter as described.
+#' @returns The input \code{df} with additional columns per parameter as described.
 #'
-#' @seealso [conama_limits()], [conama_summary()], [conama_report()], [conama_text()]
+#' @seealso \code{\link[=conama_limits]{conama_limits()}}, \code{\link[=conama_summary]{conama_summary()}}, \code{\link[=conama_report]{conama_report()}}, \code{\link[=conama_text]{conama_text()}}
 #'
 #' @examples
 #' \dontrun{
@@ -204,11 +204,11 @@ conama_check <- function(df, classe = "2") {
 #' @param df Input data
 #' @param classe CONAMA class label
 #'
-#' @return A tibble with columns:
+#' @returns A tibble with columns:
 #'   \code{parametro}, \code{valor}, \code{lim_min}, \code{lim_max},
 #'   \code{status}, \code{ok}, \code{delta}.
 #'
-#' @seealso [conama_check()], [conama_report()], [conama_text()]
+#' @seealso \code{\link[=conama_check]{conama_check()}}, \code{\link[=conama_report]{conama_report()}}, \code{\link[=conama_text]{conama_text()}}
 #'
 #' @examples
 #' \dontrun{
@@ -254,12 +254,12 @@ conama_summary <- function(df, classe = "2") {
 #' @param decimal_mark Decimal separator (default \code{","})
 #' @param big_mark Thousands separator (default \code{"."})
 #'
-#' @return A tibble. When \code{pretty = FALSE}:
+#' @returns A tibble. When \code{pretty = FALSE}:
 #'   \code{parametro}, \code{valor}, \code{lim_min}, \code{lim_max},
 #'   \code{status}, \code{delta}. When \code{pretty = TRUE}, numeric columns
 #'   are formatted as character with "natural" decimals.
 #'
-#' @seealso [conama_summary()], [conama_text()]
+#' @seealso \code{\link[=conama_summary]{conama_summary()}}, \code{\link[=conama_text]{conama_text()}}
 #'
 #' @examples
 #' \dontrun{
@@ -325,9 +325,9 @@ conama_report <- function(df, classe = "2",
 #' @param decimal_mark Decimal separator (default \code{","})
 #' @param big_mark Thousands separator (default \code{"."})
 #'
-#' @return Character vector of lines (first line is a header, the rest are bullets).
+#' @returns Character vector of lines (first line is a header, the rest are bullets).
 #'
-#' @seealso [conama_summary()], [conama_report()]
+#' @seealso \code{\link[=conama_summary]{conama_summary()}}, \code{\link[=conama_report]{conama_report()}}
 #'
 #' @examples
 #' \dontrun{

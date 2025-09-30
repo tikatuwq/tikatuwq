@@ -33,7 +33,7 @@
 #'   is computed using only available parameters, with the denominator
 #'   adjusted to the sum of the weights of present parameters.
 #'
-#' @return
+#' @returns
 #' The input \code{df} with an added numeric column \code{IQA}. The
 #' attribute \code{"iqa_method"} is set on the returned data.frame/tibble.
 #'
