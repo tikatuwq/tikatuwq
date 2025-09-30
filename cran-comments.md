@@ -1,25 +1,27 @@
-## Resubmission (0.4.6)
-- DESCRIPTION now English-only (removed Portuguese words and diacritics) to avoid CRAN “Possibly misspelled words” NOTE.
+## CRAN submission: tikatuwq 0.5.0
 
-- Fixed two DESCRIPTION URLs flagged as 404 (Lamparelli 2004, CONAMA 357/2005).
-- Updated inst/WORDLIST to silence false positives (package documented in Portuguese).
-- No code changes; local R CMD check --as-cran clean.
+### Test environments
+- Local: Windows 11 x86_64, R 4.5.1
+- GitHub Pages/pkgdown built locally (no network access required by vignettes)
+- (Optional, typically run before submission) win-builder (R-devel, R-release) and rhub checks
 
-This is a resubmission after CRAN feedback.
+### R CMD check results
+- Local `R CMD check --as-cran`: **0 errors | 0 warnings | 1 note**
 
-- Expanded acronyms in DESCRIPTION (WQI ↔ IQA; TSI ↔ IET; CONAMA; NSF).
-- Added references using `<doi:...>` and `<https:...>` in DESCRIPTION (Carlson 1977 via DOI; Lamparelli 2004, NSF WQI and CONAMA 357/2005 via HTTPS).
-- Added `\value` sections via `@return` for exported functions:
-  `conama_limits()`, `iqa()`, `plot_box()`, `plot_heatmap()`, `plot_iqa()`, `plot_series()`.
-- Documented dataset `wq_demo` and recompressed data with xz (`LazyDataCompression: xz`).
+**NOTE (local, Windows only)**
+```
+checking for future file timestamps ... NOTE
+  unable to verify current time
+```
+This appears to be environment-specific (Windows clock/TMP). It does not reflect a user-facing issue. 
+File modification times have been normalized in the working tree; the NOTE may still be reported on some local Windows setups. 
+Other platforms are expected to be clean.
 
-## Test environments
-- Local: Windows 11, R 4.5.1 (ucrt)
-- win-builder: R-devel, R-release (OK)
-- R-hub: Linux/macOS/Windows (OK)
-
-## R CMD check results
-0 errors | 0 warnings | 0 notes
-
-## Reverse dependencies
-None.
+### Notes for CRAN
+- New version **0.5.0** adds an exported function: `plot_map()` for interactive mapping (Leaflet listed in Imports).
+- No breaking changes to the existing API.
+- Interactive examples are wrapped in `if (interactive())` / `\donttest{}` to avoid issues on CRAN.
+- Vignette loads a bundled demo dataset, with a local CSV fallback; **no network access** is performed.
+- Non-ASCII strings in R code were replaced with `\u` escapes to ensure portability across platforms.
+- Unused dependency `htmltools` was removed; the package builds and checks cleanly with the current Imports/Suggests.
+- URLs and pkgdown site have been validated locally; all links are reachable at build time.

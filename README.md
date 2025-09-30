@@ -57,7 +57,7 @@ install.packages("remotes")  # ou devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável (por tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.4.1", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.5.0", build_vignettes = TRUE)
 ```
 
 ### Conformidade CONAMA (classe 2)
