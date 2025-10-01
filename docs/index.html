@@ -49,7 +49,8 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="tikatu-water-quality-tikatuwq">Tikatu Water Quality (tikatuwq)<a class="anchor" aria-label="anchor" href="#tikatu-water-quality-tikatuwq"></a>
 </h1></div>
-<p>Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).</p>
+<p>R package for water quality analysis in the Brazilian context: WQI (IQA), TSI (Carlson/Lamparelli), NSFWQI, CONAMA 357/2005 limits, visualizations, reports, and automatic rule-based text generation.</p>
+<p>📄 <a href="README-pt.html">Leia em Português</a></p>
 <!-- CRAN status -->
 <p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://www.r-pkg.org/badges/version/tikatuwq" alt="CRAN status"></a></p>
 <!-- CRAN logs - downloads -->
@@ -61,7 +62,7 @@
 <!-- Lifecycle -->
 <p><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></p>
 <div class="section level2">
-<h2 id="instalação-desenvolvimento">Instalação (desenvolvimento)<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o-desenvolvimento"></a>
+<h2 id="development-installation">Development Installation<a class="anchor" aria-label="anchor" href="#development-installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"devtools"</span>,<span class="st">"testthat"</span>,<span class="st">"rmarkdown"</span>,<span class="st">"ggplot2"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,</span>
@@ -70,7 +71,7 @@
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="fluxo-básico">Fluxo básico<a class="anchor" aria-label="anchor" href="#fluxo-b%C3%A1sico"></a>
+<h2 id="basic-workflow">Basic Workflow<a class="anchor" aria-label="anchor" href="#basic-workflow"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -79,32 +80,32 @@
 <span></span>
 <span><span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Texto analítico (sem IA)</span></span>
+<span><span class="co"># Rule-based analytical text (no AI)</span></span>
 <span><span class="va">pars</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_analysis.html">generate_analysis</a></span><span class="op">(</span><span class="va">df</span>, classe_conama <span class="op">=</span> <span class="st">"2"</span>,</span>
 <span>                          incluir_tendencia <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                          parametros_tendencia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turbidez"</span>,<span class="st">"od"</span>,<span class="st">"pH"</span><span class="op">)</span>,</span>
-<span>                          contexto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rio<span class="op">=</span><span class="st">"Chamagunga"</span>, periodo<span class="op">=</span><span class="st">"2025-07"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                          contexto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>river<span class="op">=</span><span class="st">"Chamagunga"</span>, period<span class="op">=</span><span class="st">"2025-07"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pars</span>, collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="novidades">Novidades<a class="anchor" aria-label="anchor" href="#novidades"></a>
+<h2 id="news">News<a class="anchor" aria-label="anchor" href="#news"></a>
 </h2>
 <div class="section level3">
-<h3 id="v051-atual">v0.5.1 (atual)<a class="anchor" aria-label="anchor" href="#v051-atual"></a>
+<h3 id="v051-current">v0.5.1 (current)<a class="anchor" aria-label="anchor" href="#v051-current"></a>
 </h3>
 <ul>
-<li>Correção de <strong>links inválidos</strong> reportados pelo CRAN (URLs atualizadas e DOIs incluídos).</li>
-<li>Ajustes menores na documentação <code>tikatuwq-package.Rd</code> para compatibilidade com o R-devel.</li>
+<li>Fixed <strong>invalid links</strong> reported by CRAN (updated URLs and added DOIs).</li>
+<li>Minor adjustments in <code>tikatuwq-package.Rd</code> for R-devel compatibility.</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="v050">v0.5.0<a class="anchor" aria-label="anchor" href="#v050"></a>
 </h3>
 <ul>
-<li>Inclusão de <strong>helpers</strong> internos para simplificação de fluxo.</li>
-<li>Nova funcionalidade <code><a href="reference/plot_map.html">plot_map()</a></code> para visualização espacial dos pontos de coleta.</li>
-<li>Revisão e padronização das mensagens de validação.</li>
+<li>Added internal <strong>helpers</strong> for simplified workflow.</li>
+<li>New function <code><a href="reference/plot_map.html">plot_map()</a></code> for spatial visualization of sampling points.</li>
+<li>Reviewed and standardized validation messages.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -112,75 +113,75 @@
 </h3>
 <ul>
 <li>
-<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> — parágrafos automáticos (rule-based).</li>
-<li>Template de relatório atualizado incluindo análise textual.</li>
-<li>Estruturas para <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> e <code><a href="reference/nsfwqi.html">nsfwqi()</a></code>.</li>
+<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> — automatic rule-based paragraphs.</li>
+<li>Updated report template including textual analysis.</li>
+<li>Added structures for <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> and <code><a href="reference/nsfwqi.html">nsfwqi()</a></code>.</li>
 </ul>
 <hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="instalação-via-github">Instalação via GitHub<a class="anchor" aria-label="anchor" href="#instala%C3%A7%C3%A3o-via-github"></a>
+<h2 id="github-installation">GitHub Installation<a class="anchor" aria-label="anchor" href="#github-installation"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>  <span class="co"># ou devtools</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>  <span class="co"># or devtools</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># versão estável (por tag)</span></span>
+<span><span class="co"># Stable release (by tag)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.5.1"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
-<h3 id="conformidade-conama-classe-2">Conformidade CONAMA (classe 2)<a class="anchor" aria-label="anchor" href="#conformidade-conama-classe-2"></a>
+<h3 id="conama-compliance-class-2">CONAMA Compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Tabela só com infrações, pronta para laudo</span></span>
+<span><span class="co"># Table with only violations, ready for reports</span></span>
 <span><span class="fu"><a href="reference/conama_report.html">conama_report</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Resumo textual curto</span></span>
+<span><span class="co"># Short textual summary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="reference/conama_text.html">conama_text</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="principais-funções">Principais funções<a class="anchor" aria-label="anchor" href="#principais-fun%C3%A7%C3%B5es"></a>
+<h2 id="main-functions">Main Functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
 <ul>
 <li>
-<code>read_wq(path)</code> — leitura de dados de qualidade da água (CSV).</li>
+<code>read_wq(path)</code> — read water quality data (CSV).</li>
 <li>
-<code>validate_wq(df)</code> — validação/normalização de colunas e unidades.</li>
+<code>validate_wq(df)</code> — validate/normalize columns and units.</li>
 <li>
-<code>iqa(df, na_rm = TRUE, ...)</code> — IQA (CETESB/NSF).</li>
+<code>iqa(df, na_rm = TRUE, ...)</code> — Water Quality Index (CETESB/NSF).</li>
 <li>
-<code>iet_carlson(df)</code> / <code>iet_lamparelli(df)</code> — Índice do Estado Trófico.</li>
+<code>iet_carlson(df)</code> / <code>iet_lamparelli(df)</code> — Trophic State Index.</li>
 <li>
-<code>nsfwqi(df)</code> — NSFWQI (estrutura pronta).</li>
+<code>nsfwqi(df)</code> — NSFWQI (structure ready).</li>
 <li>
-<code>conama_limits(classe)</code> — limites da Res. CONAMA 357/2005.</li>
+<code>conama_limits(classe)</code> — limits from CONAMA Resolution 357/2005.</li>
 <li>
-<code>conama_check(df, classe)</code> — conformidade por parâmetro (*_ok).</li>
-<li>Visualizações: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>.</li>
-<li>Relatórios/texto: <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code>.</li>
-<li>Dados de exemplo: <code>system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")</code>.</li>
+<code>conama_check(df, classe)</code> — compliance by parameter (*_ok).</li>
+<li>Visualizations: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>.</li>
+<li>Reports/text: <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code>.</li>
+<li>Example data: <code>system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")</code>.</li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="documentação-e-suporte">Documentação e suporte<a class="anchor" aria-label="anchor" href="#documenta%C3%A7%C3%A3o-e-suporte"></a>
+<h2 id="documentation-and-support">Documentation and Support<a class="anchor" aria-label="anchor" href="#documentation-and-support"></a>
 </h2>
 <ul>
-<li>Site (pkgdown): <a href="https://tikatuwq.github.io/tikatuwq/" class="uri">https://tikatuwq.github.io/tikatuwq/</a>
+<li>Website (pkgdown): <a href="https://tikatuwq.github.io/tikatuwq/" class="uri">https://tikatuwq.github.io/tikatuwq/</a>
 </li>
-<li>Issues/sugestões: <a href="https://github.com/tikatuwq/tikatuwq/issues" class="external-link uri">https://github.com/tikatuwq/tikatuwq/issues</a>
+<li>Issues/suggestions: <a href="https://github.com/tikatuwq/tikatuwq/issues" class="external-link uri">https://github.com/tikatuwq/tikatuwq/issues</a>
 </li>
 <li>Releases: <a href="https://github.com/tikatuwq/tikatuwq/releases" class="external-link uri">https://github.com/tikatuwq/tikatuwq/releases</a>
 </li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="como-citar">Como Citar<a class="anchor" aria-label="anchor" href="#como-citar"></a>
+<h2 id="how-to-cite">How to Cite<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
