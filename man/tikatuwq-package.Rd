@@ -45,9 +45,9 @@ See the package website for walkthroughs and examples:
 
 \references{
 Carlson (1977) \url{doi:10.4319/lo.1977.22.2.0361}
-Lamparelli (2004) \url{https://teses.usp.br/teses/disponiveis/41/41134/tde-20032006-164008/pt-br.php}
-NSF WQI \url{https://www.nsf.org/education/nsf-water-quality-index}
-CONAMA 357/2005 \url{https://www.icmbio.gov.br/cma/images/stories/biblioteca/legislacao/RESOLUCAO_CONAMA_357_2005.pdf}
+Lamparelli (2004) \url{https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf}
+NSF WQI \url{https://link.springer.com/article/10.1007/s11157-023-09650-7}
+CONAMA 357/2005 \url{https://conama.mma.gov.br/?id=450&option=com_sisconama&task=arquivo.download}
 }
 \seealso{
 \code{\link[=read_wq]{read_wq()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=iqa]{iqa()}},

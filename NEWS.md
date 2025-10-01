@@ -1,3 +1,6 @@
+# tikatuwq 0.5.1
+- Fix: replace/repair broken URLs in package help page.
+
 # tikatuwq 0.5.0 (2025-09-30)
 - New: `plot_map()` — interactive map of sampling points using Leaflet (optional dependency via Suggests).
 - Examples wrapped in `if (interactive())` / `\donttest{}` to avoid network calls on CRAN.

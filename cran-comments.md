@@ -1,12 +1,15 @@
-## CRAN submission: tikatuwq 0.5.0
+## CRAN submission: tikatuwq 0.5.1
 
 ### Test environments
 - Local: Windows 11 x86_64, R 4.5.1
 - GitHub Pages/pkgdown built locally (no network access required by vignettes)
-- (Optional, typically run before submission) win-builder (R-devel, R-release) and rhub checks
+- win-builder: r-devel
 
 ### R CMD check results
-- Local `R CMD check --as-cran`: **0 errors | 0 warnings | 1 note**
+- Local `R CMD check --as-cran`: **0 errors | 0 warnings | 0 note**
+
+## Changes
+- Replaced invalid links in package help; no code changes.
 
 **NOTE (local, Windows only)**
 ```
