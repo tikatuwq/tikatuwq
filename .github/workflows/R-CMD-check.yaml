@@ -9,37 +9,30 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # Deixe o clock “livre” para evitar NOTES em CI
-      _R_CHECK_SYSTEM_CLOCK_: false
       TZ: UTC
       NOT_CRAN: true
+      _R_CHECK_SYSTEM_CLOCK_: false
 
     steps:
       - uses: actions/checkout@v4
 
-      # R + RSPM (acelera e resolve dependências)
       - uses: r-lib/actions/setup-r@v2
         with:
-          use-public-rspm: true
+          use-public-rspm: true    # resolve dependências mais rápido/estável
 
-      # Pandoc para README/vinhetas/quarto/rmarkdown
       - uses: r-lib/actions/setup-pandoc@v2
 
-      # Instala dependências do pacote + rcmdcheck (com cache)
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           needs: check
-          # Garante que o rcmdcheck será instalado:
           extra-packages: |
             any::rcmdcheck
             local::.
 
-      # Fallback defensivo: se por algum motivo o rcmdcheck não ficou disponível
-      - name: Ensure rcmdcheck is installed (fallback)
-        run: |
-          Rscript -e 'if (!requireNamespace("rcmdcheck", quietly = TRUE)) install.packages("rcmdcheck")'
+      # Fallback defensivo (se o cache falhar)
+      - name: Ensure rcmdcheck is installed
+        run: Rscript -e 'if (!requireNamespace("rcmdcheck", quietly = TRUE)) install.packages("rcmdcheck")'
 
-      # R CMD check propriamente dito
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual","--as-cran")'
@@ -47,7 +40,6 @@ jobs:
           error-on: 'warning'
           check-dir: 'check'
 
-      # (Opcional) artefatos do check
       - name: Upload check results
         if: always()
         uses: actions/upload-artifact@v4
