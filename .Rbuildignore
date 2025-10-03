@@ -18,3 +18,5 @@
 ^\.lintr$
 ^\.devcontainer$
 ^CRAN-SUBMISSION$
+^README-pt\.md$
+^^README-pt\\.md$$

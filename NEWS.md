@@ -1,3 +1,18 @@
+# tikatuwq 0.6.0
+
+- Nova função `plot_trend()`:
+  - Permite visualizar séries temporais de parâmetros (ex.: turbidez, OD, IQA).
+  - Adiciona linhas de tendência por grupo/ponto usando três métodos:
+    - **Theil-Sen** (robusto a outliers),
+    - **OLS** (regressão linear clássica),
+    - **LOESS** (curva suavizada).
+  - Suporte a facetas por rio/ponto, personalização de pontos e número mínimo de amostras.
+  - Retorna objeto `ggplot`.
+
+- Documentação revisada para `plot_trend()`, incluindo exemplos práticos.
+- Atualização do site pkgdown com seção dedicada a gráficos de tendência.
+
+
 # tikatuwq 0.5.1
 - Fix: replace/repair broken URLs in package help page.
 

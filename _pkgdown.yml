@@ -13,14 +13,14 @@ navbar:
       href: https://github.com/tikatuwq/tikatuwq
 
 reference:
-  - title: Leitura e validação
+  - title: Leitura e validacao
     contents:
       - read_wq
       - validate_wq
       - clean_units
       - resume_wq
 
-  - title: Índices de qualidade
+  - title: Indices de qualidade
     contents:
       - iqa
       - iet_carlson
@@ -35,18 +35,22 @@ reference:
       - conama_report
       - conama_text
 
-  - title: Visualizações
+  - title: Analises
+    contents:
+      - trend_param
+
+  - title: Visualizacoes
     contents:
       - plot_iqa
       - plot_series
       - plot_box
       - plot_heatmap
       - plot_map
+      - plot_trend
 
-  - title: Relatórios e texto
+  - title: Relatorios e texto
     contents:
       - generate_analysis
-    # se quiser listar também:
       - render_report
 
   - title: Dados de exemplo

@@ -49,7 +49,14 @@ cat(paste(pars, collapse = "\n\n"))
 
 ## News
 
-### v0.5.1 (current)
+### What's new in v0.6.0 (current)
+- New function `plot_trend()` for temporal trend analysis:
+  - Trend lines by parameter/site using **Theil-Sen**, **OLS**, and **LOESS** methods.
+  - Support for faceting by river/site and point customization.
+  - Returns a `ggplot` object, ready for visualization or inclusion in reports.
+- Updated documentation and examples on the pkgdown site.
+
+### v0.5.1
 - Fixed **invalid links** reported by CRAN (updated URLs and added DOIs).
 - Minor adjustments in `tikatuwq-package.Rd` for R-devel compatibility.
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@
 <div id="tikatu-water-quality-tikatuwq" class="section level1">
 
 <p>Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).</p>
-<p>📄 <a href="README.html">Read in English</a></p>
+<p>📄 <a href="https://github.com/tikatuwq/tikatuwq/blob/main/README.md" class="external-link">Read in English</a></p>
 <!-- CRAN status -->
 <p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://www.r-pkg.org/badges/version/tikatuwq" alt="CRAN status"></a></p>
 <!-- CRAN logs - downloads -->
@@ -73,7 +73,16 @@
 <div class="section level2">
 <h2 id="novidades">Novidades<a class="anchor" aria-label="anchor" href="#novidades"></a></h2>
 <div class="section level3">
-<h3 id="v051-atual">v0.5.1 (atual)<a class="anchor" aria-label="anchor" href="#v051-atual"></a></h3>
+<h3 id="novidades-v060-atual">Novidades v0.6.0 (atual)<a class="anchor" aria-label="anchor" href="#novidades-v060-atual"></a></h3>
+<ul><li>Nova função <code><a href="reference/plot_trend.html">plot_trend()</a></code> para análise de tendências temporais:
+<ul><li>Linhas de tendência por parâmetro/ponto com métodos <strong>Theil-Sen</strong>, <strong>OLS</strong> e <strong>LOESS</strong>.</li>
+<li>Suporte a facetas por rio/ponto e personalização de pontos.</li>
+<li>Retorna objeto <code>ggplot</code>, pronto para visualização ou inclusão em relatórios.</li>
+</ul></li>
+<li>Atualização da documentação e exemplos no site pkgdown.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="v051">v0.5.1<a class="anchor" aria-label="anchor" href="#v051"></a></h3>
 <ul><li>Correção de <strong>links inválidos</strong> reportados pelo CRAN (URLs atualizadas e DOIs incluídos).</li>
 <li>Ajustes menores na documentação <code>tikatuwq-package.Rd</code> para compatibilidade com o R-devel.</li>
 </ul></div>

@@ -2,7 +2,8 @@
 
 Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).
 
-📄 [Read in English](README.md)
+📄 [Read in English](https://github.com/tikatuwq/tikatuwq/blob/main/README.md)
+
 
 <!-- CRAN status -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
@@ -49,7 +50,14 @@ cat(paste(pars, collapse = "\n\n"))
 
 ## Novidades
 
-### v0.5.1 (atual)
+### Novidades v0.6.0  (atual)
+- Nova função `plot_trend()` para análise de tendências temporais:
+  - Linhas de tendência por parâmetro/ponto com métodos **Theil-Sen**, **OLS** e **LOESS**.
+  - Suporte a facetas por rio/ponto e personalização de pontos.
+  - Retorna objeto `ggplot`, pronto para visualização ou inclusão em relatórios.
+- Atualização da documentação e exemplos no site pkgdown.
+
+### v0.5.1
 - Correção de **links inválidos** reportados pelo CRAN (URLs atualizadas e DOIs incluídos).
 - Ajustes menores na documentação `tikatuwq-package.Rd` para compatibilidade com o R-devel.
 
