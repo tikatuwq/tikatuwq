@@ -2,7 +2,7 @@
 
 R package for water quality analysis in the Brazilian context: WQI (IQA), TSI (Carlson/Lamparelli), NSFWQI, CONAMA 357/2005 limits, visualizations, reports, and automatic rule-based text generation.
 
-📄 [Leia em Português](README-pt.md)
+📄 [Leia em Português](https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md)
 
 <!-- CRAN status -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
