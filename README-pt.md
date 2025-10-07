@@ -50,11 +50,16 @@ cat(paste(pars, collapse = "\n\n"))
 
 ## Novidades
 
-### Novidades v0.6.1  (atual)
+### Novidades v0.6.2 (atual)
+- Atualização corretiva solicitada pelo CRAN.
+- Correção do WARNING **codoc** na documentação da função `generate_analysis()`.
+- Removidos os parâmetros obsoletos `id_cols` e `filter` para corresponder à assinatura atual da função.
+- Nenhuma alteração funcional ou de código foi realizada.
+
+### Novidades v0.6.1 
 - Atualização de manutenção solicitada pelo CRAN.
 - Correção do link relativo `README-pt.md`, agora convertido para URL HTTPS absoluto.
 - Nenhuma alteração funcional ou de código.
-
 
 ### Novidades v0.6.0
 - Nova função `plot_trend()` para análise de tendências temporais:

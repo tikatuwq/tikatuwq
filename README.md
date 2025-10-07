@@ -50,7 +50,14 @@ cat(paste(pars, collapse = "\n\n"))
 ## News
 
 
-### News v0.6.1  (current)
+### News v0.6.2 (current)
+
+- Patch release requested by CRAN.
+- Fixed a codoc WARNING in `generate_analysis()` documentation.
+- Removed outdated parameters `id_cols` and `filter` to match the current function signature.
+- No functional or code changes were made.
+
+### News v0.6.1
 
 - Maintenance update requested by CRAN.
 - Fixed a NOTE by replacing the relative link `README-pt.md` with an absolute HTTPS URL.
