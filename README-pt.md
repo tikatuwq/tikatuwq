@@ -50,7 +50,13 @@ cat(paste(pars, collapse = "\n\n"))
 
 ## Novidades
 
-### Novidades v0.6.0  (atual)
+### Novidades v0.6.1  (atual)
+- Atualização de manutenção solicitada pelo CRAN.
+- Correção do link relativo `README-pt.md`, agora convertido para URL HTTPS absoluto.
+- Nenhuma alteração funcional ou de código.
+
+
+### Novidades v0.6.0
 - Nova função `plot_trend()` para análise de tendências temporais:
   - Linhas de tendência por parâmetro/ponto com métodos **Theil-Sen**, **OLS** e **LOESS**.
   - Suporte a facetas por rio/ponto e personalização de pontos.
