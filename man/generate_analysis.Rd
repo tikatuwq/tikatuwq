@@ -9,7 +9,9 @@ generate_analysis(
   classe_conama = "2",
   incluir_tendencia = TRUE,
   parametros_tendencia = c("turbidez", "od", "pH"),
-  contexto = list(rio = NA, periodo = NA, cidade = NA)
+  contexto = list(rio = NA, periodo = NA, cidade = NA),
+  id_cols = NULL,
+  filter = NULL
 )
 }
 \arguments{
@@ -28,6 +30,13 @@ tendência temporal.}
 \item{contexto}{Lista com metadados opcionais (PT/EN), por exemplo
 \code{list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lençóis")}.
 As chaves aceitas são \code{rio}/\code{river}, \code{periodo}/\code{period}, \code{cidade}.}
+
+\item{id_cols}{Vetor de nomes de colunas que identificam a unidade de análise.
+Padrão inteligente: se \code{df} tiver \code{rio}, usa \code{c("rio","ponto")}, caso contrário usa
+apenas \code{"ponto"}. Você pode trocar por qualquer combinação (ex.: \code{c("bacia","rio","ponto")}).}
+
+\item{filter}{Lista opcional de filtros no formato \code{list(coluna = valor_ou_vetor)},
+aplicada antes dos cálculos (ex.: \code{list(rio = "Chamagunga")}).}
 }
 \value{
 Vetor de \code{character} com 3 a 5 parágrafos analíticos prontos para relatório.
@@ -41,6 +50,8 @@ It is \strong{rule-based} (não usa IA) e aceita metadados opcionais para compor
 \dontrun{
 library(tikatuwq)
 data("wq_demo")
+
+# Uso padrão (se existir coluna rio no df, agrupa por rio+ponto; senão, por ponto)
 txt <- generate_analysis(
   df = wq_demo,
   classe_conama = "2",
@@ -49,6 +60,14 @@ txt <- generate_analysis(
   contexto = list(rio = "Rio Azul", periodo = "jan–jun/2025")
 )
 cat(paste(txt, collapse = "\n\n"))
+
+# Forçar identificação por rio+ponto e filtrar para um rio específico
+txt2 <- generate_analysis(
+  df = wq_demo,
+  classe_conama = "2",
+  id_cols = c("rio","ponto"),
+  filter = list(rio = "Rio Azul")
+)
 }
 
 }

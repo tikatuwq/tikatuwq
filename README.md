@@ -49,7 +49,14 @@ cat(paste(pars, collapse = "\n\n"))
 
 ## News
 
-### What's new in v0.6.0 (current)
+
+### News v0.6.1  (current)
+
+- Maintenance update requested by CRAN.
+- Fixed a NOTE by replacing the relative link `README-pt.md` with an absolute HTTPS URL.
+- No functional or code changes were made.
+
+### What's new in v0.6.0 (previous)
 - New function `plot_trend()` for temporal trend analysis:
   - Trend lines by parameter/site using **Theil-Sen**, **OLS**, and **LOESS** methods.
   - Support for faceting by river/site and point customization.

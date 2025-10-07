@@ -1,7 +1,7 @@
 Package: tikatuwq
 Type: Package
 Title: Water Quality Analysis Tools for the Brazilian Context
-Version: 0.6.0
+Version: 0.6.1
 Authors@R:
     c(person(given = "Vinicius",
              family = "Saraiva Santos",

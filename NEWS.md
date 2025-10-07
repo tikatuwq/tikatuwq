@@ -1,3 +1,10 @@
+### Novidades v0.6.1 (atual)
+- Atualização de manutenção solicitada pelo CRAN.
+- Correção do link relativo `README-pt.md`, agora em URL HTTPS absoluto.
+- Nenhuma mudança funcional no código.
+
+
+
 # tikatuwq 0.6.0
 
 - Nova função `plot_trend()`:

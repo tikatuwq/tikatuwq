@@ -1,23 +1,15 @@
-## CRAN submission v0.6.0
+## Test environments
+* Windows 11, R 4.4.x (local): OK
+* win-builder (R-devel): OK
+* Ubuntu 22.04 (GHA) R-release/R-devel: OK
+* macOS (GHA) R-release: OK
 
-This is a new release of **tikatuwq**, following v0.5.0 currently on CRAN.
+## R CMD check results
+0 ERRORs | 0 WARNINGs | 0 NOTEs
 
-### Test environments
-- Windows 11 (local): R 4.5.1 (ucrt), no errors/warnings/notes
-- macOS (local via R-hub): R-release, no errors/warnings/notes
-- Ubuntu 22.04 (GitHub Actions): R-release, no errors/warnings/notes
+## Submission notes
+Maintenance-only update to address the NOTE observed by CRAN:
+* Replaced the relative README link `README-pt.md` with an absolute HTTPS URL
+  so it resolves correctly outside GitHub/CRAN build contexts.
 
-### R CMD check results
-0 errors | 0 warnings | 0 notes
-
-### Changes since last CRAN release (v0.5.0)
-- Added new function `plot_trend()` for temporal trend analysis:
-  - Supports **Theil-Sen**, **OLS**, and **LOESS** methods.
-  - Allows faceting by river/site and point customization.
-  - Returns a `ggplot` object ready for visualization or inclusion in reports.
-- Updated documentation, examples, and pkgdown site.
-- Updated README with latest release notes.
-
-### Notes
-- No reverse dependency issues detected.
-- This update introduces a new visualization function, but does not break existing functionality.
+No functional code changes.
