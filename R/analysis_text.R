@@ -1,24 +1,24 @@
 #' Generate analytical paragraphs (rule-based)
 #'
 #' @description
-#' Produces 3–5 short, human-readable paragraphs summarizing water quality,
-#' using IQA/WQI, CONAMA-357 compliance and (optionally) simple time trends.
-#' It is **rule-based** (não usa IA) e aceita metadados opcionais para compor o texto.
+#' Produz 3–5 paragrafos curtos, legiveis por humanos, resumindo a qualidade da
+#' agua a partir de IQA/WQI, conformidade com a CONAMA 357/2005 e (opcionalmente)
+#' tendencias temporais simples. E **rule-based** (nao usa IA) e aceita metadados
+#' opcionais para compor o texto.
 #'
 #' @param df Data frame contendo ao menos a coluna `ponto`. Recomenda-se
-#'   também as colunas necessárias para checagens CONAMA e para o cálculo do IQA.
-#' @param classe_conama Character (ex. `"2"`). Classe‐alvo para a checagem da
-#'   Resolução CONAMA 357/2005.
-#' @param incluir_tendencia Logical; se `TRUE`, calcula tendências lineares
+#'   tambem as colunas necessarias para checagens CONAMA e para o calculo do IQA.
+#' @param classe_conama Character (ex. "2"). Classe-alvo para a checagem da
+#'   Resolucao CONAMA 357/2005.
+#' @param incluir_tendencia Logical; se `TRUE`, calcula tendencias lineares
 #'   simples ao longo do tempo.
-#' @param parametros_tendencia Character vector; nomes dos parâmetros para testar
-#'   tendência temporal.
+#' @param parametros_tendencia Character vector; nomes dos parametros para testar
+#'   tendencia temporal.
 #' @param contexto Lista com metadados opcionais (PT/EN), por exemplo
-#'   `list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lençóis")`.
-#'   As chaves aceitas são `rio`/`river`, `periodo`/`period`, `cidade`.
+#'   `list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lencois")`.
+#'   As chaves aceitas sao `rio`/`river`, `periodo`/`period`, `cidade`.
 #'
-#' @returns
-#' Vetor de `character` com 3 a 5 parágrafos analíticos prontos para relatório.
+#' @return Vetor `character` com 3 a 5 paragrafos analiticos prontos para relatorio.
 #'
 #' @examples
 #' \dontrun{
@@ -37,24 +37,33 @@
 #' @seealso \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 #' @family reporting-tools
 #' @export
-generate_analysis <- function(df,
-                              classe_conama = "2",
-                              incluir_tendencia = TRUE,
-                              parametros_tendencia = c("turbidez","od","pH"),
-                              contexto = list(rio = NA, periodo = NA, cidade = NA)) {
+generate_analysis <- function(
+  df,
+  classe_conama = "2",
+  incluir_tendencia = TRUE,
+  parametros_tendencia = c("turbidez","od","pH"),
+  contexto = list(rio = NA, periodo = NA, cidade = NA)
+) {
   stopifnot("ponto" %in% names(df))
+
+  # Garante IQA
   if (!"IQA" %in% names(df)) {
     df <- tikatuwq::iqa(df, na_rm = TRUE)
   }
+
+  # Checagem CONAMA
   conf <- tikatuwq::conama_check(df, classe = classe_conama)
 
+  # Helpers numericos seguros
   safe_mean <- function(x) mean(x, na.rm = TRUE)
   safe_min  <- function(x) suppressWarnings(min(x, na.rm = TRUE))
   safe_max  <- function(x) suppressWarnings(max(x, na.rm = TRUE))
 
+  # Classificacao textual do IQA (exemplo simples em EN)
   class_iqa <- function(x){
     cut(x, breaks = c(-Inf,25,50,70,90,Inf),
-        labels = c("very low","low","medium","good","excellent"), right = TRUE)
+        labels = c("very low","low","medium","good","excellent"),
+        right = TRUE)
   }
 
   iqa_mean <- safe_mean(conf$IQA)
@@ -70,7 +79,7 @@ generate_analysis <- function(df,
   best <- by_point$ponto[1]; best_val <- by_point$IQA_med[1]
   worst <- by_point$ponto[nrow(by_point)]; worst_val <- by_point$IQA_med[nrow(by_point)]
 
-  # Safe metadata (accepts both PT and EN keys)
+  # Metadados (aceita PT/EN)
   .get_meta <- function(lst, key_pt, key_en) {
     if (is.null(lst)) return(NA_character_)
     v <- lst[[key_pt]]
@@ -88,6 +97,7 @@ generate_analysis <- function(df,
     "Assessing the Water Quality Index (IQA) {river_txt}{period_txt}we observed an average of {scales::number(iqa_mean, accuracy = 0.1)}, ranging from {scales::number(iqa_min, accuracy = 0.1)} to {scales::number(iqa_max, accuracy = 0.1)}. The dominant class was {dom_class}. The best-performing point was {best} (IQA~{scales::number(best_val, accuracy = 0.1)}), whereas {worst} presented the lowest value (IQA~{scales::number(worst_val, accuracy = 0.1)})."
   )
 
+  # Violacoes CONAMA
   ok_cols <- grep("_ok$", names(conf), value = TRUE)
   long_ok <- conf |>
     tidyr::pivot_longer(dplyr::all_of(ok_cols), names_to = "param_ok", values_to = "ok") |>
@@ -117,6 +127,7 @@ generate_analysis <- function(df,
     )
   }
 
+  # Tendencias (opcional)
   p3 <- NULL
   if (incluir_tendencia && "data" %in% names(conf)) {
     tend <- calc_trends(conf, parametros = intersect(parametros_tendencia, names(conf)))
@@ -133,9 +144,13 @@ generate_analysis <- function(df,
     }
   }
 
+  # Variacao espacial de IQA
   range_iqa <- iqa_max - iqa_min
-  p4 <- glue::glue("The spatial variation of IQA was approximately {scales::number(range_iqa, accuracy = 0.1)} points between extremes.")
+  p4 <- glue::glue(
+    "The spatial variation of IQA was approximately {scales::number(range_iqa, accuracy = 0.1)} points between extremes."
+  )
 
+  # Recomendacoes
   recs <- character(0)
   if (nrow(viol)) {
     if ("coliformes_ok" %in% ok_cols && any(conf$coliformes_ok == FALSE, na.rm = TRUE)) {

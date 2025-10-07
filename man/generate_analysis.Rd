@@ -9,49 +9,39 @@ generate_analysis(
   classe_conama = "2",
   incluir_tendencia = TRUE,
   parametros_tendencia = c("turbidez", "od", "pH"),
-  contexto = list(rio = NA, periodo = NA, cidade = NA),
-  id_cols = NULL,
-  filter = NULL
+  contexto = list(rio = NA, periodo = NA, cidade = NA)
 )
 }
 \arguments{
 \item{df}{Data frame contendo ao menos a coluna \code{ponto}. Recomenda-se
-também as colunas necessárias para checagens CONAMA e para o cálculo do IQA.}
+tambem as colunas necessarias para checagens CONAMA e para o calculo do IQA.}
 
-\item{classe_conama}{Character (ex. \code{"2"}). Classe‐alvo para a checagem da
-Resolução CONAMA 357/2005.}
+\item{classe_conama}{Character (ex. "2"). Classe-alvo para a checagem da
+Resolucao CONAMA 357/2005.}
 
-\item{incluir_tendencia}{Logical; se \code{TRUE}, calcula tendências lineares
+\item{incluir_tendencia}{Logical; se \code{TRUE}, calcula tendencias lineares
 simples ao longo do tempo.}
 
-\item{parametros_tendencia}{Character vector; nomes dos parâmetros para testar
-tendência temporal.}
+\item{parametros_tendencia}{Character vector; nomes dos parametros para testar
+tendencia temporal.}
 
 \item{contexto}{Lista com metadados opcionais (PT/EN), por exemplo
-\code{list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lençóis")}.
-As chaves aceitas são \code{rio}/\code{river}, \code{periodo}/\code{period}, \code{cidade}.}
-
-\item{id_cols}{Vetor de nomes de colunas que identificam a unidade de análise.
-Padrão inteligente: se \code{df} tiver \code{rio}, usa \code{c("rio","ponto")}, caso contrário usa
-apenas \code{"ponto"}. Você pode trocar por qualquer combinação (ex.: \code{c("bacia","rio","ponto")}).}
-
-\item{filter}{Lista opcional de filtros no formato \code{list(coluna = valor_ou_vetor)},
-aplicada antes dos cálculos (ex.: \code{list(rio = "Chamagunga")}).}
+\code{list(rio = "Rio Pardo", periodo = "jan–jun/2025", cidade = "Lencois")}.
+As chaves aceitas sao \code{rio}/\code{river}, \code{periodo}/\code{period}, \code{cidade}.}
 }
 \value{
-Vetor de \code{character} com 3 a 5 parágrafos analíticos prontos para relatório.
+Vetor \code{character} com 3 a 5 paragrafos analiticos prontos para relatorio.
 }
 \description{
-Produces 3–5 short, human-readable paragraphs summarizing water quality,
-using IQA/WQI, CONAMA-357 compliance and (optionally) simple time trends.
-It is \strong{rule-based} (não usa IA) e aceita metadados opcionais para compor o texto.
+Produz 3–5 paragrafos curtos, legiveis por humanos, resumindo a qualidade da
+agua a partir de IQA/WQI, conformidade com a CONAMA 357/2005 e (opcionalmente)
+tendencias temporais simples. E \strong{rule-based} (nao usa IA) e aceita metadados
+opcionais para compor o texto.
 }
 \examples{
 \dontrun{
 library(tikatuwq)
 data("wq_demo")
-
-# Uso padrão (se existir coluna rio no df, agrupa por rio+ponto; senão, por ponto)
 txt <- generate_analysis(
   df = wq_demo,
   classe_conama = "2",
@@ -60,14 +50,6 @@ txt <- generate_analysis(
   contexto = list(rio = "Rio Azul", periodo = "jan–jun/2025")
 )
 cat(paste(txt, collapse = "\n\n"))
-
-# Forçar identificação por rio+ponto e filtrar para um rio específico
-txt2 <- generate_analysis(
-  df = wq_demo,
-  classe_conama = "2",
-  id_cols = c("rio","ponto"),
-  filter = list(rio = "Rio Azul")
-)
 }
 
 }

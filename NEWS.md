@@ -1,12 +1,13 @@
-### Novidades v0.6.1 (atual)
+# tikatuwq 0.6.2
+- Fix: resolve codoc WARNING for `generate_analysis` (docs matched to code).
+- No functional code changes.
+
+### Novidades v0.6.1
 - Atualização de manutenção solicitada pelo CRAN.
 - Correção do link relativo `README-pt.md`, agora em URL HTTPS absoluto.
 - Nenhuma mudança funcional no código.
 
-
-
 # tikatuwq 0.6.0
-
 - Nova função `plot_trend()`:
   - Permite visualizar séries temporais de parâmetros (ex.: turbidez, OD, IQA).
   - Adiciona linhas de tendência por grupo/ponto usando três métodos:
