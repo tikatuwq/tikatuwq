@@ -1,8 +1,16 @@
+### Novidades 
+
 # tikatuwq 0.7.1
 
-# tikatuwq v0.7.0 (atual)
+### CRAN maintenance update
 
-### Novidades 
+- **Title** field adjusted per CRAN request:  
+  now *"Water Quality Assessment and Environmental Compliance in Brazil"*.
+
+- Added **Zenodo DOI** and formal citation entry (`citation("tikatuwq")`).
+- Updated **README** (EN/PT) with citation, DOI badge, and institutional context.
+- No changes in functions or internal code.
+---
 
 # tikatuwq v0.7.0
 

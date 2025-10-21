@@ -1,4 +1,4 @@
-# CRAN submission — tikatuwq 0.7.0
+# CRAN submission — tikatuwq 0.7.1
 
 ## Test environments
 * Windows 11, R 4.5.1 (local): OK  
@@ -10,22 +10,15 @@
 ✔ 0 errors | ✔ 0 warnings | ✔ 0 notes  
 (Validated locally, on win-builder, and via CI workflows)
 
-## Changes since v0.6.2
-### New features
-- Added `param_analysis()` and `param_analysis_multi()` for flexible parameter-wise analysis across sites and sampling points, including descriptive summaries and trend detection.
-
-### Improvements
-- Updated `plot_trend()` to use tidy-evaluation (`aes()` + `.data`) — replacing deprecated `aes_string()`.
-- Controlled coordinate warnings in `plot_map()`; new test coverage ensures reproducible outputs.
-- General documentation and reference updates across all new features.
-
-### Documentation
-- Updated **README (EN/PT)**, **NEWS.md**, and **pkgdown** reference index.
-- Full help pages added for all new functions, with examples validated on R 4.5.1.
+## Changes since 0.7.0
+- Adjusted **Title** field per CRAN request.
+- Added **Zenodo DOI** (10.5281/zenodo.17407297) and formal citation metadata.
+- Updated README (EN/PT) and pkgdown site with DOI badge and institutional context.
+- No functional or code changes.
 
 ## Reverse dependencies
 - No reverse dependencies to check.
 
 ## Submission frequency
-This is a **minor feature release** following CRAN policies.  
-Previous version (v0.6.2) passed checks with no issues; submission delayed by >14 days.
+This is a **minor maintenance release** addressing a CRAN feedback request.  
+Previous version (v0.7.0) passed all checks successfully.

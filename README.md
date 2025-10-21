@@ -6,6 +6,8 @@ The package also includes trend analysis, data validation, and automatic report 
 
 📄 [Ler em Português](https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md)
 
+<!-- Zenodo DOI -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg)](https://doi.org/10.5281/zenodo.17407297)
 
 <!-- CRAN status -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
@@ -23,8 +25,11 @@ The package also includes trend analysis, data validation, and automatic report 
 <!-- Lifecycle -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
+---
 
 ## Installation (development)
+
+To install development dependencies and check the package locally:
 
 ```r
 install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
@@ -32,6 +37,8 @@ install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
 devtools::load_all("tikatuwq")
 devtools::check("tikatuwq")
 ```
+
+---
 
 ## Basic workflow
 
@@ -52,14 +59,14 @@ cat(paste(pars, collapse = "\n\n"))
 
 ---
 
-### 📚 Scientific context
+### 📚 Scientific and Institutional Context
 
 The **TikatuWQ** package was developed by **Vinícius Saraiva Santos** (author and maintainer)  
 as part of the **Tikatu Research Project**, conducted within the **Nucleus for Research in Tropical Ecosystems – NuPEcoTropic**, a research group linked to the **Federal University of Southern Bahia (UFSB)** and coordinated by **Prof. Dr. Fabrício Berton Zanchi**.  
 
 This work was carried out as part of the activities of the **Graduate Program in Biosystems (PPG Biossistemas)** at UFSB, under the supervision of **Prof. Dr. Fabrício Berton Zanchi**.  
 
-The **Tikatu Project** is developed by **Vinícius Saraiva Santos** and integrates research focused on environmental monitoring and modeling.
+The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos**, integrates research focused on environmental monitoring and modeling.
 
 ---
 
@@ -115,7 +122,7 @@ install.packages("remotes")  # or devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # stable version (by tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.5.1", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.7.0", build_vignettes = TRUE)
 ```
 
 ---
@@ -143,7 +150,7 @@ cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
 - `nsfwqi(df)` — NSFWQI (framework ready).  
 - `conama_limits(class)` — limits from CONAMA 357/2005 Resolution.  
 - `conama_check(df, class)` — compliance by parameter (*_ok columns).  
-- Visualizations: `plot_iqa()`, `plot_series()`, `plot_box()`, `plot_heatmap()`, `plot_map()`, `plot_trend()`.  
+- Visualizations: `plot_iqa()`, `plot_series()`, `plot_box()`, `plot_heatmap()`, `plot_map()`, `plot_trend()` (returns `ggplot` object).  
 - Reporting/Text: `generate_analysis()`, `render_report()`.  
 - Example data: `system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")`.
 
@@ -151,6 +158,7 @@ cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
 
 ## Documentation and support
 
+- **CRAN page:** https://cran.r-project.org/package=tikatuwq  
 - **Pkgdown site:** https://tikatuwq.github.io/tikatuwq/  
 - **Issues/Suggestions:** https://github.com/tikatuwq/tikatuwq/issues  
 - **Releases:** https://github.com/tikatuwq/tikatuwq/releases  
@@ -160,4 +168,23 @@ cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
 ## Citation
 ```r
 citation("tikatuwq")
+```
+
+### How to cite
+
+If you use **tikatuwq** in your research, please cite it as follows:
+
+> Santos, V. S. (2025). *tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil* (v0.7.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
+
+BibTeX entry:
+
+```bibtex
+@Manual{Santos2025tikatuwq,
+  title  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},
+  author = {Vinicius Saraiva Santos},
+  year   = {2025},
+  note   = {R package version 0.7.0},
+  doi    = {10.5281/zenodo.17407297},
+  url    = {https://github.com/tikatuwq/tikatuwq},
+}
 ```
