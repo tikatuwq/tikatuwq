@@ -1,6 +1,9 @@
-# Tikatu Water Quality (tikatuwq)
+# 🌊 TikatuWQ: Pacote R para Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil
 
-Pacote R para análises de qualidade da água no contexto brasileiro: IQA, IET (Carlson/Lamparelli), NSFWQI, limites CONAMA 357/2005, visualizações, relatório e texto analítico automático (rule-based).
+O **TikatuWQ** é um pacote **open-source em R** desenvolvido para analisar, visualizar e gerar relatórios de qualidade da água de acordo com os padrões ambientais brasileiros.  
+Implementa os principais índices usados no país **IQA/NSFWQI** e **IET (Carlson e Lamparelli)**   
+e oferece verificações automáticas de conformidade com a **Resolução CONAMA 357/2005**.  
+O pacote inclui ainda análise de tendências, validação de dados e geração automática de relatórios.
 
 📄 [Read in English](https://github.com/tikatuwq/tikatuwq/blob/main/README.md)
 
@@ -48,9 +51,29 @@ cat(paste(pars, collapse = "\n\n"))
 
 ---
 
-## Novidades
+### 📚 Contexto científico
 
-### Novidades v0.6.2 (atual)
+O pacote **TikatuWQ** foi desenvolvido por **Vinícius Saraiva Santos** (autor e mantenedor)  
+no âmbito do **Projeto de Pesquisa Tikatu**, desenvolvido no **Núcleo de Pesquisas em Ecossistemas Tropicais – NuPEcoTropic**,  grupo de pesquisa vinculado à **Universidade Federal do Sul da Bahia (UFSB)** e coordenado pelo **Prof. Dr. Fabrício Berton Zanchi**.  
+
+O trabalho foi realizado como parte das atividades do **Programa de Pós-Graduação em Biossistemas (PPG Biossistemas)** da UFSB, sob orientação do **Prof. Dr. Fabrício Berton Zanchi**.  
+
+O **Projeto Tikatu** é desenvolvido por **Vinícius Saraiva Santos** e integra pesquisas voltadas ao monitoramento e à modelagem de sistemas ambientais.
+
+---
+
+## 🆕 Novidades
+
+### Novidades v0.7.0 (atual)
+- Novas funções **`param_analysis()`** e **`param_analysis_multi()`**:
+  - Permitem análise flexível por parâmetro e por ponto.
+  - Suportam comparações cruzadas (vários parâmetros por ponto ou vice-versa).
+  - Incluem estatísticas descritivas e tendências temporais.
+- Cobertura de testes 100% para os novos módulos.
+- Pequenas melhorias em `plot_trend()` e `plot_map()` (mensagens controladas).
+- Todas as verificações do CRAN e `devtools::check()` passaram sem erros.
+
+### Novidades v0.6.2
 - Atualização corretiva solicitada pelo CRAN.
 - Correção do WARNING **codoc** na documentação da função `generate_analysis()`.
 - Removidos os parâmetros obsoletos `id_cols` e `filter` para corresponder à assinatura atual da função.
@@ -118,7 +141,7 @@ cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
 - `nsfwqi(df)` — NSFWQI (estrutura pronta).
 - `conama_limits(classe)` — limites da Res. CONAMA 357/2005.
 - `conama_check(df, classe)` — conformidade por parâmetro (*_ok).
-- Visualizações: `plot_iqa()`, `plot_series()`, `plot_box()`, `plot_heatmap()`, `plot_map()`.
+- Visualizações: `plot_iqa()`, `plot_series()`, `plot_box()`, `plot_heatmap()`, `plot_map()`, `plot_trend()`.
 - Relatórios/texto: `generate_analysis()`, `render_report()`.
 - Dados de exemplo: `system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")`.
 
@@ -126,11 +149,13 @@ cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
 
 ## Documentação e suporte
 
-- Site (pkgdown): https://tikatuwq.github.io/tikatuwq/
-- Issues/sugestões: https://github.com/tikatuwq/tikatuwq/issues
-- Releases: https://github.com/tikatuwq/tikatuwq/releases
+- Site (pkgdown): https://tikatuwq.github.io/tikatuwq/  
+- Issues/sugestões: https://github.com/tikatuwq/tikatuwq/issues  
+- Releases: https://github.com/tikatuwq/tikatuwq/releases  
 
-## Como Citar
+---
+
+## Como citar
 ```r
 citation("tikatuwq")
 ```

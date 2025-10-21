@@ -1,5 +1,5 @@
 # Register columns computed on-the-fly to appease R CMD check
-utils::globalVariables(c(".x", ".y", ".key"))
+utils::globalVariables(c(".x", ".y", ".key", ".__key__"))
 
 #' Linha de tendencia temporal para parametros de qualidade da agua
 #'
@@ -36,6 +36,7 @@ utils::globalVariables(c(".x", ".y", ".key"))
 #'
 #' @importFrom stats coef loess loess.control median cor.test lm predict as.formula
 #' @importFrom utils tail globalVariables
+#' @importFrom rlang .data
 #'
 #' @examples
 #' # Exemplo simples: turbidez com tendencia Theil-Sen
@@ -114,8 +115,11 @@ plot_trend <- function(data,
   key <- interaction(df[, group_cols, drop = FALSE], drop = TRUE)
   df$.__key__ <- key
 
-  # base do plot
-  p <- ggplot2::ggplot(df, ggplot2::aes_string(x = date_col, y = param, group = ".__key__"))
+  # base do plot (sem aes_string): usa .data para tidy eval seguro
+  p <- ggplot2::ggplot(
+    df,
+    ggplot2::aes(x = .data[[date_col]], y = .data[[param]], group = .data$.__key__)
+  )
 
   if (show_points) {
     p <- p + ggplot2::geom_point(alpha = 0.85)

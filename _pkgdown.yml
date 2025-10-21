@@ -56,6 +56,18 @@ reference:
   - title: Dados de exemplo
     contents:
       - wq_demo
+  
+  - title: Parameter analysis (single)
+    contents:
+      - param_summary
+      - param_trend
+      - param_plot
+
+  - title: Parameter analysis (multi)
+    contents:
+      - param_summary_multi
+      - param_trend_multi
+      - param_plot_multi
 
 articles:
   - title: Tutorials

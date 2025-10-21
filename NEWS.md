@@ -1,8 +1,8 @@
-# tikatuwq 0.8.0
+# tikatuwq v0.7.0 (atual)
 
 ### Novidades 
 
-# tikatuwq v0.7.0 (atual)
+# tikatuwq v0.7.0
 
 - Novas funções `param_analysis()` e `param_analysis_multi()`:
   - Permitem análise detalhada de parâmetros específicos por ponto, rio ou conjunto de pontos.

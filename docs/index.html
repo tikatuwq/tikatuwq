@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Water Quality Analysis Tools for the Brazilian Context • tikatuwq</title>
+<title>TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil • tikatuwq</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Water Quality Analysis Tools for the Brazilian Context">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil">
 <meta name="description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows.">
 <meta property="og:description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows.">
 </head>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,10 +47,12 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="tikatu-water-quality-tikatuwq">Tikatu Water Quality (tikatuwq)<a class="anchor" aria-label="anchor" href="#tikatu-water-quality-tikatuwq"></a>
+<div class="page-header"><h1 id="ocean-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil">🌊 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil<a class="anchor" aria-label="anchor" href="#ocean-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil"></a>
 </h1></div>
-<p>R package for water quality analysis in the Brazilian context: WQI (IQA), TSI (Carlson/Lamparelli), NSFWQI, CONAMA 357/2005 limits, visualizations, reports, and automatic rule-based text generation.</p>
-<p>📄 <a href="https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md" class="external-link">Leia em Português</a></p>
+<p><strong>TikatuWQ</strong> is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards.<br>
+It implements the main indices used in the country <strong>IQA/NSFWQI</strong> and <strong>IET (Carlson and Lamparelli)</strong> and provides automated checks for <strong>CONAMA Resolution 357/2005</strong> compliance.<br>
+The package also includes trend analysis, data validation, and automatic report generation.</p>
+<p>📄 <a href="https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md" class="external-link">Ler em Português</a></p>
 <!-- CRAN status -->
 <p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://www.r-pkg.org/badges/version/tikatuwq" alt="CRAN status"></a></p>
 <!-- CRAN logs - downloads -->
@@ -62,7 +64,7 @@
 <!-- Lifecycle -->
 <p><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></p>
 <div class="section level2">
-<h2 id="development-installation">Development Installation<a class="anchor" aria-label="anchor" href="#development-installation"></a>
+<h2 id="installation-development">Installation (development)<a class="anchor" aria-label="anchor" href="#installation-development"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"devtools"</span>,<span class="st">"testthat"</span>,<span class="st">"rmarkdown"</span>,<span class="st">"ggplot2"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,</span>
@@ -71,7 +73,7 @@
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="basic-workflow">Basic Workflow<a class="anchor" aria-label="anchor" href="#basic-workflow"></a>
+<h2 id="basic-workflow">Basic workflow<a class="anchor" aria-label="anchor" href="#basic-workflow"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -80,25 +82,50 @@
 <span></span>
 <span><span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Rule-based analytical text (no AI)</span></span>
+<span><span class="co"># Analytical text (rule-based)</span></span>
 <span><span class="va">pars</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_analysis.html">generate_analysis</a></span><span class="op">(</span><span class="va">df</span>, classe_conama <span class="op">=</span> <span class="st">"2"</span>,</span>
 <span>                          incluir_tendencia <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                          parametros_tendencia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turbidez"</span>,<span class="st">"od"</span>,<span class="st">"pH"</span><span class="op">)</span>,</span>
 <span>                          contexto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>river<span class="op">=</span><span class="st">"Chamagunga"</span>, period<span class="op">=</span><span class="st">"2025-07"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pars</span>, collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <hr>
+<div class="section level3">
+<h3 id="books-scientific-context">📚 Scientific context<a class="anchor" aria-label="anchor" href="#books-scientific-context"></a>
+</h3>
+<p>The <strong>TikatuWQ</strong> package was developed by <strong>Vinícius Saraiva Santos</strong> (author and maintainer)<br>
+as part of the <strong>Tikatu Research Project</strong>, conducted within the <strong>Nucleus for Research in Tropical Ecosystems – NuPEcoTropic</strong>, a research group linked to the <strong>Federal University of Southern Bahia (UFSB)</strong> and coordinated by <strong>Prof. Dr. Fabrício Berton Zanchi</strong>.</p>
+<p>This work was carried out as part of the activities of the <strong>Graduate Program in Biosystems (PPG Biossistemas)</strong> at UFSB, under the supervision of <strong>Prof. Dr. Fabrício Berton Zanchi</strong>.</p>
+<p>The <strong>Tikatu Project</strong> is developed by <strong>Vinícius Saraiva Santos</strong> and integrates research focused on environmental monitoring and modeling.</p>
+<hr>
+</div>
 </div>
 <div class="section level2">
-<h2 id="news">News<a class="anchor" aria-label="anchor" href="#news"></a>
+<h2 id="new-news">🆕 News<a class="anchor" aria-label="anchor" href="#new-news"></a>
 </h2>
 <div class="section level3">
-<h3 id="news-v062-current">News v0.6.2 (current)<a class="anchor" aria-label="anchor" href="#news-v062-current"></a>
+<h3 id="news-v070-current">News v0.7.0 (current)<a class="anchor" aria-label="anchor" href="#news-v070-current"></a>
 </h3>
 <ul>
-<li>Patch release requested by CRAN.</li>
-<li>Fixed a codoc WARNING in <code><a href="reference/generate_analysis.html">generate_analysis()</a></code> documentation.</li>
-<li>Removed outdated parameters <code>id_cols</code> and <code>filter</code> to match the current function signature.</li>
-<li>No functional or code changes were made.</li>
+<li>New functions <strong><code><a href="reference/param_analysis.html">param_analysis()</a></code></strong> and <strong><code><a href="reference/param_analysis_multi.html">param_analysis_multi()</a></code></strong>:
+<ul>
+<li>Allow flexible parameter-based analyses by site or river.</li>
+<li>Support cross-comparisons (multiple parameters per site or vice versa).</li>
+<li>Include descriptive statistics and temporal trend detection.</li>
+</ul>
+</li>
+<li>Full test coverage for new modules.</li>
+<li>Minor improvements to <code><a href="reference/plot_trend.html">plot_trend()</a></code> and <code><a href="reference/plot_map.html">plot_map()</a></code> (controlled messages).</li>
+<li>All CRAN and <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code> validations passed without errors.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="news-v062">News v0.6.2<a class="anchor" aria-label="anchor" href="#news-v062"></a>
+</h3>
+<ul>
+<li>Corrective update requested by CRAN.</li>
+<li>Fixed <strong>codoc</strong> WARNING in <code><a href="reference/generate_analysis.html">generate_analysis()</a></code> documentation.</li>
+<li>Removed deprecated parameters <code>id_cols</code> and <code>filter</code> to match current signature.</li>
+<li>No functional or code changes made.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -106,19 +133,19 @@
 </h3>
 <ul>
 <li>Maintenance update requested by CRAN.</li>
-<li>Fixed a NOTE by replacing the relative link <code>README-pt.md</code> with an absolute HTTPS URL.</li>
-<li>No functional or code changes were made.</li>
+<li>Fixed relative link <code>README-pt.md</code>, now converted to absolute HTTPS URL.</li>
+<li>No functional or code changes made.</li>
 </ul>
 </div>
 <div class="section level3">
-<h3 id="whats-new-in-v060-previous">What’s new in v0.6.0 (previous)<a class="anchor" aria-label="anchor" href="#whats-new-in-v060-previous"></a>
+<h3 id="news-v060">News v0.6.0<a class="anchor" aria-label="anchor" href="#news-v060"></a>
 </h3>
 <ul>
 <li>New function <code><a href="reference/plot_trend.html">plot_trend()</a></code> for temporal trend analysis:
 <ul>
-<li>Trend lines by parameter/site using <strong>Theil-Sen</strong>, <strong>OLS</strong>, and <strong>LOESS</strong> methods.</li>
-<li>Support for faceting by river/site and point customization.</li>
-<li>Returns a <code>ggplot</code> object, ready for visualization or inclusion in reports.</li>
+<li>Trend lines per parameter/site with <strong>Theil-Sen</strong>, <strong>OLS</strong>, and <strong>LOESS</strong> methods.</li>
+<li>Supports faceting by river/site and point customization.</li>
+<li>Returns <code>ggplot</code> object ready for visualization or reports.</li>
 </ul>
 </li>
 <li>Updated documentation and examples on the pkgdown site.</li>
@@ -128,17 +155,17 @@
 <h3 id="v051">v0.5.1<a class="anchor" aria-label="anchor" href="#v051"></a>
 </h3>
 <ul>
-<li>Fixed <strong>invalid links</strong> reported by CRAN (updated URLs and added DOIs).</li>
-<li>Minor adjustments in <code>tikatuwq-package.Rd</code> for R-devel compatibility.</li>
+<li>Fixed <strong>invalid URLs</strong> reported by CRAN (updated links and DOIs included).</li>
+<li>Minor documentation adjustments for R-devel compatibility.</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="v050">v0.5.0<a class="anchor" aria-label="anchor" href="#v050"></a>
 </h3>
 <ul>
-<li>Added internal <strong>helpers</strong> for simplified workflow.</li>
-<li>New function <code><a href="reference/plot_map.html">plot_map()</a></code> for spatial visualization of sampling points.</li>
-<li>Reviewed and standardized validation messages.</li>
+<li>Added internal <strong>helper</strong> functions to simplify workflow.</li>
+<li>New feature <code><a href="reference/plot_map.html">plot_map()</a></code> for spatial visualization of sampling sites.</li>
+<li>Revised validation messages and standardized formatting.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -146,30 +173,30 @@
 </h3>
 <ul>
 <li>
-<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> — automatic rule-based paragraphs.</li>
-<li>Updated report template including textual analysis.</li>
-<li>Added structures for <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> and <code><a href="reference/nsfwqi.html">nsfwqi()</a></code>.</li>
+<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> — automatic rule-based analytical paragraphs.</li>
+<li>Report template updated to include textual analysis.</li>
+<li>Structures added for <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> and <code><a href="reference/nsfwqi.html">nsfwqi()</a></code>.</li>
 </ul>
 <hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="github-installation">GitHub Installation<a class="anchor" aria-label="anchor" href="#github-installation"></a>
+<h2 id="installation-via-github">Installation via GitHub<a class="anchor" aria-label="anchor" href="#installation-via-github"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>  <span class="co"># or devtools</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Stable release (by tag)</span></span>
+<span><span class="co"># stable version (by tag)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.5.1"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
-<h3 id="conama-compliance-class-2">CONAMA Compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
+<h3 id="conama-compliance-class-2">CONAMA compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Table with only violations, ready for reports</span></span>
+<span><span class="co"># Table with only violations, ready for report</span></span>
 <span><span class="fu"><a href="reference/conama_report.html">conama_report</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Short textual summary</span></span>
@@ -178,43 +205,56 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="main-functions">Main Functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
+<h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
 <ul>
 <li>
-<code>read_wq(path)</code> — read water quality data (CSV).</li>
+<code>read_wq(path)</code> — reads water quality datasets (CSV).<br>
+</li>
 <li>
-<code>validate_wq(df)</code> — validate/normalize columns and units.</li>
+<code>validate_wq(df)</code> — validates/normalizes columns and units.<br>
+</li>
 <li>
-<code>iqa(df, na_rm = TRUE, ...)</code> — Water Quality Index (CETESB/NSF).</li>
+<code>iqa(df, na_rm = TRUE, ...)</code> — Water Quality Index (CETESB/NSF).<br>
+</li>
 <li>
-<code>iet_carlson(df)</code> / <code>iet_lamparelli(df)</code> — Trophic State Index.</li>
+<code>iet_carlson(df)</code> / <code>iet_lamparelli(df)</code> — Trophic State Index.<br>
+</li>
 <li>
-<code>nsfwqi(df)</code> — NSFWQI (structure ready).</li>
+<code>nsfwqi(df)</code> — NSFWQI (framework ready).<br>
+</li>
 <li>
-<code>conama_limits(classe)</code> — limits from CONAMA Resolution 357/2005.</li>
+<code>conama_limits(class)</code> — limits from CONAMA 357/2005 Resolution.<br>
+</li>
 <li>
-<code>conama_check(df, classe)</code> — compliance by parameter (*_ok).</li>
-<li>Visualizations: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>.</li>
-<li>Reports/text: <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code>.</li>
+<code>conama_check(df, class)</code> — compliance by parameter (*_ok columns).<br>
+</li>
+<li>Visualizations: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>, <code><a href="reference/plot_trend.html">plot_trend()</a></code>.<br>
+</li>
+<li>Reporting/Text: <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code>.<br>
+</li>
 <li>Example data: <code>system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")</code>.</li>
 </ul>
 <hr>
 </div>
 <div class="section level2">
-<h2 id="documentation-and-support">Documentation and Support<a class="anchor" aria-label="anchor" href="#documentation-and-support"></a>
+<h2 id="documentation-and-support">Documentation and support<a class="anchor" aria-label="anchor" href="#documentation-and-support"></a>
 </h2>
 <ul>
-<li>Website (pkgdown): <a href="https://tikatuwq.github.io/tikatuwq/" class="uri">https://tikatuwq.github.io/tikatuwq/</a>
+<li>
+<strong>Pkgdown site:</strong> <a href="https://tikatuwq.github.io/tikatuwq/" class="uri">https://tikatuwq.github.io/tikatuwq/</a><br>
 </li>
-<li>Issues/suggestions: <a href="https://github.com/tikatuwq/tikatuwq/issues" class="external-link uri">https://github.com/tikatuwq/tikatuwq/issues</a>
+<li>
+<strong>Issues/Suggestions:</strong> <a href="https://github.com/tikatuwq/tikatuwq/issues" class="external-link uri">https://github.com/tikatuwq/tikatuwq/issues</a><br>
 </li>
-<li>Releases: <a href="https://github.com/tikatuwq/tikatuwq/releases" class="external-link uri">https://github.com/tikatuwq/tikatuwq/releases</a>
+<li>
+<strong>Releases:</strong> <a href="https://github.com/tikatuwq/tikatuwq/releases" class="external-link uri">https://github.com/tikatuwq/tikatuwq/releases</a>
 </li>
 </ul>
+<hr>
 </div>
 <div class="section level2">
-<h2 id="how-to-cite">How to Cite<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>

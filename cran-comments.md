@@ -1,3 +1,5 @@
+# CRAN submission — tikatuwq 0.7.0
+
 ## Test environments
 * Windows 11, R 4.4.x (local): OK  
 * win-builder (R-devel): OK  
@@ -5,11 +7,21 @@
 * macOS (GHA) R-release: OK  
 
 ## R CMD check results
-0 ERRORs | 0 WARNINGs | 0 NOTEs
+- 0 errors | 0 warnings | 0 notes (local and CI)
 
-## Submission notes
-Patch release to fix a codoc WARNING reported by CRAN for the previous version (0.6.1):
-* Removed undocumented/unused parameters (`id_cols`, `filter`) from the roxygen header of `generate_analysis()` to match the current function definition.
+## Changes since 0.6.2
+- New features:
+  - `param_analysis()` and `param_analysis_multi()` for flexible parameter-wise analyses across sites/points,
+    including descriptive summaries and simple trend detection.
+- Improvements:
+  - `plot_trend()` migrated from `aes_string()` to tidy-eval (`aes()` + `.data`) to silence deprecations.
+  - `plot_map()` warnings now controlled and covered by tests.
+- Documentation:
+  - Updated README (EN/PT), NEWS, and pkgdown reference index.
+  - Full reference pages for new functions (pkgdown site updated).
 
-No functional or behavioral changes were made to the package.
-This submission was made in response to a CRAN request.
+## Reverse dependencies
+- No strong reverse dependencies.
+
+## Submission frequency
+- We are aware of CRAN’s submission frequency policy and will comply.
