@@ -1,3 +1,19 @@
+# tikatuwq 0.8.0
+
+### Novidades 
+
+# tikatuwq v0.7.0 (atual)
+
+- Novas funções `param_analysis()` e `param_analysis_multi()`:
+  - Permitem análise detalhada de parâmetros específicos por ponto, rio ou conjunto de pontos.
+  - Suportam comparações cruzadas (vários parâmetros em um ponto ou vários pontos para um mesmo parâmetro).
+  - Incluem tendência temporal simples e resumo estatístico básico.
+  - Resultados retornam data frames padronizados, compatíveis com as funções de visualização e relatório.
+- Testes automatizados para todos os novos módulos (`test-param_analysis.R`, `test-param_analysis_multi.R`).
+- Código atualizado conforme as boas práticas do CRAN (todas as verificações 100% limpas).
+- Pequenas melhorias de estabilidade em `plot_trend()` e `plot_map()` (suporte a mensagens controladas).
+
+
 # tikatuwq 0.6.2
 - Fix: resolve codoc WARNING for `generate_analysis` (docs matched to code).
 - No functional code changes.
