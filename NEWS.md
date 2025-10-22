@@ -1,6 +1,12 @@
 ### Novidades 
 
-# tikatuwq 0.7.1
+# tikatuwq 0.7.2
+
+### Changes in this version
+- Fixed incoming NOTE detected in pre-tests:
+  - Removed non-standard fields (`DOI`, `Citation`) from DESCRIPTION.
+  - Updated `inst/CITATION` to use the modern `bibentry()` format instead of the deprecated `citEntry()`.
+- Minor internal documentation updates (no API or functional changes).
 
 ### CRAN maintenance update
 

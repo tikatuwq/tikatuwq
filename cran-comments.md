@@ -1,4 +1,4 @@
-# CRAN submission — tikatuwq 0.7.1
+# CRAN submission — tikatuwq 0.7.2
 
 ## Test environments
 * Windows 11, R 4.5.1 (local): OK  
@@ -10,11 +10,10 @@
 ✔ 0 errors | ✔ 0 warnings | ✔ 0 notes  
 (Validated locally, on win-builder, and via CI workflows)
 
-## Changes since 0.7.0
-- Adjusted **Title** field per CRAN request.
-- Added **Zenodo DOI** (10.5281/zenodo.17407297) and formal citation metadata.
-- Updated README (EN/PT) and pkgdown site with DOI badge and institutional context.
-- No functional or code changes.
+## Changes since 0.7.1
+- Removed non-standard DESCRIPTION fields (`DOI`, `Citation`).
+- Migrated `inst/CITATION` from deprecated `citEntry()` to modern `bibentry()`.
+- Documentation maintenance; no API changes and no new dependencies.
 
 ## Reverse dependencies
 - No reverse dependencies to check.

@@ -72,7 +72,16 @@ The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos*
 
 ## 🆕 News
 
-### News v0.7.0 (current)
+## 🆕 What's new in v0.7.2
+
+- Fixed CRAN incoming NOTE:
+  - Removed non-standard fields (`DOI`, `Citation`) from `DESCRIPTION`.
+  - Updated `inst/CITATION` to use `bibentry()` (replacing deprecated `citEntry()`).
+- No functional or API changes.
+- Minor documentation improvements.
+- R CMD check: **0 errors | 0 warnings | 0 notes** ✅
+
+### News v0.7.0
 - New functions **`param_analysis()`** and **`param_analysis_multi()`**:
   - Allow flexible parameter-based analyses by site or river.
   - Support cross-comparisons (multiple parameters per site or vice versa).

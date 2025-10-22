@@ -72,9 +72,12 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ## 🆕 Novidades
 
-### Novidades v0.7.1 (atual)
+### 🆕 Novidades na versão 0.7.2 (atual)
 
-
+- Correção de *NOTE* nos testes de pré-submissão do CRAN:
+  - Remoção dos campos não padrão (`DOI`, `Citation`) do arquivo `DESCRIPTION`.
+  - Atualização do arquivo `inst/CITATION` para o formato `bibentry()` (substituindo `citEntry()`).
+- Nenhuma alteração funcional — o comportamento do pacote permanece o mesmo.
 
 ### Novidades v0.7.0 
 - Novas funções **`param_analysis()`** e **`param_analysis_multi()`**:

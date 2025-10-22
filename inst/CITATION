@@ -1,18 +1,20 @@
+# inst/CITATION
+
 citHeader("To cite tikatuwq in publications, please use:")
 
-citEntry(
-  entry    = "Manual",
-  title    = "tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil",
-  author   = person("Vinicius Saraiva", "Santos", 
-                    email = "vinisaraiva@gmail.com",
-                    comment = c(ORCID = "0009-0007-1387-7927")),
-  year     = "2025",
-  note     = "R package version 0.7.0",
-  doi      = "10.5281/zenodo.17407297",
-  url      = "https://github.com/tikatuwq/tikatuwq",
+bibentry(
+  bibtype = "Manual",
+  title   = "tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil",
+  author  = person("Vinicius Saraiva", "Santos",
+                   email = "vinisaraiva@gmail.com",
+                   comment = c(ORCID = "0009-0007-1387-7927")),
+  year    = "2025",
+  note    = "R package version 0.7.2",
+  doi     = "10.5281/zenodo.17407297",
+  url     = "https://github.com/tikatuwq/tikatuwq",
   textVersion = paste(
     "Santos, V. S. (2025).",
-    "tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil (v0.7.0).",
+    "tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil (v0.7.2).",
     "Zenodo. https://doi.org/10.5281/zenodo.17407297"
   )
 )
