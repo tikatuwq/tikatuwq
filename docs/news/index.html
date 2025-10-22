@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,85 +33,81 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.0" id="tikatuwq-v070-atual">tikatuwq v0.7.0 (atual)<a class="anchor" aria-label="anchor" href="#tikatuwq-v070-atual"></a></h2>
-<div class="section level4">
-<h4 id="novidades-0-7-0">Novidades<a class="anchor" aria-label="anchor" href="#novidades-0-7-0"></a></h4>
-</div>
+<h2 class="pkg-version" data-toc-text="0.7.2" id="tikatuwq-072">tikatuwq 0.7.2<a class="anchor" aria-label="anchor" href="#tikatuwq-072"></a></h2>
+<p>Changes in this version: - Fixed incoming NOTE detected in pre-tests: - Removed non-standard fields (<code>DOI</code>, <code>Citation</code>) from DESCRIPTION. - Updated <code>inst/CITATION</code> to use the modern <code><a href="https://rdrr.io/r/utils/bibentry.html" class="external-link">bibentry()</a></code> format instead of the deprecated <code><a href="https://rdrr.io/r/utils/citEntry.html" class="external-link">citEntry()</a></code>. - Minor internal documentation updates (no API or functional changes).</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.0" id="tikatuwq-v070">tikatuwq v0.7.0<a class="anchor" aria-label="anchor" href="#tikatuwq-v070"></a></h2>
-<ul><li>Novas funções <code><a href="../reference/param_analysis.html">param_analysis()</a></code> e <code><a href="../reference/param_analysis_multi.html">param_analysis_multi()</a></code>:
-<ul><li>Permitem análise detalhada de parâmetros específicos por ponto, rio ou conjunto de pontos.</li>
-<li>Suportam comparações cruzadas (vários parâmetros em um ponto ou vários pontos para um mesmo parâmetro).</li>
-<li>Incluem tendência temporal simples e resumo estatístico básico.</li>
-<li>Resultados retornam data frames padronizados, compatíveis com as funções de visualização e relatório.</li>
+<h2 class="pkg-version" data-toc-text="0.7.1" id="tikatuwq-071">tikatuwq 0.7.1<a class="anchor" aria-label="anchor" href="#tikatuwq-071"></a></h2>
+<ul><li>
+<strong>Title</strong> field adjusted per CRAN request: now <em>“Water Quality Assessment and Environmental Compliance in Brazil”</em>.</li>
+<li>Added <strong>Zenodo DOI</strong> and formal citation entry (<code>citation("tikatuwq")</code>).</li>
+<li>Updated <strong>README</strong> (EN/PT) with citation, DOI badge, and institutional context.</li>
+<li>No changes in functions or internal code.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="tikatuwq-070">tikatuwq 0.7.0<a class="anchor" aria-label="anchor" href="#tikatuwq-070"></a></h2>
+<ul><li>New functions <code><a href="../reference/param_analysis.html">param_analysis()</a></code> and <code><a href="../reference/param_analysis_multi.html">param_analysis_multi()</a></code>:
+<ul><li>Enable detailed analysis of specific parameters by point, river, or group of points.</li>
+<li>Support cross-comparisons (multiple parameters at one point or multiple points for the same parameter).</li>
+<li>Include simple temporal trend detection and basic statistical summary.</li>
+<li>Return standardized data frames compatible with visualization and reporting tools.</li>
 </ul></li>
-<li>Testes automatizados para todos os novos módulos (<code>test-param_analysis.R</code>, <code>test-param_analysis_multi.R</code>).</li>
-<li>Código atualizado conforme as boas práticas do CRAN (todas as verificações 100% limpas).</li>
-<li>Pequenas melhorias de estabilidade em <code><a href="../reference/plot_trend.html">plot_trend()</a></code> e <code><a href="../reference/plot_map.html">plot_map()</a></code> (suporte a mensagens controladas).</li>
+<li>Automated tests for new modules (<code>test-param_analysis.R</code>, <code>test-param_analysis_multi.R</code>).</li>
+<li>Code updated to meet CRAN best practices (all checks passed 100% cleanly).</li>
+<li>Minor stability improvements in <code><a href="../reference/plot_trend.html">plot_trend()</a></code> and <code><a href="../reference/plot_map.html">plot_map()</a></code> (controlled messages).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.2" id="tikatuwq-062">tikatuwq 0.6.2<a class="anchor" aria-label="anchor" href="#tikatuwq-062"></a></h2><p class="text-muted">CRAN release: 2025-10-07</p>
-<ul><li>Fix: resolve codoc WARNING for <code>generate_analysis</code> (docs matched to code).</li>
+<ul><li>Fix: resolved codoc WARNING for <code><a href="../reference/generate_analysis.html">generate_analysis()</a></code> (docs matched to code).</li>
 <li>No functional code changes.</li>
-</ul><div class="section level4">
-<h4 id="novidades-v061-0-6-2">Novidades v0.6.1<a class="anchor" aria-label="anchor" href="#novidades-v061-0-6-2"></a></h4>
-<ul><li>Atualização de manutenção solicitada pelo CRAN.</li>
-<li>Correção do link relativo <code>README-pt.md</code>, agora em URL HTTPS absoluto.</li>
-<li>Nenhuma mudança funcional no código.</li>
 </ul></div>
-</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.1" id="tikatuwq-061">tikatuwq 0.6.1<a class="anchor" aria-label="anchor" href="#tikatuwq-061"></a></h2>
+<ul><li>Maintenance update requested by CRAN.</li>
+<li>Fixed relative link <code>README-pt.md</code>, now using absolute HTTPS URL.</li>
+<li>No functional changes in code.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.0" id="tikatuwq-060">tikatuwq 0.6.0<a class="anchor" aria-label="anchor" href="#tikatuwq-060"></a></h2>
-<ul><li>Nova função <code><a href="../reference/plot_trend.html">plot_trend()</a></code>:
-<ul><li>Permite visualizar séries temporais de parâmetros (ex.: turbidez, OD, IQA).</li>
-<li>Adiciona linhas de tendência por grupo/ponto usando três métodos:
+<ul><li>New function <code><a href="../reference/plot_trend.html">plot_trend()</a></code>:
+<ul><li>Visualize time series for parameters (e.g., turbidity, OD, IQA).</li>
+<li>Add trend lines by group/point using three methods:
 <ul><li>
-<strong>Theil-Sen</strong> (robusto a outliers),</li>
+<strong>Theil–Sen</strong> (robust to outliers),</li>
 <li>
-<strong>OLS</strong> (regressão linear clássica),</li>
+<strong>OLS</strong> (ordinary least squares),</li>
 <li>
-<strong>LOESS</strong> (curva suavizada).</li>
+<strong>LOESS</strong> (smoothed curve).</li>
 </ul></li>
-<li>Suporte a facetas por rio/ponto, personalização de pontos e número mínimo de amostras.</li>
-<li>Retorna objeto <code>ggplot</code>.</li>
+<li>Supports faceting by river/point and customizable number of samples.</li>
+<li>Returns a <code>ggplot</code> object ready for plotting.</li>
 </ul></li>
-<li>Documentação revisada para <code><a href="../reference/plot_trend.html">plot_trend()</a></code>, incluindo exemplos práticos.</li>
-<li>Atualização do site pkgdown com seção dedicada a gráficos de tendência.</li>
+<li>Updated documentation for <code><a href="../reference/plot_trend.html">plot_trend()</a></code> with practical examples.</li>
+<li>Updated pkgdown site with dedicated section for trend visualization.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="tikatuwq-051">tikatuwq 0.5.1<a class="anchor" aria-label="anchor" href="#tikatuwq-051"></a></h2><p class="text-muted">CRAN release: 2025-10-01</p>
-<ul><li>Fix: replace/repair broken URLs in package help page.</li>
+<ul><li>Fix: replaced broken URLs in help pages.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.5.0" id="tikatuwq-050-2025-09-30">tikatuwq 0.5.0 (2025-09-30)<a class="anchor" aria-label="anchor" href="#tikatuwq-050-2025-09-30"></a></h2>
-<ul><li>New: <code><a href="../reference/plot_map.html">plot_map()</a></code> — interactive map of sampling points using Leaflet (optional dependency via Suggests).</li>
+<h2 class="pkg-version" data-toc-text="0.5.0" id="tikatuwq-050">tikatuwq 0.5.0<a class="anchor" aria-label="anchor" href="#tikatuwq-050"></a></h2>
+<ul><li>New: <code><a href="../reference/plot_map.html">plot_map()</a></code> — interactive map of sampling points using <strong>Leaflet</strong> (optional dependency via Suggests).</li>
 <li>Examples wrapped in <code>if (interactive())</code> / <code>\donttest{}</code> to avoid network calls on CRAN.</li>
-<li>Tests: add <code>skip_on_cran()</code> and <code>skip_if_not_installed("leaflet")</code> guard for map tests.</li>
-<li>Encoding hardening: replace non-ASCII characters in R code strings with <code>\u</code> escapes to silence checks.</li>
-<li>Dependencies: remove unused <code>htmltools</code> from Imports (Leaflet remains in Suggests).</li>
-<li>Docs: roxygen update; add function to pkgdown “Visualizations” reference.</li>
-<li>Chore: move non-code markdown files out of <code>R/</code> to <code>inst/notes/</code> to keep build clean.</li>
+<li>Tests: added <code>skip_on_cran()</code> and <code>skip_if_not_installed("leaflet")</code> guards for map tests.</li>
+<li>Encoding hardening: replaced non-ASCII characters with <code>\u</code> escapes.</li>
+<li>Dependencies: removed unused <code>htmltools</code> from Imports.</li>
+<li>Docs: roxygen updates; added function to “Visualizations” reference.</li>
 <li>No breaking changes; existing public API unchanged.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.6" id="tikatuwq-046">tikatuwq 0.4.6<a class="anchor" aria-label="anchor" href="#tikatuwq-046"></a></h2><p class="text-muted">CRAN release: 2025-09-22</p>
-<ul><li>DESCRIPTION rewritten to English-only to avoid CRAN “Possibly misspelled words” NOTE.</li>
-<li>Fix DESCRIPTION URLs per CRAN (Lamparelli 2004, CONAMA 357/2005).</li>
-<li>Spell-check workflow: updated <code>inst/WORDLIST</code> (Portuguese terms &amp; acronyms).</li>
-<li>Expanded all acronyms in DESCRIPTION (WQI ↔︎ IQA, TSI ↔︎ IET, CONAMA, NSF).</li>
-<li>Added references with <code>&lt;doi:...&gt;</code> and <code>&lt;https:...&gt;</code> in DESCRIPTION.</li>
-<li>Documented <code>\value</code> sections via <code>@return</code> for all exported functions:
-<ul><li>
-<code><a href="../reference/conama_limits.html">conama_limits()</a></code>: tibble/data frame of thresholds.</li>
-<li>
-<code><a href="../reference/iqa.html">iqa()</a></code>: tibble with IQA scores and qualitative class.</li>
-<li>
-<code><a href="../reference/plot_box.html">plot_box()</a></code>, <code><a href="../reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="../reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="../reference/plot_series.html">plot_series()</a></code>: ggplot objects.</li>
-</ul></li>
-<li>Kept LICENSE as plain MIT text (per CRAN policy).</li>
+<ul><li>DESCRIPTION rewritten in English-only to avoid CRAN “Possibly misspelled words” NOTE.</li>
+<li>Fixed DESCRIPTION URLs (Lamparelli 2004, CONAMA 357/2005).</li>
+<li>Updated spell-check list (<code>inst/WORDLIST</code>).</li>
+<li>Added expanded acronyms and DOIs/URLs in DESCRIPTION.</li>
+<li>Documented <code>@return</code> for all exported functions.</li>
+<li>Maintained MIT license text (per CRAN policy).</li>
 <li>Minor internal refactor: <code><a href="../reference/conama_limits.html">conama_limits()</a></code> now accepts <code>class</code> argument for filtering.</li>
-<li>Version bump to 0.4.6 for CRAN submission.</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

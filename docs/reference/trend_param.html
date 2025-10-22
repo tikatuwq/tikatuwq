@@ -11,7 +11,7 @@ Retorna estatisticas por grupo (ex.: rio, ponto)."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,7 +100,10 @@ pct_change_period (aprox. % no periodo observado).</p>
 <span class="r-in"><span>  turbidez <span class="op">=</span> <span class="fl">20</span> <span class="op">+</span> <span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">trend_param</span><span class="op">(</span><span class="va">df</span>, param <span class="op">=</span> <span class="st">"turbidez"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in trend_param(df, param = "turbidez"):</span> could not find function "trend_param"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    rio ponto    param  n   date_min   date_max days_span slope_per_year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Demo    P1 turbidez 12 2024-01-01 2024-11-26       330      -2.710707</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   intercept rho_spearman     p_value trend pct_change_period</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  19.98852   -0.7622378 0.003950449 queda         -12.25253</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

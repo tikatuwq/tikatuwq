@@ -1,4 +1,4 @@
-# 🌊 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil
+# 💧 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil
 
 **TikatuWQ** is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards.  
 It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance.  
@@ -64,7 +64,7 @@ cat(paste(pars, collapse = "\n\n"))
 The **TikatuWQ** package was developed by **Vinícius Saraiva Santos** (author and maintainer)  
 as part of the **Tikatu Research Project**, conducted within the **Nucleus for Research in Tropical Ecosystems – NuPEcoTropic**, a research group linked to the **Federal University of Southern Bahia (UFSB)** and coordinated by **Prof. Dr. Fabrício Berton Zanchi**.  
 
-This work was carried out as part of the activities of the **Graduate Program in Biosystems (PPG Biossistemas)** at UFSB, under the supervision of **Prof. Dr. Fabrício Berton Zanchi**.  
+This work was carried out as part of the activities of the **Postgraduate Program in Biosystems (PPG Biossistemas)** at UFSB, under the supervision of **Prof. Dr. Fabrício Berton Zanchi**.  
 
 The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos**, integrates research focused on environmental monitoring and modeling.
 

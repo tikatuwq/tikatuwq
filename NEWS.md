@@ -1,81 +1,73 @@
-### Novidades 
-
 # tikatuwq 0.7.2
 
-### Changes in this version
+Changes in this version:
 - Fixed incoming NOTE detected in pre-tests:
   - Removed non-standard fields (`DOI`, `Citation`) from DESCRIPTION.
   - Updated `inst/CITATION` to use the modern `bibentry()` format instead of the deprecated `citEntry()`.
 - Minor internal documentation updates (no API or functional changes).
 
-### CRAN maintenance update
+# tikatuwq 0.7.1
 
-- **Title** field adjusted per CRAN request:  
-  now *"Water Quality Assessment and Environmental Compliance in Brazil"*.
-
+- **Title** field adjusted per CRAN request: now *"Water Quality Assessment and Environmental Compliance in Brazil"*.
 - Added **Zenodo DOI** and formal citation entry (`citation("tikatuwq")`).
 - Updated **README** (EN/PT) with citation, DOI badge, and institutional context.
 - No changes in functions or internal code.
----
 
-# tikatuwq v0.7.0
+# tikatuwq 0.7.0
 
-- Novas funções `param_analysis()` e `param_analysis_multi()`:
-  - Permitem análise detalhada de parâmetros específicos por ponto, rio ou conjunto de pontos.
-  - Suportam comparações cruzadas (vários parâmetros em um ponto ou vários pontos para um mesmo parâmetro).
-  - Incluem tendência temporal simples e resumo estatístico básico.
-  - Resultados retornam data frames padronizados, compatíveis com as funções de visualização e relatório.
-- Testes automatizados para todos os novos módulos (`test-param_analysis.R`, `test-param_analysis_multi.R`).
-- Código atualizado conforme as boas práticas do CRAN (todas as verificações 100% limpas).
-- Pequenas melhorias de estabilidade em `plot_trend()` e `plot_map()` (suporte a mensagens controladas).
-
+- New functions `param_analysis()` and `param_analysis_multi()`:
+  - Enable detailed analysis of specific parameters by point, river, or group of points.
+  - Support cross-comparisons (multiple parameters at one point or multiple points for the same parameter).
+  - Include simple temporal trend detection and basic statistical summary.
+  - Return standardized data frames compatible with visualization and reporting tools.
+- Automated tests for new modules (`test-param_analysis.R`, `test-param_analysis_multi.R`).
+- Code updated to meet CRAN best practices (all checks passed 100% cleanly).
+- Minor stability improvements in `plot_trend()` and `plot_map()` (controlled messages).
 
 # tikatuwq 0.6.2
-- Fix: resolve codoc WARNING for `generate_analysis` (docs matched to code).
+
+- Fix: resolved codoc WARNING for `generate_analysis()` (docs matched to code).
 - No functional code changes.
 
-### Novidades v0.6.1
-- Atualização de manutenção solicitada pelo CRAN.
-- Correção do link relativo `README-pt.md`, agora em URL HTTPS absoluto.
-- Nenhuma mudança funcional no código.
+# tikatuwq 0.6.1
+
+- Maintenance update requested by CRAN.
+- Fixed relative link `README-pt.md`, now using absolute HTTPS URL.
+- No functional changes in code.
 
 # tikatuwq 0.6.0
-- Nova função `plot_trend()`:
-  - Permite visualizar séries temporais de parâmetros (ex.: turbidez, OD, IQA).
-  - Adiciona linhas de tendência por grupo/ponto usando três métodos:
-    - **Theil-Sen** (robusto a outliers),
-    - **OLS** (regressão linear clássica),
-    - **LOESS** (curva suavizada).
-  - Suporte a facetas por rio/ponto, personalização de pontos e número mínimo de amostras.
-  - Retorna objeto `ggplot`.
 
-- Documentação revisada para `plot_trend()`, incluindo exemplos práticos.
-- Atualização do site pkgdown com seção dedicada a gráficos de tendência.
-
+- New function `plot_trend()`:
+  - Visualize time series for parameters (e.g., turbidity, OD, IQA).
+  - Add trend lines by group/point using three methods:
+    - **Theil–Sen** (robust to outliers),
+    - **OLS** (ordinary least squares),
+    - **LOESS** (smoothed curve).
+  - Supports faceting by river/point and customizable number of samples.
+  - Returns a `ggplot` object ready for plotting.
+- Updated documentation for `plot_trend()` with practical examples.
+- Updated pkgdown site with dedicated section for trend visualization.
 
 # tikatuwq 0.5.1
-- Fix: replace/repair broken URLs in package help page.
 
-# tikatuwq 0.5.0 (2025-09-30)
-- New: `plot_map()` — interactive map of sampling points using Leaflet (optional dependency via Suggests).
+- Fix: replaced broken URLs in help pages.
+
+# tikatuwq 0.5.0
+
+- New: `plot_map()` — interactive map of sampling points using **Leaflet** (optional dependency via Suggests).
 - Examples wrapped in `if (interactive())` / `\donttest{}` to avoid network calls on CRAN.
-- Tests: add `skip_on_cran()` and `skip_if_not_installed("leaflet")` guard for map tests.
-- Encoding hardening: replace non-ASCII characters in R code strings with `\u` escapes to silence checks.
-- Dependencies: remove unused `htmltools` from Imports (Leaflet remains in Suggests).
-- Docs: roxygen update; add function to pkgdown “Visualizations” reference.
-- Chore: move non-code markdown files out of `R/` to `inst/notes/` to keep build clean.
+- Tests: added `skip_on_cran()` and `skip_if_not_installed("leaflet")` guards for map tests.
+- Encoding hardening: replaced non-ASCII characters with `\u` escapes.
+- Dependencies: removed unused `htmltools` from Imports.
+- Docs: roxygen updates; added function to “Visualizations” reference.
 - No breaking changes; existing public API unchanged.
 
 # tikatuwq 0.4.6
-- DESCRIPTION rewritten to English-only to avoid CRAN “Possibly misspelled words” NOTE.
-- Fix DESCRIPTION URLs per CRAN (Lamparelli 2004, CONAMA 357/2005).
-- Spell-check workflow: updated `inst/WORDLIST` (Portuguese terms & acronyms).
-- Expanded all acronyms in DESCRIPTION (WQI ↔ IQA, TSI ↔ IET, CONAMA, NSF).
-- Added references with `<doi:...>` and `<https:...>` in DESCRIPTION.
-- Documented `\value` sections via `@return` for all exported functions:
-  - `conama_limits()`: tibble/data frame of thresholds.
-  - `iqa()`: tibble with IQA scores and qualitative class.
-  - `plot_box()`, `plot_heatmap()`, `plot_iqa()`, `plot_series()`: ggplot objects.
-- Kept LICENSE as plain MIT text (per CRAN policy).
+
+- DESCRIPTION rewritten in English-only to avoid CRAN “Possibly misspelled words” NOTE.
+- Fixed DESCRIPTION URLs (Lamparelli 2004, CONAMA 357/2005).
+- Updated spell-check list (`inst/WORDLIST`).
+- Added expanded acronyms and DOIs/URLs in DESCRIPTION.
+- Documented `@return` for all exported functions.
+- Maintained MIT license text (per CRAN policy).
 - Minor internal refactor: `conama_limits()` now accepts `class` argument for filtering.
-- Version bump to 0.4.6 for CRAN submission.

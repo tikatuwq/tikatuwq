@@ -1,7 +1,7 @@
-# 🌊 TikatuWQ: Um Pacote R para Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil
+# 💧 TikatuWQ: Um Pacote R para Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil
 
 **TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros.  
-Implementa os principais índices utilizados no país — **IQA/NSFWQI** e **IET (Carlson e Lamparelli)** — e realiza verificações automáticas de conformidade com a **Resolução CONAMA 357/2005**.  
+Implementa os principais índices utilizados no país: **IQA/NSFWQI** e **IET (Carlson e Lamparelli)** e realiza verificações automáticas de conformidade com a **Resolução CONAMA 357/2005**.  
 O pacote também inclui análise de tendências, validação de dados e geração automática de relatórios.
 
 📄 [Read in English](https://github.com/tikatuwq/tikatuwq/blob/main/README.md)

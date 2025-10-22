@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil • tikatuwq</title>
+<title>Water Quality Assessment and Environmental Compliance in Brazil • tikatuwq</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Water Quality Assessment and Environmental Compliance in Brazil">
 <meta name="description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows.">
 <meta property="og:description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows.">
 </head>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,12 +47,14 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="ocean-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil">🌊 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil<a class="anchor" aria-label="anchor" href="#ocean-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil"></a>
+<div class="page-header"><h1 id="droplet-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil">💧 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil<a class="anchor" aria-label="anchor" href="#droplet-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil"></a>
 </h1></div>
 <p><strong>TikatuWQ</strong> is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards.<br>
 It implements the main indices used in the country <strong>IQA/NSFWQI</strong> and <strong>IET (Carlson and Lamparelli)</strong> and provides automated checks for <strong>CONAMA Resolution 357/2005</strong> compliance.<br>
 The package also includes trend analysis, data validation, and automatic report generation.</p>
 <p>📄 <a href="https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md" class="external-link">Ler em Português</a></p>
+<!-- Zenodo DOI -->
+<p><a href="https://doi.org/10.5281/zenodo.17407297" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg" alt="DOI"></a></p>
 <!-- CRAN status -->
 <p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://www.r-pkg.org/badges/version/tikatuwq" alt="CRAN status"></a></p>
 <!-- CRAN logs - downloads -->
@@ -63,14 +65,17 @@ The package also includes trend analysis, data validation, and automatic report 
 <p><a href="https://github.com/tikatuwq/tikatuwq/actions" class="external-link"><img src="https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
 <!-- Lifecycle -->
 <p><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></p>
+<hr>
 <div class="section level2">
 <h2 id="installation-development">Installation (development)<a class="anchor" aria-label="anchor" href="#installation-development"></a>
 </h2>
+<p>To install development dependencies and check the package locally:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"devtools"</span>,<span class="st">"testthat"</span>,<span class="st">"rmarkdown"</span>,<span class="st">"ggplot2"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,</span>
 <span>                   <span class="st">"readr"</span>,<span class="st">"lubridate"</span>,<span class="st">"stringr"</span>,<span class="st">"glue"</span>,<span class="st">"scales"</span>,<span class="st">"broom"</span>,<span class="st">"purrr"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="basic-workflow">Basic workflow<a class="anchor" aria-label="anchor" href="#basic-workflow"></a>
@@ -90,20 +95,35 @@ The package also includes trend analysis, data validation, and automatic report 
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pars</span>, collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
-<h3 id="books-scientific-context">📚 Scientific context<a class="anchor" aria-label="anchor" href="#books-scientific-context"></a>
+<h3 id="books-scientific-and-institutional-context">📚 Scientific and Institutional Context<a class="anchor" aria-label="anchor" href="#books-scientific-and-institutional-context"></a>
 </h3>
 <p>The <strong>TikatuWQ</strong> package was developed by <strong>Vinícius Saraiva Santos</strong> (author and maintainer)<br>
 as part of the <strong>Tikatu Research Project</strong>, conducted within the <strong>Nucleus for Research in Tropical Ecosystems – NuPEcoTropic</strong>, a research group linked to the <strong>Federal University of Southern Bahia (UFSB)</strong> and coordinated by <strong>Prof. Dr. Fabrício Berton Zanchi</strong>.</p>
-<p>This work was carried out as part of the activities of the <strong>Graduate Program in Biosystems (PPG Biossistemas)</strong> at UFSB, under the supervision of <strong>Prof. Dr. Fabrício Berton Zanchi</strong>.</p>
-<p>The <strong>Tikatu Project</strong> is developed by <strong>Vinícius Saraiva Santos</strong> and integrates research focused on environmental monitoring and modeling.</p>
+<p>This work was carried out as part of the activities of the <strong>Postgraduate Program in Biosystems (PPG Biossistemas)</strong> at UFSB, under the supervision of <strong>Prof. Dr. Fabrício Berton Zanchi</strong>.</p>
+<p>The <strong>Tikatu Project</strong>, developed and coordinated by <strong>Vinícius Saraiva Santos</strong>, integrates research focused on environmental monitoring and modeling.</p>
 <hr>
 </div>
 </div>
 <div class="section level2">
 <h2 id="new-news">🆕 News<a class="anchor" aria-label="anchor" href="#new-news"></a>
 </h2>
+</div>
+<div class="section level2">
+<h2 id="new-whats-new-in-v072">🆕 What’s new in v0.7.2<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v072"></a>
+</h2>
+<ul>
+<li>Fixed CRAN incoming NOTE:
+<ul>
+<li>Removed non-standard fields (<code>DOI</code>, <code>Citation</code>) from <code>DESCRIPTION</code>.</li>
+<li>Updated <code>inst/CITATION</code> to use <code><a href="https://rdrr.io/r/utils/bibentry.html" class="external-link">bibentry()</a></code> (replacing deprecated <code><a href="https://rdrr.io/r/utils/citEntry.html" class="external-link">citEntry()</a></code>).</li>
+</ul>
+</li>
+<li>No functional or API changes.</li>
+<li>Minor documentation improvements.</li>
+<li>R CMD check: <strong>0 errors | 0 warnings | 0 notes</strong> ✅</li>
+</ul>
 <div class="section level3">
-<h3 id="news-v070-current">News v0.7.0 (current)<a class="anchor" aria-label="anchor" href="#news-v070-current"></a>
+<h3 id="news-v070">News v0.7.0<a class="anchor" aria-label="anchor" href="#news-v070"></a>
 </h3>
 <ul>
 <li>New functions <strong><code><a href="reference/param_analysis.html">param_analysis()</a></code></strong> and <strong><code><a href="reference/param_analysis_multi.html">param_analysis_multi()</a></code></strong>:
@@ -188,7 +208,7 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># stable version (by tag)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.5.1"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.7.0"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
 <h3 id="conama-compliance-class-2">CONAMA compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
@@ -229,7 +249,7 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <li>
 <code>conama_check(df, class)</code> — compliance by parameter (*_ok columns).<br>
 </li>
-<li>Visualizations: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>, <code><a href="reference/plot_trend.html">plot_trend()</a></code>.<br>
+<li>Visualizations: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>, <code><a href="reference/plot_trend.html">plot_trend()</a></code> (returns <code>ggplot</code> object).<br>
 </li>
 <li>Reporting/Text: <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code>.<br>
 </li>
@@ -241,6 +261,9 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <h2 id="documentation-and-support">Documentation and support<a class="anchor" aria-label="anchor" href="#documentation-and-support"></a>
 </h2>
 <ul>
+<li>
+<strong>CRAN page:</strong> <a href="https://cran.r-project.org/package=tikatuwq" class="external-link uri">https://cran.r-project.org/package=tikatuwq</a><br>
+</li>
 <li>
 <strong>Pkgdown site:</strong> <a href="https://tikatuwq.github.io/tikatuwq/" class="uri">https://tikatuwq.github.io/tikatuwq/</a><br>
 </li>
@@ -258,6 +281,23 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="how-to-cite">How to cite<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
+</h3>
+<p>If you use <strong>tikatuwq</strong> in your research, please cite it as follows:</p>
+<blockquote>
+<p>Santos, V. S. (2025). <em>tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil</em> (v0.7.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.17407297" class="external-link">https://doi.org/10.5281/zenodo.17407297</a></p>
+</blockquote>
+<p>BibTeX entry:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="va">@Manual</span>{<span class="ot">Santos2025tikatuwq</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="dt">title</span>  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="dt">author</span> = {Vinicius Saraiva Santos},</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="dt">year</span>   = {2025},</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.7.0},</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="dt">doi</span>    = {10.5281/zenodo.17407297},</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="dt">url</span>    = {https://github.com/tikatuwq/tikatuwq},</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>}</span></code></pre></div>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
