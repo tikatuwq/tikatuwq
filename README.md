@@ -72,7 +72,21 @@ The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos*
 
 ## 🆕 News
 
-## 🆕 What's new in v0.7.2
+### 🆕 What's new in v0.7.3
+
+- More robust IQA
+Accepts temp as an alias for temperatura.
+Automatic numeric sanitization for comma decimals and </> signs.
+With na_rm = TRUE, weights are re-scaled if some inputs are missing.
+- IET (Carlson / Lamparelli) with data.frame input
+iet_carlson() and iet_lamparelli() now accept a “raw” data.frame containing extra ID columns like rio, ponto, data, lat, lon.
+- Relevant parameters are auto-detected (secchi/sd, clorofila/chla, tp/p_total).
+p_total in mg/L is auto-converted to tp in µg/L.
+- Use .keep_ids = TRUE to preserve identifiers in the output.
+No new dependencies, no API break.
+Legacy vector calls keep working as before.
+
+### News v0.7.2
 
 - Fixed CRAN incoming NOTE:
   - Removed non-standard fields (`DOI`, `Citation`) from `DESCRIPTION`.

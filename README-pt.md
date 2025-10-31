@@ -72,7 +72,21 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ## 🆕 Novidades
 
-### 🆕 Novidades na versão 0.7.2 (atual)
+### 🆕 Novidades na versão 0.7.3 (atual)
+
+- IQA mais robusto
+Aceita temp como alias de temperatura.
+“Numificação” automática de valores com vírgula decimal e sinais < >.
+Com na_rm = TRUE, repondera os pesos quando faltarem parâmetros.
+- IET (Carlson / Lamparelli) com data.frame
+- Agora iet_carlson() e iet_lamparelli() aceitam um data.frame “cru” com colunas como rio, ponto, data, lat, lon, etc.
+- Parâmetros relevantes são detectados automaticamente (secchi/sd, clorofila/chla, tp/p_total).
+p_total em mg/L é convertido automaticamente para tp em µg/L.
+- Use .keep_ids = TRUE para preservar identificadores (ex.: rio, ponto, data) na saída.
+Sem novas dependências, sem quebra de API.
+Tudo continua funcionando como antes para quem usa as chamadas vetoriais.
+
+### Novidades v0.7.2
 
 - Correção de *NOTE* nos testes de pré-submissão do CRAN:
   - Remoção dos campos não padrão (`DOI`, `Citation`) do arquivo `DESCRIPTION`.

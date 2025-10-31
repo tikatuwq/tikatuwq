@@ -5,66 +5,65 @@
 #' total phosphorus, chlorophyll-a, and Secchi depth, and returns the overall
 #' Lamparelli index as the row-wise mean of available components.
 #'
-#' @param tp Numeric total phosphorus (mg/L).
+#' You can also pass a data.frame as the first argument (see Details).
+#'
+#' @param tp Numeric total phosphorus (mg/L) **or** a data.frame containing
+#'   columns named \code{tp} (ug/L) or \code{p_total} (mg/L), \code{chla} or
+#'   \code{clorofila} (ug/L), and \code{sd} or \code{secchi} (m). If a
+#'   data.frame is provided, \code{chla} and \code{sd} must be \code{NULL}.
 #' @param chla Numeric chlorophyll-a (ug/L).
 #' @param sd Numeric Secchi disk depth (m).
-#' @param ambiente Character, environment type: `'rio'` or `'reservatorio'`.
+#' @param ambiente Character, environment type: 'rio' or 'reservatorio'.
+#' @param .keep_ids Logical; when a data.frame is provided, bind back common ID
+#'   columns (\code{rio}, \code{ponto}, \code{data}, \code{lat}, \code{lon}).
+#'   Default FALSE (preserves historical behaviour).
 #'
 #' @details
-#' Implemented component formulas (simple skeleton):
-#' \itemize{
-#'   \item \code{IET_TP = 10 + 10 * log10(max(tp, 0.001))}
-#'   \item \code{IET_Chla = 10 + 10 * log10(max(chla, 0.001))}
-#'   \item \code{IET_Secchi = 60 - 14.41 * log10(max(sd, 0.001))}
-#' }
-#' The overall \code{IET_Lamp} is the row mean of available components
-#' (\code{na.rm = TRUE}). Inputs are recycled by standard R vector recycling
-#' rules and can contain \code{NA}.
+#' Minimal, pragmatic implementation; confirm coefficients/thresholds for your
+#' region before regulatory use. Character inputs like "3,2" or "<0,1" are
+#' safely converted. If only \code{p_total} (mg/L) is present, it is converted
+#' to \code{tp} in ug/L via \code{tp = p_total * 1000}.
 #'
-#' This is a minimal, pragmatic implementation intended for quick summaries;
-#' practitioners should confirm the most appropriate equations/coefficients for
-#' the specific waterbody type and region before regulatory use.
-#'
-#' @returns
-#' A data frame with columns (when applicable):
-#' \itemize{
-#'   \item \code{IET_TP} — component from total phosphorus.
-#'   \item \code{IET_Chla} — component from chlorophyll-a.
-#'   \item \code{IET_Secchi} — component from Secchi depth.
-#'   \item \code{IET_Lamp} — overall Lamparelli index (row mean).
-#'   \item \code{ambiente} — the informed environment label.
-#' }
-#'
-#' @references
-#' Carlson, R. E. (1977). \emph{A trophic state index for lakes}. Limnology
-#' and Oceanography, 22(2), 361–369. doi:10.4319/lo.1977.22.2.0361
-#'
-#' Lamparelli, M. C. (2004). \emph{Graus de trofia em corpos d’água do Estado
-#' de São Paulo}. (Tese de Doutorado). Instituto de Biociências, USP.
-#'
-#' @seealso \code{\link[=iet_carlson]{iet_carlson()}}, \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
-#'
-#' @examples
-#' # Vectors (can include NA)
-#' tp   <- c(0.02, 0.05, 0.10)        # mg/L
-#' chla <- c(5, 12, 30)               # ug/L
-#' sd   <- c(1.2, 0.8, 0.4)           # m
-#'
-#' iet_lamparelli(tp = tp, chla = chla, sd = sd, ambiente = "reservatorio")
-#'
-#' # With a single component:
-#' iet_lamparelli(tp = tp, ambiente = "rio")
+#' @returns Data frame with IET components and overall \code{IET_Lamp}.
 #'
 #' @export
 iet_lamparelli <- function(tp = NULL, chla = NULL, sd = NULL,
-                           ambiente = c("rio", "reservatorio")) {
+                           ambiente = c("rio", "reservatorio"),
+                           .keep_ids = FALSE) {
   ambiente <- match.arg(ambiente)
 
-  # Build component columns only for provided inputs
+  # Usa helper interno .numify() (R/utils_sanitize.R)
+
+  # --- MODO DATA.FRAME (opcional): tp é DF e demais NULL ---
+  if (is.data.frame(tp) && is.null(chla) && is.null(sd)) {
+    ext <- .df_extract_iet(tp)
+    res <- list()
+    if (!is.null(ext$tp))        res$IET_TP     <- 10 + 10 * log10(pmax(ext$tp,   0.001))
+    if (!is.null(ext$clorofila)) res$IET_Chla   <- 10 + 10 * log10(pmax(ext$clorofila, 0.001))
+    if (!is.null(ext$secchi))    res$IET_Secchi <- 60 - 14.41 * log10(pmax(ext$secchi, 0.001))
+
+    df <- as.data.frame(res, optional = TRUE)
+    if (ncol(df) > 1) {
+      df$IET_Lamp <- rowMeans(df, na.rm = TRUE)
+    } else if (ncol(df) == 1) {
+      df$IET_Lamp <- df[[1]]
+    } else {
+      df <- data.frame(IET_Lamp = numeric(0))
+    }
+    df$ambiente <- ambiente
+    if (.keep_ids && nrow(ext$ids)) df <- cbind(ext$ids, df)
+    return(df)
+  }
+
+  # --- MODO VETORIAL (comportamento original) ---
+  tp   <- .numify(tp)      # mg/L
+  chla <- .numify(chla)    # ug/L
+  sd   <- .numify(sd)      # m
+
   res <- list()
-  if (!is.null(tp))   res$IET_TP    <- 10 + 10 * log10(pmax(tp,   0.001))
-  if (!is.null(chla)) res$IET_Chla  <- 10 + 10 * log10(pmax(chla, 0.001))
-  if (!is.null(sd))   res$IET_Secchi<- 60 - 14.41 * log10(pmax(sd, 0.001))
+  if (!is.null(tp))   res$IET_TP     <- 10 + 10 * log10(pmax(tp,   0.001))
+  if (!is.null(chla)) res$IET_Chla   <- 10 + 10 * log10(pmax(chla, 0.001))
+  if (!is.null(sd))   res$IET_Secchi <- 60 - 14.41 * log10(pmax(sd, 0.001))
 
   df <- as.data.frame(res, optional = TRUE)
 

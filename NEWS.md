@@ -1,3 +1,10 @@
+# tikatuwq 0.7.3
+
+- Funções `iet_carlson()` e `iet_lamparelli()` agora aceitam `data.frame` com `.keep_ids`.
+- Conversão automática de formato BR ("," / "<" / ">") e de `p_total` (mg/L) → `tp` (µg/L).
+- `iqa()` mais robusto: alias `temp` para `temperatura`, numificação segura e reponderação com `na_rm=TRUE`.
+- Campos identificadores (rio, ponto, data, lat, lon) agora são automaticamente reconhecidos e preservados via `.keep_ids`.
+
 # tikatuwq 0.7.2
 
 Changes in this version:

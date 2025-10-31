@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,10 +107,19 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <div class="section level2">
 <h2 id="new-news">🆕 News<a class="anchor" aria-label="anchor" href="#new-news"></a>
 </h2>
+<div class="section level3">
+<h3 id="new-whats-new-in-v073">🆕 What’s new in v0.7.3<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v073"></a>
+</h3>
+<ul>
+<li>More robust IQA Accepts temp as an alias for temperatura. Automatic numeric sanitization for comma decimals and &lt;/&gt; signs. With na_rm = TRUE, weights are re-scaled if some inputs are missing.</li>
+<li>IET (Carlson / Lamparelli) with data.frame input iet_carlson() and iet_lamparelli() now accept a “raw” data.frame containing extra ID columns like rio, ponto, data, lat, lon.</li>
+<li>Relevant parameters are auto-detected (secchi/sd, clorofila/chla, tp/p_total). p_total in mg/L is auto-converted to tp in µg/L.</li>
+<li>Use .keep_ids = TRUE to preserve identifiers in the output. No new dependencies, no API break. Legacy vector calls keep working as before.</li>
+</ul>
 </div>
-<div class="section level2">
-<h2 id="new-whats-new-in-v072">🆕 What’s new in v0.7.2<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v072"></a>
-</h2>
+<div class="section level3">
+<h3 id="news-v072">News v0.7.2<a class="anchor" aria-label="anchor" href="#news-v072"></a>
+</h3>
 <ul>
 <li>Fixed CRAN incoming NOTE:
 <ul>
@@ -122,6 +131,7 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <li>Minor documentation improvements.</li>
 <li>R CMD check: <strong>0 errors | 0 warnings | 0 notes</strong> ✅</li>
 </ul>
+</div>
 <div class="section level3">
 <h3 id="news-v070">News v0.7.0<a class="anchor" aria-label="anchor" href="#news-v070"></a>
 </h3>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,15 @@ como parte do <strong>Projeto de Pesquisa Tikatu</strong>, conduzido no âmbito 
 <div class="section level2">
 <h2 id="new-novidades">🆕 Novidades<a class="anchor" aria-label="anchor" href="#new-novidades"></a></h2>
 <div class="section level3">
-<h3 id="new-novidades-na-versão-072-atual">🆕 Novidades na versão 0.7.2 (atual)<a class="anchor" aria-label="anchor" href="#new-novidades-na-vers%C3%A3o-072-atual"></a></h3>
+<h3 id="new-novidades-na-versão-073-atual">🆕 Novidades na versão 0.7.3 (atual)<a class="anchor" aria-label="anchor" href="#new-novidades-na-vers%C3%A3o-073-atual"></a></h3>
+<ul><li>IQA mais robusto Aceita temp como alias de temperatura. “Numificação” automática de valores com vírgula decimal e sinais &lt; &gt;. Com na_rm = TRUE, repondera os pesos quando faltarem parâmetros.</li>
+<li>IET (Carlson / Lamparelli) com data.frame</li>
+<li>Agora iet_carlson() e iet_lamparelli() aceitam um data.frame “cru” com colunas como rio, ponto, data, lat, lon, etc.</li>
+<li>Parâmetros relevantes são detectados automaticamente (secchi/sd, clorofila/chla, tp/p_total). p_total em mg/L é convertido automaticamente para tp em µg/L.</li>
+<li>Use .keep_ids = TRUE para preservar identificadores (ex.: rio, ponto, data) na saída. Sem novas dependências, sem quebra de API. Tudo continua funcionando como antes para quem usa as chamadas vetoriais.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="novidades-v072">Novidades v0.7.2<a class="anchor" aria-label="anchor" href="#novidades-v072"></a></h3>
 <ul><li>Correção de <em>NOTE</em> nos testes de pré-submissão do CRAN:
 <ul><li>Remoção dos campos não padrão (<code>DOI</code>, <code>Citation</code>) do arquivo <code>DESCRIPTION</code>.</li>
 <li>Atualização do arquivo <code>inst/CITATION</code> para o formato <code><a href="https://rdrr.io/r/utils/bibentry.html" class="external-link">bibentry()</a></code> (substituindo <code><a href="https://rdrr.io/r/utils/citEntry.html" class="external-link">citEntry()</a></code>).</li>

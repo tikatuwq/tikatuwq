@@ -4,14 +4,21 @@
 \alias{iet_carlson}
 \title{Trophic State Index (Carlson)}
 \usage{
-iet_carlson(secchi = NULL, clorofila = NULL, tp = NULL)
+iet_carlson(secchi = NULL, clorofila = NULL, tp = NULL, .keep_ids = FALSE)
 }
 \arguments{
-\item{secchi}{Numeric vector with Secchi depth (m).}
+\item{secchi}{Numeric vector with Secchi depth (m) \strong{or} a data.frame
+containing columns named \code{secchi} (m), \code{clorofila} (ug/L) and
+\code{tp} (ug/L) or \code{p_total} (mg/L). If a data.frame is provided,
+\code{clorofila} and \code{tp} must be \code{NULL}.}
 
 \item{clorofila}{Numeric vector with chlorophyll-a (ug/L).}
 
 \item{tp}{Numeric vector with total phosphorus (ug/L).}
+
+\item{.keep_ids}{Logical; when a data.frame is provided, bind back common
+ID columns (\code{rio}, \code{ponto}, \code{data}, \code{lat}, \code{lon}).
+Default \code{FALSE} (keeps historical behaviour).}
 }
 \value{
 A data frame with columns (when applicable):
@@ -26,6 +33,8 @@ A data frame with columns (when applicable):
 Computes Carlson's Trophic State Index (TSI/IET) from Secchi depth,
 chlorophyll-a, and total phosphorus. Returns component scores and the
 overall IET as the row-wise mean of available components.
+
+You can also pass a data.frame as the first argument (see Details).
 }
 \details{
 Implemented component formulas (Carlson 1977):
@@ -35,20 +44,26 @@ Implemented component formulas (Carlson 1977):
 \item \code{TSI_TP    = 14.42 * log10(tp) + 4.15}
 }
 
+When a data.frame is provided, character inputs using comma decimal (e.g. "3,2")
+or inequality symbols (e.g. "<0,1") are safely converted to numeric. If
+\code{p_total} (mg/L) exists instead of \code{tp} (ug/L), it is converted
+internally (\code{tp = p_total * 1000}).
+
 Inputs may contain \code{NA} and are recycled according to R rules.
 The overall index \code{IET} is the row mean of the available components
 (\code{na.rm = TRUE}).
 }
 \examples{
-# Example data
+# Vector usage (kept as-is)
 secchi <- c(1.2, 0.8, 0.4)        # m
 clorofila <- c(5, 12, 30)         # ug/L
 tp <- c(20, 40, 70)               # ug/L
-
 iet_carlson(secchi = secchi, clorofila = clorofila, tp = tp)
 
-# With only one component
-iet_carlson(secchi = secchi)
+# Data frame usage (optional)
+# df <- data.frame(secchi = secchi, clorofila = clorofila, p_total = c(0.02, 0.04, 0.07))
+# iet_carlson(df)                  # auto-converts p_total (mg/L) to tp (ug/L)
+# iet_carlson(df, .keep_ids = TRUE)
 
 }
 \references{

@@ -1,23 +1,16 @@
-# CRAN submission — tikatuwq 0.7.2
-
 ## Test environments
-* Windows 11, R 4.5.1 (local): OK  
-* win-builder (R-devel): OK  
-* Ubuntu 22.04 (GitHub Actions, R-release/R-devel): OK  
-* macOS (GitHub Actions, R-release): OK  
+- Windows 11, R 4.5.1 (x86_64, ucrt)
+- macOS 14 (local), R 4.3+
+- Ubuntu 22.04 (CI), R 4.3+
 
 ## R CMD check results
-✔ 0 errors | ✔ 0 warnings | ✔ 0 notes  
-(Validated locally, on win-builder, and via CI workflows)
+0 errors | 0 warnings | 0 notes
 
-## Changes since 0.7.1
-- Removed non-standard DESCRIPTION fields (`DOI`, `Citation`).
-- Migrated `inst/CITATION` from deprecated `citEntry()` to modern `bibentry()`.
-- Documentation maintenance; no API changes and no new dependencies.
+## Changes
+- v0.7.3 (patch, backward-compatible):
+  * iqa(): alias `temp` para `temperatura`, saneamento numérico (vírgula decimal, < >), reponderação com `na_rm=TRUE`.
+  * iet_carlson() / iet_lamparelli(): aceitam `data.frame`, auto-detecção de `secchi/chla(clorofila)/tp(p_total)`, conversão `p_total (mg/L) → tp (µg/L)`, `.keep_ids` para preservar identificadores.
+  * Sem novas dependências; API retrocompatível.
 
 ## Reverse dependencies
-- No reverse dependencies to check.
-
-## Submission frequency
-This is a **minor maintenance release** addressing a CRAN feedback request.  
-Previous version (v0.7.0) passed all checks successfully.
+- No reverse dependencies at this time.

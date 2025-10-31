@@ -69,25 +69,37 @@ iqa <- function(
   # Curvas (chaves: nomes dos parametros nas curvas; ex.: "pH")
   curves <- iqa_curve_table(method = method)
 
-  # Mapeia nomes dos pesos (chaves esperadas de curvas) para colunas do df
-  # Tratamento especial: "pH" (curva) pode estar como "ph" (coluna do df)
+  # Usa helper interno .numify() (R/utils_sanitize.R)
+
+  # Mapeia nomes dos pesos (chaves de curvas) para colunas do df
+  # Trata "pH" <- ph e "temperatura" <- temp (alias comum)
   map_param_to_col <- function(param_name) {
     if (param_name == "pH" && "ph" %in% names(df)) return("ph")
+    if (param_name == "temperatura" && "temp" %in% names(df)) return("temp")
     param_name
   }
 
-  # Verificacao de colunas requeridas
+  # Verificacao de colunas requeridas (com suporte a na_rm)
   req_curve_keys <- names(pesos)
   req_df_cols    <- vapply(req_curve_keys, map_param_to_col, character(1))
-  missing_cols   <- setdiff(req_df_cols, names(df))
-  if (length(missing_cols)) {
-    stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
+
+  present <- req_df_cols %in% names(df)
+  if (!all(present)) {
+    if (!na_rm) {
+      missing_cols <- req_df_cols[!present]
+      stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
+    } else {
+      # Se na_rm = TRUE, reescala usando apenas as colunas presentes
+      req_curve_keys <- req_curve_keys[present]
+      req_df_cols    <- req_df_cols[present]
+      pesos          <- pesos[names(pesos) %in% req_curve_keys]
+    }
   }
 
-  # Construcao de Qi por parametro
+  # Construcao de Qi por parametro (numificando antes da interpolacao)
   qi_col <- function(param_key) {
     col_name <- map_param_to_col(param_key)
-    vals <- df[[col_name]]
+    vals <- .numify(df[[col_name]])
     tbl  <- curves[[param_key]]
     if (is.null(tbl)) {
       stop("No Qi curve found for parameter key '", param_key, "'.")
@@ -98,15 +110,15 @@ iqa <- function(
   qi_df <- as.data.frame(lapply(req_curve_keys, qi_col))
   names(qi_df) <- req_curve_keys
 
-  # Denominador: soma dos pesos presentes por linha
-  # Se na_rm = FALSE e houver NA, aborta para evitar medias enviesadas
+  # Se na_rm = FALSE e houver NA em Qi, aborta (comportamento anterior preservado)
   if (!na_rm && anyNA(qi_df)) {
     stop("There are NA values in parameters. Use na_rm = TRUE to ignore incomplete rows.")
   }
 
   w_vec <- unname(pesos)
-  # matriz de pesos por linha
+  # matriz de pesos por linha restrita aos parametros correntes
   w_mat <- matrix(rep(w_vec, each = nrow(qi_df)), nrow = nrow(qi_df))
+
   # denominador por linha (soma de pesos onde Qi nao eh NA)
   denom <- rowSums(!is.na(qi_df) * rep(w_vec, each = nrow(qi_df)))
   # numerador: soma ponderada dos Qi
