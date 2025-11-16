@@ -9,38 +9,65 @@ iet_lamparelli(
   chla = NULL,
   sd = NULL,
   ambiente = c("rio", "reservatorio"),
-  .keep_ids = FALSE
+  .keep_ids = FALSE,
+  add_status = TRUE,
+  locale = c("pt", "en"),
+  ...
 )
 }
 \arguments{
-\item{tp}{Numeric total phosphorus (mg/L) \strong{or} a data.frame containing
-columns named \code{tp} (ug/L) or \code{p_total} (mg/L), \code{chla} or
-\code{clorofila} (ug/L), and \code{sd} or \code{secchi} (m). If a
-data.frame is provided, \code{chla} and \code{sd} must be \code{NULL}.}
+\item{tp}{Fosforo total (mg/L) \strong{ou} um data.frame contendo colunas
+\code{tp} (ug/L) ou \code{p_total} (mg/L), \code{chla} ou \code{clorofila}
+(ug/L), e \code{sd} ou \code{secchi} (m). Se for data.frame, \code{chla}
+e \code{sd} devem ser \code{NULL}.}
 
-\item{chla}{Numeric chlorophyll-a (ug/L).}
+\item{chla}{Clorofila-a (ug/L).}
 
-\item{sd}{Numeric Secchi disk depth (m).}
+\item{sd}{Profundidade do disco de Secchi (m).}
 
-\item{ambiente}{Character, environment type: 'rio' or 'reservatorio'.}
+\item{ambiente}{Tipo de ambiente: \code{"rio"} ou \code{"reservatorio"}.}
 
-\item{.keep_ids}{Logical; when a data.frame is provided, bind back common ID
-columns (\code{rio}, \code{ponto}, \code{data}, \code{lat}, \code{lon}).
-Default FALSE (preserves historical behaviour).}
+\item{.keep_ids}{Logico; quando data.frame, vincula colunas de ID
+(\code{rio}, \code{ponto}, \code{data}, \code{lat}, \code{lon}).
+Padrao \code{FALSE}.}
+
+\item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna
+\code{TSI_status} com a classificacao qualitativa (Lamparelli).}
+
+\item{locale}{Idioma de \code{TSI_status}: \code{"pt"} (padrao) ou \code{"en"}.}
+
+\item{...}{Reservado para uso futuro (ignorado).}
 }
 \value{
-Data frame with IET components and overall \code{IET_Lamp}.
+Um data.frame com colunas (quando aplicavel):
+\itemize{
+\item \code{IET_TP} — componente de fosforo total (0-100).
+\item \code{IET_Chla} — componente de clorofila-a (0-100).
+\item \code{IET_Secchi} — componente de Secchi (0-100).
+\item \code{IET_Lamp} — indice Lamparelli agregado (0-100).
+\item \code{TSI_status} — classe qualitativa (quando \code{add_status=TRUE}).
+\item \code{ambiente} — tipo de ambiente informado.
+}
 }
 \description{
-Computes components of the Lamparelli trophic state index (TSI/IET) from
-total phosphorus, chlorophyll-a, and Secchi depth, and returns the overall
-Lamparelli index as the row-wise mean of available components.
+Computa componentes do indice trofico de Lamparelli (TSI/IET) a partir
+de fosforo total, clorofila-a e profundidade do disco de Secchi, e
+retorna o indice agregado como a media por linha dos componentes
+disponiveis.
 
-You can also pass a data.frame as the first argument (see Details).
+Pode receber um \code{data.frame} como primeiro argumento (ver Detalhes).
 }
 \details{
-Minimal, pragmatic implementation; confirm coefficients/thresholds for your
-region before regulatory use. Character inputs like "3,2" or "<0,1" are
-safely converted. If only \code{p_total} (mg/L) is present, it is converted
-to \code{tp} in ug/L via \code{tp = p_total * 1000}.
+Implementacao pragmatica; confirme coeficientes/limiares para seu
+contexto regulatorio. Entradas com virgula decimal (ex.: "3,2") ou
+desigualdades (ex.: "<0,1") sao convertidas com seguranca por
+helpers internos. Se houver apenas \code{p_total} (mg/L), e convertida
+para \code{tp} (ug/L) via \code{tp = p_total * 1000}.
+
+Os componentes e o indice agregado sao limitados ao intervalo \code{[0, 100]}
+para consistencia com as figuras e tabelas do pacote/artigo.
+}
+\seealso{
+\code{\link[=iet_carlson]{iet_carlson()}}, \code{\link[=iqa]{iqa()}},
+\code{\link[=conama_check]{conama_check()}}
 }

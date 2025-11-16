@@ -4,73 +4,88 @@
 \alias{iet_carlson}
 \title{Trophic State Index (Carlson)}
 \usage{
-iet_carlson(secchi = NULL, clorofila = NULL, tp = NULL, .keep_ids = FALSE)
+iet_carlson(
+  secchi = NULL,
+  clorofila = NULL,
+  tp = NULL,
+  .keep_ids = FALSE,
+  add_status = TRUE,
+  locale = c("pt", "en"),
+  ...
+)
 }
 \arguments{
-\item{secchi}{Numeric vector with Secchi depth (m) \strong{or} a data.frame
-containing columns named \code{secchi} (m), \code{clorofila} (ug/L) and
-\code{tp} (ug/L) or \code{p_total} (mg/L). If a data.frame is provided,
-\code{clorofila} and \code{tp} must be \code{NULL}.}
+\item{secchi}{Vetor numerico com profundidade de Secchi (m) \strong{ou}
+um data.frame contendo colunas \code{secchi} (m), \code{clorofila} (ug/L)
+e \code{tp} (ug/L) ou \code{p_total} (mg/L). Se for data.frame,
+\code{clorofila} e \code{tp} devem ser \code{NULL}.}
 
-\item{clorofila}{Numeric vector with chlorophyll-a (ug/L).}
+\item{clorofila}{Vetor numerico com clorofila-a (ug/L).}
 
-\item{tp}{Numeric vector with total phosphorus (ug/L).}
+\item{tp}{Vetor numerico com fosforo total (ug/L).}
 
-\item{.keep_ids}{Logical; when a data.frame is provided, bind back common
-ID columns (\code{rio}, \code{ponto}, \code{data}, \code{lat}, \code{lon}).
-Default \code{FALSE} (keeps historical behaviour).}
+\item{.keep_ids}{Logico; quando data.frame, vincula colunas de ID
+comuns (\code{rio}, \code{ponto}, \code{data}, \code{lat}, \code{lon}).
+Padrao \code{FALSE}.}
+
+\item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna
+\code{TSI_status} com a classificacao qualitativa (Carlson).}
+
+\item{locale}{Idioma de \code{TSI_status}: \code{"pt"} (padrao) ou \code{"en"}.}
+
+\item{...}{Reservado para uso futuro (ignorado).}
 }
 \value{
-A data frame with columns (when applicable):
+Um data.frame com colunas (quando aplicavel):
 \itemize{
-\item \code{TSI_Secchi} — component from Secchi depth.
-\item \code{TSI_Chla} — component from chlorophyll-a.
-\item \code{TSI_TP} — component from total phosphorus.
-\item \code{IET} — overall Carlson index (row mean).
+\item \code{TSI_Secchi} — componente de Secchi (0-100).
+\item \code{TSI_Chla} — componente de clorofila-a (0-100).
+\item \code{TSI_TP} — componente de fosforo total (0-100).
+\item \code{IET} — indice Carlson agregado (media por linha, 0-100).
+\item \code{TSI_status} — classe qualitativa (quando \code{add_status=TRUE}).
 }
 }
 \description{
-Computes Carlson's Trophic State Index (TSI/IET) from Secchi depth,
-chlorophyll-a, and total phosphorus. Returns component scores and the
-overall IET as the row-wise mean of available components.
+Computa o indice trofico de Carlson (TSI/IET) a partir de profundidade
+de disco de Secchi, clorofila-a e fosforo total. Retorna componentes
+e o IET como media por linha dos componentes disponiveis.
 
-You can also pass a data.frame as the first argument (see Details).
+Pode receber um \code{data.frame} como primeiro argumento (ver Detalhes).
 }
 \details{
-Implemented component formulas (Carlson 1977):
+Formulas implementadas (Carlson 1977):
 \itemize{
 \item \code{TSI_Secchi = 60 - 14.41 * log10(secchi)}
 \item \code{TSI_Chla  = 9.81 * log10(clorofila) + 30.6}
 \item \code{TSI_TP    = 14.42 * log10(tp) + 4.15}
 }
 
-When a data.frame is provided, character inputs using comma decimal (e.g. "3,2")
-or inequality symbols (e.g. "<0,1") are safely converted to numeric. If
-\code{p_total} (mg/L) exists instead of \code{tp} (ug/L), it is converted
-internally (\code{tp = p_total * 1000}).
+Quando um data.frame e fornecido, strings com virgula decimal (ex.: "3,2")
+ou sinais de desigualdade (ex.: "<0,1") sao convertidas com seguranca.
+Se existir \code{p_total} (mg/L) em vez de \code{tp} (ug/L),
+e feita conversao interna (\code{tp = p_total * 1000}).
 
-Inputs may contain \code{NA} and are recycled according to R rules.
-The overall index \code{IET} is the row mean of the available components
-(\code{na.rm = TRUE}).
+Os componentes e o IET final sao limitados ao intervalo \code{[0, 100]}
+para manter consistencia com as figuras e tabelas do pacote/artigo.
 }
 \examples{
-# Vector usage (kept as-is)
+# Vetores
 secchi <- c(1.2, 0.8, 0.4)        # m
 clorofila <- c(5, 12, 30)         # ug/L
 tp <- c(20, 40, 70)               # ug/L
 iet_carlson(secchi = secchi, clorofila = clorofila, tp = tp)
 
-# Data frame usage (optional)
+# Data frame
 # df <- data.frame(secchi = secchi, clorofila = clorofila, p_total = c(0.02, 0.04, 0.07))
-# iet_carlson(df)                  # auto-converts p_total (mg/L) to tp (ug/L)
+# iet_carlson(df)                  # converte p_total -> tp (ug/L)
 # iet_carlson(df, .keep_ids = TRUE)
 
 }
 \references{
-Carlson, R. E. (1977). \emph{A trophic state index for lakes}.
-Limnology and Oceanography, 22(2), 361–369.
-doi:10.4319/lo.1977.22.2.0361
+Carlson, R. E. (1977). A trophic state index for lakes.
+Limnology and Oceanography, 22(2), 361-369. doi:10.4319/lo.1977.22.2.0361
 }
 \seealso{
-\code{\link[=iet_lamparelli]{iet_lamparelli()}}, \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
+\code{\link[=iet_lamparelli]{iet_lamparelli()}},
+\code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 }

@@ -2,57 +2,87 @@
 # Water Quality Index (IQA/WQI) - implementacao com curvas aproximadas
 # (ASCII-only no codigo)
 
+#' Classifica valores do IQA/WQI em faixas qualitativas
+#'
+#' @description
+#' Converte valores numericos de IQA (0-100) em classes qualitativas
+#' padronizadas. Suporta rotulos em portugues ("pt") ou ingles ("en").
+#'
+#' @param x Vetor numerico com IQA em 0-100. Valores NA sao preservados.
+#' @param locale Idioma dos rotulos: \code{"pt"} (padrao) ou \code{"en"}.
+#'
+#' @return Um fator ordenado com os rotulos de classe.
+#'
+#' @examples
+#' classify_iqa(c(15, 40, 65, 80, 95))
+#' classify_iqa(c(15, 40, 65, 80, 95), locale = "en")
+#'
+#' @export
+classify_iqa <- function(x, locale = c("pt", "en")) {
+  locale <- match.arg(locale)
+  # Quebras oficiais (0-25, 26-50, 51-70, 71-90, 91-100)
+  breaks <- c(-Inf, 25, 50, 70, 90, Inf)
+
+  if (locale == "pt") {
+    labs <- c("Muito ruim", "Ruim", "Regular", "Boa", "Otima")
+  } else {
+    labs <- c("Very Poor", "Poor", "Fair", "Good", "Excellent")
+  }
+
+  out <- cut(x, breaks = breaks, labels = labs, right = TRUE, ordered_result = TRUE)
+  out
+}
+
 #' Water Quality Index (WQI / IQA)
 #'
 #' @description
-#' Computes IQA/WQI by combining parameter-specific sub-scores (Qi) via
-#' a **weighted mean**. Sub-scores are obtained by piecewise-linear
-#' interpolation over approximate curves (CETESB/NSF-like).
+#' Computa o IQA/WQI combinando subindices (Qi) por **media ponderada**.
+#' Os subindices sao obtidos por interpolacao linear por trechos sobre
+#' curvas aproximadas (estilo CETESB/NSF).
 #'
-#' @param df Data frame (or tibble) with required parameter columns.
-#'   Expected defaults (Portuguese names): \code{od}, \code{coliformes},
+#' @param df Data frame (ou tibble) com as colunas requeridas.
+#'   Nomes esperados (portugues): \code{od}, \code{coliformes},
 #'   \code{dbo}, \code{nt_total}, \code{p_total}, \code{turbidez},
-#'   \code{tds}, \code{ph} (or \code{pH}), \code{temperatura}.
-#' @param pesos Named numeric weights for each parameter (sum not required).
-#'   Defaults follow CETESB/NSF practice:
-#'   \itemize{
-#'     \item \code{od = 0.17}
-#'     \item \code{coliformes = 0.15}
-#'     \item \code{dbo = 0.10}
-#'     \item \code{nt_total = 0.10}
-#'     \item \code{p_total = 0.10}
-#'     \item \code{turbidez = 0.08}
-#'     \item \code{tds = 0.08}
-#'     \item \code{pH = 0.12} (mapped to column \code{ph} if needed)
-#'     \item \code{temperatura = 0.10}
-#'   }
-#' @param method Character scalar; interpolation table set. Currently
-#'   only \code{"CETESB_approx"}.
-#' @param na_rm Logical; if \code{FALSE} (default), rows containing
-#'   missing Qi values will trigger an error. If \code{TRUE}, the IQA
-#'   is computed using only available parameters, with the denominator
-#'   adjusted to the sum of the weights of present parameters.
+#'   \code{tds}, \code{ph} (ou \code{pH}), \code{temperatura}.
+#' @param pesos Pesos nomeados para cada parametro. Padroes seguem pratica
+#'   CETESB/NSF: \code{od=.17}, \code{coliformes=.15}, \code{dbo=.10},
+#'   \code{nt_total=.10}, \code{p_total=.10}, \code{turbidez=.08},
+#'   \code{tds=.08}, \code{pH=.12}, \code{temperatura=.10}.
+#' @param method Conjunto de curvas de interpolacao; atualmente apenas
+#'   \code{"CETESB_approx"}.
+#' @param na_rm Logico; se \code{FALSE} (padrao), linhas com Qi ausentes
+#'   geram erro. Se \code{TRUE}, o IQA e computado usando apenas os
+#'   parametros disponiveis e o denominador e ajustado para a soma dos
+#'   pesos presentes.
+#' @param add_status Logico; se \code{TRUE} (padrao), adiciona a coluna
+#'   \code{IQA_status} com a classificacao qualitativa (0-100).
+#' @param locale Idioma de \code{IQA_status}: \code{"pt"} (padrao) ou
+#'   \code{"en"}.
+#' @param ... Reservado para uso futuro (ignorado).
 #'
 #' @returns
-#' The input \code{df} with an added numeric column \code{IQA}. The
-#' attribute \code{"iqa_method"} is set on the returned data.frame/tibble.
+#' O \code{df} de entrada com a coluna numerica \code{IQA} (0-100) e,
+#' quando \code{add_status = TRUE}, a coluna fator \code{IQA_status}.
+#' O atributo \code{"iqa_method"} e definido no objeto retornado.
 #'
 #' @details
-#' Column name compatibility:
+#' Compatibilidade de nomes:
 #' \itemize{
-#'   \item The interpolation table uses the key \code{"pH"}.
-#'         If your data uses a \code{ph} column (lowercase), it is
-#'         automatically mapped to the \code{"pH"} curve.
-#'   \item All other parameter names are used as-is.
+#'   \item A tabela de curvas usa a chave \code{"pH"}.
+#'         Se seus dados possuem \code{ph} (minusculo), a curva \code{"pH"}
+#'         e mapeada para a coluna \code{ph}.
+#'   \item Para \code{temperatura}, a coluna \code{temp} (alias comum)
+#'         e automaticamente aceita caso \code{temperatura} nao exista.
 #' }
 #'
-#' Values are clipped into \code{[0, 100]} after aggregation.
+#' Se as curvas internas retornarem Qi em 0-10 (variante historica),
+#' o valor agregado e normalizado internamente para 0-100 antes do retorno.
+#' Valores finais sao limitados ao intervalo \code{[0, 100]}.
 #'
 #' @examples
-#' # Minimal example using the demo data:
 #' d <- wq_demo
 #' d2 <- iqa(d, na_rm = TRUE)
-#' head(d2$IQA)
+#' table(d2$IQA_status, useNA = "ifany")
 #'
 #' @export
 iqa <- function(
@@ -62,17 +92,18 @@ iqa <- function(
     turbidez = .08, tds = .08, pH = .12, temperatura = .10
   ),
   method = c("CETESB_approx"),
-  na_rm = FALSE
+  na_rm = FALSE,
+  add_status = TRUE,
+  locale = c("pt", "en"),
+  ...
 ) {
   method <- match.arg(method)
+  locale <- match.arg(locale)
 
   # Curvas (chaves: nomes dos parametros nas curvas; ex.: "pH")
   curves <- iqa_curve_table(method = method)
 
-  # Usa helper interno .numify() (R/utils_sanitize.R)
-
-  # Mapeia nomes dos pesos (chaves de curvas) para colunas do df
-  # Trata "pH" <- ph e "temperatura" <- temp (alias comum)
+  # Helper de mapeamento de nome de curva -> coluna do df
   map_param_to_col <- function(param_name) {
     if (param_name == "pH" && "ph" %in% names(df)) return("ph")
     if (param_name == "temperatura" && "temp" %in% names(df)) return("temp")
@@ -115,21 +146,31 @@ iqa <- function(
     stop("There are NA values in parameters. Use na_rm = TRUE to ignore incomplete rows.")
   }
 
+  # Pesos
   w_vec <- unname(pesos)
-  # matriz de pesos por linha restrita aos parametros correntes
-  w_mat <- matrix(rep(w_vec, each = nrow(qi_df)), nrow = nrow(qi_df))
-
   # denominador por linha (soma de pesos onde Qi nao eh NA)
   denom <- rowSums(!is.na(qi_df) * rep(w_vec, each = nrow(qi_df)))
   # numerador: soma ponderada dos Qi
-  numer <- rowSums(qi_df * w_mat, na.rm = na_rm)
+  numer <- rowSums(qi_df * matrix(rep(w_vec, each = nrow(qi_df)), nrow = nrow(qi_df)), na.rm = na_rm)
 
   iqa_val <- numer / denom
-  iqa_val[denom == 0] <- NA_real_  # se todos os Qi forem NA na linha
+  iqa_val[denom == 0] <- NA_real_
+
+  # Normaliza escala: se parecer 0-10, converte para 0-100
+  # (detector simples e silencioso para compat)
+  rng <- range(iqa_val, na.rm = TRUE)
+  if (is.finite(rng[2]) && rng[2] <= 10) {
+    iqa_val <- iqa_val * 10
+  }
+
   # clip para [0, 100]
   iqa_val <- pmin(100, pmax(0, iqa_val))
 
   df$IQA <- iqa_val
+  if (isTRUE(add_status)) {
+    df$IQA_status <- classify_iqa(df$IQA, locale = locale)
+  }
+
   attr(df, "iqa_method") <- method
   df
 }

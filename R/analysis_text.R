@@ -36,6 +36,8 @@
 #'
 #' @seealso \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}
 #' @family reporting-tools
+#' @importFrom broom tidy
+#' @importFrom purrr compact
 #' @export
 generate_analysis <- function(
   df,
@@ -134,7 +136,7 @@ generate_analysis <- function(
     if (nrow(tend)) {
       top <- tend |>
         dplyr::arrange(dplyr::desc(abs(.data$beta))) |>
-        dplyr::slice(1:min(2, dplyr::n()))
+        dplyr::slice(seq_len(min(2, dplyr::n())))
       itens <- apply(top, 1, function(r){
         dir <- ifelse(as.numeric(r["beta"]) > 0, "increasing trend", "decreasing trend")
         sig <- ifelse(as.numeric(r["p_value"]) < 0.05, " (significant, p<0.05)", "")

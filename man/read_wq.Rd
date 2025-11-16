@@ -4,28 +4,41 @@
 \alias{read_wq}
 \title{Read water-quality CSV (robust parsing)}
 \usage{
-read_wq(path, tz = "America/Bahia")
+read_wq(
+  path,
+  tz = "America/Bahia",
+  normalize_coords = TRUE,
+  nd_policy = c("ld2", "ld", "zero", "na")
+)
 }
 \arguments{
-\item{path}{Path to the CSV file.}
+\item{path}{Caminho para o arquivo CSV.}
 
-\item{tz}{Time zone for dates (kept for compatibility; dates are \code{Date}).}
+\item{tz}{Fuso horario para datas (mantido por compatibilidade; datas sao \code{Date}).}
+
+\item{normalize_coords}{Logico; se \code{TRUE} (padrao) aplica \code{fix_coords()}
+em \code{lat/lon}.}
+
+\item{nd_policy}{Politica para valores censurados (ND/<LD/<LOQ). Opcoes:
+\code{"ld2"} (metade do limite, padrao), \code{"ld"} (limite),
+\code{"zero"} (0), \code{"na"} (NA_real_).}
 }
 \value{
-A tibble with:
+Um tibble com:
 \itemize{
-\item normalized, lowercase column names (spaces to \verb{_}, non-alnum removed);
-\item numeric columns parsed ignoring unit strings;
-\item \code{data} parsed to \code{Date} (tries \code{ymd} then \code{dmy});
-\item \code{ponto} coerced to character (if present).
+\item nomes de colunas normalizados (minusculas, espacos -> \verb{_}, sem nao-alfanum);
+\item colunas numericas parseadas ignorando strings de unidade;
+\item \code{data} parseada para \code{Date} (tenta \code{ymd} e depois \code{dmy});
+\item \code{ponto} coerido para \code{character} (quando presente);
+\item \code{lat/lon} corrigidos quando \code{normalize_coords = TRUE}.
 }
 }
 \description{
-Reads a CSV file with \strong{comma or semicolon delimiter} and \strong{comma or dot}
-as decimal mark, ignoring unit suffixes (e.g., \code{"0,04 mg/L"}). Everything
-is read as text first, column names are normalized, and likely numeric
-columns are parsed robustly. A conservative safeguard adjusts obviously
-out-of-range pH values (e.g., \code{72 -> 7.2}).
+Le um CSV com \strong{delimitador virgula ou ponto-e-virgula} e \strong{virgula ou ponto}
+como separador decimal, ignorando sufixos de unidade (ex.: \code{"0,04 mg/L"}).
+Le tudo como texto primeiro, normaliza nomes, e faz parse robusto de colunas
+numericas. Ajusta pH evidentemente fora de faixa (ex.: \code{72 -> 7.2}). Opcionalmente
+normaliza coordenadas geograficas se vierem em graus * 1e7.
 }
 \section{Parsed numeric candidates}{
 
@@ -33,17 +46,24 @@ out-of-range pH values (e.g., \code{72 -> 7.2}).
 "fosforo_total","temperatura","ec","condutividade","n_nitrato","n_nitrito",
 "amonia","nt_total","n_total","ntk","nkjeldahl","nitrogenio_total",
 "solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet",
-"iet_carlson","iet_lamparelli","nsfwqi","vazao")}
+"iet_carlson","iet_lamparelli","nsfwqi","vazao","lat","lon")}
+}
+
+\section{Valores censurados (ND/<LD/<LOQ)}{
+
+O pacote implementa uma politica explicita para tratamento de valores censurados.
+Valores como \code{"<0.01"}, \code{"<LD"}, \code{"<LOD"}, \code{"<LOQ"}, \code{"ND"}
+sao detectados e tratados conforme a politica especificada em \code{nd_policy}.
+O padrao \code{"ld2"} usa metade do limite de deteccao (recomendacao conservadora).
 }
 
 \examples{
 \dontrun{
-# Minimal example (write a small CSV and read it):
 tmp <- tempfile(fileext = ".csv")
 writeLines(
-  c("ponto;data;ph;od;turbidez",
-    "R1_01;2025-01-20;7,2;6,8;5,1",
-    "R1_01;21/01/2025;7.1;7.0;4.8 mg/L"),
+  c("ponto;data;ph;od;turbidez;lat;lon",
+    "R1_01;2025-01-20;7,2;6,8;5,1;-163456789;-396543210",
+    "R1_01;21/01/2025;7.1;7.0;4.8 mg/L;-16.3456789;-39.6543210"),
   tmp
 )
 x <- read_wq(tmp)

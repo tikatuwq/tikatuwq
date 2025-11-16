@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,10 +56,16 @@
         <dd>Validate presence of required columns</dd>
       </dl><dl><dt>
 
+          <code><a href="fix_coords.html">fix_coords()</a></code>
+
+        </dt>
+        <dd>Fix and validate geographic coordinates (lat/lon)</dd>
+      </dl><dl><dt>
+
           <code><a href="clean_units.html">clean_units()</a></code>
 
         </dt>
-        <dd>Normalize/standardize units (placeholder)</dd>
+        <dd>Normalize/standardize units</dd>
       </dl><dl><dt>
 
           <code><a href="resume_wq.html">resume_wq()</a></code>
@@ -85,16 +91,34 @@
         <dd>Water Quality Index (WQI / IQA)</dd>
       </dl><dl><dt>
 
+          <code><a href="classify_iqa.html">classify_iqa()</a></code>
+
+        </dt>
+        <dd>Classifica valores do IQA/WQI em faixas qualitativas</dd>
+      </dl><dl><dt>
+
           <code><a href="iet_carlson.html">iet_carlson()</a></code>
 
         </dt>
         <dd>Trophic State Index (Carlson)</dd>
       </dl><dl><dt>
 
+          <code><a href="classify_tsi_carlson.html">classify_tsi_carlson()</a></code>
+
+        </dt>
+        <dd>Classifica TSI (Carlson) em faixas qualitativas</dd>
+      </dl><dl><dt>
+
           <code><a href="iet_lamparelli.html">iet_lamparelli()</a></code>
 
         </dt>
         <dd>Trophic State Index (Lamparelli)</dd>
+      </dl><dl><dt>
+
+          <code><a href="classify_tsi_lamparelli.html">classify_tsi_lamparelli()</a></code>
+
+        </dt>
+        <dd>Classifica TSI (Lamparelli) em faixas qualitativas</dd>
       </dl><dl><dt>
 
           <code><a href="nsfwqi.html">nsfwqi()</a></code>
@@ -199,7 +223,7 @@
           <code><a href="plot_map.html">plot_map()</a></code>
 
         </dt>
-        <dd>Mapa interativo de pontos de coleta</dd>
+        <dd>Plot interactive map of sampling points (default Leaflet pins)</dd>
       </dl><dl><dt>
 
           <code><a href="plot_trend.html">plot_trend()</a></code>
@@ -245,7 +269,7 @@
           <code><a href="wq_demo.html">wq_demo</a></code>
 
         </dt>
-        <dd>Demo water quality dataset</dd>
+        <dd>Example water quality dataset (subset of real data)</dd>
       </dl></div><div class="section level2">
       <h2 id="parameter-analysis-single-">Parameter analysis (single)<a class="anchor" aria-label="anchor" href="#parameter-analysis-single-"></a></h2>
 

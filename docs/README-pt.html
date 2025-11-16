@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,20 +60,18 @@ O pacote também inclui análise de tendências, validação de dados e geraçã
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
 <hr></div>
 <div class="section level2">
+<h2 id="dados-reais-incluídos-rio-buranhem---inema">Dados reais incluídos: Rio Buranhem - INEMA<a class="anchor" aria-label="anchor" href="#dados-reais-inclu%C3%ADdos-rio-buranhem---inema"></a></h2>
+<p>Este pacote inclui agora um conjunto real de dados de qualidade da água, extraídos de campanhas de monitoramento do INEMA (Instituto do Meio Ambiente e Recursos Hídricos da Bahia) na bacia do Rio Buranhem (Porto Seguro, Bahia) entre 2021 e 2024. Os dados trazem datas de amostragem, locais (pontos) e variáveis físico-químicas coletadas em campo. Veja a documentação de <code>wq_demo</code> para detalhes sobre colunas e exemplos de uso.</p>
+<p>A documentação principal e os vignettes usam este conjunto representativo para reproducibilidade.</p>
+</div>
+<div class="section level2">
 <h2 id="fluxo-básico-de-uso">Fluxo básico de uso<a class="anchor" aria-label="anchor" href="#fluxo-b%C3%A1sico-de-uso"></a></h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/validate_wq.html">validate_wq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span>na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Texto analítico (baseado em regras)</span></span>
-<span><span class="va">pars</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_analysis.html">generate_analysis</a></span><span class="op">(</span><span class="va">df</span>, classe_conama <span class="op">=</span> <span class="st">"2"</span>,</span>
-<span>                          incluir_tendencia <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                          parametros_tendencia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turbidez"</span>,<span class="st">"od"</span>,<span class="st">"pH"</span><span class="op">)</span>,</span>
-<span>                          contexto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>rio<span class="op">=</span><span class="st">"Chamagunga"</span>, periodo<span class="op">=</span><span class="st">"2025-07"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pars</span>, collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tikatuwq/tikatuwq" class="external-link">tikatuwq</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
+<span><span class="co"># Exemplo típico</span></span>
+<span><span class="va">wq_demo</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/validate_wq.html">validate_wq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span>na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <hr><div class="section level3">
 <h3 id="books-contexto-científico-e-institucional">📚 Contexto Científico e Institucional<a class="anchor" aria-label="anchor" href="#books-contexto-cient%C3%ADfico-e-institucional"></a></h3>
 <p>O pacote <strong>TikatuWQ</strong> foi desenvolvido por <strong>Vinícius Saraiva Santos</strong> (autor e mantenedor)<br>
@@ -85,7 +83,14 @@ como parte do <strong>Projeto de Pesquisa Tikatu</strong>, conduzido no âmbito 
 <div class="section level2">
 <h2 id="new-novidades">🆕 Novidades<a class="anchor" aria-label="anchor" href="#new-novidades"></a></h2>
 <div class="section level3">
-<h3 id="new-novidades-na-versão-073-atual">🆕 Novidades na versão 0.7.3 (atual)<a class="anchor" aria-label="anchor" href="#new-novidades-na-vers%C3%A3o-073-atual"></a></h3>
+<h3 id="new-novidades-na-versão-080-atual">🆕 Novidades na versão 0.8.0 (atual)<a class="anchor" aria-label="anchor" href="#new-novidades-na-vers%C3%A3o-080-atual"></a></h3>
+<ul><li>O dataset de exemplo <code>wq_demo</code> agora é um subconjunto real de dados (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), com 20 linhas e 14 colunas (incluindo <code>rio</code>, <code>lat</code>, <code>lon</code>).</li>
+<li>Exemplos e vignettes passam a usar este conjunto real para maior reprodutibilidade e clareza.</li>
+<li>Documentação atualizada (help do dataset, README, vignette) para refletir a mudança.</li>
+<li>Sem quebra de API; comportamento permanece compatível com versões anteriores.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="novidades-na-versão-073">Novidades na versão 0.7.3<a class="anchor" aria-label="anchor" href="#novidades-na-vers%C3%A3o-073"></a></h3>
 <ul><li>IQA mais robusto Aceita temp como alias de temperatura. “Numificação” automática de valores com vírgula decimal e sinais &lt; &gt;. Com na_rm = TRUE, repondera os pesos quando faltarem parâmetros.</li>
 <li>IET (Carlson / Lamparelli) com data.frame</li>
 <li>Agora iet_carlson() e iet_lamparelli() aceitam um data.frame “cru” com colunas como rio, ponto, data, lat, lon, etc.</li>
@@ -159,7 +164,7 @@ como parte do <strong>Projeto de Pesquisa Tikatu</strong>, conduzido no âmbito 
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># versão estável (por tag)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.7.0"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.8.0"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr><div class="section level3">
 <h3 id="conformidade-conama-classe-2">Conformidade CONAMA (classe 2)<a class="anchor" aria-label="anchor" href="#conformidade-conama-classe-2"></a></h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -212,14 +217,14 @@ como parte do <strong>Projeto de Pesquisa Tikatu</strong>, conduzido no âmbito 
 <h3 id="como-citar">Como citar<a class="anchor" aria-label="anchor" href="#como-citar"></a></h3>
 <p>Se você utilizar o <strong>tikatuwq</strong> em suas pesquisas, cite da seguinte forma:</p>
 <blockquote>
-<p>Santos, V. S. (2025). <em>tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil</em> (v0.7.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.17407297" class="external-link">https://doi.org/10.5281/zenodo.17407297</a></p>
+<p>Santos, V. S. (2025). <em>tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil</em> (v0.8.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.17407297" class="external-link">https://doi.org/10.5281/zenodo.17407297</a></p>
 </blockquote>
 <p>Entrada BibTeX:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="va">@Manual</span>{<span class="ot">Santos2025tikatuwq</span>,</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="dt">title</span>  = {tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil},</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="dt">author</span> = {Vinicius Saraiva Santos},</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="dt">year</span>   = {2025},</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.7.0},</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.8.0},</span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="dt">doi</span>    = {10.5281/zenodo.17407297},</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="dt">url</span>    = {https://github.com/tikatuwq/tikatuwq},</span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>}</span></code></pre></div>

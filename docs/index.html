@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Water Quality Assessment and Environmental Compliance in Brazil">
-<meta name="description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows.">
-<meta property="og:description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows.">
+<meta name="description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows. The example dataset (`wq_demo`) is now a real subset from monitoring data (BURANHEM river, 2020-2024, 4 points, 20 rows, 14 columns including extra `rio`, `lat`, `lon`). All core examples and vignettes use this realistic sample, improving reproducibility and documentation value for users.">
+<meta property="og:description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows. The example dataset (`wq_demo`) is now a real subset from monitoring data (BURANHEM river, 2020-2024, 4 points, 20 rows, 14 columns including extra `rio`, `lat`, `lon`). All core examples and vignettes use this realistic sample, improving reproducibility and documentation value for users.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,21 +78,21 @@ The package also includes trend analysis, data validation, and automatic report 
 <hr>
 </div>
 <div class="section level2">
+<h2 id="included-real-dataset-rio-buranhem---inema">Included real dataset: Rio Buranhem - INEMA<a class="anchor" aria-label="anchor" href="#included-real-dataset-rio-buranhem---inema"></a>
+</h2>
+<p>This package now includes a real water quality dataset extracted from INEMA (the Bahia State Environmental Agency) monitoring campaigns conducted in the Rio Buranhem watershed (Porto Seguro, Bahia, Brazil) between 2021 and 2024. The included data provide site IDs, sampling dates, and diverse physicochemical variables measured during field campaigns. See documentation for <code>wq_demo</code> for details on columns and usage in analyses.</p>
+<p>All main documentation and vignettes use this realistic sample for demonstration and reproducible workflows.</p>
+</div>
+<div class="section level2">
 <h2 id="basic-workflow">Basic workflow<a class="anchor" aria-label="anchor" href="#basic-workflow"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/validate_wq.html">validate_wq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span>na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tikatuwq/tikatuwq" class="external-link">tikatuwq</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Analytical text (rule-based)</span></span>
-<span><span class="va">pars</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_analysis.html">generate_analysis</a></span><span class="op">(</span><span class="va">df</span>, classe_conama <span class="op">=</span> <span class="st">"2"</span>,</span>
-<span>                          incluir_tendencia <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                          parametros_tendencia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turbidez"</span>,<span class="st">"od"</span>,<span class="st">"pH"</span><span class="op">)</span>,</span>
-<span>                          contexto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>river<span class="op">=</span><span class="st">"Chamagunga"</span>, period<span class="op">=</span><span class="st">"2025-07"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pars</span>, collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Typical analysis</span></span>
+<span><span class="va">wq_demo</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/validate_wq.html">validate_wq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span>na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
 <h3 id="books-scientific-and-institutional-context">📚 Scientific and Institutional Context<a class="anchor" aria-label="anchor" href="#books-scientific-and-institutional-context"></a>
@@ -108,7 +108,17 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <h2 id="new-news">🆕 News<a class="anchor" aria-label="anchor" href="#new-news"></a>
 </h2>
 <div class="section level3">
-<h3 id="new-whats-new-in-v073">🆕 What’s new in v0.7.3<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v073"></a>
+<h3 id="new-whats-new-in-v080">🆕 What’s new in v0.8.0<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v080"></a>
+</h3>
+<ul>
+<li>The <code>wq_demo</code> example dataset is now a subset of real data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), with 20 rows and 14 columns (including <code>rio</code>, <code>lat</code>, <code>lon</code>).</li>
+<li>All examples and vignettes use this realistic dataset to improve reproducibility and clarity.</li>
+<li>Documentation updated accordingly (dataset help, README, vignette).</li>
+<li>No API break; behavior remains consistent with previous versions.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="whats-new-in-v073">What’s new in v0.7.3<a class="anchor" aria-label="anchor" href="#whats-new-in-v073"></a>
 </h3>
 <ul>
 <li>More robust IQA Accepts temp as an alias for temperatura. Automatic numeric sanitization for comma decimals and &lt;/&gt; signs. With na_rm = TRUE, weights are re-scaled if some inputs are missing.</li>
@@ -218,7 +228,7 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># stable version (by tag)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.7.0"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.8.0"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
 <h3 id="conama-compliance-class-2">CONAMA compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
@@ -296,14 +306,14 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 </h3>
 <p>If you use <strong>tikatuwq</strong> in your research, please cite it as follows:</p>
 <blockquote>
-<p>Santos, V. S. (2025). <em>tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil</em> (v0.7.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.17407297" class="external-link">https://doi.org/10.5281/zenodo.17407297</a></p>
+<p>Santos, V. S. (2025). <em>tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil</em> (v0.8.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.17407297" class="external-link">https://doi.org/10.5281/zenodo.17407297</a></p>
 </blockquote>
 <p>BibTeX entry:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="va">@Manual</span>{<span class="ot">Santos2025tikatuwq</span>,</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="dt">title</span>  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="dt">author</span> = {Vinicius Saraiva Santos},</span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="dt">year</span>   = {2025},</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.7.0},</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.8.0},</span>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="dt">doi</span>    = {10.5281/zenodo.17407297},</span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="dt">url</span>    = {https://github.com/tikatuwq/tikatuwq},</span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>}</span></code></pre></div>

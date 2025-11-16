@@ -1,3 +1,10 @@
+# tikatuwq 0.8.0
+
+- **Data and documentation update**: The `wq_demo` example dataset is now a subset of real data (from BURANHEM river monitoring, 4 points, years 2020–2024, 20 rows). Includes extra columns: `rio`, `lat`, and `lon`.
+- All examples and vignettes now use real, representative dataset (greater realism and reproducibility).
+- Documentation (`R/data_wq_demo.R`, inst/extdata/wq_demo_README.txt, vignettes, README) updated to reflect the change.
+- No API breakage; all functions and test expectations remain valid for the new dataset structure and size.
+
 # tikatuwq 0.7.3
 
 - Funções `iet_carlson()` e `iet_lamparelli()` agora aceitam `data.frame` com `.keep_ids`.

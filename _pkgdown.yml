@@ -17,14 +17,18 @@ reference:
     contents:
       - read_wq
       - validate_wq
+      - fix_coords
       - clean_units
       - resume_wq
 
   - title: Indices de qualidade
     contents:
       - iqa
+      - classify_iqa
       - iet_carlson
+      - classify_tsi_carlson
       - iet_lamparelli
+      - classify_tsi_lamparelli
       - nsfwqi
 
   - title: Conformidade CONAMA
@@ -73,3 +77,5 @@ articles:
   - title: Tutorials
     contents:
       - tikatuwq
+      - tikatuwq-workflow
+      - tikatuwq-methods

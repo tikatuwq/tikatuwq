@@ -1,20 +1,33 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://tikatuwq.github.io/tikatuwq/404.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/ANALISE_SEM_FBS-BRA-900.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/ANALISE_SUBSTITUICAO_WQ_DEMO.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/articles/index.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/articles/tikatuwq-methods.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/articles/tikatuwq-workflow.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/articles/tikatuwq.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/AUDITORIA_TIKATUWQ.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/AUDITORIA_TIKATUWQ_COMPLETA.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/AUDITORIA_TIKATUWQ_FINAL.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/AUDITORIA_TIKATUWQ_POS_CORRECOES.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/authors.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/index.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/INSTALACAO_WQ_DEMO.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/LICENSE-text.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/LICENSE.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/news/index.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/README-pt.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/README_install.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/classify_iqa.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/classify_tsi_carlson.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/classify_tsi_lamparelli.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/clean_units.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_check.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_limits.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_report.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_summary.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/conama_text.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/reference/fix_coords.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/generate_analysis.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/iet_carlson.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/iet_lamparelli.html</loc></url>
@@ -44,5 +57,6 @@
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/trend_param.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/validate_wq.html</loc></url>
 <url><loc>https://tikatuwq.github.io/tikatuwq/reference/wq_demo.html</loc></url>
+<url><loc>https://tikatuwq.github.io/tikatuwq/RESUMO_CRIACAO_WQ_DEMO.html</loc></url>
 </urlset>
 

@@ -7,13 +7,23 @@
 validate_wq(
   df,
   required = c("ph", "turbidez", "od", "dbo", "nt_total", "p_total", "tds",
-    "temperatura", "coliformes")
+    "temperatura", "coliformes"),
+  nd_policy = c("ld2", "ld", "zero", "na")
 )
 }
 \arguments{
-\item{df}{Input data frame / tibble.}
+\item{df}{Input data.frame/tibble to validate.}
 
-\item{required}{Character vector of required column names.}
+\item{required}{Character vector of required column names to check for.}
+
+\item{nd_policy}{Policy for censored values (ND/<LD/<LOQ) when required
+columns are not numeric. One of:
+\itemize{
+\item "ld2" (default): use half the detection limit
+\item "ld"           : use the detection limit
+\item "zero"         : replace with 0
+\item "na"           : replace with NA
+}}
 }
 \value{
 The input \code{df} if valid; otherwise, an error is thrown.

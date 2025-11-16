@@ -1,117 +1,149 @@
-#' Mapa interativo de pontos de coleta
+# R/plot_map.R
+# Mapas interativos (Leaflet) usando SEMPRE o pin padrao.
+# ASCII-only.
+
+#' Plot interactive map of sampling points (default Leaflet pins)
 #'
-#' Gera um mapa Leaflet com os pontos de coleta que possuam coordenadas
-#' de latitude e longitude validas. Mostra informacoes adicionais no popup.
+#' @description
+#' Creates an interactive Leaflet map of sampling points using the **default
+#' Leaflet marker** (blue pin). Latitude/longitude are autodetected from
+#' columns \code{lat} and \code{lon}. If these columns are not present, but
+#' \code{latitude} and/or \code{longitude} exist, they are automatically
+#' copied to \code{lat} and \code{lon}. You may group layers with
+#' \code{group_by} (e.g., "year") and show popups with \code{popup}.
 #'
-#' @param data Um data.frame contendo as colunas de coordenadas.
-#'   Sao aceitos nomes "latitude"/"longitude" ou "lat"/"lon".
-#' @param popup_cols Vetor de colunas a exibir no popup (ex.: c("rio","ponto","data","iqa")).
-#'   Se NULL, usa colunas comuns se existirem.
-#' @param cluster Agrupar marcadores proximos (TRUE/FALSE). Default = TRUE.
-#' @param color_by Nome de coluna para colorir os pontos (opcional).
-#'   Se for "iqa", aplica classes de qualidade da agua.
-#' @param tiles Provedor de tiles (default = "OpenStreetMap").
+#' If \code{color_by} is provided, a legend is drawn to describe the values,
+#' but **markers are not colorized** (the default \emph{Leaflet} pin has fixed
+#' style).
 #'
-#' @return Objeto htmlwidget (mapa Leaflet).
+#' @details
+#' The function expects coordinates in columns named \code{lat} and \code{lon}.
+#' If those columns are not found, but \code{latitude} and/or \code{longitude}
+#' are present, they are copied to \code{lat} and \code{lon} respectively
+#' before plotting.
+#'
+#' @param df data.frame/tibble with coordinates; must contain \code{lat}/\code{lon}
+#'   (or \code{latitude}/\code{longitude}, which will be mapped automatically).
+#' @param color_by optional column used to build a legend (numeric or factor).
+#'                 It does not change the marker color.
+#' @param popup    optional column name with popup/tooltip text.
+#' @param group_by optional column name to create overlay layers (e.g., "year").
+#' @param legend_title optional legend title (used when \code{color_by} is set).
+#' @param na_rm logical; if \code{TRUE} (default) remove rows with invalid
+#'              coordinates.
+#'
+#' @return a \code{leaflet} htmlwidget.
 #'
 #' @examples
-#' df <- data.frame(
-#'   rio = c("Buranhem","Chamagunga"),
-#'   ponto = c("P1","P2"),
-#'   data = as.Date(c("2025-09-20","2025-09-21")),
-#'   latitude = c(-16.435, -16.498),
-#'   longitude = c(-39.062, -39.080),
-#'   iqa = c(72, 58)
-#' )
-#' plot_map(df, popup_cols = c("rio","ponto","data","iqa"), color_by = "iqa")
+#' \dontrun{
+#' d  <- read_wq("dataset-real.csv")
+#' d2 <- iqa(d, na_rm = TRUE); d2$year <- as.integer(format(d2$data, "%Y"))
 #'
+#' # Marcadores padrao + legenda de IQA
+#' plot_map(d2, color_by="IQA", group_by="year", popup="ponto",
+#'          legend_title = "IQA (0–100)")
+#' }
+#' @importFrom leaflet leaflet leafletOptions addProviderTiles addMarkers
+#' @importFrom leaflet addLayersControl layersControlOptions addLegend
+#' @importFrom leaflet colorNumeric colorFactor fitBounds
 #' @export
-plot_map <- function(data,
-                     popup_cols = NULL,
-                     cluster = TRUE,
-                     color_by = NULL,
-                     tiles = "OpenStreetMap") {
+plot_map <- function(df,
+                     color_by    = NULL,
+                     popup       = NULL,
+                     group_by    = NULL,
+                     legend_title = NULL,
+                     na_rm       = TRUE) {
 
-  stopifnot(is.data.frame(data))
+  stopifnot(is.data.frame(df))
 
-  # Detectar colunas de coordenadas
-  cols <- tolower(names(data))
-  lat_idx <- match(c("latitude","lat"), cols, nomatch = 0)
-  lon_idx <- match(c("longitude","lon"), cols, nomatch = 0)
-  lat_col <- names(data)[lat_idx[lat_idx > 0][1]]
-  lon_col <- names(data)[lon_idx[lon_idx > 0][1]]
-  if (is.na(lat_col) || is.na(lon_col)) {
-    stop("Colunas de latitude/longitude n\u00e3o encontradas. Use 'latitude'/'longitude' ou 'lat'/'lon'.")
+  # map alternative coordinate column names if needed
+  nm <- names(df)
+  if (!("lat" %in% nm) && ("latitude" %in% nm)) {
+    df$lat <- df$latitude
+  }
+  if (!("lon" %in% nm) && ("longitude" %in% nm)) {
+    df$lon <- df$longitude
   }
 
-  df <- data
-  df$latitude  <- suppressWarnings(as.numeric(df[[lat_col]]))
-  df$longitude <- suppressWarnings(as.numeric(df[[lon_col]]))
-
-  n_in <- nrow(df)
-  df <- df[!is.na(df$latitude) & !is.na(df$longitude), ]
-  df <- df[df$latitude >= -90 & df$latitude <= 90 &
-             df$longitude >= -180 & df$longitude <= 180, ]
-  if (nrow(df) < n_in) {
-    warning(n_in - nrow(df), " registros removidos por coordenadas inv\u00e1lidas.")
-  }
-  if (nrow(df) == 0) {
-    stop("Nenhum ponto com coordenadas v\u00e1lidas para plotar.")
+  if (!("lat" %in% names(df) && "lon" %in% names(df))) {
+    stop("plot_map: columns 'lat' and 'lon' (latitude/longitude) are required.")
   }
 
-  # Popup
-  if (is.null(popup_cols)) {
-    popup_cols <- intersect(c("rio","ponto","data","iqa"), names(df))
-  }
-  make_popup <- function(r) {
-    if (length(popup_cols) == 0) return(NULL)
-    paste(sprintf("<b>%s:</b> %s", popup_cols, r[popup_cols]), collapse = "<br>")
+  # ----- coords: coerce & validate
+  df$lat <- suppressWarnings(as.numeric(df$lat))
+  df$lon <- suppressWarnings(as.numeric(df$lon))
+  ok <- is.finite(df$lat) & is.finite(df$lon) &
+        df$lat >= -90 & df$lat <= 90 & df$lon >= -180 & df$lon <= 180
+
+  if (na_rm) {
+    bad <- sum(!ok, na.rm = TRUE)
+    if (bad > 0) warning(bad, " registros removidos por coordenadas invalidas.")
+    df <- df[ok, , drop = FALSE]
+  } else {
+    df$lat[!ok] <- NA_real_; df$lon[!ok] <- NA_real_
   }
 
-  # Paleta/cores
-  pal <- NULL
-  class_col <- NULL
+  if (!nrow(df)) {
+    return(leaflet::leaflet() |> leaflet::addTiles())
+  }
+
+  # ----- popup
+  has_popup <- !is.null(popup) && popup %in% names(df)
+  popup_txt <- if (has_popup) as.character(df[[popup]]) else NULL
+
+  # ----- base map
+  m <- leaflet::leaflet(options = leaflet::leafletOptions(preferCanvas = TRUE)) |>
+       leaflet::addProviderTiles("CartoDB.Positron")
+
+  # ----- add points (with/without grouping) - ALWAYS default markers
+  has_group <- !is.null(group_by) && group_by %in% names(df)
+
+  if (has_group) {
+    groups <- unique(df[[group_by]])
+    groups <- groups[!is.na(groups)]
+    for (g in groups) {
+      idx  <- which(df[[group_by]] == g)
+      dsub <- df[idx, , drop = FALSE]
+      pp   <- if (has_popup) popup_txt[idx] else NULL
+
+      m <- leaflet::addMarkers(
+        m, lng = dsub$lon, lat = dsub$lat,
+        popup = pp, group = as.character(g)
+      )
+    }
+    m <- leaflet::addLayersControl(
+      m, overlayGroups = as.character(groups),
+      options = leaflet::layersControlOptions(collapsed = FALSE)
+    )
+  } else {
+    m <- leaflet::addMarkers(
+      m, lng = df$lon, lat = df$lat, popup = popup_txt
+    )
+  }
+
+  # ----- legend (only to describe color_by values; pins remain default)
   if (!is.null(color_by) && color_by %in% names(df)) {
-    vals <- df[[color_by]]
-    if (identical(color_by, "iqa")) {
-      breaks <- c(0, 25, 50, 70, 90, 100)
-      labels <- c("P\u00e9ssimo","Ruim","Regular","Bom","\u00d3timo")
-      cls <- cut(as.numeric(vals), breaks = breaks, labels = labels, include.lowest = TRUE)
-      class_col <- cls
-      pal <- leaflet::colorFactor("viridis", domain = levels(cls))
-    } else if (is.numeric(vals)) {
-      pal <- leaflet::colorNumeric("viridis", domain = vals)
+    v <- df[[color_by]]
+    lt <- if (is.null(legend_title)) color_by else legend_title
+
+    if (is.numeric(v)) {
+      rng <- range(v, na.rm = TRUE); if (!all(is.finite(rng))) rng <- c(0, 1)
+      pal <- leaflet::colorNumeric("viridis", domain = rng, na.color = "#cccccc")
+      m <- leaflet::addLegend(m, pal = pal, values = v, opacity = 0.9, title = lt)
     } else {
-      pal <- leaflet::colorFactor("viridis", domain = vals)
+      v <- as.factor(v)
+      pal <- leaflet::colorFactor("Set2", domain = levels(v), na.color = "#cccccc")
+      m <- leaflet::addLegend(m, pal = pal, values = as.integer(v), # legenda categ.
+                              labels = levels(v), opacity = 0.9, title = lt)
     }
   }
 
-  # Mapa
-  m <- leaflet::leaflet(df) |>
-    leaflet::addProviderTiles(tiles)
-
-  if (isTRUE(cluster) && nrow(df) > 1) {
-    m <- leaflet::addMarkers(
-      m, lng = ~longitude, lat = ~latitude,
-      popup = apply(df, 1, make_popup),
-      label = if (length(popup_cols)) df[[popup_cols[1]]] else NULL,
-      clusterOptions = leaflet::markerClusterOptions()
-    )
-  } else {
-    m <- leaflet::addCircleMarkers(
-      m, lng = ~longitude, lat = ~latitude,
-      popup = apply(df, 1, make_popup),
-      label = if (length(popup_cols)) df[[popup_cols[1]]] else NULL,
-      fillColor = if (!is.null(pal)) pal(df[[color_by]]) else "#3182bd",
-      color = "#222", radius = 6, stroke = TRUE, weight = 1, fillOpacity = 0.9
-    )
-  }
-
-  if (!is.null(pal)) {
-    vals_for_legend <- if (!is.null(class_col)) class_col else df[[color_by]]
-    title <- toupper(color_by)
-    m <- leaflet::addLegend(m, pal = pal, values = vals_for_legend, title = title, opacity = 1)
-  }
+  # ----- fit bounds
+  m <- leaflet::fitBounds(
+    m,
+    lng1 = min(df$lon, na.rm = TRUE), lat1 = min(df$lat, na.rm = TRUE),
+    lng2 = max(df$lon, na.rm = TRUE), lat2 = max(df$lat, na.rm = TRUE)
+  )
 
   m
 }

@@ -9,61 +9,66 @@ iqa(
   pesos = c(od = 0.17, coliformes = 0.15, dbo = 0.1, nt_total = 0.1, p_total = 0.1,
     turbidez = 0.08, tds = 0.08, pH = 0.12, temperatura = 0.1),
   method = c("CETESB_approx"),
-  na_rm = FALSE
+  na_rm = FALSE,
+  add_status = TRUE,
+  locale = c("pt", "en"),
+  ...
 )
 }
 \arguments{
-\item{df}{Data frame (or tibble) with required parameter columns.
-Expected defaults (Portuguese names): \code{od}, \code{coliformes},
+\item{df}{Data frame (ou tibble) com as colunas requeridas.
+Nomes esperados (portugues): \code{od}, \code{coliformes},
 \code{dbo}, \code{nt_total}, \code{p_total}, \code{turbidez},
-\code{tds}, \code{ph} (or \code{pH}), \code{temperatura}.}
+\code{tds}, \code{ph} (ou \code{pH}), \code{temperatura}.}
 
-\item{pesos}{Named numeric weights for each parameter (sum not required).
-Defaults follow CETESB/NSF practice:
-\itemize{
-\item \code{od = 0.17}
-\item \code{coliformes = 0.15}
-\item \code{dbo = 0.10}
-\item \code{nt_total = 0.10}
-\item \code{p_total = 0.10}
-\item \code{turbidez = 0.08}
-\item \code{tds = 0.08}
-\item \code{pH = 0.12} (mapped to column \code{ph} if needed)
-\item \code{temperatura = 0.10}
-}}
+\item{pesos}{Pesos nomeados para cada parametro. Padroes seguem pratica
+CETESB/NSF: \code{od=.17}, \code{coliformes=.15}, \code{dbo=.10},
+\code{nt_total=.10}, \code{p_total=.10}, \code{turbidez=.08},
+\code{tds=.08}, \code{pH=.12}, \code{temperatura=.10}.}
 
-\item{method}{Character scalar; interpolation table set. Currently
-only \code{"CETESB_approx"}.}
+\item{method}{Conjunto de curvas de interpolacao; atualmente apenas
+\code{"CETESB_approx"}.}
 
-\item{na_rm}{Logical; if \code{FALSE} (default), rows containing
-missing Qi values will trigger an error. If \code{TRUE}, the IQA
-is computed using only available parameters, with the denominator
-adjusted to the sum of the weights of present parameters.}
+\item{na_rm}{Logico; se \code{FALSE} (padrao), linhas com Qi ausentes
+geram erro. Se \code{TRUE}, o IQA e computado usando apenas os
+parametros disponiveis e o denominador e ajustado para a soma dos
+pesos presentes.}
+
+\item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna
+\code{IQA_status} com a classificacao qualitativa (0-100).}
+
+\item{locale}{Idioma de \code{IQA_status}: \code{"pt"} (padrao) ou
+\code{"en"}.}
+
+\item{...}{Reservado para uso futuro (ignorado).}
 }
 \value{
-The input \code{df} with an added numeric column \code{IQA}. The
-attribute \code{"iqa_method"} is set on the returned data.frame/tibble.
+O \code{df} de entrada com a coluna numerica \code{IQA} (0-100) e,
+quando \code{add_status = TRUE}, a coluna fator \code{IQA_status}.
+O atributo \code{"iqa_method"} e definido no objeto retornado.
 }
 \description{
-Computes IQA/WQI by combining parameter-specific sub-scores (Qi) via
-a \strong{weighted mean}. Sub-scores are obtained by piecewise-linear
-interpolation over approximate curves (CETESB/NSF-like).
+Computa o IQA/WQI combinando subindices (Qi) por \strong{media ponderada}.
+Os subindices sao obtidos por interpolacao linear por trechos sobre
+curvas aproximadas (estilo CETESB/NSF).
 }
 \details{
-Column name compatibility:
+Compatibilidade de nomes:
 \itemize{
-\item The interpolation table uses the key \code{"pH"}.
-If your data uses a \code{ph} column (lowercase), it is
-automatically mapped to the \code{"pH"} curve.
-\item All other parameter names are used as-is.
+\item A tabela de curvas usa a chave \code{"pH"}.
+Se seus dados possuem \code{ph} (minusculo), a curva \code{"pH"}
+e mapeada para a coluna \code{ph}.
+\item Para \code{temperatura}, a coluna \code{temp} (alias comum)
+e automaticamente aceita caso \code{temperatura} nao exista.
 }
 
-Values are clipped into \code{[0, 100]} after aggregation.
+Se as curvas internas retornarem Qi em 0-10 (variante historica),
+o valor agregado e normalizado internamente para 0-100 antes do retorno.
+Valores finais sao limitados ao intervalo \code{[0, 100]}.
 }
 \examples{
-# Minimal example using the demo data:
 d <- wq_demo
 d2 <- iqa(d, na_rm = TRUE)
-head(d2$IQA)
+table(d2$IQA_status, useNA = "ifany")
 
 }

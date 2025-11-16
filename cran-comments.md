@@ -7,10 +7,10 @@
 0 errors | 0 warnings | 0 notes
 
 ## Changes
-- v0.7.3 (patch, backward-compatible):
-  * iqa(): alias `temp` para `temperatura`, saneamento numérico (vírgula decimal, < >), reponderação com `na_rm=TRUE`.
-  * iet_carlson() / iet_lamparelli(): aceitam `data.frame`, auto-detecção de `secchi/chla(clorofila)/tp(p_total)`, conversão `p_total (mg/L) → tp (µg/L)`, `.keep_ids` para preservar identificadores.
-  * Sem novas dependências; API retrocompatível.
+- v0.8.0 (minor, backward-compatible):
+  * `wq_demo` now points to a real subset of monitoring data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), 20 rows and 14 columns (including `rio`, `lat`, `lon`).
+  * All examples and vignettes updated to use the real dataset, improving reproducibility and documentation value.
+  * No API break; functions and test expectations remain valid.
 
 ## Reverse dependencies
 - No reverse dependencies at this time.

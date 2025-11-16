@@ -1,30 +1,32 @@
-#' Demo water quality dataset
+#' Example water quality dataset (subset of real data)
 #'
-#' A tiny example dataset used in examples and vignettes. Column names follow
-#' the package's Portuguese conventions (e.g., `ponto`, `data`, `turbidez`).
+#' A small subset of real monitoring data used in examples and vignettes. Now includes extra columns `rio`, `lat`, `lon`.
 #'
-#' @format A data frame (tibble) with 20 rows and 11 columns:
+#' @format A tibble/data.frame with 20 rows and 14 columns:
 #' \describe{
+#'   \item{rio}{character, river name}
 #'   \item{ponto}{character, monitoring point id}
 #'   \item{data}{Date, sampling date}
 #'   \item{ph}{numeric, pH}
 #'   \item{od}{numeric, dissolved oxygen (mg/L)}
 #'   \item{turbidez}{numeric, NTU}
 #'   \item{dbo}{numeric, mg/L}
-#'   \item{coliformes}{integer, MPN/100 mL}
+#'   \item{coliformes}{numeric, MPN/100 mL}
 #'   \item{p_total}{numeric, total phosphorus (mg/L)}
 #'   \item{nt_total}{numeric, total nitrogen (mg/L)}
 #'   \item{temperatura}{numeric, degrees Celsius}
 #'   \item{tds}{numeric, total dissolved solids (mg/L)}
+#'   \item{lat}{numeric, latitude}
+#'   \item{lon}{numeric, longitude}
 #' }
 #'
 #' @usage data(wq_demo)
 #'
 #' @details
-#' The dataset is simulated for illustrative purposes and is suitable for
-#' quick examples of \code{iqa()}, \code{conama_check()}, and plotting helpers.
+#' The dataset is a real subset selected from BURANHEM river (dataset-real.csv), used for reproducible examples and vignettes.
+#' Covers 4 monitoring points and years 2020–2024. All core columns for IQA/CONAMA/plotting helpers are present.
 #'
-#' @source Simulated for package examples.
+#' @source Subset of dataset-real.csv (BURANHEM river, 4 sites, years 2020–2024).
 #'
 #' @seealso \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=plot_series]{plot_series()}},
 #'   \code{\link[=plot_box]{plot_box()}}, \code{\link[=plot_iqa]{plot_iqa()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}

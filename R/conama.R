@@ -110,14 +110,19 @@ conama_check <- function(df, classe = "2") {
   for (p in params_present) {
     v <- out[[p]]
 
-    # coerce to numeric if needed (optional helper if available)
+    # coerce to numeric if needed
     if (!is.numeric(v)) {
+      # Try direct conversion first
       v_num <- suppressWarnings(as.numeric(v))
+      # If all NA, try helper from io_clean.R if available in namespace
       if (all(is.na(v_num))) {
-        if (exists(".to_number_auto", mode = "function")) {
-          v_num <- .to_number_auto(v)
-        } else {
-          v_num <- suppressWarnings(as.numeric(v))
+        # Use internal helper from tikatuwq namespace if available
+        to_num_helper <- tryCatch(
+          get(".to_number_auto", envir = asNamespace("tikatuwq"), inherits = FALSE),
+          error = function(e) NULL
+        )
+        if (!is.null(to_num_helper)) {
+          v_num <- to_num_helper(v)
         }
       }
       v <- v_num
@@ -218,6 +223,7 @@ conama_check <- function(df, classe = "2") {
 #'
 #' @export
 #' @importFrom rlang .data
+#' @importFrom purrr map_dfr
 conama_summary <- function(df, classe = "2") {
   chk <- conama_check(df, classe = classe)
   lim <- conama_limits()

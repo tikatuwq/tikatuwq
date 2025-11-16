@@ -40,21 +40,20 @@ devtools::check("tikatuwq")
 
 ---
 
+## Dados reais incluídos: Rio Buranhem - INEMA
+
+Este pacote inclui agora um conjunto real de dados de qualidade da água, extraídos de campanhas de monitoramento do INEMA (Instituto do Meio Ambiente e Recursos Hídricos da Bahia) na bacia do Rio Buranhem (Porto Seguro, Bahia) entre 2021 e 2024. Os dados trazem datas de amostragem, locais (pontos) e variáveis físico-químicas coletadas em campo. Veja a documentação de `wq_demo` para detalhes sobre colunas e exemplos de uso.
+
+A documentação principal e os vignettes usam este conjunto representativo para reproducibilidade.
+
 ## Fluxo básico de uso
 
 ```r
-df <- read_wq(system.file("extdata","exemplo_chamagunga.csv", package="tikatuwq")) |>
-  validate_wq() |>
-  iqa(na_rm = TRUE)
-
-plot_iqa(df)
-
-# Texto analítico (baseado em regras)
-pars <- generate_analysis(df, classe_conama = "2",
-                          incluir_tendencia = TRUE,
-                          parametros_tendencia = c("turbidez","od","pH"),
-                          contexto = list(rio="Chamagunga", periodo="2025-07"))
-cat(paste(pars, collapse = "\n\n"))
+library(tikatuwq)
+data(wq_demo)
+head(wq_demo)
+# Exemplo típico
+wq_demo |> validate_wq() |> iqa(na_rm = TRUE) |> plot_iqa()
 ```
 
 ---
@@ -72,7 +71,14 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ## 🆕 Novidades
 
-### 🆕 Novidades na versão 0.7.3 (atual)
+### 🆕 Novidades na versão 0.8.0 (atual)
+
+- O dataset de exemplo `wq_demo` agora é um subconjunto real de dados (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), com 20 linhas e 14 colunas (incluindo `rio`, `lat`, `lon`).
+- Exemplos e vignettes passam a usar este conjunto real para maior reprodutibilidade e clareza.
+- Documentação atualizada (help do dataset, README, vignette) para refletir a mudança.
+- Sem quebra de API; comportamento permanece compatível com versões anteriores.
+
+### Novidades na versão 0.7.3
 
 - IQA mais robusto
 Aceita temp como alias de temperatura.
@@ -143,7 +149,7 @@ install.packages("remotes")  # ou devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável (por tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.7.0", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.8.0", build_vignettes = TRUE)
 ```
 
 ---
@@ -195,7 +201,7 @@ citation("tikatuwq")
 
 Se você utilizar o **tikatuwq** em suas pesquisas, cite da seguinte forma:
 
-> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.7.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
+> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.8.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
 
 Entrada BibTeX:
 
@@ -204,7 +210,7 @@ Entrada BibTeX:
   title  = {tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil},
   author = {Vinicius Saraiva Santos},
   year   = {2025},
-  note   = {R package version 0.7.0},
+  note   = {R package version 0.8.0},
   doi    = {10.5281/zenodo.17407297},
   url    = {https://github.com/tikatuwq/tikatuwq},
 }

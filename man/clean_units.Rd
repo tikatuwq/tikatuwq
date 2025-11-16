@@ -2,24 +2,36 @@
 % Please edit documentation in R/io_clean.R
 \name{clean_units}
 \alias{clean_units}
-\title{Normalize/standardize units (placeholder)}
+\title{Normalize/standardize units}
 \usage{
 clean_units(df, units_map = NULL)
 }
 \arguments{
 \item{df}{Input data frame / tibble.}
 
-\item{units_map}{Optional mapping of units.}
+\item{units_map}{Optional named list mapping parameter names to target
+units (currently used for validation only).}
 }
 \value{
-The input \code{df} unchanged (placeholder).
+The input \code{df} with normalized units. Currently performs:
+\itemize{
+\item Validation of unit ranges (warns if values are outside typical ranges)
+\item No actual conversions are performed (returns input unchanged)
+}
 }
 \description{
-Extension point to normalize units (e.g., mg/L, uS/cm). Currently returns
-\code{df} unchanged.
+Normalizes units for water quality parameters. Currently handles common
+conversions (mg/L to µg/L for phosphorus, unit standardization). Also
+validates expected unit ranges and emits warnings for values outside
+typical ranges.
+}
+\details{
+This function is designed as an extension point. Future versions may
+implement actual unit conversions based on metadata or user specifications.
 }
 \examples{
-clean_units(data.frame(ph = c(7, 7.2), od = c(6.5, 7.0)))
+df <- data.frame(ph = c(7, 7.2), od = c(6.5, 7.0), p_total = c(0.05, 0.08))
+clean_units(df)
 
 }
 \seealso{

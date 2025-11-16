@@ -9,7 +9,7 @@ error listing the missing names."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,8 @@ error listing the missing names.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">validate_wq</span><span class="op">(</span></span>
 <span>  <span class="va">df</span>,</span>
 <span>  required <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ph"</span>, <span class="st">"turbidez"</span>, <span class="st">"od"</span>, <span class="st">"dbo"</span>, <span class="st">"nt_total"</span>, <span class="st">"p_total"</span>, <span class="st">"tds"</span>,</span>
-<span>    <span class="st">"temperatura"</span>, <span class="st">"coliformes"</span><span class="op">)</span></span>
+<span>    <span class="st">"temperatura"</span>, <span class="st">"coliformes"</span><span class="op">)</span>,</span>
+<span>  nd_policy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ld2"</span>, <span class="st">"ld"</span>, <span class="st">"zero"</span>, <span class="st">"na"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -54,11 +55,20 @@ error listing the missing names.</p>
 
 
 <dl><dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>Input data frame / tibble.</p></dd>
+<dd><p>Input data.frame/tibble to validate.</p></dd>
 
 
 <dt id="arg-required">required<a class="anchor" aria-label="anchor" href="#arg-required"></a></dt>
-<dd><p>Character vector of required column names.</p></dd>
+<dd><p>Character vector of required column names to check for.</p></dd>
+
+
+<dt id="arg-nd-policy">nd_policy<a class="anchor" aria-label="anchor" href="#arg-nd-policy"></a></dt>
+<dd><p>Policy for censored values (ND/&lt;LD/&lt;LOQ) when required
+columns are not numeric. One of:</p><ul><li><p>"ld2" (default): use half the detection limit</p></li>
+<li><p>"ld"           : use the detection limit</p></li>
+<li><p>"zero"         : replace with 0</p></li>
+<li><p>"na"           : replace with NA</p></li>
+</ul></dd>
 
 </dl></div>
     <div class="section level2">

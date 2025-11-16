@@ -2,46 +2,61 @@
 % Please edit documentation in R/plot_map.R
 \name{plot_map}
 \alias{plot_map}
-\title{Mapa interativo de pontos de coleta}
+\title{Plot interactive map of sampling points (default Leaflet pins)}
 \usage{
 plot_map(
-  data,
-  popup_cols = NULL,
-  cluster = TRUE,
+  df,
   color_by = NULL,
-  tiles = "OpenStreetMap"
+  popup = NULL,
+  group_by = NULL,
+  legend_title = NULL,
+  na_rm = TRUE
 )
 }
 \arguments{
-\item{data}{Um data.frame contendo as colunas de coordenadas.
-Sao aceitos nomes "latitude"/"longitude" ou "lat"/"lon".}
+\item{df}{data.frame/tibble with coordinates; must contain \code{lat}/\code{lon}
+(or \code{latitude}/\code{longitude}, which will be mapped automatically).}
 
-\item{popup_cols}{Vetor de colunas a exibir no popup (ex.: c("rio","ponto","data","iqa")).
-Se NULL, usa colunas comuns se existirem.}
+\item{color_by}{optional column used to build a legend (numeric or factor).
+It does not change the marker color.}
 
-\item{cluster}{Agrupar marcadores proximos (TRUE/FALSE). Default = TRUE.}
+\item{popup}{optional column name with popup/tooltip text.}
 
-\item{color_by}{Nome de coluna para colorir os pontos (opcional).
-Se for "iqa", aplica classes de qualidade da agua.}
+\item{group_by}{optional column name to create overlay layers (e.g., "year").}
 
-\item{tiles}{Provedor de tiles (default = "OpenStreetMap").}
+\item{legend_title}{optional legend title (used when \code{color_by} is set).}
+
+\item{na_rm}{logical; if \code{TRUE} (default) remove rows with invalid
+coordinates.}
 }
 \value{
-Objeto htmlwidget (mapa Leaflet).
+a \code{leaflet} htmlwidget.
 }
 \description{
-Gera um mapa Leaflet com os pontos de coleta que possuam coordenadas
-de latitude e longitude validas. Mostra informacoes adicionais no popup.
+Creates an interactive Leaflet map of sampling points using the \strong{default
+Leaflet marker} (blue pin). Latitude/longitude are autodetected from
+columns \code{lat} and \code{lon}. If these columns are not present, but
+\code{latitude} and/or \code{longitude} exist, they are automatically
+copied to \code{lat} and \code{lon}. You may group layers with
+\code{group_by} (e.g., "year") and show popups with \code{popup}.
+
+If \code{color_by} is provided, a legend is drawn to describe the values,
+but \strong{markers are not colorized} (the default \emph{Leaflet} pin has fixed
+style).
+}
+\details{
+The function expects coordinates in columns named \code{lat} and \code{lon}.
+If those columns are not found, but \code{latitude} and/or \code{longitude}
+are present, they are copied to \code{lat} and \code{lon} respectively
+before plotting.
 }
 \examples{
-df <- data.frame(
-  rio = c("Buranhem","Chamagunga"),
-  ponto = c("P1","P2"),
-  data = as.Date(c("2025-09-20","2025-09-21")),
-  latitude = c(-16.435, -16.498),
-  longitude = c(-39.062, -39.080),
-  iqa = c(72, 58)
-)
-plot_map(df, popup_cols = c("rio","ponto","data","iqa"), color_by = "iqa")
+\dontrun{
+d  <- read_wq("dataset-real.csv")
+d2 <- iqa(d, na_rm = TRUE); d2$year <- as.integer(format(d2$data, "\%Y"))
 
+# Marcadores padrao + legenda de IQA
+plot_map(d2, color_by="IQA", group_by="year", popup="ponto",
+         legend_title = "IQA (0–100)")
+}
 }

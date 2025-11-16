@@ -1,0 +1,151 @@
+Context:
+This repository is the R package `tikatuwq`. The function `plot_map()` currently requires columns named exactly `lat` and `lon`, and throws an error:
+
+  "plot_map: columns 'lat' and 'lon' (latitude/longitude) are required."
+
+We want to make this function more user-friendly by accepting both:
+- `lat` OR `latitude`
+- `lon` OR `longitude`
+
+while keeping the error message and behavior consistent and CRAN-safe.
+
+Please perform the following changes.
+
+====================================================
+TASK 1 – Update plot_map() to accept latitude/longitude as aliases
+====================================================
+
+1. Locate the implementation of `plot_map()` (most likely in `R/plot_map.R`).
+
+2. Before the current check that requires columns `lat` and `lon`, insert logic to map possible alternative column names:
+
+   - If there is no `lat` column, but there is a `latitude` column, create `lat` as a copy of `latitude`.
+   - If there is no `lon` column, but there is a `longitude` column, create `lon` as a copy of `longitude`.
+
+   The logic should look like this (adapt to the existing style of the function, using ASCII-only):
+
+   ```r
+   # try to map alternative coordinate column names
+   nm <- names(df)
+
+   if (!("lat" %in% nm) && ("latitude" %in% nm)) {
+     df$lat <- df$latitude
+   }
+
+   if (!("lon" %in% nm) && ("longitude" %in% nm)) {
+     df$lon <- df$longitude
+   }
+After this mapping, keep the existing validation that ensures both lat and lon are present. For example (pseudocode):
+
+r
+Copiar código
+if (!all(c("lat", "lon") %in% names(df))) {
+  rlang::abort("plot_map: columns 'lat' and 'lon' (latitude/longitude) are required.")
+}
+Do not change the error message text, so that existing tests and users remain compatible.
+
+Make sure that the rest of plot_map() uses lat and lon internally (not latitude or longitude), so that the function always works on the normalized column names.
+
+Keep the code ASCII-only and do not introduce new dependencies.
+
+====================================================
+TASK 2 – Update documentation of plot_map()
+In the roxygen2 documentation block for plot_map() (in the same R file), update the @details or @param section to clearly state:
+
+That the function expects coordinates in columns named lat and lon.
+
+But it will automatically recognize and use latitude and longitude if these are present instead of lat/lon.
+
+For example (ASCII-only, adjust wording as needed):
+
+r
+Copiar código
+#' @details
+#' The function expects latitude and longitude in columns named `lat` and `lon`.
+#' If these columns are not found, but `latitude` and/or `longitude` are present,
+#' they are automatically copied to `lat` and `lon` before plotting.
+After editing the roxygen block, run devtools::document() (or at least ensure roxygen2 tags are consistent so the Rd file for plot_map will be updated correctly).
+
+====================================================
+TASK 3 – Update and extend tests for plot_map()
+Open the test file tests/testthat/test-plot_map.R.
+
+Adjust and extend the tests so we explicitly cover three cases:
+
+a) Case 1 – Error when there are no coordinate columns:
+
+r
+Copiar código
+test_that("plot_map errors when there are no coordinate columns", {
+  skip_on_cran()
+
+  df <- data.frame(x = 1:3)
+  expect_error(
+    plot_map(df),
+    "latitude/longitude"
+  )
+})
+b) Case 2 – Accepts lat/lon and warns when there is an invalid coordinate (e.g. NA):
+
+r
+Copiar código
+test_that("plot_map accepts lat/lon and warns on invalid coordinates", {
+  skip_on_cran()
+
+  df <- data.frame(
+    rio   = c("R1", "R2"),
+    ponto = c("P1", "P2"),
+    lat   = c(-12.1, NA),
+    lon   = c(-38.5, -38.6),
+    iqa   = c(70, 50)
+  )
+
+  expect_warning(
+    m <- plot_map(df),
+    regexp = "coordenad(as|es)|removid(o|a)s|invalid|removed",
+    ignore.case = TRUE
+  )
+
+  expect_true(inherits(m, "leaflet"))
+})
+c) Case 3 – NEW TEST: Accepts latitude/longitude alias and produces the same type of object, without error:
+
+r
+Copiar código
+test_that("plot_map accepts latitude/longitude as aliases for lat/lon", {
+  skip_on_cran()
+
+  df <- data.frame(
+    rio       = c("R1", "R2"),
+    ponto     = c("P1", "P2"),
+    latitude  = c(-12.1, -12.2),
+    longitude = c(-38.5, -38.6),
+    iqa       = c(70, 50)
+  )
+
+  m <- plot_map(df)
+
+  expect_true(inherits(m, "leaflet"))
+})
+Ensure the tests remain ASCII-only and use skip_on_cran() as in the current style.
+
+====================================================
+TASK 4 – Run checks
+After making the changes above, run in R:
+
+r
+Copiar código
+devtools::document()
+devtools::test()
+devtools::check()
+Confirm that:
+
+All plot_map tests pass.
+
+There are no new ERRORs or WARNINGs introduced by these changes.
+
+Only the known NOTE (if any, such as non-standard top-level file) remains.
+
+Do not modify other functions or vignettes unless they break because of these changes.
+
+End of instructions.
