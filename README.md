@@ -72,6 +72,19 @@ The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos*
 
 ## 🆕 News
 
+
+### 🆕 What's new in v0.8.1
+
+- Internal adjustments to ensure full compliance with CRAN policies regarding file system access.
+- Examples and documentation now rely exclusively on the internal dataset `wq_demo`, removing any dependency on external or local files.
+- The `render_report()` function now writes output **only to temporary directories** (`tempdir()`) or to directories explicitly provided by the user.
+- Examples, tests, and documentation were reviewed to guarantee safe execution in restricted environments (e.g., CRAN check systems).
+- No API changes and no functional impact for users.
+
+✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
+✔️ Compatible with CRAN, Windows, Linux, and macOS
+
+
 ### 🆕 What's new in v0.8.0
 
 - The `wq_demo` example dataset is now a subset of real data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), with 20 rows and 14 columns (including `rio`, `lat`, `lon`).
@@ -152,7 +165,7 @@ install.packages("remotes")  # or devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # stable version (by tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.8.0", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.8.1", build_vignettes = TRUE)
 ```
 
 ---

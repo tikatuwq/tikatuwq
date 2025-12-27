@@ -108,6 +108,19 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <h2 id="new-news">🆕 News<a class="anchor" aria-label="anchor" href="#new-news"></a>
 </h2>
 <div class="section level3">
+<h3 id="new-whats-new-in-v081">🆕 What’s new in v0.8.1<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v081"></a>
+</h3>
+<ul>
+<li>Internal adjustments to ensure full compliance with CRAN policies regarding file system access.</li>
+<li>Examples and documentation now rely exclusively on the internal dataset <code>wq_demo</code>, removing any dependency on external or local files.</li>
+<li>The <code><a href="reference/render_report.html">render_report()</a></code> function now writes output <strong>only to temporary directories</strong> (<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>) or to directories explicitly provided by the user.</li>
+<li>Examples, tests, and documentation were reviewed to guarantee safe execution in restricted environments (e.g., CRAN check systems).</li>
+<li>No API changes and no functional impact for users.</li>
+</ul>
+<p>✔️ <code>R CMD check --as-cran</code>: <strong>0 errors | 0 warnings | 0 notes</strong><br>
+✔️ Compatible with CRAN, Windows, Linux, and macOS</p>
+</div>
+<div class="section level3">
 <h3 id="new-whats-new-in-v080">🆕 What’s new in v0.8.0<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v080"></a>
 </h3>
 <ul>
@@ -228,7 +241,7 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># stable version (by tag)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.8.0"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.8.1"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
 <h3 id="conama-compliance-class-2">CONAMA compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
