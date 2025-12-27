@@ -1,7 +1,7 @@
 Package: tikatuwq
 Type: Package
 Title: Water Quality Assessment and Environmental Compliance in Brazil
-Version: 0.8.0
+Version: 0.8.1
 Authors@R:
     c(person(given = "Vinicius",
              family = "Saraiva Santos",
@@ -31,14 +31,15 @@ Imports:
     glue,
     scales,
     broom,
-    purrr,
-    leaflet
+    purrr
 Suggests:
     testthat (>= 3.0.0),
     spelling,
     rmarkdown,
     knitr,
-    pkgdown
+    pkgdown,
+    leaflet,
+    withr
 VignetteBuilder: knitr
 URL: https://github.com/tikatuwq/tikatuwq, https://tikatuwq.github.io/tikatuwq/
 BugReports: https://github.com/tikatuwq/tikatuwq/issues

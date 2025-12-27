@@ -51,12 +51,15 @@ are present, they are copied to \code{lat} and \code{lon} respectively
 before plotting.
 }
 \examples{
-\dontrun{
-d  <- read_wq("dataset-real.csv")
-d2 <- iqa(d, na_rm = TRUE); d2$year <- as.integer(format(d2$data, "\%Y"))
+\dontshow{if (requireNamespace("leaflet", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+data("wq_demo", package = "tikatuwq")
+d2 <- wq_demo |>
+  validate_wq() |>
+  iqa(na_rm = TRUE)
+d2$year <- as.integer(format(d2$data, "\%Y"))
 
 # Marcadores padrao + legenda de IQA
-plot_map(d2, color_by="IQA", group_by="year", popup="ponto",
+plot_map(d2, color_by = "IQA", group_by = "year", popup = "ponto",
          legend_title = "IQA (0–100)")
-}
+\dontshow{\}) # examplesIf}
 }

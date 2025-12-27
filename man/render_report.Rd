@@ -45,21 +45,22 @@ is not available, an informative error is thrown.
 \section{Notes}{
 
 \itemize{
-\item The default output directory is \code{tempdir()} to avoid writing into the
-user's project folder during examples or automated checks.
+\item The default output directory is \code{tempdir()} to comply with CRAN policies.
+All files (including intermediate files generated during rendering) are
+written only to \code{output_dir} or temporary directories, never to the package
+installation directory.
 \item The template is an \strong{Rmd} (R Markdown). If you prefer Quarto, provide a
 custom \code{template} path to a \code{.qmd} and ensure your environment supports it.
 }
 }
 
 \examples{
-\donttest{
+\dontshow{if (requireNamespace("rmarkdown", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Minimal example (writes to a temporary directory)
 d <- wq_demo
 path <- render_report(d, meta = list(river = "Example River", period = "Jan–Feb"))
 file.exists(path)
-}
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{rmarkdown::render()}

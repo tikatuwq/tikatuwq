@@ -1,4 +1,5 @@
-test_that("plot_map errors when there are no coordinate columns", {
+test_that("plot_map errors when leaflet not available", {
+  skip_if_not_installed("leaflet")
   skip_on_cran()
   df <- data.frame(x = 1:3)
   expect_error(
@@ -8,6 +9,7 @@ test_that("plot_map errors when there are no coordinate columns", {
 })
 
 test_that("plot_map accepts lat/lon and warns on invalid coordinates", {
+  skip_if_not_installed("leaflet")
   skip_on_cran()
   df <- data.frame(
     rio   = c("R1", "R2"),
@@ -25,6 +27,7 @@ test_that("plot_map accepts lat/lon and warns on invalid coordinates", {
 })
 
 test_that("plot_map accepts latitude/longitude as aliases for lat/lon", {
+  skip_if_not_installed("leaflet")
   skip_on_cran()
   df <- data.frame(
     rio       = c("R1", "R2"),

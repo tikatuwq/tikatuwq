@@ -28,18 +28,18 @@
 #' @returns Invisible character string: the absolute path to the generated report.
 #'
 #' @section Notes:
-#' - The default output directory is `tempdir()` to avoid writing into the
-#'   user's project folder during examples or automated checks.
+#' - The default output directory is `tempdir()` to comply with CRAN policies.
+#'   All files (including intermediate files generated during rendering) are
+#'   written only to `output_dir` or temporary directories, never to the package
+#'   installation directory.
 #' - The template is an **Rmd** (R Markdown). If you prefer Quarto, provide a
 #'   custom `template` path to a `.qmd` and ensure your environment supports it.
 #'
-#' @examples
-#' \donttest{
+#' @examplesIf requireNamespace("rmarkdown", quietly = TRUE)
 #' # Minimal example (writes to a temporary directory)
 #' d <- wq_demo
 #' path <- render_report(d, meta = list(river = "Example River", period = "Jan–Feb"))
 #' file.exists(path)
-#' }
 #'
 #' @seealso \code{rmarkdown::render()}
 #' @family reporting
@@ -57,20 +57,38 @@ render_report <- function(
   }
   if (!requireNamespace("rmarkdown", quietly = TRUE)) {
     stop("Package 'rmarkdown' is required to render the report. ",
-         "Please install it with install.packages('rmarkdown').")
+         "Please install it: install.packages('rmarkdown')", call. = FALSE)
   }
   if (!dir.exists(output_dir)) {
     ok <- dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
     if (!ok) stop("Could not create output_dir: ", output_dir)
   }
 
-  # run render
+  # CRAN compliance: copy template to writable temp directory
+  # This prevents rmarkdown::render() from writing intermediate files
+  # to the read-only package installation directory
+  template_dir <- tempfile("tikatuwq_template_")
+  dir.create(template_dir, showWarnings = FALSE)
+  on.exit(unlink(template_dir, recursive = TRUE), add = TRUE)
+  
+  template_basename <- basename(template)
+  template_copy <- file.path(template_dir, template_basename)
+  file.copy(template, template_copy, overwrite = TRUE)
+  
+  # Ensure output_file has no path components (only basename)
+  output_file <- basename(output_file)
+  if (!nzchar(output_file)) {
+    output_file <- "wq_report.html"
+  }
+
+  # run render with isolated environment and explicit output settings
   out <- rmarkdown::render(
-    input       = template,
+    input       = template_copy,
     output_file = output_file,
     output_dir  = output_dir,
     params      = list(data = df, meta = meta),
-    quiet       = TRUE
+    quiet       = TRUE,
+    envir       = new.env(parent = globalenv())
   )
 
   # rmarkdown::render returns the full path (character)

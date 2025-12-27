@@ -34,18 +34,16 @@
 #'
 #' @return a \code{leaflet} htmlwidget.
 #'
-#' @examples
-#' \dontrun{
-#' d  <- read_wq("dataset-real.csv")
-#' d2 <- iqa(d, na_rm = TRUE); d2$year <- as.integer(format(d2$data, "%Y"))
+#' @examplesIf requireNamespace("leaflet", quietly = TRUE)
+#' data("wq_demo", package = "tikatuwq")
+#' d2 <- wq_demo |>
+#'   validate_wq() |>
+#'   iqa(na_rm = TRUE)
+#' d2$year <- as.integer(format(d2$data, "%Y"))
 #'
 #' # Marcadores padrao + legenda de IQA
-#' plot_map(d2, color_by="IQA", group_by="year", popup="ponto",
+#' plot_map(d2, color_by = "IQA", group_by = "year", popup = "ponto",
 #'          legend_title = "IQA (0–100)")
-#' }
-#' @importFrom leaflet leaflet leafletOptions addProviderTiles addMarkers
-#' @importFrom leaflet addLayersControl layersControlOptions addLegend
-#' @importFrom leaflet colorNumeric colorFactor fitBounds
 #' @export
 plot_map <- function(df,
                      color_by    = NULL,
@@ -53,6 +51,11 @@ plot_map <- function(df,
                      group_by    = NULL,
                      legend_title = NULL,
                      na_rm       = TRUE) {
+
+  if (!requireNamespace("leaflet", quietly = TRUE)) {
+    stop("Package 'leaflet' is required for plot_map(). ",
+         "Please install it: install.packages('leaflet')", call. = FALSE)
+  }
 
   stopifnot(is.data.frame(df))
 

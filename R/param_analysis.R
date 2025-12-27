@@ -42,9 +42,6 @@ NULL
   period <- match.arg(period)
   if (period == "none" || all(is.na(dates))) return(NULL)
   dates <- .as_date_safe(dates)
-  if (!requireNamespace("lubridate", quietly = TRUE)) {
-    stop("Pacote 'lubridate' necessario para agregacao por periodo.", call. = FALSE)
-  }
   if (period == "month")   return(as.character(lubridate::floor_date(dates, unit = "month")))
   if (period == "quarter") return(as.character(lubridate::floor_date(dates, unit = "quarter")))
   if (period == "year")    return(as.character(lubridate::floor_date(dates, unit = "year")))

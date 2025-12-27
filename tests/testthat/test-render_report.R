@@ -1,5 +1,7 @@
 test_that("render_report creates output file when rmarkdown available", {
+  skip_on_cran()
   skip_if_not_installed("rmarkdown")
+  skip_if_not_installed("knitr")
   skip_on_ci()  # pode ser lento
   
   df <- data.frame(
@@ -15,18 +17,30 @@ test_that("render_report creates output file when rmarkdown available", {
     temperatura = c(24, 25)
   )
   
-  # Cria diretorio temporario
-  tmp_dir <- tempfile()
-  dir.create(tmp_dir)
-  on.exit(unlink(tmp_dir, recursive = TRUE))
+  # Use withr::local_tempdir() for CRAN compliance
+  if (requireNamespace("withr", quietly = TRUE)) {
+    tmp_dir <- withr::local_tempdir()
+  } else {
+    tmp_dir <- tempfile()
+    dir.create(tmp_dir)
+    on.exit(unlink(tmp_dir, recursive = TRUE), add = TRUE)
+  }
   
   result_path <- render_report(df, output_dir = tmp_dir)
   
   expect_true(file.exists(result_path))
   expect_true(grepl("\\.html$", result_path))
+  # Verify output is within tmp_dir
+  expect_true(
+    startsWith(
+      normalizePath(result_path, winslash = "/", mustWork = FALSE),
+      normalizePath(tmp_dir, winslash = "/", mustWork = FALSE)
+    )
+  )
 })
 
 test_that("render_report errors when rmarkdown not available", {
+  skip_on_cran()
   skip_if(requireNamespace("rmarkdown", quietly = TRUE))
   
   df <- data.frame(ponto = "P1", ph = 7)
@@ -38,7 +52,9 @@ test_that("render_report errors when rmarkdown not available", {
 })
 
 test_that("render_report accepts meta parameter", {
+  skip_on_cran()
   skip_if_not_installed("rmarkdown")
+  skip_if_not_installed("knitr")
   skip_on_ci()
   
   df <- data.frame(
@@ -48,9 +64,14 @@ test_that("render_report accepts meta parameter", {
     tds = 150, temperatura = 24
   )
   
-  tmp_dir <- tempfile()
-  dir.create(tmp_dir)
-  on.exit(unlink(tmp_dir, recursive = TRUE))
+  # Use withr::local_tempdir() for CRAN compliance
+  if (requireNamespace("withr", quietly = TRUE)) {
+    tmp_dir <- withr::local_tempdir()
+  } else {
+    tmp_dir <- tempfile()
+    dir.create(tmp_dir)
+    on.exit(unlink(tmp_dir, recursive = TRUE), add = TRUE)
+  }
   
   result_path <- render_report(
     df,
@@ -59,5 +80,12 @@ test_that("render_report accepts meta parameter", {
   )
   
   expect_true(file.exists(result_path))
+  # Verify output is within tmp_dir
+  expect_true(
+    startsWith(
+      normalizePath(result_path, winslash = "/", mustWork = FALSE),
+      normalizePath(tmp_dir, winslash = "/", mustWork = FALSE)
+    )
+  )
 })
 

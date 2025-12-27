@@ -7,6 +7,12 @@
 0 errors | 0 warnings | 0 notes
 
 ## Changes
+- v0.8.1 (patch, CRAN compliance fix):
+  * **Fixed filesystem write errors on CRAN Debian/Linux**: `render_report()` now copies the R Markdown template to a temporary directory before rendering, ensuring all intermediate files are written only to `output_dir` (default `tempdir()`), never to the read-only package installation directory. This resolves the "cannot open the connection" errors during `rmarkdown::render()` → `knitr::knit()` → `xfun::write_utf8()`.
+  * Tests in `test-render_report.R` now use `skip_on_cran()` and `withr::local_tempdir()` for proper cleanup and CRAN compliance.
+  * Added `withr` to Suggests for test infrastructure.
+  * No API changes; backward compatible.
+
 - v0.8.0 (minor, backward-compatible):
   * `wq_demo` now points to a real subset of monitoring data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), 20 rows and 14 columns (including `rio`, `lat`, `lon`).
   * All examples and vignettes updated to use the real dataset, improving reproducibility and documentation value.
