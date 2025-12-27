@@ -73,6 +73,10 @@ The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos*
 ## 🆕 News
 
 
+### 🆕 What's new in v0.8.2
+
+- CRAN maintenance: Fixed example in `plot_map()` to use internal dataset `wq_demo` instead of external file reference. All examples and tests now comply with CRAN policies.
+
 ### 🆕 What's new in v0.8.1
 
 - Internal adjustments to ensure full compliance with CRAN policies regarding file system access.
@@ -165,7 +169,7 @@ install.packages("remotes")  # or devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # stable version (by tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.8.1", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 ```
 
 ---

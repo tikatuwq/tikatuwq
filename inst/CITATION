@@ -9,12 +9,12 @@ bibentry(
                    email = "vinisaraiva@gmail.com",
                    comment = c(ORCID = "0009-0007-1387-7927")),
   year    = "2025",
-  note    = "R package version 0.7.2",
+  note    = "R package version 0.8.2",
   doi     = "10.5281/zenodo.17407297",
   url     = "https://github.com/tikatuwq/tikatuwq",
   textVersion = paste(
     "Santos, V. S. (2025).",
-    "tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil (v0.7.2).",
+    "tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil (v0.8.2).",
     "Zenodo. https://doi.org/10.5281/zenodo.17407297"
   )
 )

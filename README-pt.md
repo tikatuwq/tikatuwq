@@ -149,7 +149,7 @@ install.packages("remotes")  # ou devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável (por tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.8.1", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 ```
 
 ---

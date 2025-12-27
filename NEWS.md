@@ -1,3 +1,7 @@
+# tikatuwq 0.8.2
+
+- **CRAN maintenance**: Patch release for CRAN compliance. Fixed example in `plot_map()` to use internal dataset `wq_demo` instead of external file reference. All examples and tests now comply with CRAN policies (no local file dependencies, write only to tempdir). No API changes.
+
 # tikatuwq 0.8.1
 
 - **Fix (CRAN compliance)**: `render_report()` now copies the template to a temporary directory before rendering to comply with CRAN filesystem policies. All intermediate files generated during rendering are written only to `output_dir` (default `tempdir()`), never to the package installation directory. Tests for `render_report()` are now skipped on CRAN (`skip_on_cran()`) and use `withr::local_tempdir()` for proper cleanup.
