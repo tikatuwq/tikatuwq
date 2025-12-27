@@ -13,7 +13,7 @@ generated file."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,8 +99,10 @@ is not available, an informative error is thrown.</p>
     <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a></h2>
 
 
-<ul><li><p>The default output directory is <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> to avoid writing into the
-user's project folder during examples or automated checks.</p></li>
+<ul><li><p>The default output directory is <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> to comply with CRAN policies.
+All files (including intermediate files generated during rendering) are
+written only to <code>output_dir</code> or temporary directories, never to the package
+installation directory.</p></li>
 <li><p>The template is an <strong>Rmd</strong> (R Markdown). If you prefer Quarto, provide a
 custom <code>template</code> path to a <code>.qmd</code> and ensure your environment supports it.</p></li>
 </ul></div>
@@ -111,14 +113,11 @@ custom <code>template</code> path to a <code>.qmd</code> and ensure your environ
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># Minimal example (writes to a temporary directory)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Minimal example (writes to a temporary directory)</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">wq_demo</span></span></span>
 <span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu">render_report</span><span class="op">(</span><span class="va">d</span>, meta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>river <span class="op">=</span> <span class="st">"Example River"</span>, period <span class="op">=</span> <span class="st">"Jan–Feb"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

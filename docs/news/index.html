@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,12 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.0" id="tikatuwq-080">tikatuwq 0.8.0<a class="anchor" aria-label="anchor" href="#tikatuwq-080"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.8.1" id="tikatuwq-081">tikatuwq 0.8.1<a class="anchor" aria-label="anchor" href="#tikatuwq-081"></a></h2>
+<ul><li>
+<strong>Fix (CRAN compliance)</strong>: <code><a href="../reference/render_report.html">render_report()</a></code> now copies the template to a temporary directory before rendering to comply with CRAN filesystem policies. All intermediate files generated during rendering are written only to <code>output_dir</code> (default <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>), never to the package installation directory. Tests for <code><a href="../reference/render_report.html">render_report()</a></code> are now skipped on CRAN (<code>skip_on_cran()</code>) and use <code><a href="https://withr.r-lib.org/reference/with_tempfile.html" class="external-link">withr::local_tempdir()</a></code> for proper cleanup.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.8.0" id="tikatuwq-080">tikatuwq 0.8.0<a class="anchor" aria-label="anchor" href="#tikatuwq-080"></a></h2><p class="text-muted">CRAN release: 2025-11-17</p>
 <ul><li>
 <strong>Data and documentation update</strong>: The <code>wq_demo</code> example dataset is now a subset of real data (from BURANHEM river monitoring, 4 points, years 2020–2024, 20 rows). Includes extra columns: <code>rio</code>, <code>lat</code>, and <code>lon</code>.</li>
 <li>All examples and vignettes now use real, representative dataset (greater realism and reproducibility).</li>
