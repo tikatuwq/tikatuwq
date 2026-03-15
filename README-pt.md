@@ -10,7 +10,7 @@
 [![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions) 
 ![Status do manuscrito](https://img.shields.io/badge/manuscrito-em_avaliação-yellow) 
 
-**TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros. Ele implementa os principais índices utilizados no país — **IQA/NSFWQI** e **IET (Carlson e Lamparelli)** — e fornece verificações automatizadas de conformidade com a **Resolução CONAMA 357/2005**. O pacote também inclui análise de tendências, validação de dados e geração automática de relatórios.
+**TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros. Ele implementa os principais índices utilizados no país, **IQA/NSFWQI** e **IET (Carlson e Lamparelli)**, e fornece verificações automatizadas de conformidade com a **Resolução CONAMA 357/2005**. O pacote também inclui análise de tendências, validação de dados e geração automática de relatórios.
 
 ---
 
