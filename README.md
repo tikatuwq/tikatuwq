@@ -4,6 +4,24 @@
 It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance.  
 The package also includes trend analysis, data validation, and automatic report generation.
 
+---
+
+## Scientific Scope
+
+The **tikatuwq** package was designed to support reproducible scientific workflows in freshwater monitoring and environmental assessment. Environmental monitoring datasets often present challenges such as heterogeneous formats, inconsistent parameter names, and the need to interpret regulatory thresholds.
+
+By integrating data validation, environmental indices, regulatory compliance checks, visualization, and automated reporting in a single analytical framework, **tikatuwq** enables researchers to move efficiently from **raw monitoring data to interpretable environmental assessments**.
+
+The package is particularly suited for:
+
+- freshwater monitoring programs  
+- environmental impact assessments  
+- academic research in aquatic sciences  
+- environmental agencies and regulatory analysis  
+- long-term environmental datasets  
+
+---
+
 📄 [Ler em Português](https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md)
 
 <!-- Zenodo DOI -->
@@ -59,7 +77,7 @@ wq_demo |> validate_wq() |> iqa(na_rm = TRUE) |> plot_iqa()
 
 ---
 
-### 📚 Scientific and Institutional Context
+### 📚 Project and Institutional Context
 
 The **TikatuWQ** package was developed by **Vinícius Saraiva Santos** (author and maintainer)  
 as part of the **Tikatu Research Project**, conducted within the **Nucleus for Research in Tropical Ecosystems – NuPEcoTropic**, a research group linked to the **Federal University of Southern Bahia (UFSB)** and coordinated by **Prof. Dr. Fabrício Berton Zanchi**.  
