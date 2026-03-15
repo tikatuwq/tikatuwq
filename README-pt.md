@@ -192,7 +192,7 @@ citation("tikatuwq")
 
 Se você utilizar o **tikatuwq** em suas pesquisas, cite da seguinte forma:
 
-> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.8.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
+> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.8.2). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
 
 Entrada BibTeX:
 
