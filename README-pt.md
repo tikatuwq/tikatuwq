@@ -183,26 +183,11 @@ cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
 
 ---
 
-## Citação
+### Como citar
+
+Se você utilizar o **tikatuwq** em pesquisas, relatórios ou materiais didáticos, utilize a citação oficial do pacote:
+
 ```r
 citation("tikatuwq")
 ```
 
-### Como citar
-
-Se você utilizar o **tikatuwq** em suas pesquisas, cite da seguinte forma:
-
-> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.8.2). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
-
-Entrada BibTeX:
-
-```bibtex
-@Manual{Santos2025tikatuwq,
-  title  = {tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil},
-  author = {Vinicius Saraiva Santos},
-  year   = {2025},
-  note   = {R package version 0.8.2},
-  doi    = {10.5281/zenodo.17407297},
-  url    = {https://github.com/tikatuwq/tikatuwq},
-}
-```
