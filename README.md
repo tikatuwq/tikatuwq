@@ -183,9 +183,9 @@ Legacy vector calls keep working as before.
 
 ## Installation
 
-Install the released version from CRAN:
-
 ```r
+## Install the released version from CRAN:
+
 install.packages("tikatuwq")
 
 ## Installation via GitHub
