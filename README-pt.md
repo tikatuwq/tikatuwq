@@ -20,29 +20,6 @@ O pacote **tikatuwq** foi desenvolvido para apoiar fluxos de trabalho científic
 
 ---
 
-## Instalação
-
-Instale a versão atual a partir do CRAN:
-
-install.packages("tikatuwq")
-
-Se você quiser a versão de desenvolvimento ou uma versão específica marcada por tag, 
-
-instale pelo GitHub: 
-
-```r
-
-install.packages("remotes")
-
-# versão de desenvolvimento
-
-remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
-
-# versão estável por tag
-remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
-
----
-
 ## Dados reais incluídos: Rio Buranhem - INEMA
 
 Este pacote inclui agora um conjunto real de dados de qualidade da água, extraídos de campanhas de monitoramento do INEMA (Instituto do Meio Ambiente e Recursos Hídricos da Bahia) na bacia do Rio Buranhem (Porto Seguro, Bahia) entre 2021 e 2024. Os dados trazem datas de amostragem, locais (pontos) e variáveis físico-químicas coletadas em campo. Veja a documentação de `wq_demo` para detalhes sobre colunas e exemplos de uso.
@@ -57,11 +34,13 @@ data(wq_demo)
 head(wq_demo)
 # Exemplo típico
 wq_demo |> validate_wq() |> iqa(na_rm = TRUE) |> plot_iqa()
+
+Um fluxo de análise típico com o **tikatuwq** segue um pipeline reprodutível: read_wq → validate_wq → cálculo de índices → verificação regulatória → visualização → relatório
 ```
 
 ---
 
-### 📚 Contexto Científico e Institucional
+### 📚 Projeto e Contexto Institucional
 
 O pacote **TikatuWQ** foi desenvolvido por **Vinícius Saraiva Santos** (autor e mantenedor)  
 como parte do **Projeto de Pesquisa Tikatu**, conduzido no âmbito do **Núcleo de Pesquisas em Ecossistemas Tropicais – NuPEcoTropic**, grupo de pesquisa vinculado à **Universidade Federal do Sul da Bahia (UFSB)** e coordenado pelo **Prof. Dr. Fabrício Berton Zanchi**.  
@@ -145,13 +124,22 @@ Tudo continua funcionando como antes para quem usa as chamadas vetoriais.
 
 ---
 
+## Instalação
+
+```r
+## Instale a versão atual a partir do CRAN:
+
+install.packages("tikatuwq")
+
 ## Instalação via GitHub
 
 ```r
-install.packages("remotes")  # ou devtools
+install.packages("remotes")
+
+# development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
-# versão estável (por tag)
+# tagged release
 remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 ```
 
