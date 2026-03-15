@@ -22,7 +22,7 @@ O pacote **tikatuwq** foi desenvolvido para apoiar fluxos de trabalho científic
 
 ## Instalação
 
-## Instale a versão atual a partir do CRAN:
+Instale a versão atual a partir do CRAN:
 
 install.packages("tikatuwq")
 
@@ -40,13 +40,6 @@ remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável por tag
 remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
-
-```r
-install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
-                   "readr","lubridate","stringr","glue","scales","broom","purrr"))
-devtools::load_all("tikatuwq")
-devtools::check("tikatuwq")
-```
 
 ---
 
