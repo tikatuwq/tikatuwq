@@ -258,7 +258,7 @@ BibTeX entry:
   title  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},
   author = {Vinicius Saraiva Santos},
   year   = {2025},
-  note   = {R package version 0.8.0},
+  note   = {R package version 0.8.2},
   doi    = {10.5281/zenodo.17407297},
   url    = {https://github.com/tikatuwq/tikatuwq},
 }
