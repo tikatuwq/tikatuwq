@@ -2,6 +2,16 @@
 
 **Reproducible freshwater monitoring workflows for Brazil, including water quality indices, regulatory compliance checks, and automated reporting.**
 
+```markdown
+**Author:** Vinícius Saraiva Santos  
+**Institution:** Federal University of Southern Bahia (UFSB) – Graduate Program in Biosystems  
+**Research Group:** Tropical Ecosystems Research Center (NuPEcoTropic)  
+**Project:** Tikatu – Ecosystem of tools for water quality monitoring and interpretation  
+**License:** MIT  
+**Software DOI:** https://doi.org/10.5281/zenodo.17407297  
+**Manuscript status:** scientific article currently under review in an international journal
+```
+
 [![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
