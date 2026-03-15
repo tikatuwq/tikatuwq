@@ -14,9 +14,32 @@
 
 ---
 
-## Instalação (desenvolvimento)
+## Escopo Científico 
 
-Para instalar as dependências de desenvolvimento e verificar o pacote localmente:
+O pacote **tikatuwq** foi desenvolvido para apoiar fluxos de trabalho científicos reprodutíveis em monitoramento de águas doces e avaliação ambiental. Bases de dados de monitoramento ambiental frequentemente apresentam desafios como formatos heterogêneos, nomes de parâmetros inconsistentes e necessidade de interpretar limites regulatórios. Ao integrar validação de dados, cálculo de índices ambientais, verificação de conformidade, visualização e geração automatizada de relatórios em um único fluxo analítico, o **tikatuwq** permite que pesquisadores avancem de forma eficiente de **dados brutos de monitoramento para avaliações ambientais interpretáveis**. O pacote é particularmente adequado para: - programas de monitoramento de águas doces - avaliações de impacto ambiental - pesquisa acadêmica em ciências aquáticas - agências ambientais e análises regulatórias - séries históricas e bases de dados ambientais de longo prazo
+
+---
+
+## Instalação
+
+## Instale a versão atual a partir do CRAN:
+
+install.packages("tikatuwq")
+
+Se você quiser a versão de desenvolvimento ou uma versão específica marcada por tag, 
+
+instale pelo GitHub: 
+
+```r
+
+install.packages("remotes")
+
+# versão de desenvolvimento
+
+remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
+
+# versão estável por tag
+remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 
 ```r
 install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
