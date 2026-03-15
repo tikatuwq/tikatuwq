@@ -29,17 +29,6 @@ The package is particularly suited for:
 - environmental agencies and regulatory analysis  
 - long-term environmental datasets  
 
-## Installation (development)
-
-To install development dependencies and check the package locally:
-
-```r
-install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
-                   "readr","lubridate","stringr","glue","scales","broom","purrr"))
-devtools::load_all("tikatuwq")
-devtools::check("tikatuwq")
-```
-
 ---
 
 ## Included real dataset: Rio Buranhem - INEMA
