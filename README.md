@@ -71,8 +71,9 @@ library(tikatuwq)
 data(wq_demo)
 head(wq_demo)
 
-# Typical analysis
-wq_demo |> validate_wq() |> iqa(na_rm = TRUE) |> plot_iqa()
+A typical analysis workflow using **tikatuwq** follows a reproducible pipeline:
+
+`read_wq → validate_wq → index calculation → regulatory check → visualization → reporting`
 ```
 
 ---
@@ -180,13 +181,22 @@ Legacy vector calls keep working as before.
 
 ---
 
+## Installation
+
+Install the released version from CRAN:
+
+```r
+install.packages("tikatuwq")
+
 ## Installation via GitHub
 
 ```r
-install.packages("remotes")  # or devtools
+install.packages("remotes")
+
+# development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
-# stable version (by tag)
+# tagged release
 remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 ```
 
