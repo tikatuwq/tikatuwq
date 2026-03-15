@@ -13,6 +13,7 @@
 **TikatuWQ** is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards.  
 It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance.  
 The package also includes trend analysis, data validation, and automatic report generation.
+
 ---
 
 ## Scientific Scope
