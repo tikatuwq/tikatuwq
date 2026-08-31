@@ -4,12 +4,20 @@
 \alias{conama_check}
 \title{CONAMA conformity check (detailed; default class = "2")}
 \usage{
-conama_check(df, classe = "2")
+conama_check(
+  df,
+  classe = "2",
+  environment = c("all", "lotic", "lentic", "intermediate")
+)
 }
 \arguments{
 \item{df}{A tibble/data.frame with parameter columns (e.g., ph, turbidez, od, dbo).}
 
 \item{classe}{Character class label (e.g., "especial", "1", "2", "3", "4").}
+
+\item{environment}{Optional aquatic environment context: \code{"all"} (default),
+\code{"lotic"} (rivers), \code{"lentic"} (lakes/reservoirs), or \code{"intermediate"}.
+Used to select specific regulatory thresholds for total phosphorus.}
 }
 \value{
 The input \code{df} with additional columns per parameter as described.
@@ -22,10 +30,6 @@ For each parameter present in \code{df}, adds columns:
 \item \code{*__lim_min} and \code{*__lim_max} (thresholds used),
 \item \code{*__delta} (difference to the relevant limit; >0 above max, <0 below min, 0 if ok).
 }
-If multiple limit rows exist for the same parameter, \code{*_ok} is TRUE if
-any row is satisfied; for \code{status/lim_min/lim_max/delta}, the first
-satisfied row is chosen; if none satisfy, the row with the smallest
-absolute violation (min |delta|) is used.
 }
 \examples{
 \dontrun{

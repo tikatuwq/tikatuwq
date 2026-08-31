@@ -39,3 +39,6 @@
 ^run_check_cran\.R$
 ^EXEMPLOS_TIKATUWQ\.md$
 ^banner_tikatuwq.*$
+^PROMPT_CORRECOES_.*\.md$
+^test_script\.R$
+^run_tests\.R$

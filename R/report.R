@@ -35,11 +35,12 @@
 #' - The template is an **Rmd** (R Markdown). If you prefer Quarto, provide a
 #'   custom `template` path to a `.qmd` and ensure your environment supports it.
 #'
-#' @examplesIf requireNamespace("rmarkdown", quietly = TRUE)
+#' @examplesIf requireNamespace("rmarkdown", quietly = TRUE) && rmarkdown::pandoc_available()
 #' # Minimal example (writes to a temporary directory)
 #' d <- wq_demo
 #' path <- render_report(d, meta = list(river = "Example River", period = "Jan–Feb"))
 #' file.exists(path)
+
 #'
 #' @seealso \code{rmarkdown::render()}
 #' @family reporting

@@ -2,88 +2,71 @@
 % Please edit documentation in R/nsfwqi.R
 \name{nsfwqi}
 \alias{nsfwqi}
-\title{NSF Water Quality Index (NSF WQI)}
+\title{National Sanitation Foundation Water Quality Index (NSF WQI)}
 \usage{
 nsfwqi(
   df,
   pesos = c(do = 0.17, fc = 0.16, ph = 0.11, bod = 0.11, temp_change = 0.1, po4 = 0.1,
-    no3 = 0.1, turbidez = 0.08, sst = 0.07),
+    no3 = 0.1, turbidez = 0.08, ts = 0.07),
+  aggregation = c("mcclelland_geometric", "brown1970_arithmetic"),
   na_rm = FALSE,
   add_status = TRUE,
   locale = c("pt", "en")
 )
 }
 \arguments{
-\item{df}{Data frame com as colunas de parametros (ver Detalhes).}
+\item{df}{Data frame com as colunas dos parametros.}
 
-\item{pesos}{Named numeric vector com os pesos dos parametros.
-Os defaults seguem a proposta original NSF:
-\code{do=.17}, \code{fc=.16}, \code{ph=.11}, \code{bod=.11},
-\code{temp_change=.10}, \code{po4=.10}, \code{no3=.10},
-\code{turbidez=.08}, \code{sst=.07}.}
+\item{pesos}{Vetor nomeado numerico com os pesos oficiais NSF:
+\code{do=0.17}, \code{fc=0.16}, \code{ph=0.11}, \code{bod=0.11},
+\code{temp_change=0.10}, \code{po4=0.10}, \code{no3=0.10},
+\code{turbidez=0.08}, \code{ts=0.07}.}
 
-\item{na_rm}{Logical; se \code{TRUE}, renormaliza pesos por linha para
-os parametros com valor valido. Default \code{FALSE}.}
+\item{aggregation}{Metodo de agregacao: \code{"mcclelland_geometric"} (padrao geometrico ponderado)
+ou \code{"brown1970_arithmetic"} (padrao aritmetico ponderado original de 1970).}
 
-\item{add_status}{Logical; adiciona a coluna \code{NSFWQI_status} com a
-classificacao qualitativa. Default \code{TRUE}.}
+\item{na_rm}{Logico; se \code{TRUE}, renormaliza os pesos por linha para os parametros validos.
+Se \code{FALSE} (padrao), linhas com parametros faltantes resultam em \code{NA}.}
 
-\item{locale}{Character; idioma para os rotulos de status:
-\code{"pt"} (default, portugues) ou \code{"en"} (ingles).}
+\item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna \code{NSFWQI_status}.}
+
+\item{locale}{Idioma dos rotulos: \code{"pt"} (padrao) ou \code{"en"}.}
 }
 \value{
-O data frame de entrada com a coluna \code{NSFWQI} (e
-opcionalmente \code{NSFWQI_status}) adicionada.
+O data frame de entrada com a coluna \code{NSFWQI} e, opcionalmente, \code{NSFWQI_status}.
 }
 \description{
-Calcula o NSF WQI (Brown et al., 1970) como media geometrica ponderada
-dos sub-escores dos parametros: \eqn{WQI = \prod Q_i^{w_i}}{WQI = prod(Qi^Wi)}.
-Aceita nomes de colunas no padrao brasileiro (e.g. \code{od}, \code{dbo},
-\code{coliformes}) e traduz automaticamente para os indices NSF.
+Calcula o NSF WQI suportando a agregacao multiplicativa (McClelland / NSF revisado:
+\eqn{WQI = \prod Q_i^{w_i}}{WQI = prod(Qi^Wi)}) e a agregacao aditiva original (Brown et al., 1970:
+\eqn{WQI = \sum Q_i \cdot w_i}{WQI = sum(Qi * Wi)}).
 }
 \details{
-O mapeamento tentado (alias BR -> nome NSF) e:
+O mapeamento de parametros tenta resolver colunas em formato brasileiro ou internacional:
 \describe{
-\item{\code{do}}{coluna \code{od} ou \code{do}.}
-\item{\code{fc}}{coluna \code{coliformes} ou \code{fc}.}
-\item{\code{ph}}{coluna \code{pH}, \code{ph} ou \code{pH}.}
-\item{\code{bod}}{coluna \code{dbo} ou \code{bod}.}
-\item{\code{turbidez}}{coluna \code{turbidez}.}
-\item{\code{sst}}{coluna \code{solidos_suspensos} ou \code{sst}.}
-\item{\code{po4}}{coluna \code{p_ortofosfato} ou \code{po4}.}
-\item{\code{no3}}{coluna \code{n_nitrato} ou \code{no3}.}
-\item{\code{temp_change}}{coluna \code{temp_change} (delta T relativo
-ao padrao; deve ser calculado externamente).}
+\item{\code{do}}{Oxigenio dissolvido (mg/L ou sat).}
+\item{\code{fc}}{Coliformes termotolerantes / fecais (NMP/100 mL).}
+\item{\code{ph}}{pH (unidades).}
+\item{\code{bod}}{Demanda bioquimica de oxigenio (mg/L).}
+\item{\code{temp_change}}{Variacao termica Delta T (graus Celsius).}
+\item{\code{po4}}{Fosfato total (mg/L).}
+\item{\code{no3}}{Nitrato (mg/L).}
+\item{\code{turbidez}}{Turbidez (NTU).}
+\item{\code{ts}}{Solidos totais (mg/L).}
 }
-
-Os Qi (sub-escores, escala 0-100) seguem curvas piecewise baseadas nas
-curvas originais de Brown et al. (1970). A agregacao usa media geometrica
-ponderada, fiel ao metodo original.
-
-Se \code{na_rm = TRUE}, os pesos sao renormalizados por linha aos
-parametros disponiveis. Se \code{na_rm = FALSE} (default), linhas com
-qualquer NA resultam em \code{NSFWQI = NA} (sem erro).
 }
 \examples{
-\donttest{
-data("wq_demo", package = "tikatuwq")
-d <- wq_demo
-# Mapeia alias brasileiros
-d$do  <- d$od
-d$fc  <- d$coliformes
-d$bod <- d$dbo
-# Parametros ausentes sao ignorados com na_rm = TRUE
-out <- nsfwqi(d, na_rm = TRUE)
-head(out[, c("ponto", "NSFWQI", "NSFWQI_status")])
-}
-
+d <- data.frame(
+  od = 6.5, coliformes = 200, ph = 7.2, dbo = 2,
+  temperatura = 25, p_ortofosfato = 0.05, n_nitrato = 1.0,
+  turbidez = 8, solidos_totais = 120
+)
+nsfwqi(d, na_rm = TRUE)
 }
 \references{
-Brown, R. M., McClelland, N. I., Deininger, R. A., &
-Tozer, R. G. (1970). A water quality index - do we dare? \emph{Water and
-Sewage Works}, 117(10), 339-343.
+Brown, R. M., McClelland, N. I., Deininger, R. A., & Tozer, R. G. (1970).
+A water quality index - do we dare? \emph{Water and Sewage Works}, 117(10), 339-343.
+
+McClelland, N. I. (1974). \emph{Water Quality Index Application in the Kansas River Basin}.
+EPA-907/9-74-001, U.S. Environmental Protection Agency.
 }
-\seealso{
-\code{\link[=iqa]{iqa()}}, \code{\link[=plot_iqa]{plot_iqa()}}
-}
-\concept{wqi-tools}
+\concept{water-quality-indices}

@@ -1,29 +1,18 @@
+## Submission of tikatuwq 0.10.0
+
+This is a minor release (0.10.0) implementing scientific and metrological updates to the Brazilian Water Quality Index (IQA CETESB/INEMA) formulations:
+
+* **Official Analytical Equations**: Replaced legacy curve interpolations with the official validated piecewise analytical equations for all 9 CETESB sub-indices (DO saturation corrected for temperature and altitude, exact exponential-base curves for BOD5, Total Nitrogen, Turbidity, and Total Phosphorus).
+* **Phosphorus Conversion**: Added automatic stoichiometric conversion from Total Phosphorus (P) to phosphate (PO4) with the official 3.066x factor.
+* **Microbial Indicator**: Native support for E. coli applying the CETESB 1.25x factor.
+* **Component-Level Audit**: Added `iqa_components()` returning raw values, analytical sub-indices (Qi), official weights (Wi), and weighted terms for complete transparency.
+* **Solids vs. TDS**: Strict separation of Total Solids (solidos_totais/residuo_total) vs. Total Dissolved Solids (TDS) in strict mode.
+* **CONAMA 357/2005**: Added aquatic environment context support (lotic, lentic, intermediate) for total phosphorus standards and pH-conditioned ammonia limits in `conama_check()`.
+
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* NOTE: "unable to verify current time" — network issue on the check machine;
-  not a package problem.
+## Test results
 
-## Possibly misspelled words in DESCRIPTION
-
-The spell-checker flagged the following terms, all of which are correct:
-
-* **CETESB** — Companhia Ambiental do Estado de Sao Paulo (Brazilian
-  environmental agency); now wrapped in single quotes in DESCRIPTION.
-* **INEMA** — Instituto do Meio Ambiente e Recursos Hidricos (Bahia state
-  environmental agency); now wrapped in single quotes.
-* **Buranhem** — proper name of a Brazilian river (Rio Buranhem, Bahia).
-* **hydrological** — standard English adjective; listed in major dictionaries.
-* **et al.** — standard Latin abbreviation used in academic citations.
-
-## URL change
-
-Replaced https://www.teses.usp.br/... with https://teses.usp.br/...
-to follow the permanent redirect (301) flagged by CRAN incoming checks.
-
-## Resubmission note
-
-This is a resubmission of tikatuwq 0.9.0. The previous submission was
-rejected due to the 301 redirect on the Lamparelli (2004) URL and the
-spell-check NOTE. Both have been addressed above.
+299 tests pass locally with testthat. Validated against official INEMA monitoring data from Rio Buranhem (2024 Campaign 3).

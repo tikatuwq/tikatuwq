@@ -49,7 +49,10 @@ data(wq_demo)
 head(wq_demo)
 
 # Exemplo típico
-wq_demo |> validate_wq() |> iqa(na_rm = TRUE) |> plot_iqa()
+wq_demo |> validate_wq() |> iqa(allow_partial = TRUE) |> plot_iqa()
+
+# Auditoria detalhada dos 9 subíndices analíticos do IQA CETESB
+iqa_components(wq_demo)
 
 # Visualização do estado trófico
 wq_demo |> iet_carlson(.keep_ids = TRUE) |> plot_iet(method = "carlson")
@@ -75,46 +78,41 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ## 🆕 Novidades
 
-### 🆕 Novidades na versão 0.9.0 (atual)
+### 🆕 Novidades na versão 0.10.0 (atual)
+
+**🔬 Auditoria Científica e Metrológica do IQA Brasileiro (CETESB/INEMA)**
+
+- **Equações Analíticas Contínuas Oficiais**: `iqa()` implementa as equações analíticas paramétricas por trechos oficiais da CETESB para todos os 9 sub-índices ($Q_1$ a $Q_9$), incluindo saturação de OD ($C_s$) corrigida por altitude e temperatura, equações em base exponencial natural ($\text{DBO}_5$, $\text{NT}$, $\text{Turb}$, $\text{PT}$) e polinômios estritos.
+- **Conversão Estequiométrica de Fósforo**: Conversão automática de fósforo elementar para fosfato ($\text{P}_{\text{total}} \times 3.066 = \text{PO}_4$) quando `phosphorus_basis = "P"`.
+- **Fator E. coli ($1.25\times$)**: Suporte nativo a `microbial_type = "e_coli"`, aplicando o fator de conversão oficial da CETESB.
+- **Separação Estrita de Sólidos Totais vs. TDS**: Sólidos Dissolvidos Totais (`tds`) não é mais aceito como alias de Sólidos Totais (`solidos_totais`/`residuo_total`) no modo CETESB estrito, prevenindo superestimativa de qualidade da água.
+- **Camada de Auditoria dos Componentes**: Nova função exportada `iqa_components()` e opção `iqa(..., details = TRUE)` retornando valores brutos, sub-índices analíticos ($Q_i$), pesos oficiais ($W_i$) e parcelas ponderadas ($Q_i^{W_i}$) para reprodutibilidade científica total.
+- **Faixas Qualitativas Oficiais CETESB**: `classify_iqa()` atualizado para os limiares oficiais da CETESB: *Péssima* ($\le 19$), *Ruim* ($19\text{--}36$), *Regular* ($36\text{--}51$), *Boa* ($51\text{--}79$), *Ótima* ($> 79$).
+- **Contexto Ambiental em CONAMA**: `conama_check()` passa a receber `environment = c("all", "lotic", "lentic", "intermediate")` para seleção automática dos limites legais de fósforo total e amônia total condicionada ao pH.
+- **Validação com Benchmark Oficial**: Validado contra dados oficiais de monitoramento do INEMA no Rio Buranhém (Campanha 3 de 2024).
+
+✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
+✔️ **299 testes unitários aprovados**  
+✔️ Compatível com CRAN, Windows, Linux e macOS
+
+---
+
+### 🆕 Novidades na versão 0.9.0
 
 **⚠️ Mudança incompatível — IQA agora usa a média geométrica ponderada correta**
 
 `iqa()` passa a usar por padrão `method = "CETESB"`, que calcula a média geométrica ponderada `∏(Qi^Wi)` conforme a metodologia da CETESB e a formulação original do NSF WQI (Brown et al., 1970). O comportamento anterior (média aritmética, incorreto) é preservado via `method = "NSF_approx"`. Usuários que dependem do valor padrão obterão resultados mais precisos — e em geral ligeiramente menores.
 
-**Novas funções:**
+**Novas funções na v0.9.0:**
 
-- `conama_freq_check()` — implementa a regra de frequência legal do Art. 15 da CONAMA 357/2005: um parâmetro é considerado conforme apenas quando ≥ 80% de ao menos 6 amostras por ano estão dentro dos limites. Retorna uma tabela de conformidade por ponto, ano e parâmetro.
-- `assign_season()` — classifica cada amostra como `"chuvoso"` ou `"seco"` com base em calendários hidrológicos regionais brasileiros (Sudeste, Nordeste, Norte, Sul, Centro-Oeste, Bahia) ou em um vetor de meses personalizado.
-- `compare_seasons()` — compara um parâmetro de qualidade da água entre os períodos chuvoso e seco usando Wilcoxon, teste t ou Kruskal-Wallis; retorna estatísticas descritivas, resultado do teste e um boxplot `ggplot` opcional.
-- `plot_iet()` — gráfico de barras (vertical ou horizontal) do Índice de Estado Trófico com coloração por classe trófica, compatível com os esquemas de Carlson (1977) e Lamparelli (2004).
-- `compute_load()` — calcula a carga poluidora como concentração × vazão × fator de unidade; saídas em kg/dia, t/dia, kg/ano e g/s.
-- `exceedance_prob()` — estima a probabilidade empírica de excedência com intervalo de confiança de Wilson, por grupo.
-- `wq_pca()` — wrapper PCA sobre `stats::prcomp()` com seleção automática de colunas, biplot, screeplot e gráfico de loadings retornados como atributos `ggplot`.
-- `nsfwqi()` — atualizado: passa a usar média geométrica ponderada (consistente com a correção do IQA); adiciona argumentos `add_status` e `locale` para rótulos de status multilíngues.
-
-**Tabela de limites expandida:**
-
-- `inst/extdata/conama_limits.csv` ampliada de ~38 para ~116 linhas, incluindo espécies de nitrogênio (NO₃, NO₂, NH₃ com limites condicionais ao pH), íons inorgânicos (fluoretos, cloretos, sulfatos), poluentes orgânicos (fenóis, surfactantes) e 14 metais pesados para as Classes 1–3.
-
-✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
-✔️ Compatível com CRAN, Windows, Linux e macOS
-
----
-
-### 🆕 Novidades na versão 0.8.2
-
-- Manutenção CRAN: corrigido o exemplo de `plot_map()` para usar o dataset interno `wq_demo` em vez de referência a arquivo externo. Todos os exemplos e testes estão em conformidade com as políticas do CRAN.
-
-### 🆕 Novidades na versão 0.8.1
-
-- Ajustes internos para garantir plena conformidade com as políticas do CRAN em relação ao acesso ao sistema de arquivos.
-- Exemplos e documentação passam a depender exclusivamente do dataset interno `wq_demo`, removendo qualquer dependência de arquivos externos ou locais.
-- A função `render_report()` agora grava saída **somente em diretórios temporários** (`tempdir()`) ou em diretórios explicitamente fornecidos pelo usuário.
-- Exemplos, testes e documentação foram revisados para garantir execução segura em ambientes restritos (ex.: sistemas de verificação do CRAN).
-- Sem alterações na API e sem impacto funcional para os usuários.
-
-✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
-✔️ Compatível com CRAN, Windows, Linux e macOS
+- `conama_freq_check()` — implementa a regra de frequência legal do Art. 15 da CONAMA 357/2005 (≥ 80% de ao menos 6 amostras por ano).
+- `assign_season()` — classifica cada amostra como `"chuvoso"` ou `"seco"` com base em calendários hidrológicos regionais brasileiros.
+- `compare_seasons()` — compara parâmetros entre os períodos chuvoso e seco.
+- `plot_iet()` — gráfico de barras do Índice de Estado Trófico.
+- `compute_load()` — calcula carga poluidora (kg/dia, t/dia, kg/ano, g/s).
+- `exceedance_prob()` — probabilidade empírica de excedência com IC de Wilson.
+- `wq_pca()` — wrapper PCA multivariado com biplot, screeplot e loadings.
+- `nsfwqi()` — atualizado com agregação geométrica e suporte multilíngue.
 
 ---
 
@@ -127,14 +125,13 @@ install.packages("tikatuwq")
 
 ## Instalação via GitHub
 
-```r
 install.packages("remotes")
 
 # development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável (por tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.9.0", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.10.0", build_vignettes = TRUE)
 ```
 
 ---
@@ -203,18 +200,18 @@ conama_freq_check(df, classe = "2", by = "ponto")
 
 ### Como citar
 
-Se você utilizar o **tikatuwq** em suas pesquisas, cite da seguinte forma:
+Se você utilizar o **tikatuwq** em sua pesquisa ou projeto, por favor cite:
 
-> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.9.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
+> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.10.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
 
 Entrada BibTeX:
 
 ```bibtex
 @Manual{Santos2025tikatuwq,
-  title  = {tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil},
+  title  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},
   author = {Vinicius Saraiva Santos},
   year   = {2025},
-  note   = {R package version 0.9.0},
+  note   = {R package version 0.10.0},
   doi    = {10.5281/zenodo.17407297},
   url    = {https://github.com/tikatuwq/tikatuwq},
 }

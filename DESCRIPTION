@@ -1,23 +1,23 @@
 Package: tikatuwq
 Type: Package
 Title: Water Quality Assessment and Environmental Compliance in Brazil
-Version: 0.9.0
+Version: 0.10.0
 Authors@R: c(
-  person(
-    given = "Vinicius",
-    family = "Saraiva Santos",
-    role = c("aut", "cre"),
-    email = "vinisaraiva@gmail.com",
-    comment = c(ORCID = "0009-0007-1387-7927")
-  ),
-  person(
-    given = "Fabricio",
-    family = "Berton Zanchi",
-    role = "ctb",
-    email = "fabricio.berton@ufsb.edu.br",
-    comment = c(ORCID = "0000-0002-8074-2893")
+    person(
+      given = "Vinicius",
+      family = "Saraiva Santos",
+      role = c("aut", "cre"),
+      email = "vinisaraiva@gmail.com",
+      comment = c(ORCID = "0009-0007-1387-7927")
+    ),
+    person(
+      given = "Fabricio",
+      family = "Berton Zanchi",
+      role = "ctb",
+      email = "fabricio.berton@ufsb.edu.br",
+      comment = c(ORCID = "0000-0002-8074-2893")
+    )
   )
-)
 Maintainer: Vinicius Saraiva Santos <vinisaraiva@gmail.com>
 Description: Tools to import, clean, validate, and analyze freshwater quality data
     in Brazil. Implements water quality indices including the Water Quality Index

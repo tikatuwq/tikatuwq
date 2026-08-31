@@ -78,13 +78,12 @@ conama_limits <- function(class){
 #'   \item \code{*__lim_min} and \code{*__lim_max} (thresholds used),
 #'   \item \code{*__delta} (difference to the relevant limit; >0 above max, <0 below min, 0 if ok).
 #' }
-#' If multiple limit rows exist for the same parameter, \code{*_ok} is TRUE if
-#' any row is satisfied; for \code{status/lim_min/lim_max/delta}, the first
-#' satisfied row is chosen; if none satisfy, the row with the smallest
-#' absolute violation (min |delta|) is used.
 #'
 #' @param df A tibble/data.frame with parameter columns (e.g., ph, turbidez, od, dbo).
 #' @param classe Character class label (e.g., "especial", "1", "2", "3", "4").
+#' @param environment Optional aquatic environment context: \code{"all"} (default),
+#'   \code{"lotic"} (rivers), \code{"lentic"} (lakes/reservoirs), or \code{"intermediate"}.
+#'   Used to select specific regulatory thresholds for total phosphorus.
 #'
 #' @returns The input \code{df} with additional columns per parameter as described.
 #'
@@ -98,7 +97,8 @@ conama_limits <- function(class){
 #'
 #' @export
 #' @importFrom rlang .data
-conama_check <- function(df, classe = "2") {
+conama_check <- function(df, classe = "2", environment = c("all", "lotic", "lentic", "intermediate")) {
+  environment <- match.arg(environment)
   lim_all <- conama_limits()
   lim <- lim_all[as.character(lim_all$classe) == as.character(classe), , drop = FALSE]
   if (!nrow(lim)) return(df)
@@ -107,29 +107,33 @@ conama_check <- function(df, classe = "2") {
   params_present <- intersect(unique(lim$parametro), names(df))
   if (!length(params_present)) return(out)
 
+  # Check if pH is present in df for pH-conditioned ammonia limits
+  ph_col <- if ("ph" %in% names(df)) "ph" else if ("pH" %in% names(df)) "pH" else NULL
+  ph_vals <- if (!is.null(ph_col)) suppressWarnings(as.numeric(df[[ph_col]])) else rep(NA_real_, nrow(df))
+
   for (p in params_present) {
     v <- out[[p]]
 
     # coerce to numeric if needed
     if (!is.numeric(v)) {
-      # Try direct conversion first
       v_num <- suppressWarnings(as.numeric(v))
-      # If all NA, try helper from io_clean.R if available in namespace
-      if (all(is.na(v_num))) {
-        # Use internal helper from tikatuwq namespace if available
-        to_num_helper <- tryCatch(
-          get(".to_number_auto", envir = asNamespace("tikatuwq"), inherits = FALSE),
-          error = function(e) NULL
-        )
-        if (!is.null(to_num_helper)) {
-          v_num <- to_num_helper(v)
-        }
-      }
       v <- v_num
     }
 
     rows <- lim[lim$parametro == p, , drop = FALSE]
     if (!nrow(rows)) next
+
+    # Filter phosphorus by environment if specified
+    if (p %in% c("p_total", "fosforo_total") && environment != "all") {
+      if (environment == "lentic") {
+        env_rows <- rows[grepl("lentico", rows$observacao, ignore.case = TRUE) & !grepl("intermediario", rows$observacao, ignore.case = TRUE), , drop = FALSE]
+      } else if (environment == "lotic") {
+        env_rows <- rows[grepl("lotico", rows$observacao, ignore.case = TRUE), , drop = FALSE]
+      } else { # intermediate
+        env_rows <- rows[grepl("intermediario", rows$observacao, ignore.case = TRUE), , drop = FALSE]
+      }
+      if (nrow(env_rows) > 0) rows <- env_rows
+    }
 
     n <- length(v)
     k <- nrow(rows)

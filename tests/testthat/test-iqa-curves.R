@@ -7,8 +7,9 @@ test_that("qi interpolation returns finite values", {
 
 test_that("iqa curve-based works", {
   df <- data.frame(pH=7.2, turbidez=4, od=7, dbo=2, nt_total=0.8,
-                   p_total=0.05, tds=300, temperatura=2, coliformes=150)
-  out <- iqa(df, na_rm = TRUE)
+                   p_total=0.05, solidos_totais=300, temperatura=24, coliformes=150)
+  out <- iqa(df, method = "CETESB_legacy_approx", allow_partial = TRUE)
   expect_true("IQA" %in% names(out))
   expect_true(out$IQA[1] > 0 && out$IQA[1] <= 100)
 })
+

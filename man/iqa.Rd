@@ -2,96 +2,93 @@
 % Please edit documentation in R/iqa.R
 \name{iqa}
 \alias{iqa}
-\title{Water Quality Index (WQI / IQA)}
+\title{Water Quality Index (WQI / IQA CETESB Oficial)}
 \usage{
 iqa(
   df,
-  pesos = c(od = 0.17, coliformes = 0.15, dbo = 0.1, nt_total = 0.1, p_total = 0.1,
-    turbidez = 0.08, tds = 0.08, pH = 0.12, temperatura = 0.1),
-  method = c("CETESB", "CETESB_equations", "NSF_approx"),
+  method = c("CETESB", "CETESB_equations", "CETESB_legacy_approx", "NSF_approx"),
+  classification = c("cetesb", "legacy"),
   altitude_m = 0,
-  na_rm = FALSE,
+  phosphorus_basis = c("P", "PO4"),
+  microbial_type = c("thermotolerant_coliforms", "e_coli"),
+  temperature_method = c("cetesb_default", "delta", "reference"),
+  temperature_reference = NULL,
+  delta_temperature = NULL,
+  censor_policy = c("limit", "half_limit", "zero", "na", "preserve"),
+  allow_partial = FALSE,
+  details = FALSE,
   add_status = TRUE,
   locale = c("pt", "en"),
+  pesos = NULL,
   ...
 )
 }
 \arguments{
-\item{df}{Data frame (ou tibble) com as colunas requeridas.
-Nomes esperados: \code{od}, \code{coliformes}, \code{dbo},
-\code{nt_total}, \code{p_total}, \code{turbidez}, \code{tds},
-\code{ph} (ou \code{pH}), \code{temperatura} (ou \code{temp}).}
-
-\item{pesos}{Pesos nomeados para cada parametro. Padroes seguem pratica
-CETESB/NSF: \code{od=.17}, \code{coliformes=.15}, \code{dbo=.10},
-\code{nt_total=.10}, \code{p_total=.10}, \code{turbidez=.08},
-\code{tds=.08}, \code{pH=.12}, \code{temperatura=.10}.}
+\item{df}{Data frame ou tibble com as colunas de monitoramento.
+Nomes canônicos reconhecidos: \code{od}, \code{solidos_totais} (ou \code{residuo_total}),
+\code{ph}, \code{dbo}, \code{coliformes_termotolerantes} (ou \code{coliformes}),
+\code{nt_total}, \code{p_total}, \code{turbidez}, \code{temperatura}.}
 
 \item{method}{Metodo de calculo:
 \itemize{
-\item \code{"CETESB"} (padrao) — subindices por curvas de interpolacao
-+ \strong{media geometrica ponderada}.
-\item \code{"CETESB_equations"} — equacoes polinomiais CETESB com
-saturacao de OD dependente de temperatura e altitude +
-media geometrica ponderada.
-\item \code{"NSF_approx"} — subindices por curvas + media aritmetica
-ponderada (metodo legado, mantido para compatibilidade).
+\item \code{"CETESB"} (padrao) — equacoes analiticas continuas oficiais CETESB/INEMA
+com media geometrica ponderada.
+\item \code{"CETESB_equations"} — alias de \code{"CETESB"}.
+\item \code{"CETESB_legacy_approx"} — subindices por curvas interpoladas aproximadas (legado).
+\item \code{"NSF_approx"} — subindices por curvas aproximadas com media aritmetica (legado).
 }}
 
-\item{altitude_m}{Altitude em metros acima do nivel do mar (default \code{0}).
-Usado apenas em \code{method = "CETESB_equations"} para correcao da
-saturacao de oxigenio dissolvido.}
+\item{classification}{Esquema de classificacao qualitativa: \code{"cetesb"} (padrao: 19/36/51/79)
+ou \code{"legacy"} (25/50/70/90).}
 
-\item{na_rm}{Logico; se \code{FALSE} (padrao), linhas com Qi ausentes
-geram erro. Se \code{TRUE}, o IQA e calculado com os parametros
-disponiveis e os pesos sao renormalizados por linha.}
+\item{altitude_m}{Altitude em metros acima do nivel do mar (default \code{0}), usada no calculo
+da concentracao de saturacao de OD.}
 
-\item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna
-\code{IQA_status} com a classificacao qualitativa (0-100).}
+\item{phosphorus_basis}{Base do fosforo informado: \code{"P"} (default, aplica fator 3.066 para PO4)
+ou \code{"PO4"}.}
 
-\item{locale}{Idioma de \code{IQA_status}: \code{"pt"} (padrao) ou
-\code{"en"}.}
+\item{microbial_type}{Tipo microbiologico informado: \code{"thermotolerant_coliforms"} (default)
+ou \code{"e_coli"} (aplica fator 1.25x da CETESB).}
 
-\item{...}{Reservado para uso futuro.}
+\item{temperature_method}{Metodo para o componente termico: \code{"cetesb_default"} (default: Qi=94),
+\code{"delta"} (usa delta_temperatura) ou \code{"reference"} (calcula temp_agua - temp_ref).}
+
+\item{temperature_reference}{Temperatura de referencia quando \code{temperature_method = "reference"}.}
+
+\item{delta_temperature}{Variacao de temperatura quando \code{temperature_method = "delta"}.}
+
+\item{censor_policy}{Politica para dados censurados: \code{"limit"} (default: <X -> X),
+\code{"half_limit"} (<X -> X/2), \code{"zero"}, \code{"na"}, ou \code{"preserve"}.}
+
+\item{allow_partial}{Logico; se \code{FALSE} (padrao estrito), exige todos os componentes presentes.
+Se \code{TRUE}, permite calculo parcial renormalizando pesos dos parametros disponiveis.}
+
+\item{details}{Logico; se \code{TRUE}, anexa o dataframe detalhado de componentes no atributo \code{"components"}.}
+
+\item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna \code{IQA_status}.}
+
+\item{locale}{Idioma dos rotulos qualitativos: \code{"pt"} (padrao) ou \code{"en"}.}
+
+\item{pesos}{Pesos customizados (opcional; padrao sao os 9 pesos oficiais CETESB).}
+
+\item{...}{Parametros adicionais reservados.}
 }
 \value{
-O \code{df} de entrada com a coluna numerica \code{IQA} (0-100) e,
+O data frame de entrada com a coluna numerica \code{IQA} (0-100) e,
 quando \code{add_status = TRUE}, a coluna fator \code{IQA_status}.
-O atributo \code{"iqa_method"} e definido no objeto retornado.
 }
 \description{
-Computa o IQA/WQI combinando subindices (Qi) por \strong{media geometrica
-ponderada}, conforme a metodologia oficial CETESB e o NSF WQI original
-(Brown et al., 1970): \eqn{IQA = \prod_{i} Qi_i^{Wi}}{IQA = prod(Qi^Wi)}.
-}
-\details{
-\strong{Metodo de agregacao (correcao em v0.9.0):}
-O IQA CETESB e o NSF WQI original utilizam media geometrica ponderada.
-O metodo \code{"NSF_approx"} (media aritmetica) e mantido apenas para
-compatibilidade retroativa.
-
-\strong{Compatibilidade de nomes de coluna:}
-\itemize{
-\item \code{ph} (minusculo) e aceito como alias de \code{pH}.
-\item \code{temp} e aceito como alias de \code{temperatura}.
-}
+Computa o IQA brasileiro oficial conforme a metodologia da CETESB/INEMA
+utilizando equacoes analiticas continuas validadas e agregacao por
+\strong{media geometrica ponderada}: \eqn{IQA = \prod_{i=1}^{9} q_i^{w_i}}.
 }
 \examples{
-d <- iqa(wq_demo, na_rm = TRUE)
-table(d$IQA_status, useNA = "ifany")
-
-# Usando equacoes CETESB com correcao de altitude
-\donttest{
-d2 <- iqa(wq_demo, method = "CETESB_equations", altitude_m = 800, na_rm = TRUE)
-summary(d2$IQA)
+d <- data.frame(
+  od = 6.5, temperatura = 25, dbo = 2, coliformes = 200,
+  ph = 7.2, nt_total = 1.2, p_total = 0.05, turbidez = 8,
+  solidos_totais = 120
+)
+out <- iqa(d)
+out$IQA
+out$IQA_status
 }
-
-}
-\references{
-CETESB (2021). \emph{Qualidade das Aguas Superficiais no Estado de Sao Paulo}.
-CETESB, Sao Paulo.
-
-Brown, R.M. et al. (1970). A Water Quality Index — Do We Dare?
-\emph{Water and Sewage Works}, 117, 339-343.
-}
-\concept{water-quality-indices}

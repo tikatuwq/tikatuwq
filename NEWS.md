@@ -1,3 +1,21 @@
+# tikatuwq 0.10.0
+
+## Breaking changes and scientific corrections
+
+- **Official CETESB analytical equations**: `iqa()` now implements the official validated continuous piecewise polynomial/exponential equations from CETESB/INEMA rather than discrete/interpolated approximation tables.
+- **Total Solids vs TDS**: The canonical 9th component of CETESB IQA is now strictly `solidos_totais` (Total Solids / Resíduo Total, weight 0.08). TDS (`tds`) is no longer accepted silently as a synonym for Total Solids; providing `tds` in strict CETESB mode throws an explicit, informative error.
+- **Stoichiometric phosphorus conversion**: Total phosphorus (mg P/L) is now converted to phosphate via $PO_4 = P_{\text{total}} \times 3.066$ by default (`phosphorus_basis = "P"`), matching the calibration basis of the CETESB sub-index curve.
+- **Separation of water temperature and $\Delta T$**: Water temperature (`temperatura`) is used exclusively to compute DO saturation percentage (accounting for altitude via `altitude_m`), while temperature change $\Delta T$ (`delta_temperatura`) is an independent component defaulting to $Q_i = 94$ (operational hypothesis of thermal equilibrium).
+- **Coliforms & E. coli**: Canonical parameter is `coliformes_termotolerantes`. E. coli inputs are converted using the CETESB factor $1.25\times$ via `microbial_type = "e_coli"`.
+- **Strict calculation by default**: `iqa()` with `method = "CETESB"` requires all 9 components. Partial calculation now requires explicit `allow_partial = TRUE` and flags missing components in metadata.
+- **Official CETESB classification scale**: Default breaks for `classify_iqa()` updated to official CETESB categories: Péssima ($\le 19$), Ruim ($19\text{--}36$), Regular ($36\text{--}51$), Boa ($51\text{--}79$), Ótima ($79\text{--}100$).
+
+## New features
+
+- `iqa_components()` and `iqa(..., details = TRUE)`: Comprehensive audit layer returning raw values, transformed values, $Q_i$, $W_i$, and $Q_i^{W_i}$ for each parameter.
+- Explicit censored data policy (`censor_policy = c("limit", "half_limit", "preserve", "zero", "na")`).
+- Extensive scientific test suite and benchmark against official INEMA SEIA Campanha 3/2024 (Rio Buranhém) monitoring records.
+
 # tikatuwq 0.9.0
 
 ## Breaking changes

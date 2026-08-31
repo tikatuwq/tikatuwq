@@ -4,10 +4,12 @@
 \alias{classify_iqa}
 \title{Classifica valores do IQA/WQI em faixas qualitativas}
 \usage{
-classify_iqa(x, locale = c("pt", "en"))
+classify_iqa(x, scheme = c("cetesb", "legacy"), locale = c("pt", "en"))
 }
 \arguments{
 \item{x}{Vetor numerico com IQA em 0-100. Valores NA sao preservados.}
+
+\item{scheme}{Esquema de classificacao: \code{"cetesb"} (padrao oficial) ou \code{"legacy"} (escala 25/50/70/90).}
 
 \item{locale}{Idioma dos rotulos: \code{"pt"} (padrao) ou \code{"en"}.}
 }
@@ -16,10 +18,11 @@ Um fator ordenado com os rotulos de classe.
 }
 \description{
 Converte valores numericos de IQA (0-100) em classes qualitativas
-padronizadas. Suporta rotulos em portugues ("pt") ou ingles ("en").
+padronizadas. O padrao oficial CETESB utiliza as faixas:
+Pessima (0-19), Ruim (19-36), Regular (36-51), Boa (51-79) e Otima (79-100).
 }
 \examples{
-classify_iqa(c(15, 40, 65, 80, 95))
-classify_iqa(c(15, 40, 65, 80, 95), locale = "en")
+classify_iqa(c(15, 30, 45, 70, 85))
+classify_iqa(c(15, 30, 45, 70, 85), locale = "en")
 
 }

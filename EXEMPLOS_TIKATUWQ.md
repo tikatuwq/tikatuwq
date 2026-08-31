@@ -1,6 +1,6 @@
 # Exemplos Práticos — pacote `tikatuwq`
 
-Todos os exemplos abaixo foram executados e verificados com `tikatuwq` v0.9.0.  
+Todos os exemplos abaixo foram executados e verificados com `tikatuwq` v0.10.0.  
 Dataset usado: `wq_demo` — 20 amostras reais do monitoramento INEMA (Bahia, 2020–2024),  
 4 pontos de coleta, 5 amostras cada.
 
@@ -25,11 +25,12 @@ names(wq_demo)
 
 ## 1. Índice de Qualidade da Água — IQA/WQI (`iqa`)
 
-Calcula o IQA pela **média geométrica ponderada** (metodologia CETESB).
+Calcula o IQA pela **média geométrica ponderada** (metodologia CETESB com equações analíticas oficiais).
 
 ```r
-iqa(wq_demo[1:3, ], method = "CETESB")[, c("ponto", "data", "IQA", "IQA_status")]
+iqa(wq_demo[1:3, ], method = "CETESB", allow_partial = TRUE)[, c("ponto", "data", "IQA", "IQA_status")]
 ```
+
 
 ```
 # A tibble: 3 × 4
@@ -313,4 +314,5 @@ mk_seasonal(d, param = "od", by = "ponto", period = "season")
 
 ---
 
-*Gerado com `tikatuwq` v0.9.0 · Dataset: `wq_demo` (INEMA, Bahia, 2020–2024)*
+*Gerado com `tikatuwq` v0.10.0 · Dataset: `wq_demo` (INEMA, Bahia, 2020–2024)*
+

@@ -57,5 +57,10 @@ CONAMA 357/2005 \url{https://conama.mma.gov.br/?id=450&option=com_sisconama&task
 \author{
 \strong{Maintainer}: Vinicius Saraiva Santos \email{vinisaraiva@gmail.com} (\href{https://orcid.org/0009-0007-1387-7927}{ORCID})
 
+Other contributors:
+\itemize{
+  \item Fabricio Berton Zanchi \email{fabricio.berton@ufsb.edu.br} (\href{https://orcid.org/0000-0002-8074-2893}{ORCID}) [contributor]
+}
+
 }
 \keyword{internal}

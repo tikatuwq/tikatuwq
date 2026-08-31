@@ -55,7 +55,7 @@ custom \code{template} path to a \code{.qmd} and ensure your environment support
 }
 
 \examples{
-\dontshow{if (requireNamespace("rmarkdown", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("rmarkdown", quietly = TRUE) && rmarkdown::pandoc_available()) withAutoprint(\{ # examplesIf}
 # Minimal example (writes to a temporary directory)
 d <- wq_demo
 path <- render_report(d, meta = list(river = "Example River", period = "Jan–Feb"))

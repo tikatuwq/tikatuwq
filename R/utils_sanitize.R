@@ -12,60 +12,69 @@
 #' @noRd
 .param_aliases <- list(
   # Oxigenio dissolvido
-  od              = c("od", "do", "dissolved_oxygen", "oxigenio_dissolvido",
-                      "o2_dissolvido", "o_d", "od_mgl"),
+  od                      = c("od", "do", "dissolved_oxygen", "oxigenio_dissolvido",
+                              "o2_dissolvido", "o_d", "od_mgl"),
   # pH
-  ph              = c("ph", "pH", "PH"),
+  ph                      = c("ph", "pH", "PH"),
   # Demanda bioquimica de oxigenio
-  dbo             = c("dbo", "bod", "dbo5", "bod5", "dbo_5", "bod_5",
-                      "demanda_bioquimica"),
+  dbo                     = c("dbo", "bod", "dbo5", "bod5", "dbo_5", "bod_5",
+                              "demanda_bioquimica"),
   # Turbidez
-  turbidez        = c("turbidez", "turbidity", "turb", "ntu"),
-  # Coliformes termotolerantes / E. coli
-  coliformes      = c("coliformes", "col_termotolerantes", "e_coli", "ecoli",
-                      "fc", "fecal_coliform", "coliforms", "ct"),
-  # Solidos totais dissolvidos
-  tds             = c("tds", "sd", "solidos_dissolvidos", "total_dissolved_solids",
-                      "dissolved_solids"),
-  # Temperatura
-  temperatura     = c("temperatura", "temperature", "temp", "temp_c"),
+  turbidez                = c("turbidez", "turbidity", "turb", "ntu"),
+  # Coliformes termotolerantes
+  coliformes_termotolerantes = c("coliformes_termotolerantes", "col_termotolerantes",
+                                 "coliformes", "fc", "fecal_coliform", "coliforms", "ct"),
+  # E. coli (especifico)
+  e_coli                  = c("e_coli", "ecoli", "escherichia_coli"),
+  # Solidos totais (IQA CETESB oficial)
+  solidos_totais          = c("solidos_totais", "st", "ts", "total_solids",
+                              "residuo_total", "solidos_total"),
+  # Solidos totais dissolvidos (TDS - NAO e Solidos Totais)
+  tds                     = c("tds", "sd", "solidos_dissolvidos", "total_dissolved_solids",
+                              "dissolved_solids"),
+  # Temperatura absoluta da agua (usada na saturacao de OD)
+  temperatura             = c("temperatura", "temp", "temp_c", "water_temperature",
+                              "temperatura_agua", "temperature"),
+  # Variacao de temperatura / Afastamento termico (Delta T)
+  delta_temperatura       = c("delta_temperatura", "delta_t", "temp_change",
+                              "temperature_change", "variacao_temperatura", "delta_temp"),
+  # Altitude
+  altitude                = c("altitude", "altitude_m", "alt", "elevacao"),
   # Fosforo total (mg/L)
-  p_total         = c("p_total", "ptotal", "fosforo_total", "phosphorus",
-                      "tp_mgl", "total_phosphorus", "p_tot"),
+  p_total                 = c("p_total", "ptotal", "fosforo_total", "phosphorus",
+                              "tp_mgl", "total_phosphorus", "p_tot"),
   # Fosforo total em ug/L (IET usa esta escala)
-  tp_ugl          = c("tp", "tp_ugl"),
+  tp_ugl                  = c("tp", "tp_ugl"),
   # Nitrogenio total
-  nt_total        = c("nt_total", "n_total", "ntk", "nkjeldahl",
-                      "nitrogenio_total", "total_nitrogen", "tn"),
+  nt_total                = c("nt_total", "n_total", "ntk", "nkjeldahl",
+                              "nitrogenio_total", "total_nitrogen", "tn"),
   # Nitrato
-  n_nitrato       = c("n_nitrato", "no3", "nitrato", "nitrate", "n_no3"),
+  n_nitrato               = c("n_nitrato", "no3", "nitrato", "nitrate", "n_no3"),
   # Nitrito
-  n_nitrito       = c("n_nitrito", "no2", "nitrito", "nitrite", "n_no2"),
+  n_nitrito               = c("n_nitrito", "no2", "nitrito", "nitrite", "n_no2"),
   # Amonia / nitrogenio amoniacal
-  amonia          = c("amonia", "n_amoniacal", "nh3", "nh4", "ammonia",
-                      "ammoniacal_nitrogen"),
+  amonia                  = c("amonia", "n_amoniacal", "nh3", "nh4", "ammonia",
+                              "ammoniacal_nitrogen"),
   # Solidos suspensos totais
-  solidos_suspensos = c("solidos_suspensos", "sst", "ss", "tss",
-                        "total_suspended_solids", "suspended_solids"),
-  # Solidos totais
-  solidos_totais  = c("solidos_totais", "st", "ts", "total_solids"),
+  solidos_suspensos       = c("solidos_suspensos", "sst", "ss", "tss",
+                              "total_suspended_solids", "suspended_solids"),
   # Condutividade eletrica
-  condutividade   = c("condutividade", "ec", "conducao", "conductivity",
-                      "cond", "ec_uscm"),
+  condutividade           = c("condutividade", "ec", "conducao", "conductivity",
+                              "cond", "ec_uscm"),
   # Clorofila-a
-  clorofila       = c("clorofila", "chla", "chl_a", "chlorophyll",
-                      "chlorophyll_a", "clorofila_a"),
+  clorofila               = c("clorofila", "chla", "chl_a", "chlorophyll",
+                              "chlorophyll_a", "clorofila_a"),
   # Disco de Secchi / profundidade de visibilidade
-  secchi          = c("secchi", "sd_secchi", "disco_secchi", "secchi_depth",
-                      "visibilidade"),
+  secchi                  = c("secchi", "sd_secchi", "disco_secchi", "secchi_depth",
+                              "visibilidade"),
   # Ortofosfato
-  p_ortofosfato   = c("p_ortofosfato", "po4", "orthophosphate",
-                      "phosphate", "ortofosfato"),
+  p_ortofosfato           = c("p_ortofosfato", "po4", "orthophosphate",
+                              "phosphate", "ortofosfato"),
   # Vazao
-  vazao           = c("vazao", "flow", "discharge", "q_m3s", "q"),
+  vazao                   = c("vazao", "flow", "discharge", "q_m3s", "q"),
   # Coordenadas
-  lat             = c("lat", "latitude", "y"),
-  lon             = c("lon", "longitude", "long", "x")
+  lat                     = c("lat", "latitude", "y"),
+  lon                     = c("lon", "longitude", "long", "x")
 )
 
 # Vetor inverso: alias -> canonico (pre-computado para lookup O(1))
@@ -146,45 +155,48 @@ normalize_param_names <- function(df) {
 #' Helper interno que detecta e trata valores censurados (ex.: "<0.01", "<LD", "<LOQ").
 #'
 #' @param x Vetor de entrada (character ou numeric).
-#' @param ld_policy Politica a aplicar: "ld2" (metade do limite), "ld" (limite),
-#'   "zero" (0), "na" (NA_real_).
-#' @return Vetor numerico com valores tratados conforme politica.
+#' @param censor_policy Politica a aplicar: "limit" (valor do limite), "half_limit" (metade do limite),
+#'   "zero" (0), "na" (NA_real_), "preserve" (preserva original), "ld2" (alias de half_limit), "ld" (alias de limit).
+#' @return Vetor numerico (ou character quando preserve) com valores tratados conforme politica.
 #' @keywords internal
 #' @noRd
-.parse_nd_ld <- function(x, ld_policy = c("ld2", "ld", "zero", "na")) {
-  ld_policy <- match.arg(ld_policy)
-  
+.parse_nd_ld <- function(x, censor_policy = c("limit", "half_limit", "zero", "na", "preserve", "ld2", "ld"), ld_policy = NULL) {
+  if (!is.null(ld_policy)) censor_policy <- ld_policy
+  censor_policy <- match.arg(censor_policy, c("limit", "half_limit", "zero", "na", "preserve", "ld2", "ld"))
+  if (censor_policy == "ld2") censor_policy <- "half_limit"
+  if (censor_policy == "ld")  censor_policy <- "limit"
+
   if (is.null(x) || length(x) == 0) return(x)
+  if (censor_policy == "preserve") return(x)
   if (is.numeric(x)) return(x)
-  
+
   x_char <- as.character(x)
   x_out <- rep(NA_real_, length(x_char))
   censored_flags <- logical(length(x_char))
-  
+
   for (i in seq_along(x_char)) {
     if (is.na(x_char[i])) {
       x_out[i] <- NA_real_
       next
     }
-    
+
     trimmed <- trimws(x_char[i])
-    
-    # Tenta extrair valor numerico de padrao <valor>
+
+    # Tenta extrair valor numerico de padrao <valor> ou >valor
     match_val <- grepl("^\\s*[<>]\\s*([0-9]+[.,]?[0-9]*)\\s*$", trimmed, perl = TRUE)
     if (match_val) {
-      # Extrai o numero (substitui virgula por ponto)
       num_str <- gsub("^\\s*[<>]\\s*([0-9]+)[.,]([0-9]*)\\s*$", "\\1.\\2", trimmed, perl = TRUE)
       num_str <- gsub("^\\s*[<>]\\s*([0-9]+)\\s*$", "\\1", num_str, perl = TRUE)
       num_str <- gsub(",", ".", num_str, fixed = TRUE)
       ld_value <- suppressWarnings(as.numeric(num_str))
-      
+
       if (is.finite(ld_value)) {
         censored_flags[i] <- TRUE
-        if (ld_policy == "ld2") {
+        if (censor_policy == "half_limit") {
           x_out[i] <- ld_value / 2
-        } else if (ld_policy == "ld") {
+        } else if (censor_policy == "limit") {
           x_out[i] <- ld_value
-        } else if (ld_policy == "zero") {
+        } else if (censor_policy == "zero") {
           x_out[i] <- 0
         } else {  # "na"
           x_out[i] <- NA_real_
@@ -192,25 +204,24 @@ normalize_param_names <- function(df) {
         next
       }
     }
-    
-    # Tenta detectar <LD, <LOD, <LOQ, ND sem valor numerico
+
+    # Tenta detectar <LD, <LOD, <LOQ, ND
     is_censored <- grepl("^\\s*[<>]\\s*(LD|LOD|LOQ)\\s*$", trimmed, ignore.case = TRUE, perl = TRUE) ||
                    grepl("^\\s*ND\\s*$", trimmed, ignore.case = TRUE, perl = TRUE) ||
                    grepl("^\\s*[<>]\\s*(LD|LOD|LOQ)\\s+([0-9]+[.,]?[0-9]*)\\s*$", trimmed, ignore.case = TRUE, perl = TRUE)
-    
+
     if (is_censored) {
-      # Tenta extrair valor apos LD/LOD/LOQ
       ld_match <- regmatches(trimmed, regexec("^\\s*[<>]\\s*(?:LD|LOD|LOQ)\\s+([0-9]+[.,]?[0-9]*)\\s*$", trimmed, ignore.case = TRUE, perl = TRUE))
       if (length(ld_match[[1]]) > 1) {
         num_str <- gsub(",", ".", ld_match[[1]][2], fixed = TRUE)
         ld_value <- suppressWarnings(as.numeric(num_str))
         if (is.finite(ld_value)) {
           censored_flags[i] <- TRUE
-          if (ld_policy == "ld2") {
+          if (censor_policy == "half_limit") {
             x_out[i] <- ld_value / 2
-          } else if (ld_policy == "ld") {
+          } else if (censor_policy == "limit") {
             x_out[i] <- ld_value
-          } else if (ld_policy == "zero") {
+          } else if (censor_policy == "zero") {
             x_out[i] <- 0
           } else {
             x_out[i] <- NA_real_
@@ -218,25 +229,22 @@ normalize_param_names <- function(df) {
           next
         }
       }
-      
-      # Se nao tem valor numerico, usa 0 ou NA conforme politica
+
       censored_flags[i] <- TRUE
-      if (ld_policy == "zero") {
+      if (censor_policy == "zero") {
         x_out[i] <- 0
       } else {
         x_out[i] <- NA_real_
       }
       next
     }
-    
-    # Se nao e censurado, tenta converter para numero normalmente
+
+    # Se nao e censurado, tenta converter para numero
     num_str <- gsub(",", ".", trimmed, fixed = TRUE)
     x_out[i] <- suppressWarnings(as.numeric(num_str))
   }
-  
-  # Se havia censura e politica e "ld2", pode avisar (opcional, silencioso por agora)
-  # attr(x_out, "censored") <- censored_flags
-  
+
+  attr(x_out, "censored") <- censored_flags
   x_out
 }
 

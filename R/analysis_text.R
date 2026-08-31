@@ -50,8 +50,9 @@ generate_analysis <- function(
 
   # Garante IQA
   if (!"IQA" %in% names(df)) {
-    df <- tikatuwq::iqa(df, na_rm = TRUE)
+    df <- tikatuwq::iqa(df, allow_partial = TRUE)
   }
+
 
   # Checagem CONAMA
   conf <- tikatuwq::conama_check(df, classe = classe_conama)
