@@ -14,8 +14,6 @@ O pacote também inclui análise sazonal, cálculo de carga poluidora, probabili
 [![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions) 
 ![Status do manuscrito](https://img.shields.io/badge/manuscrito-em_avaliação-yellow) 
 
-**TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros. Ele implementa os principais índices utilizados no país, **IQA/NSFWQI** e **IET (Carlson e Lamparelli)**, e fornece verificações automatizadas de conformidade com a **Resolução CONAMA 357/2005**. O pacote também inclui análise de tendências, validação de dados e geração automática de relatórios.
-
 ---
 
 ## Escopo Científico 
@@ -117,74 +115,6 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
 ✔️ Compatível com CRAN, Windows, Linux e macOS
-
-### 🆕 Novidades na versão 0.8.0
-
-- O dataset de exemplo `wq_demo` agora é um subconjunto real de dados (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), com 20 linhas e 14 colunas (incluindo `rio`, `lat`, `lon`).
-- Exemplos e vignettes passam a usar este conjunto real para maior reprodutibilidade e clareza.
-- Documentação atualizada (help do dataset, README, vignette) para refletir a mudança.
-- Sem quebra de API; comportamento permanece compatível com versões anteriores.
-
-### Novidades na versão 0.7.3
-
-- IQA mais robusto:
-aceita `temp` como alias de `temperatura`.
-"Numificação" automática de valores com vírgula decimal e sinais `<`/`>`.
-Com `na_rm = TRUE`, repondera os pesos quando faltarem parâmetros.
-- IET (Carlson / Lamparelli) com data.frame:
-`iet_carlson()` e `iet_lamparelli()` agora aceitam um data.frame com colunas como `rio`, `ponto`, `data`, `lat`, `lon`.
-Parâmetros relevantes são detectados automaticamente (`secchi/sd`, `clorofila/chla`, `tp/p_total`).
-`p_total` em mg/L é convertido automaticamente para `tp` em µg/L.
-Use `.keep_ids = TRUE` para preservar identificadores na saída.
-Sem novas dependências, sem quebra de API.
-
-### Novidades v0.7.2
-
-- Correção de *NOTE* nos testes de pré-submissão do CRAN:
-  - Remoção dos campos não padrão (`DOI`, `Citation`) do arquivo `DESCRIPTION`.
-  - Atualização do arquivo `inst/CITATION` para o formato `bibentry()` (substituindo `citEntry()`).
-- Nenhuma alteração funcional — o comportamento do pacote permanece o mesmo.
-
-### Novidades v0.7.0 
-- Novas funções **`param_analysis()`** e **`param_analysis_multi()`**:
-  - Permitem análises flexíveis por parâmetro e ponto de coleta ou rio.
-  - Suportam comparações cruzadas (múltiplos parâmetros por ponto e vice-versa).
-  - Incluem estatísticas descritivas e detecção de tendências temporais.
-- Cobertura total de testes para os novos módulos.
-- Pequenas melhorias em `plot_trend()` e `plot_map()` (mensagens controladas).
-- Todas as validações CRAN e `devtools::check()` passaram sem erros.
-
-### Novidades v0.6.2
-- Atualização corretiva solicitada pelo CRAN.
-- Corrigido o aviso **codoc** na documentação de `generate_analysis()`.
-- Removidos parâmetros obsoletos `id_cols` e `filter` para manter compatibilidade com a versão atual.
-- Nenhuma alteração funcional no código.
-
-### Novidades v0.6.1 
-- Atualização de manutenção solicitada pelo CRAN.
-- Corrigido o link relativo `README-pt.md`, agora convertido para URL HTTPS absoluta.
-- Nenhuma alteração funcional no código.
-
-### Novidades v0.6.0
-- Nova função `plot_trend()` para análise de tendências temporais:
-  - Linhas de tendência por parâmetro/ponto com métodos **Theil-Sen**, **OLS** e **LOESS**.
-  - Suporte a facetas por rio/ponto e personalização de pontos.
-  - Retorna um objeto `ggplot` pronto para visualização ou relatórios.
-- Documentação e exemplos atualizados no site pkgdown.
-
-### v0.5.1
-- Corrigidos **URLs inválidos** reportados pelo CRAN (links e DOIs atualizados).
-- Pequenos ajustes de documentação para compatibilidade com o R-devel.
-
-### v0.5.0
-- Adicionadas funções **helper internas** para simplificar o fluxo de trabalho.
-- Novo recurso `plot_map()` para visualização espacial dos pontos de amostragem.
-- Mensagens de validação revisadas e formatação padronizada.
-
-### v0.2.1
-- `generate_analysis()` — geração automática de parágrafos analíticos baseados em regras.
-- Modelo de relatório atualizado para incluir análise textual.
-- Estruturas adicionadas para `iet_lamparelli()` e `nsfwqi()`.
 
 ---
 

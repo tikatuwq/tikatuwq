@@ -6,6 +6,8 @@
 It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance — including the legal frequency rule (Art. 15).  
 The package also includes seasonal analysis, pollutant load computation, exceedance probability, multivariate PCA, trend analysis, data validation, and automatic report generation.
 
+📄 [Ler em Português](https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md)
+
 ```markdown
 **Author:** Vinícius Saraiva Santos  
 **Institution:** Federal University of Southern Bahia (UFSB) – Graduate Program in Biosystems  
@@ -23,9 +25,6 @@ The package also includes seasonal analysis, pollutant load computation, exceeda
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions)
 ![Manuscript status](https://img.shields.io/badge/manuscript-under_review-yellow)
-
-**TikatuWQ** is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards. It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance.  
-The package also includes trend analysis, data validation, and automatic report generation.
 
 ---
 
@@ -129,78 +128,6 @@ The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos*
 
 ✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
 ✔️ Compatible with CRAN, Windows, Linux, and macOS
-
-
-### 🆕 What's new in v0.8.0
-
-- The `wq_demo` example dataset is now a subset of real data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), with 20 rows and 14 columns (including `rio`, `lat`, `lon`).
-- All examples and vignettes use this realistic dataset to improve reproducibility and clarity.
-- Documentation updated accordingly (dataset help, README, vignette).
-- No API break; behavior remains consistent with previous versions.
-
-### What's new in v0.7.3
-
-- More robust IQA
-Accepts `temp` as an alias for `temperatura`.
-Automatic numeric sanitization for comma decimals and `<`/`>` signs.
-With `na_rm = TRUE`, weights are re-scaled if some inputs are missing.
-- IET (Carlson / Lamparelli) with data.frame input
-`iet_carlson()` and `iet_lamparelli()` now accept a "raw" data.frame containing extra ID columns like `rio`, `ponto`, `data`, `lat`, `lon`.
-- Relevant parameters are auto-detected (`secchi/sd`, `clorofila/chla`, `tp/p_total`).
-`p_total` in mg/L is auto-converted to `tp` in µg/L.
-- Use `.keep_ids = TRUE` to preserve identifiers in the output.
-No new dependencies, no API break.
-Legacy vector calls keep working as before.
-
-### News v0.7.2
-
-- Fixed CRAN incoming NOTE:
-  - Removed non-standard fields (`DOI`, `Citation`) from `DESCRIPTION`.
-  - Updated `inst/CITATION` to use `bibentry()` (replacing deprecated `citEntry()`).
-- No functional or API changes.
-- Minor documentation improvements.
-- R CMD check: **0 errors | 0 warnings | 0 notes** ✅
-
-### News v0.7.0
-- New functions **`param_analysis()`** and **`param_analysis_multi()`**:
-  - Allow flexible parameter-based analyses by site or river.
-  - Support cross-comparisons (multiple parameters per site or vice versa).
-  - Include descriptive statistics and temporal trend detection.
-- Full test coverage for new modules.
-- Minor improvements to `plot_trend()` and `plot_map()` (controlled messages).
-- All CRAN and `devtools::check()` validations passed without errors.
-
-### News v0.6.2
-- Corrective update requested by CRAN.
-- Fixed **codoc** WARNING in `generate_analysis()` documentation.
-- Removed deprecated parameters `id_cols` and `filter` to match current signature.
-- No functional or code changes made.
-
-### News v0.6.1 
-- Maintenance update requested by CRAN.
-- Fixed relative link `README-pt.md`, now converted to absolute HTTPS URL.
-- No functional or code changes made.
-
-### News v0.6.0
-- New function `plot_trend()` for temporal trend analysis:
-  - Trend lines per parameter/site with **Theil-Sen**, **OLS**, and **LOESS** methods.
-  - Supports faceting by river/site and point customization.
-  - Returns `ggplot` object ready for visualization or reports.
-- Updated documentation and examples on the pkgdown site.
-
-### v0.5.1
-- Fixed **invalid URLs** reported by CRAN (updated links and DOIs included).
-- Minor documentation adjustments for R-devel compatibility.
-
-### v0.5.0
-- Added internal **helper** functions to simplify workflow.
-- New feature `plot_map()` for spatial visualization of sampling sites.
-- Revised validation messages and standardized formatting.
-
-### v0.2.1
-- `generate_analysis()` — automatic rule-based analytical paragraphs.
-- Report template updated to include textual analysis.
-- Structures added for `iet_lamparelli()` and `nsfwqi()`.
 
 ---
 
