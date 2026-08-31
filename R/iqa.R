@@ -1,5 +1,5 @@
 # R/iqa.R
-# Water Quality Index (IQA/WQI) - implementacao com curvas aproximadas
+# Water Quality Index (IQA/WQI) - media geometrica ponderada (CETESB/NSF)
 # (ASCII-only no codigo)
 
 #' Classifica valores do IQA/WQI em faixas qualitativas
@@ -20,45 +20,51 @@
 #' @export
 classify_iqa <- function(x, locale = c("pt", "en")) {
   locale <- match.arg(locale)
-  # Quebras oficiais (0-25, 26-50, 51-70, 71-90, 91-100)
   breaks <- c(-Inf, 25, 50, 70, 90, Inf)
-
   if (locale == "pt") {
     labs <- c("Muito ruim", "Ruim", "Regular", "Boa", "Otima")
   } else {
     labs <- c("Very Poor", "Poor", "Fair", "Good", "Excellent")
   }
-
-  out <- cut(x, breaks = breaks, labels = labs, right = TRUE, ordered_result = TRUE)
-  out
+  cut(x, breaks = breaks, labels = labs, right = TRUE, ordered_result = TRUE)
 }
 
 #' Water Quality Index (WQI / IQA)
 #'
 #' @description
-#' Computa o IQA/WQI combinando subindices (Qi) por **media ponderada**.
-#' Os subindices sao obtidos por interpolacao linear por trechos sobre
-#' curvas aproximadas (estilo CETESB/NSF).
+#' Computa o IQA/WQI combinando subindices (Qi) por **media geometrica
+#' ponderada**, conforme a metodologia oficial CETESB e o NSF WQI original
+#' (Brown et al., 1970): \eqn{IQA = \prod_{i} Qi_i^{Wi}}{IQA = prod(Qi^Wi)}.
 #'
 #' @param df Data frame (ou tibble) com as colunas requeridas.
-#'   Nomes esperados (portugues): \code{od}, \code{coliformes},
-#'   \code{dbo}, \code{nt_total}, \code{p_total}, \code{turbidez},
-#'   \code{tds}, \code{ph} (ou \code{pH}), \code{temperatura}.
+#'   Nomes esperados: \code{od}, \code{coliformes}, \code{dbo},
+#'   \code{nt_total}, \code{p_total}, \code{turbidez}, \code{tds},
+#'   \code{ph} (ou \code{pH}), \code{temperatura} (ou \code{temp}).
 #' @param pesos Pesos nomeados para cada parametro. Padroes seguem pratica
 #'   CETESB/NSF: \code{od=.17}, \code{coliformes=.15}, \code{dbo=.10},
 #'   \code{nt_total=.10}, \code{p_total=.10}, \code{turbidez=.08},
 #'   \code{tds=.08}, \code{pH=.12}, \code{temperatura=.10}.
-#' @param method Conjunto de curvas de interpolacao; atualmente apenas
-#'   \code{"CETESB_approx"}.
+#' @param method Metodo de calculo:
+#'   \itemize{
+#'     \item \code{"CETESB"} (padrao) — subindices por curvas de interpolacao
+#'           + **media geometrica ponderada**.
+#'     \item \code{"CETESB_equations"} — equacoes polinomiais CETESB com
+#'           saturacao de OD dependente de temperatura e altitude +
+#'           media geometrica ponderada.
+#'     \item \code{"NSF_approx"} — subindices por curvas + media aritmetica
+#'           ponderada (metodo legado, mantido para compatibilidade).
+#'   }
+#' @param altitude_m Altitude em metros acima do nivel do mar (default \code{0}).
+#'   Usado apenas em \code{method = "CETESB_equations"} para correcao da
+#'   saturacao de oxigenio dissolvido.
 #' @param na_rm Logico; se \code{FALSE} (padrao), linhas com Qi ausentes
-#'   geram erro. Se \code{TRUE}, o IQA e computado usando apenas os
-#'   parametros disponiveis e o denominador e ajustado para a soma dos
-#'   pesos presentes.
+#'   geram erro. Se \code{TRUE}, o IQA e calculado com os parametros
+#'   disponiveis e os pesos sao renormalizados por linha.
 #' @param add_status Logico; se \code{TRUE} (padrao), adiciona a coluna
 #'   \code{IQA_status} com a classificacao qualitativa (0-100).
 #' @param locale Idioma de \code{IQA_status}: \code{"pt"} (padrao) ou
 #'   \code{"en"}.
-#' @param ... Reservado para uso futuro (ignorado).
+#' @param ... Reservado para uso futuro.
 #'
 #' @returns
 #' O \code{df} de entrada com a coluna numerica \code{IQA} (0-100) e,
@@ -66,23 +72,35 @@ classify_iqa <- function(x, locale = c("pt", "en")) {
 #' O atributo \code{"iqa_method"} e definido no objeto retornado.
 #'
 #' @details
-#' Compatibilidade de nomes:
+#' **Metodo de agregacao (correcao em v0.9.0):**
+#' O IQA CETESB e o NSF WQI original utilizam media geometrica ponderada.
+#' O metodo \code{"NSF_approx"} (media aritmetica) e mantido apenas para
+#' compatibilidade retroativa.
+#'
+#' **Compatibilidade de nomes de coluna:**
 #' \itemize{
-#'   \item A tabela de curvas usa a chave \code{"pH"}.
-#'         Se seus dados possuem \code{ph} (minusculo), a curva \code{"pH"}
-#'         e mapeada para a coluna \code{ph}.
-#'   \item Para \code{temperatura}, a coluna \code{temp} (alias comum)
-#'         e automaticamente aceita caso \code{temperatura} nao exista.
+#'   \item \code{ph} (minusculo) e aceito como alias de \code{pH}.
+#'   \item \code{temp} e aceito como alias de \code{temperatura}.
 #' }
 #'
-#' Se as curvas internas retornarem Qi em 0-10 (variante historica),
-#' o valor agregado e normalizado internamente para 0-100 antes do retorno.
-#' Valores finais sao limitados ao intervalo \code{[0, 100]}.
+#' @references
+#' CETESB (2021). \emph{Qualidade das Aguas Superficiais no Estado de Sao Paulo}.
+#' CETESB, Sao Paulo.
+#'
+#' Brown, R.M. et al. (1970). A Water Quality Index — Do We Dare?
+#' \emph{Water and Sewage Works}, 117, 339-343.
+#'
+#' @family water-quality-indices
 #'
 #' @examples
-#' d <- wq_demo
-#' d2 <- iqa(d, na_rm = TRUE)
-#' table(d2$IQA_status, useNA = "ifany")
+#' d <- iqa(wq_demo, na_rm = TRUE)
+#' table(d$IQA_status, useNA = "ifany")
+#'
+#' # Usando equacoes CETESB com correcao de altitude
+#' \donttest{
+#' d2 <- iqa(wq_demo, method = "CETESB_equations", altitude_m = 800, na_rm = TRUE)
+#' summary(d2$IQA)
+#' }
 #'
 #' @export
 iqa <- function(
@@ -91,85 +109,100 @@ iqa <- function(
     od = .17, coliformes = .15, dbo = .10, nt_total = .10, p_total = .10,
     turbidez = .08, tds = .08, pH = .12, temperatura = .10
   ),
-  method = c("CETESB_approx"),
-  na_rm = FALSE,
+  method    = c("CETESB", "CETESB_equations", "NSF_approx"),
+  altitude_m = 0,
+  na_rm     = FALSE,
   add_status = TRUE,
-  locale = c("pt", "en"),
+  locale    = c("pt", "en"),
   ...
 ) {
   method <- match.arg(method)
   locale <- match.arg(locale)
 
-  # Curvas (chaves: nomes dos parametros nas curvas; ex.: "pH")
-  curves <- iqa_curve_table(method = method)
+  # ------------------------------------------------------------------
+  # Rota: equacoes polinomiais CETESB (iqa_official)
+  # ------------------------------------------------------------------
+  if (method == "CETESB_equations") {
+    out <- iqa_official(df, pesos = pesos, altitude_m = altitude_m, na_rm = na_rm)
+    out$IQA <- pmin(100, pmax(0, out$IQA))
+    if (isTRUE(add_status)) {
+      out$IQA_status <- classify_iqa(out$IQA, locale = locale)
+    }
+    attr(out, "iqa_method") <- method
+    return(out)
+  }
 
-  # Helper de mapeamento de nome de curva -> coluna do df
+  # ------------------------------------------------------------------
+  # Rotas: CETESB (geometrica) e NSF_approx (aritmetica) via curvas
+  # ------------------------------------------------------------------
+  curves <- iqa_curve_table(method = "CETESB_approx")
+
   map_param_to_col <- function(param_name) {
-    if (param_name == "pH" && "ph" %in% names(df)) return("ph")
+    if (param_name == "pH"         && "ph"   %in% names(df)) return("ph")
     if (param_name == "temperatura" && "temp" %in% names(df)) return("temp")
     param_name
   }
 
-  # Verificacao de colunas requeridas (com suporte a na_rm)
   req_curve_keys <- names(pesos)
   req_df_cols    <- vapply(req_curve_keys, map_param_to_col, character(1))
+  present        <- req_df_cols %in% names(df)
 
-  present <- req_df_cols %in% names(df)
   if (!all(present)) {
     if (!na_rm) {
-      missing_cols <- req_df_cols[!present]
-      stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
-    } else {
-      # Se na_rm = TRUE, reescala usando apenas as colunas presentes
-      req_curve_keys <- req_curve_keys[present]
-      req_df_cols    <- req_df_cols[present]
-      pesos          <- pesos[names(pesos) %in% req_curve_keys]
+      stop("Missing required columns: ", paste(req_df_cols[!present], collapse = ", "))
     }
+    req_curve_keys <- req_curve_keys[present]
+    req_df_cols    <- req_df_cols[present]
+    pesos          <- pesos[names(pesos) %in% req_curve_keys]
   }
 
-  # Construcao de Qi por parametro (numificando antes da interpolacao)
   qi_col <- function(param_key) {
     col_name <- map_param_to_col(param_key)
-    vals <- .numify(df[[col_name]])
-    tbl  <- curves[[param_key]]
-    if (is.null(tbl)) {
-      stop("No Qi curve found for parameter key '", param_key, "'.")
-    }
+    vals     <- .numify(df[[col_name]])
+    tbl      <- curves[[param_key]]
+    if (is.null(tbl)) stop("No Qi curve found for parameter key '", param_key, "'.")
     qi_interp(vals, tbl)
   }
 
   qi_df <- as.data.frame(lapply(req_curve_keys, qi_col))
   names(qi_df) <- req_curve_keys
 
-  # Se na_rm = FALSE e houver NA em Qi, aborta (comportamento anterior preservado)
   if (!na_rm && anyNA(qi_df)) {
     stop("There are NA values in parameters. Use na_rm = TRUE to ignore incomplete rows.")
   }
 
-  # Pesos
   w_vec <- unname(pesos)
-  # denominador por linha (soma de pesos onde Qi nao eh NA)
-  denom <- rowSums(!is.na(qi_df) * rep(w_vec, each = nrow(qi_df)))
-  # numerador: soma ponderada dos Qi
-  numer <- rowSums(qi_df * matrix(rep(w_vec, each = nrow(qi_df)), nrow = nrow(qi_df)), na.rm = na_rm)
 
-  iqa_val <- numer / denom
-  iqa_val[denom == 0] <- NA_real_
-
-  # Normaliza escala: se parecer 0-10, converte para 0-100
-  # (detector simples e silencioso para compat)
-  rng <- range(iqa_val, na.rm = TRUE)
-  if (is.finite(rng[2]) && rng[2] <= 10) {
-    iqa_val <- iqa_val * 10
+  # ------------------------------------------------------------------
+  # Agregacao: geometrica (CETESB, padrao) ou aritmetica (NSF_approx)
+  # ------------------------------------------------------------------
+  if (method == "CETESB") {
+    # Media geometrica ponderada: IQA = prod(Qi^Wi)
+    iqa_val <- vapply(seq_len(nrow(qi_df)), function(i) {
+      qi_row <- unlist(qi_df[i, , drop = TRUE])
+      ok     <- is.finite(qi_row)
+      if (!any(ok)) return(NA_real_)
+      ww <- w_vec[ok]
+      if (na_rm) ww <- ww / sum(ww) else ww <- ww / sum(w_vec)
+      prod(qi_row[ok]^ww)
+    }, numeric(1))
+  } else {
+    # NSF_approx: media aritmetica ponderada (legado)
+    denom   <- rowSums(!is.na(qi_df) * matrix(rep(w_vec, each = nrow(qi_df)),
+                                               nrow = nrow(qi_df)))
+    numer   <- rowSums(qi_df * matrix(rep(w_vec, each = nrow(qi_df)),
+                                      nrow = nrow(qi_df)), na.rm = na_rm)
+    iqa_val <- ifelse(denom == 0, NA_real_, numer / denom)
   }
 
-  # clip para [0, 100]
+  # Normaliza escala se necessario (0-10 -> 0-100, variante historica)
+  rng <- range(iqa_val, na.rm = TRUE)
+  if (is.finite(rng[2]) && rng[2] <= 10) iqa_val <- iqa_val * 10
+
   iqa_val <- pmin(100, pmax(0, iqa_val))
 
   df$IQA <- iqa_val
-  if (isTRUE(add_status)) {
-    df$IQA_status <- classify_iqa(df$IQA, locale = locale)
-  }
+  if (isTRUE(add_status)) df$IQA_status <- classify_iqa(df$IQA, locale = locale)
 
   attr(df, "iqa_method") <- method
   df

@@ -1,8 +1,8 @@
 # 💧 TikatuWQ: Um Pacote R para Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil
 
 **TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros.  
-Implementa os principais índices utilizados no país: **IQA/NSFWQI** e **IET (Carlson e Lamparelli)** e realiza verificações automáticas de conformidade com a **Resolução CONAMA 357/2005**.  
-O pacote também inclui análise de tendências, validação de dados e geração automática de relatórios.
+Implementa os principais índices utilizados no país: **IQA/NSFWQI** e **IET (Carlson e Lamparelli)** e realiza verificações automáticas de conformidade com a **Resolução CONAMA 357/2005** — incluindo a regra de frequência legal (Art. 15).  
+O pacote também inclui análise sazonal, cálculo de carga poluidora, probabilidade de excedência, PCA multivariado, análise de tendências, validação de dados e geração automática de relatórios.
 
 📄 [Read in English](https://github.com/tikatuwq/tikatuwq/blob/main/README.md)
 
@@ -33,7 +33,7 @@ Para instalar as dependências de desenvolvimento e verificar o pacote localment
 
 ```r
 install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
-                   "readr","lubridate","stringr","glue","scales","broom","purrr"))
+                   "readr","lubridate","stringr","glue","scales","broom","purrr","tools"))
 devtools::load_all("tikatuwq")
 devtools::check("tikatuwq")
 ```
@@ -42,7 +42,7 @@ devtools::check("tikatuwq")
 
 ## Dados reais incluídos: Rio Buranhem - INEMA
 
-Este pacote inclui agora um conjunto real de dados de qualidade da água, extraídos de campanhas de monitoramento do INEMA (Instituto do Meio Ambiente e Recursos Hídricos da Bahia) na bacia do Rio Buranhem (Porto Seguro, Bahia) entre 2021 e 2024. Os dados trazem datas de amostragem, locais (pontos) e variáveis físico-químicas coletadas em campo. Veja a documentação de `wq_demo` para detalhes sobre colunas e exemplos de uso.
+Este pacote inclui um conjunto real de dados de qualidade da água, extraídos de campanhas de monitoramento do INEMA (Instituto do Meio Ambiente e Recursos Hídricos da Bahia) na bacia do Rio Buranhem (Porto Seguro, Bahia) entre 2021 e 2024. Os dados trazem datas de amostragem, locais (pontos) e variáveis físico-químicas coletadas em campo. Veja a documentação de `wq_demo` para detalhes sobre colunas e exemplos de uso.
 
 A documentação principal e os vignettes usam este conjunto representativo para reproducibilidade.
 
@@ -52,8 +52,17 @@ A documentação principal e os vignettes usam este conjunto representativo para
 library(tikatuwq)
 data(wq_demo)
 head(wq_demo)
+
 # Exemplo típico
 wq_demo |> validate_wq() |> iqa(na_rm = TRUE) |> plot_iqa()
+
+# Visualização do estado trófico
+wq_demo |> iet_carlson(.keep_ids = TRUE) |> plot_iet(method = "carlson")
+
+# Análise sazonal
+wq_demo |>
+  assign_season(region = "bahia") |>
+  compare_seasons(param = "turbidez", by = "ponto")
 ```
 
 ---
@@ -71,7 +80,48 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ## 🆕 Novidades
 
-### 🆕 Novidades na versão 0.8.0 (atual)
+### 🆕 Novidades na versão 0.9.0 (atual)
+
+**⚠️ Mudança incompatível — IQA agora usa a média geométrica ponderada correta**
+
+`iqa()` passa a usar por padrão `method = "CETESB"`, que calcula a média geométrica ponderada `∏(Qi^Wi)` conforme a metodologia da CETESB e a formulação original do NSF WQI (Brown et al., 1970). O comportamento anterior (média aritmética, incorreto) é preservado via `method = "NSF_approx"`. Usuários que dependem do valor padrão obterão resultados mais precisos — e em geral ligeiramente menores.
+
+**Novas funções:**
+
+- `conama_freq_check()` — implementa a regra de frequência legal do Art. 15 da CONAMA 357/2005: um parâmetro é considerado conforme apenas quando ≥ 80% de ao menos 6 amostras por ano estão dentro dos limites. Retorna uma tabela de conformidade por ponto, ano e parâmetro.
+- `assign_season()` — classifica cada amostra como `"chuvoso"` ou `"seco"` com base em calendários hidrológicos regionais brasileiros (Sudeste, Nordeste, Norte, Sul, Centro-Oeste, Bahia) ou em um vetor de meses personalizado.
+- `compare_seasons()` — compara um parâmetro de qualidade da água entre os períodos chuvoso e seco usando Wilcoxon, teste t ou Kruskal-Wallis; retorna estatísticas descritivas, resultado do teste e um boxplot `ggplot` opcional.
+- `plot_iet()` — gráfico de barras (vertical ou horizontal) do Índice de Estado Trófico com coloração por classe trófica, compatível com os esquemas de Carlson (1977) e Lamparelli (2004).
+- `compute_load()` — calcula a carga poluidora como concentração × vazão × fator de unidade; saídas em kg/dia, t/dia, kg/ano e g/s.
+- `exceedance_prob()` — estima a probabilidade empírica de excedência com intervalo de confiança de Wilson, por grupo.
+- `wq_pca()` — wrapper PCA sobre `stats::prcomp()` com seleção automática de colunas, biplot, screeplot e gráfico de loadings retornados como atributos `ggplot`.
+- `nsfwqi()` — atualizado: passa a usar média geométrica ponderada (consistente com a correção do IQA); adiciona argumentos `add_status` e `locale` para rótulos de status multilíngues.
+
+**Tabela de limites expandida:**
+
+- `inst/extdata/conama_limits.csv` ampliada de ~38 para ~116 linhas, incluindo espécies de nitrogênio (NO₃, NO₂, NH₃ com limites condicionais ao pH), íons inorgânicos (fluoretos, cloretos, sulfatos), poluentes orgânicos (fenóis, surfactantes) e 14 metais pesados para as Classes 1–3.
+
+✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
+✔️ Compatível com CRAN, Windows, Linux e macOS
+
+---
+
+### 🆕 Novidades na versão 0.8.2
+
+- Manutenção CRAN: corrigido o exemplo de `plot_map()` para usar o dataset interno `wq_demo` em vez de referência a arquivo externo. Todos os exemplos e testes estão em conformidade com as políticas do CRAN.
+
+### 🆕 Novidades na versão 0.8.1
+
+- Ajustes internos para garantir plena conformidade com as políticas do CRAN em relação ao acesso ao sistema de arquivos.
+- Exemplos e documentação passam a depender exclusivamente do dataset interno `wq_demo`, removendo qualquer dependência de arquivos externos ou locais.
+- A função `render_report()` agora grava saída **somente em diretórios temporários** (`tempdir()`) ou em diretórios explicitamente fornecidos pelo usuário.
+- Exemplos, testes e documentação foram revisados para garantir execução segura em ambientes restritos (ex.: sistemas de verificação do CRAN).
+- Sem alterações na API e sem impacto funcional para os usuários.
+
+✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
+✔️ Compatível com CRAN, Windows, Linux e macOS
+
+### 🆕 Novidades na versão 0.8.0
 
 - O dataset de exemplo `wq_demo` agora é um subconjunto real de dados (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), com 20 linhas e 14 colunas (incluindo `rio`, `lat`, `lon`).
 - Exemplos e vignettes passam a usar este conjunto real para maior reprodutibilidade e clareza.
@@ -80,17 +130,16 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ### Novidades na versão 0.7.3
 
-- IQA mais robusto
-Aceita temp como alias de temperatura.
-“Numificação” automática de valores com vírgula decimal e sinais < >.
-Com na_rm = TRUE, repondera os pesos quando faltarem parâmetros.
-- IET (Carlson / Lamparelli) com data.frame
-- Agora iet_carlson() e iet_lamparelli() aceitam um data.frame “cru” com colunas como rio, ponto, data, lat, lon, etc.
-- Parâmetros relevantes são detectados automaticamente (secchi/sd, clorofila/chla, tp/p_total).
-p_total em mg/L é convertido automaticamente para tp em µg/L.
-- Use .keep_ids = TRUE para preservar identificadores (ex.: rio, ponto, data) na saída.
+- IQA mais robusto:
+aceita `temp` como alias de `temperatura`.
+"Numificação" automática de valores com vírgula decimal e sinais `<`/`>`.
+Com `na_rm = TRUE`, repondera os pesos quando faltarem parâmetros.
+- IET (Carlson / Lamparelli) com data.frame:
+`iet_carlson()` e `iet_lamparelli()` agora aceitam um data.frame com colunas como `rio`, `ponto`, `data`, `lat`, `lon`.
+Parâmetros relevantes são detectados automaticamente (`secchi/sd`, `clorofila/chla`, `tp/p_total`).
+`p_total` em mg/L é convertido automaticamente para `tp` em µg/L.
+Use `.keep_ids = TRUE` para preservar identificadores na saída.
 Sem novas dependências, sem quebra de API.
-Tudo continua funcionando como antes para quem usa as chamadas vetoriais.
 
 ### Novidades v0.7.2
 
@@ -149,7 +198,7 @@ install.packages("remotes")  # ou devtools
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável (por tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
+remotes::install_github("tikatuwq/tikatuwq@v0.9.0", build_vignettes = TRUE)
 ```
 
 ---
@@ -164,22 +213,46 @@ conama_report(df, "2", only_violations = TRUE, pretty = TRUE)
 
 # Resumo textual curto
 cat(paste(conama_text(df, "2", only_violations = TRUE), collapse = "\n"))
+
+# Regra de frequência legal (CONAMA 357/2005 Art. 15)
+conama_freq_check(df, classe = "2", by = "ponto")
 ```
 
 ---
 
 ## Principais funções
 
-- `read_wq(path)` — lê conjuntos de dados de qualidade da água (CSV).  
-- `validate_wq(df)` — valida e normaliza colunas e unidades.  
-- `iqa(df, na_rm = TRUE, ...)` — Índice de Qualidade da Água (CETESB/NSF).  
-- `iet_carlson(df)` / `iet_lamparelli(df)` — Índice do Estado Trófico.  
-- `nsfwqi(df)` — NSFWQI (estrutura pronta).  
-- `conama_limits(class)` — limites da Resolução CONAMA 357/2005.  
-- `conama_check(df, class)` — verificação de conformidade por parâmetro (colunas *_ok).  
-- Visualizações: `plot_iqa()`, `plot_series()`, `plot_box()`, `plot_heatmap()`, `plot_map()`, `plot_trend()` (retorna objeto `ggplot`).  
-- Relatórios/Textos: `generate_analysis()`, `render_report()`.  
-- Dados de exemplo: `system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")`.
+**Índices de qualidade da água**
+- `iqa(df, method = "CETESB", na_rm = TRUE, ...)` — Índice de Qualidade da Água; média geométrica ponderada (CETESB/NSF por padrão).
+- `iet_carlson(df)` / `iet_lamparelli(df)` — Índice do Estado Trófico.
+- `nsfwqi(df, na_rm = TRUE, add_status = TRUE)` — NSF WQI com agregação por média geométrica.
+
+**Conformidade CONAMA e balneabilidade**
+- `conama_limits(class)` — limites da Resolução CONAMA 357/2005.
+- `conama_check(df, class)` — verificação de conformidade por parâmetro (colunas `*_ok`).
+- `conama_freq_check(df, classe, by)` — regra de frequência Art. 15 (≥ 80% de conformidade em ≥ 6 amostras/ano).
+- `balnear_check(df, by)` — classificação de balneabilidade pela CONAMA 274/2000 (Excelente → Imprópria).
+
+**Análise sazonal e tendência**
+- `assign_season(df, region)` — classifica amostras por período hidrológico usando calendários regionais.
+- `compare_seasons(df, param, test)` — comparação estatística entre períodos chuvoso e seco.
+- `mk_seasonal(df, param, period)` — teste de Mann-Kendall sazonal (Hirsch et al., 1982); retorna Z, p-valor, tau e inclinação de Sen.
+
+**Carga e risco**
+- `compute_load(df, param, flow_col, unit_out)` — carga poluidora (kg/dia, t/dia, etc.).
+- `exceedance_prob(df, param, threshold, direction, by)` — probabilidade empírica de excedência com IC de Wilson.
+
+**Multivariado**
+- `wq_pca(df, params, color_by)` — PCA com biplot, screeplot e gráfico de loadings.
+
+**Visualizações**
+- `plot_iqa()`, `plot_iet()`, `plot_series()`, `plot_box()`, `plot_heatmap()`, `plot_trend()` — retornam objetos `ggplot`.
+- `plot_map()`, `plot_map_quality()` — mapas interativos Leaflet; `plot_map_quality()` colore os pontos pela classe do IQA/IET/NSF WQI.
+
+**Dados e relatórios**
+- `read_wq(path)` — lê conjuntos de dados de qualidade da água (CSV).
+- `validate_wq(df)` — valida e normaliza colunas e unidades.
+- `generate_analysis()`, `render_report()` — relatórios textuais e documentais automáticos.
 
 ---
 
@@ -201,7 +274,7 @@ citation("tikatuwq")
 
 Se você utilizar o **tikatuwq** em suas pesquisas, cite da seguinte forma:
 
-> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.8.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
+> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.9.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
 
 Entrada BibTeX:
 
@@ -210,7 +283,7 @@ Entrada BibTeX:
   title  = {tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil},
   author = {Vinicius Saraiva Santos},
   year   = {2025},
-  note   = {R package version 0.8.0},
+  note   = {R package version 0.9.0},
   doi    = {10.5281/zenodo.17407297},
   url    = {https://github.com/tikatuwq/tikatuwq},
 }

@@ -23,7 +23,7 @@ A tibble/data.frame with 20 rows and 14 columns:
 \item{lon}{numeric, longitude}
 }
 
-A tibble/data.frame. See \code{wq_demo} documentation for column details.
+A tibble with columns documented in \code{\link{wq_demo}}.
 }
 \source{
 Subset of dataset-real.csv (BURANHEM river, 4 sites, years 2020–2024).
@@ -36,7 +36,14 @@ data(wq_demo)
 \description{
 A small subset of real monitoring data used in examples and vignettes. Now includes extra columns \code{rio}, \code{lat}, \code{lon}.
 
-This dataset contains real water quality measurements collected by INEMA (Instituto do Meio Ambiente e Recursos Hidricos, Bahia) during monitoring campaigns conducted between 2021 and 2024 in the Rio Buranhem watershed, municipality of Porto Seguro, Bahia, Brazil. The dataset was incorporated into the package for demonstration, reproducibility and methodological illustration, following the analytical workflow implemented in tikatuwq. Parameters include sampling dates, site identifiers and multiple physicochemical variables measured during field campaigns.
+Real water quality measurements collected by INEMA (Instituto do Meio
+Ambiente e Recursos Hidricos, Bahia) during monitoring campaigns conducted
+between 2021 and 2024 in the Rio Buranhem watershed, municipality of
+Porto Seguro, Bahia, Brazil. Incorporated into the package for
+demonstration, reproducibility and methodological illustration, following
+the analytical workflow implemented in tikatuwq. Parameters include
+sampling dates, site identifiers and multiple physicochemical variables
+measured during field campaigns.
 }
 \details{
 The dataset is a real subset selected from BURANHEM river (dataset-real.csv), used for reproducible examples and vignettes.
@@ -53,6 +60,6 @@ head(wq_demo)
 \code{\link[=iqa]{iqa()}}, \code{\link[=conama_check]{conama_check()}}, \code{\link[=plot_series]{plot_series()}},
 \code{\link[=plot_box]{plot_box()}}, \code{\link[=plot_iqa]{plot_iqa()}}, \code{\link[=plot_heatmap]{plot_heatmap()}}
 
-wq_demo
+\code{\link{wq_demo}}
 }
 \keyword{datasets}

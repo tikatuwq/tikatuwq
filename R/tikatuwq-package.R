@@ -40,7 +40,7 @@
 #'
 #' @references
 #' Carlson (1977) <doi:10.4319/lo.1977.22.2.0361>  
-#' Lamparelli (2004) <https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf>  
+#' Lamparelli (2004) <https://teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf>  
 #' NSF WQI <https://link.springer.com/article/10.1007/s11157-023-09650-7>  
 #' CONAMA 357/2005 <https://conama.mma.gov.br/?id=450&option=com_sisconama&task=arquivo.download>
 #'

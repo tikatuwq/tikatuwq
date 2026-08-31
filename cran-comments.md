@@ -1,27 +1,29 @@
-## Test environments
-- Windows 11, R 4.5.1 (x86_64, ucrt)
-- macOS 14 (local), R 4.3+
-- Ubuntu 22.04 (CI), R 4.3+
-
 ## R CMD check results
-0 errors | 0 warnings | 0 notes
 
-## Changes
-- v0.8.2 (patch, CRAN maintenance):
-  * Fixed example in `plot_map()` to use internal dataset `wq_demo` instead of external file reference (`dataset-real.csv`).
-  * All examples and tests now comply with CRAN policies (no local file dependencies, write only to tempdir).
-  * No API changes; backward compatible.
+0 errors | 0 warnings | 1 note
 
-- v0.8.1 (patch, CRAN compliance fix):
-  * **Fixed filesystem write errors on CRAN Debian/Linux**: `render_report()` now copies the R Markdown template to a temporary directory before rendering, ensuring all intermediate files are written only to `output_dir` (default `tempdir()`), never to the read-only package installation directory. This resolves the "cannot open the connection" errors during `rmarkdown::render()` → `knitr::knit()` → `xfun::write_utf8()`.
-  * Tests in `test-render_report.R` now use `skip_on_cran()` and `withr::local_tempdir()` for proper cleanup and CRAN compliance.
-  * Added `withr` to Suggests for test infrastructure.
-  * No API changes; backward compatible.
+* NOTE: "unable to verify current time" — network issue on the check machine;
+  not a package problem.
 
-- v0.8.0 (minor, backward-compatible):
-  * `wq_demo` now points to a real subset of monitoring data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), 20 rows and 14 columns (including `rio`, `lat`, `lon`).
-  * All examples and vignettes updated to use the real dataset, improving reproducibility and documentation value.
-  * No API break; functions and test expectations remain valid.
+## Possibly misspelled words in DESCRIPTION
 
-## Reverse dependencies
-- No reverse dependencies at this time.
+The spell-checker flagged the following terms, all of which are correct:
+
+* **CETESB** — Companhia Ambiental do Estado de Sao Paulo (Brazilian
+  environmental agency); now wrapped in single quotes in DESCRIPTION.
+* **INEMA** — Instituto do Meio Ambiente e Recursos Hidricos (Bahia state
+  environmental agency); now wrapped in single quotes.
+* **Buranhem** — proper name of a Brazilian river (Rio Buranhem, Bahia).
+* **hydrological** — standard English adjective; listed in major dictionaries.
+* **et al.** — standard Latin abbreviation used in academic citations.
+
+## URL change
+
+Replaced https://www.teses.usp.br/... with https://teses.usp.br/...
+to follow the permanent redirect (301) flagged by CRAN incoming checks.
+
+## Resubmission note
+
+This is a resubmission of tikatuwq 0.9.0. The previous submission was
+rejected due to the 301 redirect on the Lamparelli (2004) URL and the
+spell-check NOTE. Both have been addressed above.

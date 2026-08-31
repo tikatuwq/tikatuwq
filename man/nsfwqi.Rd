@@ -2,64 +2,88 @@
 % Please edit documentation in R/nsfwqi.R
 \name{nsfwqi}
 \alias{nsfwqi}
-\title{NSF Water Quality Index (NSF WQI, prototype)}
+\title{NSF Water Quality Index (NSF WQI)}
 \usage{
 nsfwqi(
   df,
   pesos = c(do = 0.17, fc = 0.16, ph = 0.11, bod = 0.11, temp_change = 0.1, po4 = 0.1,
     no3 = 0.1, turbidez = 0.08, sst = 0.07),
-  na_rm = FALSE
+  na_rm = FALSE,
+  add_status = TRUE,
+  locale = c("pt", "en")
 )
 }
 \arguments{
-\item{df}{Data frame containing columns compatible with the mapping above.}
+\item{df}{Data frame com as colunas de parametros (ver Detalhes).}
 
-\item{pesos}{Named numeric vector with parameter weights. Defaults follow a
-common NSF WQI variant:
+\item{pesos}{Named numeric vector com os pesos dos parametros.
+Os defaults seguem a proposta original NSF:
 \code{do=.17}, \code{fc=.16}, \code{ph=.11}, \code{bod=.11},
 \code{temp_change=.10}, \code{po4=.10}, \code{no3=.10},
 \code{turbidez=.08}, \code{sst=.07}.}
 
-\item{na_rm}{Logical; allow NA per row and rescale weights to available
-parameters (\code{TRUE}) or error on missing inputs (\code{FALSE}).}
+\item{na_rm}{Logical; se \code{TRUE}, renormaliza pesos por linha para
+os parametros com valor valido. Default \code{FALSE}.}
+
+\item{add_status}{Logical; adiciona a coluna \code{NSFWQI_status} com a
+classificacao qualitativa. Default \code{TRUE}.}
+
+\item{locale}{Character; idioma para os rotulos de status:
+\code{"pt"} (default, portugues) ou \code{"en"} (ingles).}
 }
 \value{
-The input \code{df} with an added numeric column \code{NSFWQI}.
+O data frame de entrada com a coluna \code{NSFWQI} (e
+opcionalmente \code{NSFWQI_status}) adicionada.
 }
 \description{
-Computes a \strong{prototype} NSF WQI as a weighted arithmetic mean of
-parameter sub-scores (Qi) using simple piecewise rules. This is intended
-for quick demonstrations and is \strong{not} a full replication of the original
-NSF curves.
+Calcula o NSF WQI (Brown et al., 1970) como media geometrica ponderada
+dos sub-escores dos parametros: \eqn{WQI = \prod Q_i^{w_i}}{WQI = prod(Qi^Wi)}.
+Aceita nomes de colunas no padrao brasileiro (e.g. \code{od}, \code{dbo},
+\code{coliformes}) e traduz automaticamente para os indices NSF.
 }
 \details{
-The function accepts both NSF-style column names and common Brazilian
-aliases. The mapping tried (if present) is:
-\itemize{
-\item \code{do}  <- \code{od}
-\item \code{fc}  <- \code{coliformes}
-\item \code{ph}  <- \code{pH} or \code{ph}
-\item \code{bod} <- \code{dbo}
-\item \code{turbidez} stays \code{turbidez}
-\item \code{sst} <- \code{solidos_suspensos}
-\item \code{po4} <- \code{po4} or \code{p_ortofosfato}
-\item \code{no3} <- \code{no3} or \code{n_nitrato}
-\item \code{temp_change} must be supplied as-is (delta T to reference)
+O mapeamento tentado (alias BR -> nome NSF) e:
+\describe{
+\item{\code{do}}{coluna \code{od} ou \code{do}.}
+\item{\code{fc}}{coluna \code{coliformes} ou \code{fc}.}
+\item{\code{ph}}{coluna \code{pH}, \code{ph} ou \code{pH}.}
+\item{\code{bod}}{coluna \code{dbo} ou \code{bod}.}
+\item{\code{turbidez}}{coluna \code{turbidez}.}
+\item{\code{sst}}{coluna \code{solidos_suspensos} ou \code{sst}.}
+\item{\code{po4}}{coluna \code{p_ortofosfato} ou \code{po4}.}
+\item{\code{no3}}{coluna \code{n_nitrato} ou \code{no3}.}
+\item{\code{temp_change}}{coluna \code{temp_change} (delta T relativo
+ao padrao; deve ser calculado externamente).}
 }
 
-If \code{na_rm = TRUE}, weights are rescaled \strong{per row} to the parameters
-available in that row. If \code{na_rm = FALSE} (default), any missing
-required input leads to an error.
+Os Qi (sub-escores, escala 0-100) seguem curvas piecewise baseadas nas
+curvas originais de Brown et al. (1970). A agregacao usa media geometrica
+ponderada, fiel ao metodo original.
+
+Se \code{na_rm = TRUE}, os pesos sao renormalizados por linha aos
+parametros disponiveis. Se \code{na_rm = FALSE} (default), linhas com
+qualquer NA resultam em \code{NSFWQI = NA} (sem erro).
 }
 \examples{
+\donttest{
+data("wq_demo", package = "tikatuwq")
 d <- wq_demo
-# create minimal aliases so the prototype can run
+# Mapeia alias brasileiros
 d$do  <- d$od
 d$fc  <- d$coliformes
-d$ph  <- d$ph
 d$bod <- d$dbo
-# others are missing; use na_rm = TRUE to rescale weights by row
+# Parametros ausentes sao ignorados com na_rm = TRUE
 out <- nsfwqi(d, na_rm = TRUE)
-head(out$NSFWQI)
+head(out[, c("ponto", "NSFWQI", "NSFWQI_status")])
+}
 
 }
+\references{
+Brown, R. M., McClelland, N. I., Deininger, R. A., &
+Tozer, R. G. (1970). A water quality index - do we dare? \emph{Water and
+Sewage Works}, 117(10), 339-343.
+}
+\seealso{
+\code{\link[=iqa]{iqa()}}, \code{\link[=plot_iqa]{plot_iqa()}}
+}
+\concept{wqi-tools}

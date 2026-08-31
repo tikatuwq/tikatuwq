@@ -35,3 +35,7 @@
 ^grafico_variacao_IQA\.png$
 ^verifica\.txt$
 ^wq_demo_selected\.csv$
+^ANALISE_TECNICA_TIKATUWQ\.md$
+^run_check_cran\.R$
+^EXEMPLOS_TIKATUWQ\.md$
+^banner_tikatuwq.*$

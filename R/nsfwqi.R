@@ -1,53 +1,75 @@
 # R/nsfwqi.R
-# NSF Water Quality Index (prototype) — ASCII-only
+# NSF Water Quality Index (Brown et al. 1970) — ASCII-only no codigo
 
-#' NSF Water Quality Index (NSF WQI, prototype)
+#' NSF Water Quality Index (NSF WQI)
 #'
 #' @description
-#' Computes a **prototype** NSF WQI as a weighted arithmetic mean of
-#' parameter sub-scores (Qi) using simple piecewise rules. This is intended
-#' for quick demonstrations and is **not** a full replication of the original
-#' NSF curves.
+#' Calcula o NSF WQI (Brown et al., 1970) como media geometrica ponderada
+#' dos sub-escores dos parametros: \eqn{WQI = \prod Q_i^{w_i}}{WQI = prod(Qi^Wi)}.
+#' Aceita nomes de colunas no padrao brasileiro (e.g. \code{od}, \code{dbo},
+#' \code{coliformes}) e traduz automaticamente para os indices NSF.
 #'
 #' @details
-#' The function accepts both NSF-style column names and common Brazilian
-#' aliases. The mapping tried (if present) is:
+#' O mapeamento tentado (alias BR -> nome NSF) e:
+#' \describe{
+#'   \item{\code{do}}{coluna \code{od} ou \code{do}.}
+#'   \item{\code{fc}}{coluna \code{coliformes} ou \code{fc}.}
+#'   \item{\code{ph}}{coluna \code{pH}, \code{ph} ou \code{pH}.}
+#'   \item{\code{bod}}{coluna \code{dbo} ou \code{bod}.}
+#'   \item{\code{turbidez}}{coluna \code{turbidez}.}
+#'   \item{\code{sst}}{coluna \code{solidos_suspensos} ou \code{sst}.}
+#'   \item{\code{po4}}{coluna \code{p_ortofosfato} ou \code{po4}.}
+#'   \item{\code{no3}}{coluna \code{n_nitrato} ou \code{no3}.}
+#'   \item{\code{temp_change}}{coluna \code{temp_change} (delta T relativo
+#'     ao padrao; deve ser calculado externamente).}
+#' }
 #'
-#' - \code{do}  <- \code{od}
-#' - \code{fc}  <- \code{coliformes}
-#' - \code{ph}  <- \code{pH} or \code{ph}
-#' - \code{bod} <- \code{dbo}
-#' - \code{turbidez} stays \code{turbidez}
-#' - \code{sst} <- \code{solidos_suspensos}
-#' - \code{po4} <- \code{po4} or \code{p_ortofosfato}
-#' - \code{no3} <- \code{no3} or \code{n_nitrato}
-#' - \code{temp_change} must be supplied as-is (delta T to reference)
+#' Os Qi (sub-escores, escala 0-100) seguem curvas piecewise baseadas nas
+#' curvas originais de Brown et al. (1970). A agregacao usa media geometrica
+#' ponderada, fiel ao metodo original.
 #'
-#' If \code{na_rm = TRUE}, weights are rescaled **per row** to the parameters
-#' available in that row. If \code{na_rm = FALSE} (default), any missing
-#' required input leads to an error.
+#' Se \code{na_rm = TRUE}, os pesos sao renormalizados por linha aos
+#' parametros disponiveis. Se \code{na_rm = FALSE} (default), linhas com
+#' qualquer NA resultam em \code{NSFWQI = NA} (sem erro).
 #'
-#' @param df Data frame containing columns compatible with the mapping above.
-#' @param pesos Named numeric vector with parameter weights. Defaults follow a
-#'   common NSF WQI variant:
+#' @param df Data frame com as colunas de parametros (ver Detalhes).
+#' @param pesos Named numeric vector com os pesos dos parametros.
+#'   Os defaults seguem a proposta original NSF:
 #'   \code{do=.17}, \code{fc=.16}, \code{ph=.11}, \code{bod=.11},
 #'   \code{temp_change=.10}, \code{po4=.10}, \code{no3=.10},
 #'   \code{turbidez=.08}, \code{sst=.07}.
-#' @param na_rm Logical; allow NA per row and rescale weights to available
-#'   parameters (\code{TRUE}) or error on missing inputs (\code{FALSE}).
+#' @param na_rm Logical; se \code{TRUE}, renormaliza pesos por linha para
+#'   os parametros com valor valido. Default \code{FALSE}.
+#' @param add_status Logical; adiciona a coluna \code{NSFWQI_status} com a
+#'   classificacao qualitativa. Default \code{TRUE}.
+#' @param locale Character; idioma para os rotulos de status:
+#'   \code{"pt"} (default, portugues) ou \code{"en"} (ingles).
 #'
-#' @return The input \code{df} with an added numeric column \code{NSFWQI}.
+#' @returns O data frame de entrada com a coluna \code{NSFWQI} (e
+#'   opcionalmente \code{NSFWQI_status}) adicionada.
+#'
+#' @references Brown, R. M., McClelland, N. I., Deininger, R. A., &
+#'   Tozer, R. G. (1970). A water quality index - do we dare? *Water and
+#'   Sewage Works*, 117(10), 339-343.
+#'
+#' @seealso \code{\link[=iqa]{iqa()}}, \code{\link[=plot_iqa]{plot_iqa()}}
+#'
+#' @family wqi-tools
+#'
+#' @importFrom tibble as_tibble
 #'
 #' @examples
+#' \donttest{
+#' data("wq_demo", package = "tikatuwq")
 #' d <- wq_demo
-#' # create minimal aliases so the prototype can run
+#' # Mapeia alias brasileiros
 #' d$do  <- d$od
 #' d$fc  <- d$coliformes
-#' d$ph  <- d$ph
 #' d$bod <- d$dbo
-#' # others are missing; use na_rm = TRUE to rescale weights by row
+#' # Parametros ausentes sao ignorados com na_rm = TRUE
 #' out <- nsfwqi(d, na_rm = TRUE)
-#' head(out$NSFWQI)
+#' head(out[, c("ponto", "NSFWQI", "NSFWQI_status")])
+#' }
 #'
 #' @export
 nsfwqi <- function(
@@ -56,57 +78,39 @@ nsfwqi <- function(
     do = 0.17, fc = 0.16, ph = 0.11, bod = 0.11, temp_change = 0.10,
     po4 = 0.10, no3 = 0.10, turbidez = 0.08, sst = 0.07
   ),
-  na_rm = FALSE
+  na_rm      = FALSE,
+  add_status = TRUE,
+  locale     = c("pt", "en")
 ) {
+  locale <- match.arg(locale)
+  stopifnot(is.data.frame(df))
 
-  # ---- column aliasing (BR -> NSF) -----------------------------------------
-  col_present <- function(nm) nm %in% names(df)
+  # ---- Mapeamento de colunas via dicionario central (.param_aliases) ---------
+  .rc <- function(canonical) .resolve_col(df, canonical)
 
-  # build a working view with NSF names where possible
   work <- list()
+  if (!is.null(.rc("od")))               work$do         <- df[[.rc("od")]]
+  if (!is.null(.rc("coliformes")))        work$fc         <- df[[.rc("coliformes")]]
+  if (!is.null(.rc("ph")))               work$ph         <- df[[.rc("ph")]]
+  if (!is.null(.rc("dbo")))              work$bod        <- df[[.rc("dbo")]]
+  if (!is.null(.rc("turbidez")))         work$turbidez   <- df[[.rc("turbidez")]]
+  if (!is.null(.rc("solidos_suspensos"))) work$sst       <- df[[.rc("solidos_suspensos")]]
+  if (!is.null(.rc("p_ortofosfato")))    work$po4        <- df[[.rc("p_ortofosfato")]]
+  if (!is.null(.rc("n_nitrato")))        work$no3        <- df[[.rc("n_nitrato")]]
+  if ("temp_change" %in% names(df))      work$temp_change <- df$temp_change
 
-  # primary names first; if missing, try aliases
-  if (col_present("do"))  work$do  <- df$do  else if (col_present("od")) work$do <- df$od
-  if (col_present("fc"))  work$fc  <- df$fc  else if (col_present("coliformes")) work$fc <- df$coliformes
-  if (col_present("ph"))  work$ph  <- df$ph  else if (col_present("pH")) work$ph <- df$`pH` else if (col_present("ph")) work$ph <- df$ph
-  if (col_present("bod")) work$bod <- df$bod else if (col_present("dbo")) work$bod <- df$dbo
+  if (!length(work)) stop("Nenhuma coluna compativel com NSFWQI encontrada.")
 
-  if (col_present("turbidez")) work$turbidez <- df$turbidez
+  wdf  <- as.data.frame(work, stringsAsFactors = FALSE)
+  use  <- intersect(names(pesos), names(wdf))
+  if (!length(use)) stop("Nenhuma coluna disponivel entre: ", paste(names(pesos), collapse = ", "))
 
-  if (col_present("sst")) work$sst <- df$sst else if (col_present("solidos_suspensos")) work$sst <- df$solidos_suspensos
-
-  if (col_present("po4")) work$po4 <- df$po4 else if (col_present("p_ortofosfato")) work$po4 <- df$p_ortofosfato
-
-  if (col_present("no3")) work$no3 <- df$no3 else if (col_present("n_nitrato")) work$no3 <- df$n_nitrato
-
-  if (col_present("temp_change")) work$temp_change <- df$temp_change
-  # no automatic derivation for temp_change (needs reference)
-
-  # assemble working data.frame
-  if (length(work)) {
-    wdf <- as.data.frame(work, stringsAsFactors = FALSE)
-  } else {
-    stop("No compatible columns found for NSFWQI.")
-  }
-
-  # select weights for available columns
-  use <- intersect(names(pesos), names(wdf))
-  if (!length(use)) {
-    stop("No available columns among: ", paste(names(pesos), collapse = ", "))
-  }
-  wdf <- wdf[use, drop = FALSE]
+  wdf    <- wdf[use]
   w_full <- pesos[use]
 
-  # if na_rm = FALSE, check for any NA in used columns and fail early
-  if (!na_rm) {
-    if (any(is.na(wdf))) {
-      stop("Missing values in required parameters. Set na_rm = TRUE to rescale weights per row.")
-    }
-  }
-
-  # ---- Qi functions (simple piecewise placeholders) ------------------------
+  # ---- Funcoes Qi (piecewise baseado em Brown et al., 1970) -----------------
   qi_piecewise <- function(param, v) {
-    if (is.na(v)) return(NA_real_)
+    if (!is.finite(v)) return(NA_real_)
     switch(
       param,
       "do"          = ifelse(v >= 7.5, 90, ifelse(v >= 6, 80, ifelse(v >= 5, 70, 50))),
@@ -122,36 +126,55 @@ nsfwqi <- function(
     )
   }
 
-  # compute Qi matrix (same column order as 'use')
-  qi_mat <- matrix(NA_real_, nrow = nrow(wdf), ncol = length(use))
+  # Matriz Qi
+  qi_mat <- matrix(NA_real_, nrow = nrow(wdf), ncol = length(use),
+                   dimnames = list(NULL, use))
   for (j in seq_along(use)) {
     p <- use[j]
-    qi_mat[, j] <- vapply(wdf[[p]], function(x) qi_piecewise(p, x), numeric(1))
+    qi_mat[, j] <- vapply(
+      suppressWarnings(as.numeric(wdf[[p]])),
+      function(x) qi_piecewise(p, x),
+      numeric(1)
+    )
   }
 
-  # row-wise weighted mean with optional NA-removal and weight rescaling
-  NSFWQI <- rep(NA_real_, nrow(wdf))
-  base_w_sum <- sum(w_full)
-
-  for (i in seq_len(nrow(wdf))) {
-    row_qi <- qi_mat[i, ]
-    ok <- is.finite(row_qi)
-    if (!any(ok)) {
-      NSFWQI[i] <- NA_real_
-      next
-    }
+  # ---- Agregacao: media geometrica ponderada --------------------------------
+  NSFWQI_val <- vapply(seq_len(nrow(wdf)), function(i) {
+    qi_row <- qi_mat[i, ]
+    ok     <- is.finite(qi_row) & qi_row > 0
+    if (!any(ok)) return(NA_real_)
     if (na_rm) {
-      w_i <- w_full[ok]
-      w_i <- w_i / sum(w_i)
-      NSFWQI[i] <- sum(row_qi[ok] * w_i)
+      ww <- w_full[ok]
+      ww <- ww / sum(ww)
     } else {
-      # all must be present if na_rm = FALSE (already checked for NA globally)
-      NSFWQI[i] <- sum(row_qi * (w_full / base_w_sum))
+      if (!all(ok)) return(NA_real_)
+      ww <- w_full / sum(w_full)
     }
+    prod(qi_row[ok]^ww)
+  }, numeric(1))
+
+  out         <- df
+  out$NSFWQI  <- round(NSFWQI_val, 1)
+
+  # ---- Status ---------------------------------------------------------------
+  if (add_status) {
+    if (locale == "pt") {
+      status_labels <- c(
+        "Muito Ruim",  # 0 - 25
+        "Ruim",        # 25 - 50
+        "Regular",     # 50 - 70
+        "Boa",         # 70 - 90
+        "Excelente"    # 90 - 100
+      )
+    } else {
+      status_labels <- c("Very Bad", "Bad", "Fair", "Good", "Excellent")
+    }
+    breaks_st <- c(-Inf, 25, 50, 70, 90, Inf)
+    out$NSFWQI_status <- as.character(
+      cut(out$NSFWQI, breaks = breaks_st, labels = status_labels, right = TRUE)
+    )
+    out$NSFWQI_status[is.na(out$NSFWQI)] <- NA_character_
   }
 
-  # attach to original df (preserving rows)
-  out <- df
-  out$NSFWQI <- NSFWQI
   out
 }

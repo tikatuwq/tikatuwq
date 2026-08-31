@@ -3,36 +3,114 @@ classe,parametro,unidade,min,max,observacao,status,contexto
 1,od,mg/L,6.0,,mínimo em qualquer amostra,ok,Águas doces classe 1
 1,turbidez,UNT,,40,,ok,Águas doces classe 1
 1,dbo,mg/L,,3.0,DBO5 a 20°C,ok,Águas doces classe 1
-1,coliformes,NMP/100mL,,200,<=200 em 80% de ≥6 amostras/ano (demais usos); balneabilidade segue CONAMA 274/2000,ok,Águas doces classe 1
+1,coliformes,NMP/100mL,,200,<=200 em 80% de >=6 amostras/ano (demais usos); balneabilidade segue CONAMA 274/2000,ok,Águas doces classe 1
 1,clorofila_a,µg/L,,10,,ok,Águas doces classe 1
-1,cianobactérias,cel/mL,,20000,ou 2 mm3/L,ok,Águas doces classe 1
-1,p_total,mg/L,,0.020,Ambiente lêntico,ok,Águas doces classe 1
-1,p_total,mg/L,,0.025,Ambiente intermediário/tributários de ambiente lêntico,ok,Águas doces classe 1
-1,p_total,mg/L,,0.10,Ambiente lótico e tributários de ambientes intermediários,ok,Águas doces classe 1
+1,cianobacterias,cel/mL,,20000,ou 2 mm3/L,ok,Águas doces classe 1
+1,p_total,mg/L,,0.020,Ambiente lentico,ok,Águas doces classe 1
+1,p_total,mg/L,,0.025,Ambiente intermediario/tributarios de ambiente lentico,ok,Águas doces classe 1
+1,p_total,mg/L,,0.10,Ambiente lotico e tributarios de ambientes intermediarios,ok,Águas doces classe 1
 1,tds,mg/L,,500,,ok,Águas doces classe 1
+1,no3,mg/L,,10.0,Como N,ok,Águas doces classe 1
+1,no2,mg/L,,1.0,Como N,ok,Águas doces classe 1
+1,nh3,mg/L,,3.7,NH3 total como N; pH <= 7.5,ok,Águas doces classe 1
+1,nh3,mg/L,,2.0,NH3 total como N; 7.5 < pH <= 8.0,ok,Águas doces classe 1
+1,nh3,mg/L,,1.0,NH3 total como N; 8.0 < pH <= 8.5,ok,Águas doces classe 1
+1,nh3,mg/L,,0.5,NH3 total como N; pH > 8.5,ok,Águas doces classe 1
+1,fluoretos,mg/L,,1.4,,ok,Águas doces classe 1
+1,cloretos,mg/L,,250,,ok,Águas doces classe 1
+1,sulfatos,mg/L,,250,,ok,Águas doces classe 1
+1,fenois_totais,mg/L,,0.003,Como C6H5OH,ok,Águas doces classe 1
+1,surfactantes,mg/L,,0.5,Como LAS,ok,Águas doces classe 1
+1,al_total,mg/L,,0.1,Aluminio total,ok,Águas doces classe 1
+1,as_total,mg/L,,0.01,Arsenio total,ok,Águas doces classe 1
+1,ba_total,mg/L,,0.7,Bario total,ok,Águas doces classe 1
+1,cd_total,mg/L,,0.001,Cadmio total,ok,Águas doces classe 1
+1,pb_total,mg/L,,0.01,Chumbo total,ok,Águas doces classe 1
+1,cu_dissolvido,mg/L,,0.009,Cobre dissolvido,ok,Águas doces classe 1
+1,cr_total,mg/L,,0.05,Cromo total,ok,Águas doces classe 1
+1,fe_dissolvido,mg/L,,0.3,Ferro dissolvido,ok,Águas doces classe 1
+1,mn_total,mg/L,,0.1,Manganes total,ok,Águas doces classe 1
+1,hg_total,mg/L,,0.0002,Mercurio total,ok,Águas doces classe 1
+1,ni_total,mg/L,,0.025,Niquel total,ok,Águas doces classe 1
+1,se_total,mg/L,,0.01,Selenio total,ok,Águas doces classe 1
+1,zn_total,mg/L,,0.18,Zinco total,ok,Águas doces classe 1
 2,pH,unid,6.0,9.0,,ok,Águas doces classe 2
 2,od,mg/L,5.0,,mínimo em qualquer amostra,ok,Águas doces classe 2
 2,turbidez,UNT,,100,,ok,Águas doces classe 2
 2,dbo,mg/L,,5.0,DBO5 a 20°C,ok,Águas doces classe 2
-2,coliformes,NMP/100mL,,1000,<=1000 em 80% de ≥6 amostras/ano (demais usos); balneabilidade segue CONAMA 274/2000,ok,Águas doces classe 2
+2,coliformes,NMP/100mL,,1000,<=1000 em 80% de >=6 amostras/ano (demais usos); balneabilidade segue CONAMA 274/2000,ok,Águas doces classe 2
 2,clorofila_a,µg/L,,30,,ok,Águas doces classe 2
-2,cianobactérias,cel/mL,,50000,ou 5 mm3/L,ok,Águas doces classe 2
-2,p_total,mg/L,,0.030,Ambiente lêntico,ok,Águas doces classe 2
-2,p_total,mg/L,,0.050,Ambiente intermediário/tributários de ambiente lêntico,ok,Águas doces classe 2
+2,cianobacterias,cel/mL,,50000,ou 5 mm3/L,ok,Águas doces classe 2
+2,p_total,mg/L,,0.030,Ambiente lentico,ok,Águas doces classe 2
+2,p_total,mg/L,,0.050,Ambiente intermediario/tributarios de ambiente lentico,ok,Águas doces classe 2
+2,p_total,mg/L,,0.10,Ambiente lotico e tributarios de ambientes intermediarios,ok,Águas doces classe 2
+2,tds,mg/L,,500,,ok,Águas doces classe 2
 2,cor,mg Pt/L,,75,Cor verdadeira,ok,Águas doces classe 2
+2,no3,mg/L,,10.0,Como N,ok,Águas doces classe 2
+2,no2,mg/L,,1.0,Como N,ok,Águas doces classe 2
+2,nh3,mg/L,,3.7,NH3 total como N; pH <= 7.5,ok,Águas doces classe 2
+2,nh3,mg/L,,2.0,NH3 total como N; 7.5 < pH <= 8.0,ok,Águas doces classe 2
+2,nh3,mg/L,,1.0,NH3 total como N; 8.0 < pH <= 8.5,ok,Águas doces classe 2
+2,nh3,mg/L,,0.5,NH3 total como N; pH > 8.5,ok,Águas doces classe 2
+2,fluoretos,mg/L,,1.4,,ok,Águas doces classe 2
+2,cloretos,mg/L,,250,,ok,Águas doces classe 2
+2,sulfatos,mg/L,,250,,ok,Águas doces classe 2
+2,fenois_totais,mg/L,,0.003,Como C6H5OH,ok,Águas doces classe 2
+2,surfactantes,mg/L,,0.5,Como LAS,ok,Águas doces classe 2
+2,al_total,mg/L,,0.1,Aluminio total,ok,Águas doces classe 2
+2,as_total,mg/L,,0.01,Arsenio total,ok,Águas doces classe 2
+2,ba_total,mg/L,,0.7,Bario total,ok,Águas doces classe 2
+2,cd_total,mg/L,,0.001,Cadmio total,ok,Águas doces classe 2
+2,pb_total,mg/L,,0.01,Chumbo total,ok,Águas doces classe 2
+2,cu_dissolvido,mg/L,,0.009,Cobre dissolvido,ok,Águas doces classe 2
+2,cr_total,mg/L,,0.05,Cromo total,ok,Águas doces classe 2
+2,fe_dissolvido,mg/L,,0.3,Ferro dissolvido,ok,Águas doces classe 2
+2,mn_total,mg/L,,0.1,Manganes total,ok,Águas doces classe 2
+2,hg_total,mg/L,,0.0002,Mercurio total,ok,Águas doces classe 2
+2,ni_total,mg/L,,0.025,Niquel total,ok,Águas doces classe 2
+2,se_total,mg/L,,0.01,Selenio total,ok,Águas doces classe 2
+2,zn_total,mg/L,,0.18,Zinco total,ok,Águas doces classe 2
 3,pH,unid,6.0,9.0,,ok,Águas doces classe 3
 3,od,mg/L,4.0,,mínimo em qualquer amostra,ok,Águas doces classe 3
 3,turbidez,UNT,,100,,ok,Águas doces classe 3
 3,dbo,mg/L,,10.0,DBO5 a 20°C,ok,Águas doces classe 3
-3,coliformes,NMP/100mL,,2500,recreação de contato secundário: <=2500 em 80% de ≥6 amostras/ano,ok,Águas doces classe 3
-3,coliformes,NMP/100mL,,1000,dessedentação de animais: <=1000 em 80% de ≥6 amostras/ano,ok,Águas doces classe 3
-3,coliformes,NMP/100mL,,4000,demais usos: <=4000 em 80% de ≥6 amostras/ano,ok,Águas doces classe 3
+3,coliformes,NMP/100mL,,2500,recreacao de contato secundario: <=2500 em 80% de >=6 amostras/ano,ok,Águas doces classe 3
+3,coliformes,NMP/100mL,,1000,dessedentacao de animais: <=1000 em 80% de >=6 amostras/ano,ok,Águas doces classe 3
+3,coliformes,NMP/100mL,,4000,demais usos: <=4000 em 80% de >=6 amostras/ano,ok,Águas doces classe 3
 3,clorofila_a,µg/L,,60,,ok,Águas doces classe 3
-3,cianobactérias,cel/mL,,100000,ou 10 mm3/L,ok,Águas doces classe 3
+3,cianobacterias,cel/mL,,100000,ou 10 mm3/L,ok,Águas doces classe 3
 3,tds,mg/L,,500,,ok,Águas doces classe 3
 3,cor,mg Pt/L,,75,Cor verdadeira,ok,Águas doces classe 3
-3,p_total,mg/L,,0.050,Ambiente lêntico,ok,Águas doces classe 3
-3,p_total,mg/L,,0.075,Ambiente intermediário/tributários de ambiente lêntico,ok,Águas doces classe 3
-3,p_total,mg/L,,0.15,Ambiente lótico e tributários de ambientes intermediários,ok,Águas doces classe 3
+3,p_total,mg/L,,0.050,Ambiente lentico,ok,Águas doces classe 3
+3,p_total,mg/L,,0.075,Ambiente intermediario/tributarios de ambiente lentico,ok,Águas doces classe 3
+3,p_total,mg/L,,0.15,Ambiente lotico e tributarios de ambientes intermediarios,ok,Águas doces classe 3
+3,no3,mg/L,,10.0,Como N,ok,Águas doces classe 3
+3,no2,mg/L,,1.0,Como N,ok,Águas doces classe 3
+3,nh3,mg/L,,13.3,NH3 total como N; pH <= 7.5 (Classe 3),ok,Águas doces classe 3
+3,nh3,mg/L,,5.6,NH3 total como N; 7.5 < pH <= 8.0 (Classe 3),ok,Águas doces classe 3
+3,nh3,mg/L,,2.2,NH3 total como N; 8.0 < pH <= 8.5 (Classe 3),ok,Águas doces classe 3
+3,nh3,mg/L,,1.0,NH3 total como N; pH > 8.5 (Classe 3),ok,Águas doces classe 3
+3,fluoretos,mg/L,,1.4,,ok,Águas doces classe 3
+3,cloretos,mg/L,,250,,ok,Águas doces classe 3
+3,sulfatos,mg/L,,250,,ok,Águas doces classe 3
+3,fenois_totais,mg/L,,0.01,Como C6H5OH,ok,Águas doces classe 3
+3,surfactantes,mg/L,,0.5,Como LAS,ok,Águas doces classe 3
+3,al_total,mg/L,,0.2,Aluminio total,ok,Águas doces classe 3
+3,as_total,mg/L,,0.033,Arsenio total,ok,Águas doces classe 3
+3,ba_total,mg/L,,1.0,Bario total,ok,Águas doces classe 3
+3,cd_total,mg/L,,0.01,Cadmio total,ok,Águas doces classe 3
+3,pb_total,mg/L,,0.033,Chumbo total,ok,Águas doces classe 3
+3,cu_dissolvido,mg/L,,0.013,Cobre dissolvido,ok,Águas doces classe 3
+3,cr_total,mg/L,,0.05,Cromo total,ok,Águas doces classe 3
+3,fe_dissolvido,mg/L,,5.0,Ferro dissolvido,ok,Águas doces classe 3
+3,mn_total,mg/L,,0.5,Manganes total,ok,Águas doces classe 3
+3,hg_total,mg/L,,0.002,Mercurio total,ok,Águas doces classe 3
+3,ni_total,mg/L,,0.025,Niquel total,ok,Águas doces classe 3
+3,se_total,mg/L,,0.05,Selenio total,ok,Águas doces classe 3
+3,zn_total,mg/L,,5.0,Zinco total,ok,Águas doces classe 3
 4,pH,unid,6.0,9.0,,ok,Águas doces classe 4
 4,od,mg/L,2.0,,mínimo em qualquer amostra,ok,Águas doces classe 4
+4,nh3,mg/L,,13.3,NH3 total como N; pH <= 7.5 (Classe 4),ok,Águas doces classe 4
+4,nh3,mg/L,,5.6,NH3 total como N; 7.5 < pH <= 8.0 (Classe 4),ok,Águas doces classe 4
+4,nh3,mg/L,,2.2,NH3 total como N; 8.0 < pH <= 8.5 (Classe 4),ok,Águas doces classe 4
+4,nh3,mg/L,,1.0,NH3 total como N; pH > 8.5 (Classe 4),ok,Águas doces classe 4

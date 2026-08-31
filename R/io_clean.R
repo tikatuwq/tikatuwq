@@ -188,32 +188,21 @@ read_wq <- function(path, tz = "America/Bahia", normalize_coords = TRUE,
     stringr::str_replace_all("[^A-Za-z0-9_]", "") |>
     tolower()
 
-  # Colunas tipicamente numericas (inclui lat/lon)
+  # Colunas numericas: todos os aliases do dicionario central + indices
   param_cols <- intersect(
     names(df),
-    c(
-      "ph","od","turbidez","dbo","coliformes",
-      "p_total","ptotal","fosforo_total",
-      "temperatura","ec","condutividade",
-      "n_nitrato","n_nitrito","amonia",
-      "nt_total","n_total","ntk","nkjeldahl","nitrogenio_total",
-      "solidos_totais","solidos_suspensos","tds",
-      "conducao","qi","iqa","iet","iet_carlson","iet_lamparelli",
-      "nsfwqi","vazao","lat","lon"
-    )
+    c(unlist(.param_aliases, use.names = FALSE),
+      "qi","iqa","iet","iet_carlson","iet_lamparelli","nsfwqi")
   )
   if (length(param_cols)) {
     # Aplica politica ND/LD primeiro para tratar valores censurados
-    # .parse_nd_ld ja faz parse de valores nao censurados tambem
     for (col_name in param_cols) {
       col_data <- df[[col_name]]
-      # Aplica .parse_nd_ld que trata tanto valores censurados quanto normais
       df[[col_name]] <- .parse_nd_ld(col_data, ld_policy = nd_policy)
       # Fallback: se algum valor ainda nao foi parseado, tenta .to_number_auto
       na_idx <- is.na(df[[col_name]]) & !is.na(col_data)
       if (any(na_idx, na.rm = TRUE)) {
-        fallback_parsed <- .to_number_auto(col_data[na_idx])
-        df[[col_name]][na_idx] <- fallback_parsed
+        df[[col_name]][na_idx] <- .to_number_auto(col_data[na_idx])
       }
     }
   }

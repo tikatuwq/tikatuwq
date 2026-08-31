@@ -1,3 +1,70 @@
+# tikatuwq 0.9.0
+
+## Breaking changes
+
+- `iqa()` now defaults to the correct **weighted geometric mean** (`method = "CETESB"`)
+  as specified by CETESB and the original NSF WQI (Brown et al., 1970).
+  The previous arithmetic mean behaviour is preserved via `method = "NSF_approx"`.
+  Existing code using `iqa()` without specifying `method` will produce different
+  (more accurate) IQA values. (#P0)
+
+## New functions
+
+- `mk_seasonal()`: seasonal Mann-Kendall trend test (Hirsch, Slack & Smith,
+  1982). Splits the time series by season (monthly or wet/dry via
+  `assign_season()`), computes S and VAR(S) per season, aggregates, and
+  returns Z, p-value, Kendall tau, and Sen's slope (units/year) per group.
+  Removes the seasonal bias that inflates false positives in standard
+  Mann-Kendall tests applied to tropical rivers. (#P6)
+- `plot_map_quality()`: interactive Leaflet map coloring sampling sites by
+  IQA, IET (Carlson or Lamparelli), or NSF WQI value. Uses the standard
+  classification palettes for each index and shows class and value in the
+  popup. Extends `plot_map()` with index-aware choropleth logic. (#P12)
+- `balnear_check()`: classifies sampling sites for primary-contact
+  recreation (swimming) under CONAMA Resolution 274/2000 (Excelente,
+  Muito Boa, Satisfatória, Imprópria) based on the 80% rule over the last
+  5 collections. Supports thermotolerant coliforms and E. coli; flags
+  sites with insufficient samples. (#P16)
+- `conama_freq_check()`: implements the legal frequency rule of CONAMA 357/2005
+  Art. 15 — conformity assessed as ≥80% of samples within limits, requiring
+  at least 6 samples per year. Returns a tibble with per-point, per-year,
+  per-parameter compliance status. (#P1)
+- `assign_season()`: adds a hydrological season column (`"chuvoso"` / `"seco"`)
+  to a data frame, based on regional Brazilian calendars (Sudeste, Nordeste,
+  Norte, Sul, Centro-Oeste, Bahia) or a custom month vector. (#P3)
+- `compare_seasons()`: compares a water quality parameter between wet and dry
+  seasons using Wilcoxon, t-test, or Kruskal-Wallis; returns descriptive
+  statistics, test results, and optionally a `ggplot` boxplot. (#P3)
+- `plot_iet()`: bar chart (vertical or horizontal) for the Trophic State Index
+  with color-coded trophic classes, supporting both Carlson (1977) and
+  Lamparelli (2004) classification schemes. (#P4)
+- `compute_load()`: computes pollutant load as concentration × flow × unit
+  factor; supports kg/day, t/day, kg/year, and g/s outputs. (#P7)
+- `exceedance_prob()`: estimates empirical exceedance probability with Wilson
+  confidence interval, by group. (#P8)
+- `wq_pca()`: PCA wrapper around `stats::prcomp()` with automatic column
+  selection, biplot, screeplot, and loadings plot as `ggplot` attributes. (#P15)
+- `nsfwqi()`: updated to use weighted geometric mean (consistent with CETESB
+  IQA fix), adds `add_status` and `locale` arguments, removes prototype
+  language. (#P5)
+
+## Data
+
+- `inst/extdata/conama_limits.csv` expanded from ~38 to ~116 rows, adding
+  nitrogen species (NO3, NO2, NH3 with pH-conditional limits), inorganic ions
+  (fluorides, chlorides, sulfates), organic pollutants (phenols, surfactants),
+  and 14 heavy metals / trace elements for Classes 1–3. (#P2)
+
+## Internal
+
+- `R/testando.R`: replaced empty file with documented placeholder comment.
+- `R/wq_buranhem.R`: removed duplicate `@docType` tag that caused a `R CMD check`
+  WARNING.
+- `DESCRIPTION`: version bumped to 0.9.0; `tools` added to Imports.
+- Tests added for all new modules (`test-iqa-geometric.R`, `test-conama_freq.R`,
+  `test-seasonal.R`, `test-load_exceedance.R`, `test-plot_iet.R`,
+  `test-wq_pca.R`).
+
 # tikatuwq 0.8.2
 
 - **CRAN maintenance**: Patch release for CRAN compliance. Fixed example in `plot_map()` to use internal dataset `wq_demo` instead of external file reference. All examples and tests now comply with CRAN policies (no local file dependencies, write only to tempdir). No API changes.
