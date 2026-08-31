@@ -1,42 +1,47 @@
 # 💧 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil
 
+**Reproducible freshwater monitoring workflows for Brazil, including water quality indices, regulatory compliance checks, and automated reporting.**
+
 **TikatuWQ** is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards.  
 It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance — including the legal frequency rule (Art. 15).  
 The package also includes seasonal analysis, pollutant load computation, exceedance probability, multivariate PCA, trend analysis, data validation, and automatic report generation.
 
-📄 [Ler em Português](https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md)
+```markdown
+**Author:** Vinícius Saraiva Santos  
+**Institution:** Federal University of Southern Bahia (UFSB) – Graduate Program in Biosystems  
+**Research Group:** Tropical Ecosystems Research Center (NuPEcoTropic)  
+**Project:** Tikatu – Ecosystem of tools for water quality monitoring and interpretation  
+**License:** MIT  
+**Software DOI:** https://doi.org/10.5281/zenodo.17407297  
+**Manuscript status:** scientific article currently under review in an international journal
+```
 
-<!-- Zenodo DOI -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg)](https://doi.org/10.5281/zenodo.17407297)
-
-<!-- CRAN status -->
 [![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
-
-<!-- CRAN logs - downloads -->
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
-
-<!-- License -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg)](https://doi.org/10.5281/zenodo.17407297)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-<!-- R CMD check results -->
 [![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions)
+![Manuscript status](https://img.shields.io/badge/manuscript-under_review-yellow)
 
-<!-- Lifecycle -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+**TikatuWQ** is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards. It implements the main indices used in the country **IQA/NSFWQI** and **IET (Carlson and Lamparelli)** and provides automated checks for **CONAMA Resolution 357/2005** compliance.  
+The package also includes trend analysis, data validation, and automatic report generation.
 
 ---
 
-## Installation (development)
+## Scientific Scope
 
-To install development dependencies and check the package locally:
+The **tikatuwq** package was designed to support reproducible scientific workflows in freshwater monitoring and environmental assessment. Environmental monitoring datasets often present challenges such as heterogeneous formats, inconsistent parameter names, and the need to interpret regulatory thresholds.
 
-```r
-install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
-                   "readr","lubridate","stringr","glue","scales","broom","purrr","tools"))
-devtools::load_all("tikatuwq")
-devtools::check("tikatuwq")
-```
+By integrating data validation, environmental indices, regulatory compliance checks, visualization, and automated reporting in a single analytical framework, **tikatuwq** enables researchers to move efficiently from **raw monitoring data to interpretable environmental assessments**.
+
+The package is particularly suited for:
+
+- freshwater monitoring programs  
+- environmental impact assessments  
+- academic research in aquatic sciences  
+- environmental agencies and regulatory analysis  
+- long-term environmental datasets  
 
 ---
 
@@ -47,6 +52,10 @@ This package includes a real water quality dataset extracted from INEMA (the Bah
 All main documentation and vignettes use this realistic sample for demonstration and reproducible workflows.
 
 ## Basic workflow
+
+A typical analysis workflow using **tikatuwq** follows a reproducible pipeline:
+
+`read_wq → validate_wq → index calculation → regulatory check → visualization → reporting`
 
 ```r
 library(tikatuwq)
@@ -67,7 +76,7 @@ wq_demo |>
 
 ---
 
-### 📚 Scientific and Institutional Context
+### 📚 Project and Institutional Context
 
 The **TikatuWQ** package was developed by **Vinícius Saraiva Santos** (author and maintainer)  
 as part of the **Tikatu Research Project**, conducted within the **Nucleus for Research in Tropical Ecosystems – NuPEcoTropic**, a research group linked to the **Federal University of Southern Bahia (UFSB)** and coordinated by **Prof. Dr. Fabrício Berton Zanchi**.  
@@ -195,10 +204,19 @@ Legacy vector calls keep working as before.
 
 ---
 
+## Installation
+
+```r
+## Install the released version from CRAN:
+
+install.packages("tikatuwq")
+
 ## Installation via GitHub
 
 ```r
-install.packages("remotes")  # or devtools
+install.packages("remotes")
+
+# development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # stable version (by tag)
@@ -268,11 +286,6 @@ conama_freq_check(df, classe = "2", by = "ponto")
 - **Releases:** https://github.com/tikatuwq/tikatuwq/releases  
 
 ---
-
-## Citation
-```r
-citation("tikatuwq")
-```
 
 ### How to cite
 

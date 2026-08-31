@@ -1,42 +1,35 @@
 # 💧 TikatuWQ: Um Pacote R para Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil
 
+**Fluxos de trabalho reprodutíveis para monitoramento de águas doces no Brasil, incluindo índices de qualidade da água, verificações regulatórias e geração automatizada de relatórios.**
+
 **TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros.  
 Implementa os principais índices utilizados no país: **IQA/NSFWQI** e **IET (Carlson e Lamparelli)** e realiza verificações automáticas de conformidade com a **Resolução CONAMA 357/2005** — incluindo a regra de frequência legal (Art. 15).  
 O pacote também inclui análise sazonal, cálculo de carga poluidora, probabilidade de excedência, PCA multivariado, análise de tendências, validação de dados e geração automática de relatórios.
 
-📄 [Read in English](https://github.com/tikatuwq/tikatuwq/blob/main/README.md)
+[![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq) 
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq)](https://cran.r-project.org/package=tikatuwq) 
+[![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/tikatuwq)](https://cran.r-project.org/package=tikatuwq) 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg)](https://doi.org/10.5281/zenodo.17407297) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+[![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions) 
+![Status do manuscrito](https://img.shields.io/badge/manuscrito-em_avaliação-yellow) 
 
-<!-- Zenodo DOI -->
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg)](https://doi.org/10.5281/zenodo.17407297)
-
-<!-- Status CRAN -->
-[![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
-
-<!-- Downloads CRAN -->
-[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
-[![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/tikatuwq)](https://cran.r-project.org/package=tikatuwq)
-
-<!-- Licença -->
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-<!-- R CMD check -->
-[![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions)
-
-<!-- Ciclo de vida -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+**TikatuWQ** é um pacote R de código aberto desenvolvido para analisar, visualizar e relatar dados de qualidade da água de acordo com os padrões ambientais brasileiros. Ele implementa os principais índices utilizados no país, **IQA/NSFWQI** e **IET (Carlson e Lamparelli)**, e fornece verificações automatizadas de conformidade com a **Resolução CONAMA 357/2005**. O pacote também inclui análise de tendências, validação de dados e geração automática de relatórios.
 
 ---
 
-## Instalação (desenvolvimento)
+## Escopo Científico 
 
-Para instalar as dependências de desenvolvimento e verificar o pacote localmente:
+O pacote **tikatuwq** foi desenvolvido para apoiar fluxos de trabalho científicos reprodutíveis em monitoramento de águas doces e avaliação ambiental. Bases de dados de monitoramento ambiental frequentemente apresentam desafios como formatos heterogêneos, nomes de parâmetros inconsistentes e necessidade de interpretar limites regulatórios.
 
-```r
-install.packages(c("devtools","testthat","rmarkdown","ggplot2","dplyr","tidyr",
-                   "readr","lubridate","stringr","glue","scales","broom","purrr","tools"))
-devtools::load_all("tikatuwq")
-devtools::check("tikatuwq")
-```
+Ao integrar validação de dados, cálculo de índices ambientais, verificação de conformidade, visualização e geração automatizada de relatórios em um único fluxo analítico, o **tikatuwq** permite que pesquisadores avancem de forma eficiente de **dados brutos de monitoramento para avaliações ambientais interpretáveis**.
+
+O pacote é particularmente adequado para:
+- programas de monitoramento de águas doces  
+- avaliações de impacto ambiental  
+- pesquisa acadêmica em ciências aquáticas  
+- agências ambientais e análises regulatórias  
+- séries históricas e bases de dados ambientais de longo prazo  
 
 ---
 
@@ -47,6 +40,10 @@ Este pacote inclui um conjunto real de dados de qualidade da água, extraídos d
 A documentação principal e os vignettes usam este conjunto representativo para reproducibilidade.
 
 ## Fluxo básico de uso
+
+Um fluxo de análise típico com o **tikatuwq** segue um pipeline reprodutível:
+
+`read_wq → validate_wq → cálculo de índices → verificação regulatória → visualização → relatório`
 
 ```r
 library(tikatuwq)
@@ -67,7 +64,7 @@ wq_demo |>
 
 ---
 
-### 📚 Contexto Científico e Institucional
+### 📚 Projeto e Contexto Institucional
 
 O pacote **TikatuWQ** foi desenvolvido por **Vinícius Saraiva Santos** (autor e mantenedor)  
 como parte do **Projeto de Pesquisa Tikatu**, conduzido no âmbito do **Núcleo de Pesquisas em Ecossistemas Tropicais – NuPEcoTropic**, grupo de pesquisa vinculado à **Universidade Federal do Sul da Bahia (UFSB)** e coordenado pelo **Prof. Dr. Fabrício Berton Zanchi**.  
@@ -191,10 +188,19 @@ Sem novas dependências, sem quebra de API.
 
 ---
 
+## Instalação
+
+```r
+## Instale a versão atual a partir do CRAN:
+
+install.packages("tikatuwq")
+
 ## Instalação via GitHub
 
 ```r
-install.packages("remotes")  # ou devtools
+install.packages("remotes")
+
+# development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
 # versão estável (por tag)
@@ -264,11 +270,6 @@ conama_freq_check(df, classe = "2", by = "ponto")
 - **Releases:** https://github.com/tikatuwq/tikatuwq/releases  
 
 ---
-
-## Citação
-```r
-citation("tikatuwq")
-```
 
 ### Como citar
 
