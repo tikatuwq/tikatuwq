@@ -1,0 +1,95 @@
+balnear: ...........
+clean_units: ...W.W....W......
+conama-db: ..
+conama: .
+conama_freq: .....
+conama_text: ......
+fix_coords: ............
+generate_analysis: .........
+iet-values: ..............
+iqa-audit-validation: ..............................................................................................................................................................................................
+iqa-cetesb-formulas: ....................................
+iqa-components: ...............
+iqa-curves: ....
+iqa-geometric: ........
+iqa-inema-benchmark: ....
+iqa-solids-tds: ...
+iqa-temperature: ..........
+iqa: .....
+load_exceedance: ............
+mk_seasonal: WWWW..WWWW.S...
+nd-ld-policy: ...............................
+param_analysis: SSSS
+param_analysis_multi: SSSS
+plot_functions: ...........
+plot_iet: .....
+plot_map: SSS
+plot_map_quality: .S....
+plot_trend: S
+render_report: SSS
+seasonal: .........
+trend_param: ....
+wq-demo: ..............
+wq_pca: .........
+
+══ Skipped ═════════════════════════════════════════════════════════════════════════════════════════════════════════════
+1. mk_seasonal() tendencia crescente para serie monotonica crescente ('test-mk_seasonal.R:16:1') - Reason: empty test
+
+2. param_summary() calcula resumo e respeita filtros por ponto/rio ('test-param_analysis.R:2:3') - Reason: On CRAN
+
+3. param_trend() retorna NA (slope/p_value/r2) quando n < 4 ('test-param_analysis.R:30:3') - Reason: On CRAN
+
+4. param_trend() calcula slope e p_value com dados suficientes ('test-param_analysis.R:50:3') - Reason: On CRAN
+
+5. param_plot() retorna um ggplot e aceita facet por ponto ('test-param_analysis.R:75:3') - Reason: On CRAN
+
+6. param_summary_multi() combina parametros e respeita filtros ('test-param_analysis_multi.R:2:3') - Reason: On CRAN
+
+7. param_trend_multi() produz uma linha por parametro (por grupo quando houver) ('test-param_analysis_multi.R:28:3') - Reason: On CRAN
+
+8. param_plot_multi() retorna ggplot e facet funciona ('test-param_analysis_multi.R:61:3') - Reason: On CRAN
+
+9. funcoes *_multi validam parametros inexistentes ('test-param_analysis_multi.R:88:3') - Reason: On CRAN
+
+10. plot_map errors when leaflet not available ('test-plot_map.R:3:3') - Reason: On CRAN
+
+11. plot_map accepts lat/lon and warns on invalid coordinates ('test-plot_map.R:13:3') - Reason: On CRAN
+
+12. plot_map accepts latitude/longitude as aliases for lat/lon ('test-plot_map.R:31:3') - Reason: On CRAN
+
+13. plot_map_quality() retorna NULL invisivel sem leaflet ('test-plot_map_quality.R:10:3') - Reason: leaflet esta disponivel — pular teste de fallback
+
+14. plot_trend retorna ggplot com linhas de tendencia ('test-plot_trend.R:2:3') - Reason: On CRAN
+
+15. render_report creates output file when rmarkdown available ('test-render_report.R:2:3') - Reason: On CRAN
+
+16. render_report errors when rmarkdown not available ('test-render_report.R:44:3') - Reason: On CRAN
+
+17. render_report accepts meta parameter ('test-render_report.R:56:3') - Reason: On CRAN
+
+══ Warnings ════════════════════════════════════════════════════════════════════════════════════════════════════════════
+1. clean_units validates ranges and warns on outliers ('test-clean_units.R:16:3') - Negative p_total values detected in 1 row(s). Check data quality.
+
+2. clean_units validates ranges and warns on outliers ('test-clean_units.R:17:3') - Negative turbidity values detected in 1 row(s). Check data quality.
+
+3. clean_units converts units when units_map is provided ('test-clean_units.R:33:3') - Converted column 'p_total' from ug/L to mg/L.
+
+4. mk_seasonal() retorna tibble com colunas esperadas ('test-mk_seasonal.R:3:3') - Grupo 'FBS-BRH-250': menos de 2 estacoes com dados suficientes para o teste.
+
+5. mk_seasonal() retorna tibble com colunas esperadas ('test-mk_seasonal.R:3:3') - Grupo 'FBS-BRH-300': menos de 2 estacoes com dados suficientes para o teste.
+
+6. mk_seasonal() retorna tibble com colunas esperadas ('test-mk_seasonal.R:3:3') - Grupo 'FBS-BRH-450': menos de 2 estacoes com dados suficientes para o teste.
+
+7. mk_seasonal() retorna tibble com colunas esperadas ('test-mk_seasonal.R:3:3') - Grupo 'FBS-BRH-950': menos de 2 estacoes com dados suficientes para o teste.
+
+8. mk_seasonal() p_value esta entre 0 e 1 ('test-mk_seasonal.R:11:3') - Grupo 'FBS-BRH-250': menos de 2 estacoes com dados suficientes para o teste.
+
+9. mk_seasonal() p_value esta entre 0 e 1 ('test-mk_seasonal.R:11:3') - Grupo 'FBS-BRH-300': menos de 2 estacoes com dados suficientes para o teste.
+
+10. mk_seasonal() p_value esta entre 0 e 1 ('test-mk_seasonal.R:11:3') - Grupo 'FBS-BRH-450': menos de 2 estacoes com dados suficientes para o teste.
+
+11. mk_seasonal() p_value esta entre 0 e 1 ('test-mk_seasonal.R:11:3') - Grupo 'FBS-BRH-950': menos de 2 estacoes com dados suficientes para o teste.
+
+══ DONE ════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+RESUMO files: 33  tests: 146  expectations_passed: 455  failed: 0  skipped: 17  warnings: 11  errors: 0 

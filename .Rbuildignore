@@ -42,3 +42,4 @@
 ^PROMPT_CORRECOES_.*\.md$
 ^test_script\.R$
 ^run_tests\.R$
+^audit$

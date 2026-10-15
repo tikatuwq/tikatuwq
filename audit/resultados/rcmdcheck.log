@@ -1,0 +1,10 @@
+ℹ Loading tikatuwq
+── R CMD check results ──────────────────────────────────── tikatuwq 0.11.0 ────
+Duration: 1m 58.4s
+
+❯ checking top-level files ... NOTE
+  Non-standard files/directories found at top level:
+    'atividade.R' 'scratch_save_baselines.R' 'scratch_spec.txt'
+    'user_spec.txt' 'user_spec_utf8.txt'
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
