@@ -61,7 +61,7 @@ library(tikatuwq)
 data(wq_demo)
 head(wq_demo)
 
-# IQA calculation with validated analytical CETESB equations
+# IQA calculation with the CETESB analytical equations
 wq_demo |> validate_wq() |> iqa(allow_partial = TRUE) |> plot_iqa()
 
 # Detailed component-level audit of the 9 CETESB sub-indices
@@ -91,18 +91,33 @@ The **Tikatu Project**, developed and coordinated by **Vinícius Saraiva Santos*
 
 ## 🆕 News
 
-### 🆕 What's new in v0.10.0 (current)
+### 🆕 What's new in v0.11.0 (current)
+
+**IQA results change for some inputs.** The pH (8.5–10), BOD (5–15 mg/L) and
+total nitrogen (10–60 mg/L) sub-index equations were corrected to remove
+discontinuities found in v0.10.0, after comparison with the curves in CETESB
+Appendix D (2023, Figure 1). CETESB publishes the sub-indices only as graphical
+curves, so the package equations are analytical approximations of them. See `NEWS.md` and
+`system.file("audit", "IQA_AUDITORIA.md", package = "tikatuwq")` for the
+before/after comparison and the list of open items.
+
+- `classify_iqa()` uses `classification` (as `iqa()` does); `scheme` is deprecated.
+- New classification scales `"igam"` and `"ana"` (alias of `"cetesb"`). They change only the labels, never the IQA value.
+- `iqa(details = TRUE)` reports the effective weights actually used, including with custom `pesos` and `allow_partial = TRUE`.
+- `delta_temperature` is now forwarded; invalid physical values become `NA` with a warning.
+
+### 🆕 What's new in v0.10.0
 
 **🔬 Scientific & Metrological Audit of the Brazilian IQA (CETESB/INEMA)**
 
-- **Official Analytical Equations**: `iqa()` now implements validated piecewise analytical equations for all 9 CETESB sub-indices ($Q_1$ to $Q_9$), including altitude- and temperature-corrected DO saturation ($C_s$), exact exponential-base curves ($\text{DBO}_5$, $\text{NT}$, $\text{Turb}$, $\text{PT}$), and strict piecewise polynomials.
+- **Analytical Equations**: `iqa()` implements piecewise analytical equations for all 9 CETESB sub-indices ($Q_1$ to $Q_9$), including altitude- and temperature-corrected DO saturation ($C_s$). *Note: the 2026 audit found errors in some pieces of these equations (fixed in development).*
 - **Stoichiometric Phosphorus Conversion**: Automatic conversion of total elemental phosphorus to phosphate ($\text{P}_{\text{total}} \times 3.066 = \text{PO}_4$) when `phosphorus_basis = "P"`.
-- **E. coli Factor ($1.25\times$)**: Native support for `microbial_type = "e_coli"`, applying the official CETESB conversion factor.
+- **E. coli Factor ($1.25\times$)**: Native support for `microbial_type = "e_coli"`, applying a $1.25\times$ conversion factor (CETESB Appendix D 2023, p. 5).
 - **Strict Separation of Total Solids vs. TDS**: Total Dissolved Solids (`tds`) is no longer accepted as an interchangeable alias for Total Solids (`solidos_totais`/`residuo_total`) in strict CETESB mode, preventing systematic overestimation of water quality.
 - **Component-Level Audit Layer**: New exported function `iqa_components()` and `iqa(..., details = TRUE)` returning raw values, analytical sub-indices ($Q_i$), official weights ($W_i$), and weighted factors ($Q_i^{W_i}$) for full scientific reproducibility.
 - **Official CETESB Qualitative Ranges**: `classify_iqa()` updated to official CETESB rating thresholds: *Péssima* ($\le 19$), *Ruim* ($19\text{--}36$), *Regular* ($36\text{--}51$), *Boa* ($51\text{--}79$), *Ótima* ($> 79$).
 - **Aquatic Environment Context for CONAMA**: `conama_check()` now accepts `environment = c("all", "lotic", "lentic", "intermediate")` for automatic selection of regulatory phosphorus thresholds and pH-conditioned ammonia limits.
-- **Official Benchmark Validation**: Validated against INEMA monitoring data from Rio Buranhém (2024 Campaign 3).
+- **INEMA example data**: Test case built from INEMA monitoring data from Rio Buranhém (2024 Campaign 3). It checks the class and a plausible range; it does not compare against IQA values published by INEMA.
 
 ✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
 ✔️ **299 automated unit tests passing**  

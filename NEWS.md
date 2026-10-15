@@ -1,3 +1,105 @@
+# tikatuwq 0.11.0
+
+Scientific stabilization of the IQA core and of the trophic state indices.
+**IQA and IET values change for some inputs**; see `inst/audit/IQA_AUDITORIA.md`
+and `inst/audit/REGRESSAO_0_10_0_0_11_0.csv` for the full before/after
+comparison.
+
+CETESB (2023) Appendix D gives the IQA sub-indices only as graphical curves
+(Figure 1). The package's piecewise equations come from the CETESB spreadsheet
+as transcribed by CPRH (PNMA II) and by von Sperling (2007, p. 255; reproduced
+by IBEAS 2015). Weights, fixed out-of-range values, unit conversions and the
+classification match the official text exactly; where the two secondary
+transcriptions disagree, the choice follows the official curve. An
+independent re-implementation agrees with `iqa()` to 1e-14 on 3000 inputs, and
+the published IBEAS/von Sperling worked example (IQA = 81) is reproduced.
+
+## Changes in numerical results
+
+- `.qi_cetesb_ph()`, 8.5 < pH <= 9: `10^(-1.1507 pH)` replaced by `exp(-1.1507 pH)`.
+  The old form gave qi ~ 0.0002 at pH 8.6. Example: `wq_demo` point
+  FBS-BRH-300 on 2023-05-24 moves from 15.58 (Pessima) to 82.55 (Otima).
+- `.qi_cetesb_ph()`, 9 < pH <= 10: `50 - 32 (pH - 9)` replaced by `288 - 27 pH`
+  (removes the 45 -> 50 jump at pH 9; Figure 1 has no jump there). CPRH prints
+  `228 - 27 pH` (an evident typo: it would give qi < 0), while von Sperling via
+  IBEAS gives the old form. Effect on the IQA: at most 0.9 point.
+  **Maintainer decision pending.**
+- `.qi_cetesb_dbo()`, 5 < DBO <= 15 mg/L, and `.qi_cetesb_nt()`, 10 < NT <= 60 mg/L:
+  `log10()` replaced by natural `log()`, removing the jumps at 5/15 and 10/60 mg/L.
+  IQA drops by up to ~9 points (DBO) and ~15 points (NT) in these ranges.
+  Figure 1 confirms the corrected values (e.g. BOD 10 mg/L: ~30, was 73).
+  Note: spreadsheets that follow the von Sperling (2007) transcription with
+  `log10` (e.g. IBEAS 2015) give higher IQA values in these ranges.
+- DO saturation `Cs`: cubic coefficient 0.00005898 corrected to 0.00005896
+  (CPRH; von Sperling via IBEAS). Effect below 0.02% of `Cs`.
+- `.qi_cetesb_temperatura()`: delta T < -5 C now gives `NA` (qi is "undefined"
+  per Figure 1); it returned 93. `temperature_method = "delta"`/`"reference"`
+  now warns that the package's delta-T curve does not match the CETESB curve;
+  these modes are **experimental** and flagged in `attr(, "iqa_nonstandard")`.
+  The default (qi = 94: CPRH and IBEAS "constant of 94 adopted by CETESB";
+  consistent with the source's q^w = 1.58) is unchanged.
+- `iqa()` now assigns `IQA_status` from the unrounded IQA; rounding to two
+  decimals is display only (e.g. 79.004 is Otima although shown as 79.00).
+- `iet_lamparelli()`: now uses the Lamparelli (2004) equations given by CETESB
+  (Appendix D 2023, p. 10), different for rivers and reservoirs, with total
+  phosphorus and chlorophyll-a in ug/L. Until v0.10.0 it used `10 + 10 log10(x)`
+  for both environments, which classified almost any sample as
+  ultraoligotrophic (e.g. TP = 137 ug/L in a river gave 1.4 instead of 59.5).
+  Results now reproduce the class limits of Tables 5 and 6. Secchi depth is
+  returned as an auxiliary component and no longer enters `IET_Lamp`, as
+  CETESB does not use transparency.
+- `iet_carlson()`: natural logarithm instead of `log10` (Carlson 1977 defines
+  TSI = 10 (6 - log2 SD); the 14.41/14.42/9.81 coefficients only hold with ln).
+  Example: TP = 48 ug/L now gives 60 (was 28.4).
+- `generate_analysis()`: the dominant IQA class now uses the CETESB scale of
+  `classify_iqa()` instead of a private 25/50/70/90 scale, and the text reports
+  how many samples are partial IQA estimates.
+- `plot_map_quality()`: auto-detection now recognizes `IET_Lamp`, the column
+  returned by `iet_lamparelli()` (it only looked for `IET_Lamparelli`, so
+  Lamparelli output was never detected; the corresponding test was silently
+  skipped).
+- Physically invalid inputs (negative concentrations, pH outside 0-14,
+  temperature outside -2..50 C, `Inf`) now become `NA` with a warning instead
+  of being silently truncated to 0 (which gave the best possible qi).
+
+## API
+
+- `classify_iqa()` now uses `classification` (same name as in `iqa()`).
+  `scheme` still works but is deprecated (warning); giving both with different
+  values is an error. `iqa()` also accepts `scheme` via `...` with the same rules.
+- New classification scales `"igam"` (25/50/70/90) and `"ana"`. `"ana"` uses the
+  19/36/51/79 cuts shown on the current ANA portal and is an alias of `"cetesb"`.
+  `classification` never changes the numeric IQA.
+- `classify_iqa()` returns `NA` (with a warning) for values outside [0, 100];
+  previously they were classified as the lowest/highest class.
+- `iqa()` now forwards `delta_temperature` (it was silently ignored).
+  `temperature_method = "delta"` without a delta, or `"reference"` without
+  `temperature_reference`, is now an error instead of silently using qi = 94.
+- `pesos`: must be a named, finite, non-negative vector of known parameter
+  names. Unknown names (e.g. `tds`) were silently ignored before and are now an
+  error. With `details = TRUE`, the `wi_*` and `term_*` columns hold the
+  **effective** (renormalized) weights, so `prod(qi^wi)` reproduces the IQA.
+- `allow_partial = TRUE`: partial rows are listed in `attr(, "iqa_partial_rows")`
+  and, with `details = TRUE`, in the new `IQA_partial`/`missing_params` columns.
+  This is a package estimate, not an institutional rule.
+- `altitude_m` accepts one value per row; values outside -500..9000 m are an error.
+- `na_rm` in `iqa()` is deprecated in favour of `allow_partial`. Unknown
+  arguments passed through `...` now produce a warning.
+- New provenance attributes on `iqa()` output, including for empty input and
+  the legacy routes: `iqa_method_reference`, `iqa_weights`, `iqa_custom_weights`,
+  `iqa_allow_partial`, `iqa_partial_rows`, `iqa_nonstandard`. `iqa_complete` now
+  reports whether every computed row was complete (it used to echo
+  `!allow_partial`).
+
+## Documentation
+
+- Removed unverified claims that the equations are "official", "validated" and
+  "continuous". Pending items are listed in `inst/audit/IQA_AUDITORIA.md`.
+- New sections in `?iqa`: method vs classification, missing data, invalid values.
+- `?wq_demo` now states that the dataset has TDS but not total solids, so its
+  IQA values are partial estimates (8 parameters), not CETESB IQA values, and
+  that it is not an independent benchmark.
+
 # tikatuwq 0.10.0
 
 ## Breaking changes and scientific corrections

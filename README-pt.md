@@ -78,18 +78,34 @@ O **Projeto Tikatu**, desenvolvido e coordenado por **Vinícius Saraiva Santos**
 
 ## 🆕 Novidades
 
-### 🆕 Novidades na versão 0.10.0 (atual)
+### 🆕 Novidades na versão 0.11.0 (atual)
+
+**Os resultados do IQA mudam para algumas entradas.** As equações dos
+sub-índices de pH (8,5–10), DBO (5–15 mg/L) e nitrogênio total (10–60 mg/L)
+foram corrigidas para eliminar descontinuidades encontradas na v0.10.0, após
+comparação com as curvas do Apêndice D da CETESB (2023, Figura 1). A CETESB
+publica os sub-índices apenas como curvas gráficas; as equações do pacote são
+aproximações analíticas delas. Veja o
+`NEWS.md` e `system.file("audit", "IQA_AUDITORIA.md", package = "tikatuwq")`
+para a comparação antes/depois e a lista de pendências.
+
+- `classify_iqa()` usa `classification` (como `iqa()`); `scheme` foi depreciado.
+- Novas escalas de classificação `"igam"` e `"ana"` (alias de `"cetesb"`). Elas mudam apenas os rótulos, nunca o valor do IQA.
+- `iqa(details = TRUE)` informa os pesos efetivamente usados, inclusive com `pesos` customizados e `allow_partial = TRUE`.
+- `delta_temperature` agora é repassado; valores físicos inválidos viram `NA` com aviso.
+
+### 🆕 Novidades na versão 0.10.0
 
 **🔬 Auditoria Científica e Metrológica do IQA Brasileiro (CETESB/INEMA)**
 
-- **Equações Analíticas Contínuas Oficiais**: `iqa()` implementa as equações analíticas paramétricas por trechos oficiais da CETESB para todos os 9 sub-índices ($Q_1$ a $Q_9$), incluindo saturação de OD ($C_s$) corrigida por altitude e temperatura, equações em base exponencial natural ($\text{DBO}_5$, $\text{NT}$, $\text{Turb}$, $\text{PT}$) e polinômios estritos.
+- **Equações Analíticas**: `iqa()` implementa equações analíticas por trechos para os 9 sub-índices da CETESB ($Q_1$ a $Q_9$), incluindo saturação de OD ($C_s$) corrigida por altitude e temperatura. *Nota: a auditoria de 2026 encontrou erros em alguns trechos (corrigidos em desenvolvimento).*
 - **Conversão Estequiométrica de Fósforo**: Conversão automática de fósforo elementar para fosfato ($\text{P}_{\text{total}} \times 3.066 = \text{PO}_4$) quando `phosphorus_basis = "P"`.
-- **Fator E. coli ($1.25\times$)**: Suporte nativo a `microbial_type = "e_coli"`, aplicando o fator de conversão oficial da CETESB.
+- **Fator E. coli ($1.25\times$)**: Suporte nativo a `microbial_type = "e_coli"`, aplicando um fator de conversão de 1,25 (Apêndice D CETESB 2023, p. 5).
 - **Separação Estrita de Sólidos Totais vs. TDS**: Sólidos Dissolvidos Totais (`tds`) não é mais aceito como alias de Sólidos Totais (`solidos_totais`/`residuo_total`) no modo CETESB estrito, prevenindo superestimativa de qualidade da água.
 - **Camada de Auditoria dos Componentes**: Nova função exportada `iqa_components()` e opção `iqa(..., details = TRUE)` retornando valores brutos, sub-índices analíticos ($Q_i$), pesos oficiais ($W_i$) e parcelas ponderadas ($Q_i^{W_i}$) para reprodutibilidade científica total.
 - **Faixas Qualitativas Oficiais CETESB**: `classify_iqa()` atualizado para os limiares oficiais da CETESB: *Péssima* ($\le 19$), *Ruim* ($19\text{--}36$), *Regular* ($36\text{--}51$), *Boa* ($51\text{--}79$), *Ótima* ($> 79$).
 - **Contexto Ambiental em CONAMA**: `conama_check()` passa a receber `environment = c("all", "lotic", "lentic", "intermediate")` para seleção automática dos limites legais de fósforo total e amônia total condicionada ao pH.
-- **Validação com Benchmark Oficial**: Validado contra dados oficiais de monitoramento do INEMA no Rio Buranhém (Campanha 3 de 2024).
+- **Dados de exemplo do INEMA**: Caso de teste montado com dados de monitoramento do INEMA no Rio Buranhém (Campanha 3 de 2024). Verifica a classe e uma faixa plausível; não compara com valores de IQA publicados pelo INEMA.
 
 ✔️ `R CMD check --as-cran`: **0 errors | 0 warnings | 0 notes**  
 ✔️ **299 testes unitários aprovados**  
