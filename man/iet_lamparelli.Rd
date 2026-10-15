@@ -43,29 +43,52 @@ Um data.frame com colunas (quando aplicavel):
 \itemize{
 \item \code{IET_TP} — componente de fosforo total (0-100).
 \item \code{IET_Chla} — componente de clorofila-a (0-100).
-\item \code{IET_Secchi} — componente de Secchi (0-100).
-\item \code{IET_Lamp} — indice Lamparelli agregado (0-100).
+\item \code{IET_Secchi} — componente auxiliar de Secchi (0-100), fora do agregado.
+\item \code{IET_Lamp} — indice Lamparelli agregado: media de IET_TP e IET_Chla (0-100).
 \item \code{TSI_status} — classe qualitativa (quando \code{add_status=TRUE}).
 \item \code{ambiente} — tipo de ambiente informado.
 }
 }
 \description{
-Computa componentes do indice trofico de Lamparelli (TSI/IET) a partir
-de fosforo total, clorofila-a e profundidade do disco de Secchi, e
-retorna o indice agregado como a media por linha dos componentes
-disponiveis.
+Computa o Indice do Estado Trofico de Lamparelli (2004), como adotado pela
+CETESB, a partir de fosforo total e clorofila-a. O indice agregado e a media
+de IET(PT) e IET(CL) disponiveis na linha.
 
 Pode receber um \code{data.frame} como primeiro argumento (ver Detalhes).
 }
 \details{
-Implementacao pragmatica; confirme coeficientes/limiares para seu
-contexto regulatorio. Entradas com virgula decimal (ex.: "3,2") ou
+Equacoes (CETESB 2023, Apendice D, secao 4, p. 10; PT e CL em ug/L,
+ln = logaritmo natural):
+\itemize{
+\item Rios: \code{IET(CL) = 10 (6 - ((-0.7 - 0.6 ln CL) / ln 2)) - 20};
+\code{IET(PT) = 10 (6 - ((0.42 - 0.36 ln PT) / ln 2)) - 20}.
+\item Reservatorios: \code{IET(CL) = 10 (6 - ((0.92 - 0.34 ln CL) / ln 2))};
+\code{IET(PT) = 10 (6 - ((1.77 - 0.42 ln PT) / ln 2))}.
+}
+Conferidas contra os cortes das Tabelas 5 e 6 da mesma fonte. A CETESB nao
+usa a transparencia no IET; quando \code{sd} e informado, \code{IET_Secchi}
+e devolvido como componente auxiliar (definicao de Carlson,
+\code{10 (6 - ln SD / ln 2)}) e nao entra em \code{IET_Lamp}.
+Ate a v0.10.0 a funcao usava \code{10 + 10 log10(x)} para PT e CL, igual
+para rio e reservatorio, o que classificava praticamente qualquer amostra
+como ultraoligotrofica.
+
+Entradas com virgula decimal (ex.: "3,2") ou
 desigualdades (ex.: "<0,1") sao convertidas com seguranca por
 helpers internos. Se houver apenas \code{p_total} (mg/L), e convertida
 para \code{tp} (ug/L) via \code{tp = p_total * 1000}.
 
 Os componentes e o indice agregado sao limitados ao intervalo \code{[0, 100]}
 para consistencia com as figuras e tabelas do pacote/artigo.
+}
+\references{
+Lamparelli, M. C. (2004). Grau de trofia em corpos d'agua do Estado de Sao
+Paulo: avaliacao dos metodos de monitoramento. Tese (Doutorado), Instituto de
+Biociencias, Universidade de Sao Paulo.
+
+CETESB (2023). Apendice D: Indices de Qualidade das Aguas e Criterios de
+Avaliacao da Qualidade dos Sedimentos. In: Qualidade das Aguas Interiores no
+Estado de Sao Paulo. Secao 4, pp. 9-11.
 }
 \seealso{
 \code{\link[=iet_carlson]{iet_carlson()}}, \code{\link[=iqa]{iqa()}},

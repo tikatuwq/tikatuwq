@@ -35,13 +35,51 @@ classify_tsi_lamparelli <- function(x, locale = c("pt", "en")) {
   cut(x, breaks = breaks, labels = labs, right = TRUE, ordered_result = TRUE)
 }
 
+# Equacoes de Lamparelli (2004) adotadas pela CETESB (Apendice D 2023, p. 10).
+# tp e chla em ug/L (conferido pelas Tabelas 5 e 6: tp = 13 ug/L em rio da
+# IET = 47.3, o corte Ultraoligotrofico/Oligotrofico).
+.lamp_iet_pt <- function(tp_ug, ambiente) {
+  if (ambiente == "rio") 10 * (6 - ((0.42 - 0.36 * log(tp_ug)) / log(2))) - 20
+  else                   10 * (6 - ((1.77 - 0.42 * log(tp_ug)) / log(2)))
+}
+.lamp_iet_cl <- function(chla_ug, ambiente) {
+  if (ambiente == "rio") 10 * (6 - ((-0.7 - 0.6 * log(chla_ug)) / log(2))) - 20
+  else                   10 * (6 - ((0.92 - 0.34 * log(chla_ug)) / log(2)))
+}
+# Transparencia: a CETESB nao a usa no IET (Apendice D 2023, p. 9-10). O
+# componente e calculado como auxiliar pela definicao de Carlson e NAO entra
+# no indice agregado.
+.lamp_iet_sd <- function(sd) 10 * (6 - log(sd) / log(2))
+
+# Monta componentes e indice agregado de Lamparelli. tp_ug e chla em ug/L.
+# IET = media de IET(PT) e IET(CL) disponiveis (Apendice D 2023, p. 10).
+.lamp_assemble <- function(tp_ug, chla, sd, ambiente, clip01) {
+  res <- list()
+  if (!is.null(tp_ug)) res$IET_TP     <- clip01(.lamp_iet_pt(pmax(tp_ug, 0.001), ambiente))
+  if (!is.null(chla))  res$IET_Chla   <- clip01(.lamp_iet_cl(pmax(chla, 0.001), ambiente))
+  if (!is.null(sd))    res$IET_Secchi <- clip01(.lamp_iet_sd(pmax(sd, 0.001)))
+  df <- as.data.frame(res, optional = TRUE)
+  agg_cols <- intersect(names(df), c("IET_TP", "IET_Chla"))
+  if (length(agg_cols) == 0L) {
+    if (!is.null(sd)) {
+      warning("Only Secchi depth supplied: CETESB's Lamparelli IET does not use transparency; IET_Lamp is NA.", call. = FALSE)
+      df$IET_Lamp <- rep(NA_real_, nrow(df))
+    } else {
+      df <- data.frame(IET_Lamp = numeric(0))
+    }
+  } else {
+    df$IET_Lamp <- rowMeans(df[, agg_cols, drop = FALSE], na.rm = TRUE)
+    df$IET_Lamp[is.nan(df$IET_Lamp)] <- NA_real_
+  }
+  df
+}
+
 #' Trophic State Index (Lamparelli)
 #'
 #' @description
-#' Computa componentes do indice trofico de Lamparelli (TSI/IET) a partir
-#' de fosforo total, clorofila-a e profundidade do disco de Secchi, e
-#' retorna o indice agregado como a media por linha dos componentes
-#' disponiveis.
+#' Computa o Indice do Estado Trofico de Lamparelli (2004), como adotado pela
+#' CETESB, a partir de fosforo total e clorofila-a. O indice agregado e a media
+#' de IET(PT) e IET(CL) disponiveis na linha.
 #'
 #' Pode receber um \code{data.frame} como primeiro argumento (ver Detalhes).
 #'
@@ -61,8 +99,23 @@ classify_tsi_lamparelli <- function(x, locale = c("pt", "en")) {
 #' @param ... Reservado para uso futuro (ignorado).
 #'
 #' @details
-#' Implementacao pragmatica; confirme coeficientes/limiares para seu
-#' contexto regulatorio. Entradas com virgula decimal (ex.: "3,2") ou
+#' Equacoes (CETESB 2023, Apendice D, secao 4, p. 10; PT e CL em ug/L,
+#' ln = logaritmo natural):
+#' \itemize{
+#'   \item Rios: \code{IET(CL) = 10 (6 - ((-0.7 - 0.6 ln CL) / ln 2)) - 20};
+#'     \code{IET(PT) = 10 (6 - ((0.42 - 0.36 ln PT) / ln 2)) - 20}.
+#'   \item Reservatorios: \code{IET(CL) = 10 (6 - ((0.92 - 0.34 ln CL) / ln 2))};
+#'     \code{IET(PT) = 10 (6 - ((1.77 - 0.42 ln PT) / ln 2))}.
+#' }
+#' Conferidas contra os cortes das Tabelas 5 e 6 da mesma fonte. A CETESB nao
+#' usa a transparencia no IET; quando \code{sd} e informado, \code{IET_Secchi}
+#' e devolvido como componente auxiliar (definicao de Carlson,
+#' \code{10 (6 - ln SD / ln 2)}) e nao entra em \code{IET_Lamp}.
+#' Ate a v0.10.0 a funcao usava \code{10 + 10 log10(x)} para PT e CL, igual
+#' para rio e reservatorio, o que classificava praticamente qualquer amostra
+#' como ultraoligotrofica.
+#'
+#' Entradas com virgula decimal (ex.: "3,2") ou
 #' desigualdades (ex.: "<0,1") sao convertidas com seguranca por
 #' helpers internos. Se houver apenas \code{p_total} (mg/L), e convertida
 #' para \code{tp} (ug/L) via \code{tp = p_total * 1000}.
@@ -75,11 +128,20 @@ classify_tsi_lamparelli <- function(x, locale = c("pt", "en")) {
 #' \itemize{
 #'   \item \code{IET_TP} — componente de fosforo total (0-100).
 #'   \item \code{IET_Chla} — componente de clorofila-a (0-100).
-#'   \item \code{IET_Secchi} — componente de Secchi (0-100).
-#'   \item \code{IET_Lamp} — indice Lamparelli agregado (0-100).
+#'   \item \code{IET_Secchi} — componente auxiliar de Secchi (0-100), fora do agregado.
+#'   \item \code{IET_Lamp} — indice Lamparelli agregado: media de IET_TP e IET_Chla (0-100).
 #'   \item \code{TSI_status} — classe qualitativa (quando \code{add_status=TRUE}).
 #'   \item \code{ambiente} — tipo de ambiente informado.
 #' }
+#'
+#' @references
+#' Lamparelli, M. C. (2004). Grau de trofia em corpos d'agua do Estado de Sao
+#' Paulo: avaliacao dos metodos de monitoramento. Tese (Doutorado), Instituto de
+#' Biociencias, Universidade de Sao Paulo.
+#'
+#' CETESB (2023). Apendice D: Indices de Qualidade das Aguas e Criterios de
+#' Avaliacao da Qualidade dos Sedimentos. In: Qualidade das Aguas Interiores no
+#' Estado de Sao Paulo. Secao 4, pp. 9-11.
 #'
 #' @seealso \code{\link[=iet_carlson]{iet_carlson()}}, \code{\link[=iqa]{iqa()}},
 #'   \code{\link[=conama_check]{conama_check()}}
@@ -100,27 +162,7 @@ iet_lamparelli <- function(tp = NULL, chla = NULL, sd = NULL,
   if (is.data.frame(tp) && is.null(chla) && is.null(sd)) {
     ext <- .df_extract_iet(tp)  # supoe helper interno existente
 
-    res <- list()
-    if (!is.null(ext$tp))        res$IET_TP     <- 10 + 10 * log10(pmax(ext$tp,        0.001))
-    if (!is.null(ext$clorofila)) res$IET_Chla   <- 10 + 10 * log10(pmax(ext$clorofila, 0.001))
-    if (!is.null(ext$secchi))    res$IET_Secchi <- 60 - 14.41 * log10(pmax(ext$secchi,  0.001))
-
-    df_out <- as.data.frame(res, optional = TRUE)
-
-    # clip de componentes
-    for (nm in intersect(names(df_out), c("IET_TP","IET_Chla","IET_Secchi"))) {
-      df_out[[nm]] <- clip01(df_out[[nm]])
-    }
-
-    # agregado
-    if (ncol(df_out) > 1) {
-      df_out$IET_Lamp <- rowMeans(df_out, na.rm = TRUE)
-    } else if (ncol(df_out) == 1) {
-      df_out$IET_Lamp <- df_out[[1]]
-    } else {
-      df_out <- data.frame(IET_Lamp = numeric(0))
-    }
-    df_out$IET_Lamp <- clip01(df_out$IET_Lamp)
+    df_out <- .lamp_assemble(ext$tp, ext$clorofila, ext$secchi, ambiente, clip01)
 
     if (isTRUE(add_status) && nrow(df_out)) {
       df_out$TSI_status <- classify_tsi_lamparelli(df_out$IET_Lamp, locale = locale)
@@ -134,29 +176,11 @@ iet_lamparelli <- function(tp = NULL, chla = NULL, sd = NULL,
   }
 
   # --- MODO VETORIAL (comportamento original) ---
-  tp   <- .numify(tp)      # mg/L
+  tp   <- .numify(tp)      # mg/L (convertido para ug/L abaixo)
   chla <- .numify(chla)    # ug/L
   sd   <- .numify(sd)      # m
 
-  res <- list()
-  if (!is.null(tp))   res$IET_TP     <- 10 + 10 * log10(pmax(tp,   0.001))
-  if (!is.null(chla)) res$IET_Chla   <- 10 + 10 * log10(pmax(chla, 0.001))
-  if (!is.null(sd))   res$IET_Secchi <- 60 - 14.41 * log10(pmax(sd,  0.001))
-
-  df <- as.data.frame(res, optional = TRUE)
-
-  for (nm in intersect(names(df), c("IET_TP","IET_Chla","IET_Secchi"))) {
-    df[[nm]] <- clip01(df[[nm]])
-  }
-
-  if (ncol(df) > 1) {
-    df$IET_Lamp <- rowMeans(df, na.rm = TRUE)
-  } else if (ncol(df) == 1) {
-    df$IET_Lamp <- df[[1]]
-  } else {
-    df <- data.frame(IET_Lamp = numeric(0))
-  }
-  df$IET_Lamp <- clip01(df$IET_Lamp)
+  df <- .lamp_assemble(if (is.null(tp)) NULL else 1000 * tp, chla, sd, ambiente, clip01)
 
   if (isTRUE(add_status) && nrow(df)) {
     df$TSI_status <- classify_tsi_lamparelli(df$IET_Lamp, locale = locale)

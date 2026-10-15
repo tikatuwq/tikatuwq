@@ -53,12 +53,15 @@ e o IET como media por linha dos componentes disponiveis.
 Pode receber um \code{data.frame} como primeiro argumento (ver Detalhes).
 }
 \details{
-Formulas implementadas (Carlson 1977):
+Formulas implementadas (Carlson 1977), com logaritmo natural:
 \itemize{
-\item \code{TSI_Secchi = 60 - 14.41 * log10(secchi)}
-\item \code{TSI_Chla  = 9.81 * log10(clorofila) + 30.6}
-\item \code{TSI_TP    = 14.42 * log10(tp) + 4.15}
+\item \code{TSI_Secchi = 60 - 14.41 * log(secchi)}
+\item \code{TSI_Chla  = 9.81 * log(clorofila) + 30.6}
+\item \code{TSI_TP    = 14.42 * log(tp) + 4.15}
 }
+Os coeficientes derivam da definicao TSI = 10 (6 - log2 SD): 10 / ln 2 =
+14,43. Ate a v0.10.0 o pacote usava \code{log10}, o que subestimava o
+indice (ex.: TP = 48 ug/L dava 28,4 em vez de 60).
 
 Quando um data.frame e fornecido, strings com virgula decimal (ex.: "3,2")
 ou sinais de desigualdade (ex.: "<0,1") sao convertidas com seguranca.

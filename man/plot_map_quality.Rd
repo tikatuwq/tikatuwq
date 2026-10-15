@@ -67,7 +67,7 @@ Quando o data frame tiver multiplas linhas por ponto, e usada a
 \donttest{
 if (requireNamespace("leaflet", quietly = TRUE)) {
   data("wq_demo", package = "tikatuwq")
-  d <- iqa(wq_demo, na_rm = TRUE)
+  d <- iqa(wq_demo, allow_partial = TRUE)
   plot_map_quality(d, index = "IQA")
 }
 }

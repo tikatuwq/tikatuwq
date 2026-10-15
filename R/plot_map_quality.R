@@ -84,7 +84,7 @@
 #' \donttest{
 #' if (requireNamespace("leaflet", quietly = TRUE)) {
 #'   data("wq_demo", package = "tikatuwq")
-#'   d <- iqa(wq_demo, na_rm = TRUE)
+#'   d <- iqa(wq_demo, allow_partial = TRUE)
 #'   plot_map_quality(d, index = "IQA")
 #' }
 #' }
@@ -112,7 +112,8 @@ plot_map_quality <- function(
 
   # Detectar coluna do indice
   if (is.null(index_col)) {
-    candidates <- c("IQA", "NSFWQI", "IET_Lamparelli", "IET_Carlson",
+    # IET_Lamp e o nome devolvido por iet_lamparelli(); IET, por iet_carlson()
+    candidates <- c("IQA", "NSFWQI", "IET_Lamp", "IET_Lamparelli", "IET_Carlson",
                     "IET", "TSI", "iet", "tsi")
     index_col  <- candidates[candidates %in% names(df)][1]
     if (is.na(index_col)) {
@@ -120,7 +121,7 @@ plot_map_quality <- function(
            "ou calcular o indice com iqa() / iet_carlson() primeiro.")
     }
     # Ajustar 'index' pelo nome detectado
-    if (grepl("Lamparelli|lamparelli", index_col, ignore.case = TRUE)) {
+    if (grepl("Lamparelli|IET_Lamp", index_col, ignore.case = TRUE)) {
       index <- "IET_lamparelli"
     } else if (grepl("Carlson|carlson|IET|TSI|iet|tsi", index_col,
                      ignore.case = TRUE)) {

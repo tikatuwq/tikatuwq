@@ -59,12 +59,15 @@ classify_tsi_carlson <- function(x, locale = c("pt", "en")) {
 #' @param ... Reservado para uso futuro (ignorado).
 #'
 #' @details
-#' Formulas implementadas (Carlson 1977):
+#' Formulas implementadas (Carlson 1977), com logaritmo natural:
 #' \itemize{
-#'   \item \code{TSI_Secchi = 60 - 14.41 * log10(secchi)}
-#'   \item \code{TSI_Chla  = 9.81 * log10(clorofila) + 30.6}
-#'   \item \code{TSI_TP    = 14.42 * log10(tp) + 4.15}
+#'   \item \code{TSI_Secchi = 60 - 14.41 * log(secchi)}
+#'   \item \code{TSI_Chla  = 9.81 * log(clorofila) + 30.6}
+#'   \item \code{TSI_TP    = 14.42 * log(tp) + 4.15}
 #' }
+#' Os coeficientes derivam da definicao TSI = 10 (6 - log2 SD): 10 / ln 2 =
+#' 14,43. Ate a v0.10.0 o pacote usava \code{log10}, o que subestimava o
+#' indice (ex.: TP = 48 ug/L dava 28,4 em vez de 60).
 #'
 #' Quando um data.frame e fornecido, strings com virgula decimal (ex.: "3,2")
 #' ou sinais de desigualdade (ex.: "<0,1") sao convertidas com seguranca.
@@ -123,11 +126,11 @@ iet_carlson <- function(secchi = NULL,
 
     res <- list()
     if (!is.null(ext$secchi))
-      res$TSI_Secchi <- 60 - 14.41 * log10(pmax(ext$secchi, 0.001))
+      res$TSI_Secchi <- 60 - 14.41 * log(pmax(ext$secchi, 0.001))
     if (!is.null(ext$clorofila))
-      res$TSI_Chla  <- 9.81 * log10(pmax(ext$clorofila, 0.001)) + 30.6
+      res$TSI_Chla  <- 9.81 * log(pmax(ext$clorofila, 0.001)) + 30.6
     if (!is.null(ext$tp))
-      res$TSI_TP    <- 14.42 * log10(pmax(ext$tp, 0.001)) + 4.15
+      res$TSI_TP    <- 14.42 * log(pmax(ext$tp, 0.001)) + 4.15
 
     df_out <- as.data.frame(res, optional = TRUE)
 
@@ -162,11 +165,11 @@ iet_carlson <- function(secchi = NULL,
 
   res <- list()
   if (!is.null(secchi))
-    res$TSI_Secchi <- 60 - 14.41 * log10(pmax(secchi, 0.001))
+    res$TSI_Secchi <- 60 - 14.41 * log(pmax(secchi, 0.001))
   if (!is.null(clorofila))
-    res$TSI_Chla  <- 9.81 * log10(pmax(clorofila, 0.001)) + 30.6
+    res$TSI_Chla  <- 9.81 * log(pmax(clorofila, 0.001)) + 30.6
   if (!is.null(tp))
-    res$TSI_TP    <- 14.42 * log10(pmax(tp, 0.001)) + 4.15
+    res$TSI_TP    <- 14.42 * log(pmax(tp, 0.001)) + 4.15
 
   df <- as.data.frame(res, optional = TRUE)
 
