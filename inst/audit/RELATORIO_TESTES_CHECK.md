@@ -17,7 +17,10 @@ Rscript -e 'suppressMessages(devtools::load_all(".", quiet=TRUE));
 
 | Arquivos | Testes (`test_that`) | Verificações aprovadas | Falhas | Erros | Pulados | Avisos |
 |---:|---:|---:|---:|---:|---:|---:|
-| 33 | 146 | 455 | 0 | 0 | 17 | 11 |
+| 35 | 160 | 550 | 0 | 0 | 17 | 11 |
+
+(3ª rodada; na 2ª rodada eram 33 arquivos, 146 testes e 455 verificações.
+Novos: `test-iqa-igam-compare.R` e `test-nsfwqi.R`.)
 
 - **Pulados (17):** 15 com `skip_on_cran()` (`mk_seasonal`, `param_*`,
   `plot_map`), 1 teste vazio e 1 fallback sem leaflet (leaflet está instalado).
@@ -48,7 +51,7 @@ RSTUDIO_PANDOC=".../quarto/bin/tools" Rscript -e 'devtools::check(
   check_dir = "audit/resultados/check")'
 ```
 
-Resultado: **0 erros, 0 avisos, 1 nota.**
+Resultado (3ª rodada): **0 erros, 0 avisos, 1 nota.**
 
 - **NOTE:** "Non-standard files/directories found at top level": `atividade.R`,
   `scratch_save_baselines.R`, `scratch_spec.txt`, `user_spec.txt`,

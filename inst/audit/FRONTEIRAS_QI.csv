@@ -1,102 +1,35 @@
-"parametro","unidade","tipo","x","qi_esq_atual","qi_atual","qi_dir_atual","salto_atual","qi_esq_v0100","qi_v0100","qi_dir_v0100","salto_v0100"
-"dbo","mg/L","fronteira",0,99.96,99.96,99.959988,-1.2e-05,99.96,99.96,99.959988,-1.2e-05
-"dbo","mg/L","fronteira",5,53.968807,53.9688,53.898182,-0.070618,53.968807,53.9688,82.62008,28.65128
-"dbo","mg/L","fronteira",15,19.241038,19.241036,19.634224,0.393188,67.568673,67.568672,19.634224,-47.934448
-"dbo","mg/L","fronteira",30,4.91506,4.915059,2,-2.915059,4.91506,4.915059,2,-2.915059
-"dbo","mg/L","valor_tipico",2,NA,78.118313,NA,NA,NA,78.118313,NA,NA
-"dbo","mg/L","valor_tipico",5,NA,53.9688,NA,NA,NA,53.9688,NA,NA
-"dbo","mg/L","valor_tipico",10,NA,32.03196,NA,NA,NA,73.1237,NA,NA
-"dbo","mg/L","valor_tipico",15,NA,19.241036,NA,NA,NA,67.568672,NA,NA
-"dbo","mg/L","valor_tipico",20,NA,11.050323,NA,NA,NA,11.050323,NA,NA
-"dbo","mg/L","valor_tipico",30,NA,4.915059,NA,NA,NA,4.915059,NA,NA
-"dbo","mg/L","valor_tipico",35,NA,2,NA,NA,NA,2,NA,NA
-"nt_total","mg/L N","fronteira",10,48.900002,48.9,48.704986,-0.195014,48.900002,48.9,78.797699,29.897699
-"nt_total","mg/L N","fronteira",60,7.311224,7.311224,7.343606,0.032383,60.820617,60.820616,7.343606,-53.47701
-"nt_total","mg/L N","fronteira",100,0.944086,0.944086,1,0.055914,0.944086,0.944086,1,0.055914
-"nt_total","mg/L N","valor_tipico",0.5,NA,95.991975,NA,NA,NA,95.991975,NA,NA
-"nt_total","mg/L N","valor_tipico",1,NA,92.1369,NA,NA,NA,92.1369,NA,NA
-"nt_total","mg/L N","valor_tipico",2,NA,84.8856,NA,NA,NA,84.8856,NA,NA
-"nt_total","mg/L N","valor_tipico",5,NA,66.8025,NA,NA,NA,66.8025,NA,NA
-"nt_total","mg/L N","valor_tipico",10,NA,48.9,NA,NA,NA,48.9,NA,NA
-"nt_total","mg/L N","valor_tipico",20,NA,32.691694,NA,NA,NA,71.843215,NA,NA
-"nt_total","mg/L N","valor_tipico",40,NA,16.6784,NA,NA,NA,64.888729,NA,NA
-"nt_total","mg/L N","valor_tipico",60,NA,7.311224,NA,NA,NA,60.820616,NA,NA
-"nt_total","mg/L N","valor_tipico",80,NA,2.633059,NA,NA,NA,2.633059,NA,NA
-"nt_total","mg/L N","valor_tipico",100,NA,0.944086,NA,NA,NA,0.944086,NA,NA
-"nt_total","mg/L N","valor_tipico",120,NA,1,NA,NA,NA,1,NA,NA
-"ph","pH","fronteira",2,2,2,2.145599,0.145599,2,2,2.145599,0.145599
-"ph","pH","fronteira",4,10.182391,10.1824,10.029605,-0.152795,10.182391,10.1824,10.029605,-0.152795
-"ph","pH","fronteira",6.2,69.804914,69.804964,70.038089,0.233125,69.804914,69.804964,70.038089,0.233125
-"ph","pH","fronteira",7,91.541683,91.5417,91.495006,-0.046694,91.541683,91.5417,91.495006,-0.046694
-"ph","pH","fronteira",8,88.120013,88.12,87.999984,-0.120016,88.120013,88.12,87.999984,-0.120016
-"ph","pH","fronteira",8.5,80.000016,80,80.019503,0.019503,80.000016,80,0.000234,-79.999766
-"ph","pH","fronteira",9,45.011711,45.011659,44.999973,-0.011686,6.2e-05,6.2e-05,49.999968,49.999906
-"ph","pH","fronteira",10,18.000027,18,17.999984,-1.6e-05,18.000032,18,17.999984,-1.6e-05
-"ph","pH","fronteira",12,2.999999,3,3,0,2.999999,3,3,0
-"ph","pH","valor_tipico",5,NA,24.9025,NA,NA,NA,24.9025,NA,NA
-"ph","pH","valor_tipico",6,NA,60.2716,NA,NA,NA,60.2716,NA,NA
-"ph","pH","valor_tipico",6.5,NA,80.039425,NA,NA,NA,80.039425,NA,NA
-"ph","pH","valor_tipico",7,NA,91.5417,NA,NA,NA,91.5417,NA,NA
-"ph","pH","valor_tipico",7.5,NA,92.23125,NA,NA,NA,92.23125,NA,NA
-"ph","pH","valor_tipico",8,NA,88.12,NA,NA,NA,88.12,NA,NA
-"ph","pH","valor_tipico",8.6,NA,71.321765,NA,NA,NA,0.00018,NA,NA
-"ph","pH","valor_tipico",9,NA,45.011659,NA,NA,NA,6.2e-05,NA,NA
-"ph","pH","valor_tipico",9.5,NA,31.5,NA,NA,NA,34,NA,NA
-"ph","pH","valor_tipico",10,NA,18,NA,NA,NA,18,NA,NA
-"ph","pH","valor_tipico",11,NA,6,NA,NA,NA,6,NA,NA
-"p_total_PO4","mg/L PO4","fronteira",1,39.600065,39.600029,39.554584,-0.045445,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","fronteira",5,10.024999,10.025,10.059141,0.034141,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","fronteira",10,5.110422,5.110422,5,-0.110422,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","valor_tipico",0.03,NA,96.315682,NA,NA,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","valor_tipico",0.1,NA,90.331917,NA,NA,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","valor_tipico",0.3,NA,75.206138,NA,NA,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","valor_tipico",1,NA,39.600029,NA,NA,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","valor_tipico",3,NA,16.2594,NA,NA,NA,NA,NA,NA
-"p_total_PO4","mg/L PO4","valor_tipico",10,NA,5.110422,NA,NA,NA,NA,NA,NA
-"turbidez","UNT","fronteira",25,57.013751,57.01375,56.524474,-0.489276,NA,NA,NA,NA
-"turbidez","UNT","fronteira",100,16.763833,16.763832,5,-11.763832,NA,NA,NA,NA
-"turbidez","UNT","valor_tipico",1,NA,97.53775,NA,NA,NA,NA,NA,NA
-"turbidez","UNT","valor_tipico",5,NA,87.76375,NA,NA,NA,NA,NA,NA
-"turbidez","UNT","valor_tipico",25,NA,57.01375,NA,NA,NA,NA,NA,NA
-"turbidez","UNT","valor_tipico",50,NA,37.69486,NA,NA,NA,NA,NA,NA
-"turbidez","UNT","valor_tipico",100,NA,16.763832,NA,NA,NA,NA,NA,NA
-"turbidez","UNT","valor_tipico",150,NA,5,NA,NA,NA,NA,NA,NA
-"solidos_totais","mg/L","fronteira",150,80.17,80.17,80.7945,0.6245,NA,NA,NA,NA
-"solidos_totais","mg/L","fronteira",500,32.085,32.085,32,-0.085,NA,NA,NA,NA
-"solidos_totais","mg/L","valor_tipico",50,NA,85.33,NA,NA,NA,NA,NA,NA
-"solidos_totais","mg/L","valor_tipico",100,NA,85.47,NA,NA,NA,NA,NA,NA
-"solidos_totais","mg/L","valor_tipico",150,NA,80.17,NA,NA,NA,NA,NA,NA
-"solidos_totais","mg/L","valor_tipico",300,NA,59.919,NA,NA,NA,NA,NA,NA
-"solidos_totais","mg/L","valor_tipico",500,NA,32.085,NA,NA,NA,NA,NA,NA
-"solidos_totais","mg/L","valor_tipico",600,NA,32,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","fronteira",1,100,100,99.999986,-1.4e-05,NA,NA,NA,NA
-"coliformes","NMP/100 mL","fronteira",10,67.000001,67,66.407429,-0.592571,NA,NA,NA,NA
-"coliformes","NMP/100 mL","fronteira",1e+05,4.18575,4.18575,3,-1.18575,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",1,NA,100,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",10,NA,67,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",100,NA,40.02972,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",1000,NA,20.86687,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",10000,NA,8.91888,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",1e+05,NA,4.18575,NA,NA,NA,NA,NA,NA
-"coliformes","NMP/100 mL","valor_tipico",1e+06,NA,3,NA,NA,NA,NA,NA,NA
-"od_psat","% sat (25 C, 0 m)","fronteira",50,41.928149,41.92815,42.157064,0.228914,42.160411,42.160412,42.160414,2e-06
-"od_psat","% sat (25 C, 0 m)","fronteira",85,89.361548,89.361548,89.474012,0.112464,89.476303,89.476304,89.476305,1e-06
-"od_psat","% sat (25 C, 0 m)","fronteira",100,99.970007,99.970008,99.4919,-0.478108,99.490361,99.490361,99.49036,0
-"od_psat","% sat (25 C, 0 m)","fronteira",140,73.700174,73.700174,47,-26.700174,47,47,47,0
-"od_psat","% sat (25 C, 0 m)","valor_tipico",20,NA,13.146202,NA,NA,NA,13.146713,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",50,NA,41.92815,NA,NA,NA,42.160412,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",70,NA,75.122179,NA,NA,NA,75.125768,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",85,NA,89.361548,NA,NA,NA,89.476304,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",100,NA,99.970008,NA,NA,NA,99.490361,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",120,NA,88.502803,NA,NA,NA,88.499792,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",140,NA,73.700174,NA,NA,NA,47,NA,NA
-"od_psat","% sat (25 C, 0 m)","valor_tipico",160,NA,47,NA,NA,NA,47,NA,NA
-"delta_t","C","fronteira",-5,NA,92,92.000002,2e-06,NA,NA,NA,NA
-"delta_t","C","fronteira",0,99.999999,100,99.999996,-4e-06,NA,NA,NA,NA
-"delta_t","C","fronteira",5,83.500003,83.5,90.499996,6.999995,NA,NA,NA,NA
-"delta_t","C","fronteira",15,45.500004,45.5,9,-36.5,NA,NA,NA,NA
-"delta_t","C","valor_tipico",-5,NA,92,NA,NA,NA,NA,NA,NA
-"delta_t","C","valor_tipico",0,NA,100,NA,NA,NA,NA,NA,NA
-"delta_t","C","valor_tipico",5,NA,83.5,NA,NA,NA,NA,NA,NA
-"delta_t","C","valor_tipico",10,NA,68,NA,NA,NA,NA,NA,NA
-"delta_t","C","valor_tipico",15,NA,45.5,NA,NA,NA,NA,NA,NA
+"parametro","limite","unidade","epsilon","qi_esquerda","qi_limite","qi_direita","salto","qi_esquerda_v0100","qi_limite_v0100","qi_direita_v0100","salto_v0100","classe_salto","fonte","conclusao","acao"
+"dbo",0,"mg/L",1e-06,99.96,99.96,99.959988,-1.2e-05,99.96,99.96,99.959988,-1.2e-05,"b","CPRH; von Sperling/IBEAS","continuo","manter"
+"dbo",5,"mg/L",1e-06,53.968807,53.9688,53.898182,-0.070618,53.968807,53.9688,82.62008,28.65128,"b","CPRH; von Sperling/IBEAS; curva CETESB q3","v0.10.0: salto +28.65 por log10 (erro a); atual -0.07 (ajuste)","corrigido na 0.11.0"
+"dbo",15,"mg/L",1e-06,19.241038,19.241036,19.634224,0.393188,67.568673,67.568672,19.634224,-47.934448,"b","CPRH; von Sperling/IBEAS","+0.39: ramos ajustados separadamente; coeficientes identicos nas duas transcricoes","manter; documentado"
+"dbo",30,"mg/L",1e-06,4.91506,4.915059,2,-2.915059,4.91506,4.915059,2,-2.915059,"b","CETESB Figura 1 (nota DBO > 30 -> 2)","valor fixo oficial","manter"
+"nt_total",10,"mg/L N",1e-06,48.900002,48.9,48.704986,-0.195014,48.900002,48.9,78.797699,29.897699,"b","CPRH; von Sperling/IBEAS; curva CETESB q4","v0.10.0: +29.9 por log10 (erro a); atual -0.20","corrigido na 0.11.0"
+"nt_total",60,"mg/L N",1e-06,7.311224,7.311224,7.343606,0.032383,60.820617,60.820616,7.343606,-53.47701,"b","CPRH; von Sperling/IBEAS","+0.03: artefato do ajuste","manter; documentado"
+"nt_total",100,"mg/L N",1e-06,0.944086,0.944086,1,0.055914,0.944086,0.944086,1,0.055914,"b","CETESB Figura 1 (nota NT > 100 -> 1)","+0.056: ajuste termina em 0.944 abaixo do valor fixo","manter; documentado"
+"ph",2,"pH",1e-06,2,2,2.145599,0.145599,2,2,2.145599,0.145599,"b","CETESB Figura 1 (pH < 2 -> 2)","+0.15","manter"
+"ph",4,"pH",1e-06,10.182391,10.1824,10.029605,-0.152795,10.182391,10.1824,10.029605,-0.152795,"b","CPRH; von Sperling/IBEAS","-0.15","manter"
+"ph",6.2,"pH",1e-06,69.804914,69.804964,70.038089,0.233125,69.804914,69.804964,70.038089,0.233125,"b","CPRH; von Sperling/IBEAS","+0.23","manter"
+"ph",7,"pH",1e-06,91.541683,91.5417,91.495006,-0.046694,91.541683,91.5417,91.495006,-0.046694,"b","CPRH; von Sperling/IBEAS","-0.05","manter"
+"ph",8,"pH",1e-06,88.120013,88.12,87.999984,-0.120016,88.120013,88.12,87.999984,-0.120016,"b","CPRH; von Sperling/IBEAS","-0.12","manter"
+"ph",8.5,"pH",1e-06,80.000016,80,80.019503,0.019503,80.000016,80,0.000234,-79.999766,"b","CPRH; von Sperling/IBEAS; curva CETESB q2","v0.10.0: -80 por 10^ (erro a); atual +0.02","corrigido na 0.11.0"
+"ph",9,"pH",1e-06,45.011711,45.011659,44.999973,-0.011686,6.2e-05,6.2e-05,49.999968,49.999906,"c","CPRH (228-27pH; tipografico) x von Sperling/IBEAS (50-32(pH-9))","atual -0.01 (288-27pH); variante IBEAS: +5","decisao do mantenedor"
+"ph",10,"pH",1e-06,18.000027,18,17.999984,-1.6e-05,18.000032,18,17.999984,-1.6e-05,"b","CPRH; von Sperling/IBEAS","continuo","manter"
+"ph",12,"pH",1e-06,2.999999,3,3,0,2.999999,3,3,0,"b","CETESB Figura 1 (pH > 12 -> 3)","continuo","manter"
+"p_total_PO4",1,"mg/L PO4",1e-06,39.600065,39.600029,39.554584,-0.045445,NA,NA,NA,NA,"b","CPRH; von Sperling/IBEAS","-0.05","manter"
+"p_total_PO4",5,"mg/L PO4",1e-06,10.024999,10.025,10.059141,0.034141,NA,NA,NA,NA,"b","CPRH; von Sperling/IBEAS","+0.03","manter"
+"p_total_PO4",10,"mg/L PO4",1e-06,5.110422,5.110422,5,-0.110422,NA,NA,NA,NA,"b","CETESB Figura 1 (PO4 > 10 -> 5)","-0.11","manter"
+"turbidez",25,"UNT",1e-06,57.013751,57.01375,56.524474,-0.489276,NA,NA,NA,NA,"b","CPRH; von Sperling/IBEAS","-0.49","manter"
+"turbidez",100,"UNT",1e-06,16.763833,16.763832,5,-11.763832,NA,NA,NA,NA,"b","CETESB Figura 1 (turbidez > 100 -> 5)","-11.8: valor fixo oficial","manter"
+"solidos_totais",150,"mg/L",1e-06,80.17,80.17,80.7945,0.6245,NA,NA,NA,NA,"b","CPRH; von Sperling/IBEAS","+0.62","manter"
+"solidos_totais",500,"mg/L",1e-06,32.085,32.085,32,-0.085,NA,NA,NA,NA,"b","CETESB Figura 1 (ST > 500 -> 32)","-0.09","manter"
+"coliformes",1,"NMP/100 mL",1e-06,100,100,99.999986,-1.4e-05,NA,NA,NA,NA,"b","CPRH; von Sperling/IBEAS","continuo","manter"
+"coliformes",10,"NMP/100 mL",1e-06,67.000001,67,66.407429,-0.592571,NA,NA,NA,NA,"b","CPRH; von Sperling/IBEAS","-0.59","manter"
+"coliformes",1e+05,"NMP/100 mL",1e-06,4.18575,4.18575,3,-1.18575,NA,NA,NA,NA,"b","CETESB Figura 1 (CT > 1e5 -> 3)","-1.19","manter"
+"od_psat",50,"% sat (25 C, 0 m)",1e-06,41.928149,41.92815,42.157064,0.228914,42.160411,42.160412,42.160414,2e-06,"b","CPRH; von Sperling/IBEAS","continuo","manter"
+"od_psat",85,"% sat (25 C, 0 m)",1e-06,89.361548,89.361548,89.474012,0.112464,89.476303,89.476304,89.476305,1e-06,"b","CPRH; von Sperling/IBEAS","continuo","manter"
+"od_psat",100,"% sat (25 C, 0 m)",1e-06,99.970007,99.970008,99.4919,-0.478108,99.490361,99.490361,99.49036,0,"b","CPRH; von Sperling/IBEAS","continuo","manter"
+"od_psat",140,"% sat (25 C, 0 m)",1e-06,73.700174,73.700174,47,-26.700174,47,47,47,0,"b","CETESB Figura 1 (OD > 140% -> 47)","~74 -> 47: valor fixo oficial (secundarias: 50)","manter 47"
+"delta_t",-5,"C",1e-06,NA,92,92.000002,2e-06,NA,NA,NA,NA,"c","CETESB Figura 1 (dT < -5 indefinido); curva do pacote sem fonte","abaixo de -5 -> NA","modo experimental"
+"delta_t",0,"C",1e-06,99.999999,100,99.999996,-4e-06,NA,NA,NA,NA,"c","curva do pacote sem fonte","curva diverge da q6 oficial","modo experimental"
+"delta_t",5,"C",1e-06,83.500003,83.5,90.499996,6.999995,NA,NA,NA,NA,"c","curva do pacote sem fonte","+7.0: salto sem fonte","modo experimental; decisao do mantenedor"
+"delta_t",15,"C",1e-06,45.500004,45.5,9,-36.5,NA,NA,NA,NA,"b","CETESB Figura 1 (dT > 15 -> 9)","-36.5 (parte do salto vem da curva sem fonte)","modo experimental"

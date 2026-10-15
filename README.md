@@ -102,7 +102,9 @@ curves, so the package equations are analytical approximations of them. See `NEW
 before/after comparison and the list of open items.
 
 - `classify_iqa()` uses `classification` (as `iqa()` does); `scheme` is deprecated.
-- New classification scales `"igam"` and `"ana"` (alias of `"cetesb"`). They change only the labels, never the IQA value.
+- `classify_iqa()` offers the scales `"cetesb"`, `"igam"` and `"ana"` (same cuts as `"cetesb"`); they change only the labels, never the IQA value. In `iqa()` the scale now follows `method`; `iqa(classification = ...)` is deprecated and a different scale is flagged as cross-classification.
+- `iqa_methods()` lists the calculation engines. `method = "IGAM"` is declared but **blocked**: the IGAM sub-index equations (SCQA, SEMAD 2005) could not be obtained from a primary source.
+- `compare_iqa()` compares calculation engines on paired samples (ready for IGAM once it is unblocked).
 - `iqa(details = TRUE)` reports the effective weights actually used, including with custom `pesos` and `allow_partial = TRUE`.
 - `delta_temperature` is now forwarded; invalid physical values become `NA` with a warning.
 

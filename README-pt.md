@@ -90,7 +90,9 @@ aproximações analíticas delas. Veja o
 para a comparação antes/depois e a lista de pendências.
 
 - `classify_iqa()` usa `classification` (como `iqa()`); `scheme` foi depreciado.
-- Novas escalas de classificação `"igam"` e `"ana"` (alias de `"cetesb"`). Elas mudam apenas os rótulos, nunca o valor do IQA.
+- `classify_iqa()` oferece as escalas `"cetesb"`, `"igam"` e `"ana"` (mesmos cortes da `"cetesb"`); elas mudam apenas os rótulos, nunca o valor do IQA. Em `iqa()` a escala passa a seguir `method`; `iqa(classification = ...)` foi depreciado e uma escala diferente é marcada como classificação cruzada.
+- `iqa_methods()` lista os motores de cálculo. `method = "IGAM"` está declarado, mas **bloqueado**: as equações dos sub-índices do IGAM (SCQA, SEMAD 2005) não foram obtidas de fonte primária.
+- `compare_iqa()` compara motores de cálculo em amostras pareadas (pronta para o IGAM quando ele for desbloqueado).
 - `iqa(details = TRUE)` informa os pesos efetivamente usados, inclusive com `pesos` customizados e `allow_partial = TRUE`.
 - `delta_temperature` agora é repassado; valores físicos inválidos viram `NA` com aviso.
 

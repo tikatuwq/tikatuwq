@@ -62,6 +62,46 @@ the published IBEAS/von Sperling worked example (IQA = 81) is reproduced.
   temperature outside -2..50 C, `Inf`) now become `NA` with a warning instead
   of being silently truncated to 0 (which gave the best possible qi).
 
+## Calculation engines and comparison
+
+- New `iqa_methods()` lists the IQA calculation engines and their validation
+  status.
+- `method = "IGAM"` is declared in `iqa()` and `iqa_components()` but
+  **blocked**: the IGAM sub-index equations (SCQA, SEMAD/PNMA II 2005) could
+  not be obtained from a primary source, and the CETESB equations are not
+  reused for IGAM (different analytes: nitrate and total phosphate). The call
+  fails with an error of class `tikatuwq_method_unavailable` that also
+  diagnoses the inputs (e.g. `nt_total` is not used for nitrate). Weights,
+  mandatory parameters, missing-data rule, temperature qs = 92 and classes are
+  documented in `inst/audit/VALIDACAO_IGAM.md`.
+- New `compare_iqa()`: runs each engine on the same rows, keeps row identity
+  (`id_cols`), reports eligibility and reasons per method, and computes paired
+  statistics (mean/median difference, MAE, RMSE, correlations with >= 3 pairs)
+  only on rows valid for all methods. Class differences are reported as a
+  transition table, not as label agreement. Unavailable methods make all rows
+  ineligible instead of failing.
+- `iqa()`: the classification scale now follows `method`. `classification` is
+  deprecated (warning); a scale different from the method's own is flagged as
+  `"cross_classification"` in `attr(, "iqa_nonstandard")`. New attributes
+  `iqa_calculation_method` and `iqa_method_version`. Planned removal of the
+  argument: not before 0.13.0. Use `classify_iqa()` for other scales.
+- New canonical column `fosfato_total` (total phosphate as PO4), distinct from
+  `p_ortofosfato` and `p_total`.
+- ANA: no `method = "ANA"` (see `inst/audit/ANA_VS_CETESB.md`);
+  `classify_iqa(classification = "ana")` stays.
+
+## nsfwqi()
+
+- Documented as an **approximation by coarse step functions**, not the
+  validated NSF WQI (sub-index maximum is 90, so the index never exceeds 90;
+  DO in mg/L). New attribute `nsfwqi_validation`.
+- With `na_rm = FALSE`, a component without a column now gives `NA`, as
+  documented (it was silently dropped with renormalized weights). All 20
+  `wq_demo` rows (no nitrate, no total solids) change from a value to `NA` in
+  strict mode; partial (`na_rm = TRUE`) values are unchanged
+  (`inst/audit/REGRESSAO_NSFWQI_0_11_0.csv`).
+- Total suspended solids are no longer used as total solids (warning).
+
 ## API
 
 - `classify_iqa()` now uses `classification` (same name as in `iqa()`).

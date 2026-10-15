@@ -1,6 +1,6 @@
 ℹ Loading tikatuwq
 ── R CMD check results ──────────────────────────────────── tikatuwq 0.11.0 ────
-Duration: 1m 58.4s
+Duration: 2m 5.1s
 
 ❯ checking top-level files ... NOTE
   Non-standard files/directories found at top level:

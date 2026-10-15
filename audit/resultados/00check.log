@@ -18,7 +18,7 @@
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
-* checking whether package 'tikatuwq' can be installed ... OK
+* checking whether package 'tikatuwq' can be installed ... [12s] OK
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking for future file timestamps ... OK
@@ -43,7 +43,7 @@ Non-standard files/directories found at top level:
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... [10s] OK
+* checking R code for possible problems ... [19s] OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -60,13 +60,13 @@ Non-standard files/directories found at top level:
 * checking installed files from 'inst/doc' ... OK
 * checking files in 'vignettes' ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... OK
+* checking examples with --run-donttest ... [10s] OK
 * checking for unstated dependencies in 'tests' ... OK
 * checking tests ... [12s] OK
-  Running 'testthat.R' [11s]
+  Running 'testthat.R' [12s]
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [16s] OK
+* checking re-building of vignette outputs ... [13s] OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
