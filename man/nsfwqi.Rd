@@ -51,9 +51,26 @@ O mapeamento de parametros tenta resolver colunas em formato brasileiro ou inter
 \item{\code{po4}}{Fosfato total (mg/L).}
 \item{\code{no3}}{Nitrato (mg/L).}
 \item{\code{turbidez}}{Turbidez (NTU).}
-\item{\code{ts}}{Solidos totais (mg/L).}
+\item{\code{ts}}{Solidos totais (mg/L). Solidos suspensos (TSS) nao sao
+usados como substituto (ate a v0.11.0 eram, sem aviso).}
 }
 }
+\section{Natureza aproximada}{
+
+\strong{Nao e o NSF WQI validado.} Os subindices \eqn{Q_i} sao funcoes-degrau
+grosseiras, com 2 a 4 niveis (ex.: OD >= 7,5 mg/L -> 90), e nao as curvas da
+NSF (Brown et al., 1970). Consequencias:
+\itemize{
+\item o \eqn{Q_i} maximo e 90, logo o indice nunca passa de 90 e a classe
+"Excelente" (> 90) e inalcancavel;
+\item o OD e usado em mg/L, enquanto a NSF usa \\% de saturacao;
+\item sem coluna de variacao de temperatura, assume-se Delta T = 0 (Q = 90).
+}
+Use apenas para exploracao e comparacao qualitativa. Os pesos padrao sao os
+pesos NSF publicados. Ver \code{system.file("audit",
+"RELATORIO_IMPLEMENTACAO_IGAM_COMPARE.md", package = "tikatuwq")}.
+}
+
 \examples{
 d <- data.frame(
   od = 6.5, coliformes = 200, ph = 7.2, dbo = 2,

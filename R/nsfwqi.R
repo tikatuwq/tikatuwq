@@ -9,6 +9,20 @@
 #' \eqn{WQI = \prod Q_i^{w_i}}{WQI = prod(Qi^Wi)}) e a agregacao aditiva original (Brown et al., 1970:
 #' \eqn{WQI = \sum Q_i \cdot w_i}{WQI = sum(Qi * Wi)}).
 #'
+#' @section Natureza aproximada:
+#' \strong{Nao e o NSF WQI validado.} Os subindices \eqn{Q_i} sao funcoes-degrau
+#' grosseiras, com 2 a 4 niveis (ex.: OD >= 7,5 mg/L -> 90), e nao as curvas da
+#' NSF (Brown et al., 1970). Consequencias:
+#' \itemize{
+#'   \item o \eqn{Q_i} maximo e 90, logo o indice nunca passa de 90 e a classe
+#'     "Excelente" (> 90) e inalcancavel;
+#'   \item o OD e usado em mg/L, enquanto a NSF usa \% de saturacao;
+#'   \item sem coluna de variacao de temperatura, assume-se Delta T = 0 (Q = 90).
+#' }
+#' Use apenas para exploracao e comparacao qualitativa. Os pesos padrao sao os
+#' pesos NSF publicados. Ver \code{system.file("audit",
+#' "RELATORIO_IMPLEMENTACAO_IGAM_COMPARE.md", package = "tikatuwq")}.
+#'
 #' @details
 #' O mapeamento de parametros tenta resolver colunas em formato brasileiro ou internacional:
 #' \describe{
@@ -21,7 +35,8 @@
 #'   \item{\code{po4}}{Fosfato total (mg/L).}
 #'   \item{\code{no3}}{Nitrato (mg/L).}
 #'   \item{\code{turbidez}}{Turbidez (NTU).}
-#'   \item{\code{ts}}{Solidos totais (mg/L).}
+#'   \item{\code{ts}}{Solidos totais (mg/L). Solidos suspensos (TSS) nao sao
+#'     usados como substituto (ate a v0.11.0 eram, sem aviso).}
 #' }
 #'
 #' @param df Data frame com as colunas dos parametros.
@@ -85,7 +100,11 @@ nsfwqi <- function(
   if (!is.null(.rc("dbo")))                work$bod         <- .parse_nd_ld(df[[.rc("dbo")]], "limit")
   if (!is.null(.rc("turbidez")))           work$turbidez    <- .parse_nd_ld(df[[.rc("turbidez")]], "limit")
   if (!is.null(.rc("solidos_totais")))     work$ts          <- .parse_nd_ld(df[[.rc("solidos_totais")]], "limit")
-  if (!is.null(.rc("solidos_suspensos")) && is.null(work$ts)) work$ts <- .parse_nd_ld(df[[.rc("solidos_suspensos")]], "limit")
+  # Solidos suspensos (TSS) nao substituem solidos totais (removido na 0.11.0)
+  if (is.null(work$ts) && !is.null(.rc("solidos_suspensos"))) {
+    warning("Total suspended solids are not used as total solids in nsfwqi(); ",
+            "the total solids component is missing.", call. = FALSE)
+  }
   if (!is.null(.rc("p_ortofosfato")))      work$po4         <- .parse_nd_ld(df[[.rc("p_ortofosfato")]], "limit")
   if (!is.null(.rc("p_total")) && is.null(work$po4)) work$po4 <- .parse_nd_ld(df[[.rc("p_total")]], "limit") * 3.066
   if (!is.null(.rc("n_nitrato")))          work$no3         <- .parse_nd_ld(df[[.rc("n_nitrato")]], "limit")
@@ -99,6 +118,17 @@ nsfwqi <- function(
 
   wdf    <- wdf[use]
   w_full <- pesos[use]
+
+  # Componentes sem coluna: no modo estrito (na_rm = FALSE) o indice e NA,
+  # como documentado. Ate a v0.11.0 eles eram descartados em silencio e os
+  # pesos renormalizados mesmo com na_rm = FALSE.
+  missing_comp <- setdiff(names(pesos), use)
+  if (length(missing_comp)) {
+    warning("nsfwqi(): no column for component(s) ", paste(missing_comp, collapse = ", "),
+            if (na_rm) "; weights renormalized over available components." else "; NSFWQI is NA (use na_rm = TRUE for a partial estimate).",
+            call. = FALSE)
+  }
+  strict_missing <- !na_rm && length(missing_comp) > 0L
 
   # Funcoes de sub-indice Qi aproximadas baseadas nas curvas NSF
   qi_piecewise <- function(param, v) {
@@ -129,6 +159,7 @@ nsfwqi <- function(
   }
 
   NSFWQI_val <- vapply(seq_len(nrow(wdf)), function(i) {
+    if (strict_missing) return(NA_real_)
     qi_row <- qi_mat[i, ]
     ok     <- is.finite(qi_row) & qi_row > 0
     if (!any(ok)) return(NA_real_)
@@ -159,5 +190,6 @@ nsfwqi <- function(
   }
 
   attr(out, "nsfwqi_aggregation") <- aggregation
+  attr(out, "nsfwqi_validation")  <- "approximate_step_functions_not_validated"
   out
 }
