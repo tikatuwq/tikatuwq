@@ -48,9 +48,12 @@ generate_analysis <- function(
 ) {
   stopifnot("ponto" %in% names(df))
 
-  # Garante IQA
+  # Garante IQA. Linhas sem algum dos 9 parametros sao estimativas parciais
+  # (nao sao IQA CETESB); a contagem entra no texto.
+  n_partial <- 0L
   if (!"IQA" %in% names(df)) {
     df <- tikatuwq::iqa(df, allow_partial = TRUE)
+    n_partial <- length(attr(df, "iqa_partial_rows"))
   }
 
 
@@ -62,12 +65,9 @@ generate_analysis <- function(
   safe_min  <- function(x) suppressWarnings(min(x, na.rm = TRUE))
   safe_max  <- function(x) suppressWarnings(max(x, na.rm = TRUE))
 
-  # Classificacao textual do IQA (exemplo simples em EN)
-  class_iqa <- function(x){
-    cut(x, breaks = c(-Inf,25,50,70,90,Inf),
-        labels = c("very low","low","medium","good","excellent"),
-        right = TRUE)
-  }
+  # Classificacao textual do IQA: mesma escala CETESB usada por iqa()
+  # (ate a v0.10.0 usava cortes proprios 25/50/70/90).
+  class_iqa <- function(x) tolower(as.character(classify_iqa(x, locale = "en")))
 
   iqa_mean <- safe_mean(conf$IQA)
   iqa_min  <- safe_min(conf$IQA)
@@ -93,11 +93,14 @@ generate_analysis <- function(
   river  <- .get_meta(contexto, "rio", "river")
   period <- .get_meta(contexto, "periodo", "period")
 
+  partial_txt <- if (n_partial > 0L) {
+    glue::glue(" For {n_partial} sample(s) the IQA is a partial estimate (missing parameters, weights renormalized), not a CETESB IQA.")
+  } else ""
   river_txt  <- if (!is.na(river))  glue::glue("for the {river} river ") else ""
   period_txt <- if (!is.na(period)) glue::glue("in {period} ") else ""
 
   p1 <- glue::glue(
-    "Assessing the Water Quality Index (IQA) {river_txt}{period_txt}we observed an average of {scales::number(iqa_mean, accuracy = 0.1)}, ranging from {scales::number(iqa_min, accuracy = 0.1)} to {scales::number(iqa_max, accuracy = 0.1)}. The dominant class was {dom_class}. The best-performing point was {best} (IQA~{scales::number(best_val, accuracy = 0.1)}), whereas {worst} presented the lowest value (IQA~{scales::number(worst_val, accuracy = 0.1)})."
+    "Assessing the Water Quality Index (IQA) {river_txt}{period_txt}we observed an average of {scales::number(iqa_mean, accuracy = 0.1)}, ranging from {scales::number(iqa_min, accuracy = 0.1)} to {scales::number(iqa_max, accuracy = 0.1)}. The dominant class (CETESB scale) was {dom_class}.{partial_txt} The best-performing point was {best} (IQA~{scales::number(best_val, accuracy = 0.1)}), whereas {worst} presented the lowest value (IQA~{scales::number(worst_val, accuracy = 0.1)})."
   )
 
   # Violacoes CONAMA
