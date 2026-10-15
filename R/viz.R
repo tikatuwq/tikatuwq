@@ -93,7 +93,7 @@ plot_box <- function(df, parametro, by = "ponto") {
 #' @examples
 #' \donttest{
 #' data(wq_demo)
-#' d <- iqa(wq_demo, na_rm = TRUE)
+#' d <- iqa(wq_demo, allow_partial = TRUE)
 #' plot_iqa(d)
 #' }
 #'

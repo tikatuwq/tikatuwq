@@ -2,7 +2,7 @@
 % Please edit documentation in R/iqa_equations.R
 \name{iqa_components}
 \alias{iqa_components}
-\title{Auditoria detalhada dos subindices do IQA (CETESB oficial)}
+\title{Auditoria detalhada dos subindices do IQA (metodo CETESB)}
 \usage{
 iqa_components(
   df,
@@ -11,6 +11,7 @@ iqa_components(
   microbial_type = c("thermotolerant_coliforms", "e_coli"),
   temperature_method = c("cetesb_default", "delta", "reference"),
   temperature_reference = NULL,
+  delta_temperature = NULL,
   censor_policy = c("limit", "half_limit", "zero", "na", "preserve")
 )
 }
@@ -26,6 +27,8 @@ iqa_components(
 \item{temperature_method}{"cetesb_default" (default), "delta" ou "reference".}
 
 \item{temperature_reference}{Vetor ou escalar com temperatura de referencia.}
+
+\item{delta_temperature}{Vetor ou escalar com a variacao de temperatura (Delta T em graus Celsius).}
 
 \item{censor_policy}{Politica de tratamento de dados censurados ("limit", "half_limit", "zero", "na", "preserve").}
 }

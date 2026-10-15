@@ -47,13 +47,21 @@ measured during field campaigns.
 }
 \details{
 The dataset is a real subset selected from BURANHEM river (dataset-real.csv), used for reproducible examples and vignettes.
-Covers 4 monitoring points and years 2020–2024. All core columns for IQA/CONAMA/plotting helpers are present.
+Covers 4 monitoring points and years 2020–2024.
+
+The dataset has total dissolved solids (\code{tds}) but \strong{not total solids}
+(\code{solidos_totais}), one of the nine CETESB IQA parameters. TDS is not
+interchangeable with total solids, so \code{iqa(wq_demo)} returns \code{NA} and
+\code{iqa(wq_demo, allow_partial = TRUE)} gives partial estimates from eight
+parameters with renormalized weights. These are not CETESB IQA values, and
+no published IQA exists for these samples: \code{wq_demo} is example data, not an
+independent benchmark.
 }
 \examples{
 data("wq_demo", package = "tikatuwq")
 head(wq_demo)
 # quick IQA example:
-# iqa(wq_demo, na_rm = TRUE)
+# iqa(wq_demo, allow_partial = TRUE)
 
 }
 \seealso{

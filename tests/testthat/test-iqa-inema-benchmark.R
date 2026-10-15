@@ -1,5 +1,8 @@
 # tests/testthat/test-iqa-inema-benchmark.R
 # Benchmark oficial contra dados do INEMA / SEIA (Campanha 3 de 2024 - Rio Buranhem)
+# Nota (auditoria 2026-10-15): este teste NAO compara com valores de IQA
+# publicados pelo INEMA; verifica apenas faixa (68-78) e classe. Nenhum ponto
+# cai nos trechos de DBO/pH/NT alterados. Nao e evidencia de equivalencia.
 
 test_that("Benchmark INEMA Campanha 3/2024 reproduz classificacoes e valores de IQA", {
   df_inema <- data.frame(

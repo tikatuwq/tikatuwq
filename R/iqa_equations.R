@@ -1,5 +1,14 @@
 # R/iqa_equations.R
-# Equacoes analiticas oficiais do IQA CETESB e camada de auditoria de componentes
+# Equacoes analiticas que aproximam as curvas graficas do IQA CETESB e camada
+# de auditoria de componentes.
+#
+# Proveniencia (ver inst/audit/IQA_AUDITORIA.md e MATRIZ_VALIDACAO_QI.csv):
+# - CETESB (2023), Apendice D, Figura 1: so curvas graficas + valores fixos.
+# - Equacoes por trechos: planilha CETESB transcrita em CPRH, PNMA II
+#   "Indices e indicadores de qualidade da agua" (Pernambuco) e em
+#   von Sperling (2007, p. 255), reproduzida por IBEAS (2015, VIII-041).
+#   As duas transcricoes divergem em DBO 5-15, NT 10-60 (base do log),
+#   pH 9-10 e OD > 140%; as escolhas abaixo seguem a curva oficial.
 # (ASCII-only no codigo)
 
 # ------------------------------------------------------------------------------
@@ -19,8 +28,12 @@
   temp <- as.numeric(temp)
   altitude_m <- as.numeric(altitude_m)
 
-  # Concentracao de saturacao Cs (mg/L) corrigida por temperatura e altitude
-  Cs <- (14.62 - 0.3898 * temp + 0.006969 * (temp^2) - 0.00005898 * (temp^3)) *
+  # Concentracao de saturacao Cs (mg/L) corrigida por temperatura e altitude.
+  # Nao consta do Apendice D CETESB 2023 (que so diz que a %sat depende de
+  # altitude e temperatura). Coeficientes conforme CPRH/PNMA II (planilha
+  # CETESB) e von Sperling (2007, p. 255, via IBEAS 2015). Ate a v0.10.0 o
+  # termo cubico era 0.00005898 (erro de transcricao; impacto < 0.02% em Cs).
+  Cs <- (14.62 - 0.3898 * temp + 0.006969 * (temp^2) - 0.00005896 * (temp^3)) *
         ((1 - 0.0000228675 * altitude_m)^5.167)
   
   # Evita divisao por zero
@@ -49,7 +62,9 @@
   if (length(i)) {
     out[i] <- 3 + 2.9 * psat[i] - 0.02496 * (psat[i]^2) + 5.60919e-05 * (psat[i]^3)
   }
-  # psat > 140
+  # psat > 140: qi = 47 (nota da Figura 1, Apendice D CETESB 2023, p. 4).
+  # O degrau ~74 -> 47 e previsto na fonte oficial (EQ-06). CPRH e IBEAS
+  # transcrevem "47 + 3" = 50; prevalece o texto oficial.
   i <- which(psat > 140)
   if (length(i)) {
     out[i] <- 47
@@ -69,7 +84,8 @@
   microbial_type <- match.arg(microbial_type)
   col <- as.numeric(col)
 
-  # Se for E. coli, aplica fator 1.25x conforme metodologia CETESB
+  # E. coli x 1.25 -> equivalente em termotolerantes (Apendice D CETESB 2023,
+  # p. 5: estudo CETESB 2008, ~80 E. coli para cada 100 termotolerantes).
   if (microbial_type == "e_coli") {
     col <- col * 1.25
   }
@@ -139,13 +155,20 @@
   i <- which(ph > 8 & ph <= 8.5)
   if (length(i)) out[i] <- 216 - 16 * ph[i]
 
-  # 8.5 < ph <= 9
+  # 8.5 < ph <= 9: exp natural (v0.10.0 usava 10^x, com salto 80 -> 0.0002 em 8.5).
+  # Com exp() o trecho vale 80.0 em 8.5 e 45.0 em 9, compativel com a curva
+  # de q2 (Apendice D CETESB 2023, Figura 1; leitura visual) (EQ-02).
   i <- which(ph > 8.5 & ph <= 9)
-  if (length(i)) out[i] <- 1415823 * (10^(-1.1507 * ph[i]))
+  if (length(i)) out[i] <- 1415823 * exp(-1.1507 * ph[i])
 
-  # 9 < ph <= 10
+  # 9 < ph <= 10: 288 - 27*pH (v0.10.0 usava 50 - 32*(pH - 9), salto 45 -> 50 em 9).
+  # Fontes secundarias divergem: CPRH transcreve "228 - 27*pH" (daria qi < 0
+  # em todo o trecho; com 288 fecha em 45 e 18, os vizinhos); von Sperling via
+  # IBEAS da "50 - 32*(pH - 9)" (salto +5 em pH 9, contrario a curva q2, que e
+  # decrescente apos o pico). Adotado 288 - 27*pH; aprovacao do mantenedor
+  # pendente (EQ-03).
   i <- which(ph > 9 & ph <= 10)
-  if (length(i)) out[i] <- 50 - 32 * (ph[i] - 9)
+  if (length(i)) out[i] <- 288 - 27 * ph[i]
 
   # 10 < ph <= 12
   i <- which(ph > 10 & ph <= 12)
@@ -172,9 +195,12 @@
   i <- which(C >= 0 & C <= 5)
   if (length(i)) out[i] <- 99.96 * exp(-0.1232728 * C[i])
 
-  # 5 < C <= 15
+  # 5 < C <= 15: ln natural (v0.10.0 usava log10, com saltos em 5 e 15 mg/L).
+  # Com ln, DBO 10 -> 32 (curva q3 da Figura 1: ~30); com log10 dava 73 (EQ-01).
+  # CPRH escreve "log" (base ambigua); von Sperling via IBEAS escreve LOG10 e
+  # a planilha do IBEAS da DBO 12 -> 70.6 (log10). Prevalece a curva oficial.
   i <- which(C > 5 & C <= 15)
-  if (length(i)) out[i] <- 104.67 - 31.5463 * log10(C[i])
+  if (length(i)) out[i] <- 104.67 - 31.5463 * log(C[i])
 
   # 15 < C <= 30
   i <- which(C > 15 & C <= 30)
@@ -201,15 +227,18 @@
   i <- which(C >= 0 & C <= 10)
   if (length(i)) out[i] <- 100 - 8.169 * C[i] + 0.3059 * (C[i]^2)
 
-  # 10 < C <= 60
+  # 10 < C <= 60: ln natural (v0.10.0 usava log10, com saltos em 10 e 60 mg/L).
+  # Com ln, NT 20 -> 33 (curva q4 da Figura 1: ~32); com log10 dava 72 (EQ-04).
+  # Mesmo conflito de base de log que na DBO (CPRH "log"; IBEAS LOG10).
   i <- which(C > 10 & C <= 60)
-  if (length(i)) out[i] <- 101.9 - 23.1023 * log10(C[i])
+  if (length(i)) out[i] <- 101.9 - 23.1023 * log(C[i])
 
   # 60 < C <= 100 (exp natural)
   i <- which(C > 60 & C <= 100)
   if (length(i)) out[i] <- 159.3148 * exp(-0.0512842 * C[i])
 
-  # C > 100
+  # C > 100: qi = 1 (nota da Figura 1, Apendice D CETESB 2023). O trecho
+  # exponencial vale ~0.945 em 100 mg/L; o degrau de ~0.055 vem do ajuste (EQ-05).
   i <- which(C > 100)
   if (length(i)) out[i] <- 1
 
@@ -332,12 +361,19 @@
   dT <- as.numeric(delta_t)
   out <- rep(NA_real_, length(dT))
 
-  # dT <= -5
-  i <- which(dT <= -5)
-  if (length(i)) out[i] <- 93
+  # dT < -5: qi indefinido (CETESB 2023, Apendice D, Figura 1, p. 4).
+  # Ate a v0.10.0 o pacote retornava 93.
+  # ATENCAO (EQ-07/08): os trechos abaixo NAO acompanham a curva de q6 da
+  # Figura 1 (pico ~93 em dT = 0; ~60 em 5; ~30 em 10; ~12 em 15). Nao foram
+  # corrigidos porque a fonte so traz a curva grafica, sem equacao.
+  i <- which(dT < -5)
+  if (length(i)) {
+    warning(length(i), " delta temperature value(s) below -5 C: qi is undefined ",
+            "(CETESB Appendix D, Figure 1) and was set to NA.", call. = FALSE)
+  }
 
-  # -5 < dT <= 0
-  i <- which(dT > -5 & dT <= 0)
+  # -5 <= dT <= 0
+  i <- which(dT >= -5 & dT <= 0)
   if (length(i)) out[i] <- 100 - 1.4 * abs(dT[i]) - 0.04 * (dT[i]^2)
 
   # 0 < dT <= 5
@@ -355,11 +391,48 @@
   pmin(100, pmax(0, out))
 }
 
+#' Marca valores fisicamente invalidos como NA, com aviso
+#' @param x Vetor (numerico ou nao; nao numerico e devolvido sem alteracao).
+#' @param name Nome do parametro, usado na mensagem.
+#' @param lower,upper Limites fisicos inclusivos.
+#' @return Vetor com valores invalidos substituidos por NA.
+#' @keywords internal
+#' @noRd
+.iqa_flag_invalid <- function(x, name, lower = -Inf, upper = Inf) {
+  if (!is.numeric(x)) return(x)
+  bad <- !is.na(x) & (!is.finite(x) | x < lower | x > upper)
+  if (any(bad)) {
+    warning(
+      sum(bad), " physically invalid value(s) in '", name, "' (outside [",
+      lower, ", ", upper, "] or non-finite) set to NA.",
+      call. = FALSE
+    )
+    x[bad] <- NA_real_
+  }
+  x
+}
+
+# Pesos oficiais CETESB (soma = 1.0), ordem canonica dos 9 componentes
+.iqa_cetesb_weights <- c(
+  od                         = 0.17,
+  coliformes_termotolerantes = 0.15,
+  ph                         = 0.12,
+  dbo                        = 0.10,
+  nt_total                   = 0.10,
+  p_total                    = 0.10,
+  temperatura                = 0.10,
+  turbidez                   = 0.08,
+  solidos_totais             = 0.08
+)
+
+# Sufixos das colunas de componentes, na mesma ordem de .iqa_cetesb_weights
+.iqa_comp_suffix <- c("od", "colif", "ph", "dbo", "nt", "pt", "temp", "turb", "st")
+
 # ------------------------------------------------------------------------------
 # Camada de Auditoria dos Componentes do IQA
 # ------------------------------------------------------------------------------
 
-#' Auditoria detalhada dos subindices do IQA (CETESB oficial)
+#' Auditoria detalhada dos subindices do IQA (metodo CETESB)
 #'
 #' @description
 #' Retorna uma tabela estruturada contendo o valor bruto, valor transformado,
@@ -372,6 +445,7 @@
 #' @param microbial_type "thermotolerant_coliforms" (default) ou "e_coli".
 #' @param temperature_method "cetesb_default" (default), "delta" ou "reference".
 #' @param temperature_reference Vetor ou escalar com temperatura de referencia.
+#' @param delta_temperature Vetor ou escalar com a variacao de temperatura (Delta T em graus Celsius).
 #' @param censor_policy Politica de tratamento de dados censurados ("limit", "half_limit", "zero", "na", "preserve").
 #'
 #' @return Um tibble ou data frame detalhado com colunas para cada parametro e o IQA calculado.
@@ -390,6 +464,7 @@ iqa_components <- function(
   microbial_type = c("thermotolerant_coliforms", "e_coli"),
   temperature_method = c("cetesb_default", "delta", "reference"),
   temperature_reference = NULL,
+  delta_temperature = NULL,
   censor_policy = c("limit", "half_limit", "zero", "na", "preserve")
 ) {
   phosphorus_basis   <- match.arg(phosphorus_basis)
@@ -400,18 +475,21 @@ iqa_components <- function(
   n_rows <- nrow(df)
   if (n_rows == 0L) return(tibble::tibble())
 
-  # Pesos oficiais CETESB (soma = 1.0)
-  weights <- c(
-    od                      = 0.17,
-    coliformes_termotolerantes = 0.15,
-    ph                      = 0.12,
-    dbo                     = 0.10,
-    nt_total                = 0.10,
-    p_total                 = 0.10,
-    temperatura             = 0.10,
-    turbidez                = 0.08,
-    solidos_totais          = 0.08
-  )
+  # Validacao de altitude_m
+  if (!is.numeric(altitude_m) || any(!is.finite(altitude_m))) {
+    stop("altitude_m must be a finite numeric value or vector.")
+  }
+  if (length(altitude_m) != 1L && length(altitude_m) != n_rows) {
+    stop("altitude_m must have length 1 or match nrow(df) (", n_rows, ").")
+  }
+  # Dominio fisico da correcao barometrica (1 - 2.28675e-5 * h)^5.167:
+  # a base deve ser positiva; aceitamos de -500 m (depressoes) a 9000 m.
+  if (any(altitude_m < -500 | altitude_m > 9000)) {
+    stop("altitude_m must be between -500 and 9000 m (domain of the barometric correction).")
+  }
+  if (length(altitude_m) == 1L && n_rows > 1L) altitude_m <- rep(altitude_m, n_rows)
+
+  weights <- .iqa_cetesb_weights
 
   # Resolucao de colunas
   col_od     <- .resolve_col(df, "od")
@@ -426,10 +504,54 @@ iqa_components <- function(
   col_turb   <- .resolve_col(df, "turbidez")
   col_st     <- .resolve_col(df, "solidos_totais")
 
+  # Resolucao de delta_temperature (precedencia: argumento explicito > coluna do df)
+  v_deltaT <- if (!is.null(delta_temperature)) {
+    if (!is.numeric(delta_temperature) || any(!is.finite(delta_temperature))) {
+      stop("delta_temperature must be a finite numeric value or vector.")
+    }
+    if (length(delta_temperature) != 1L && length(delta_temperature) != n_rows) {
+      stop("delta_temperature must have length 1 or match nrow(df) (", n_rows, ").")
+    }
+    if (length(delta_temperature) == 1L && n_rows > 1L) {
+      rep(as.numeric(delta_temperature), n_rows)
+    } else {
+      as.numeric(delta_temperature)
+    }
+  } else if (!is.null(col_deltaT)) {
+    .parse_nd_ld(df[[col_deltaT]], censor_policy)
+  } else {
+    NULL
+  }
+
+  if (temperature_method == "delta" && is.null(v_deltaT)) {
+    stop("temperature_method = 'delta' requires argument 'delta_temperature' or a 'delta_temperatura' column in df.")
+  }
+
+  if (temperature_method == "reference") {
+    if (is.null(temperature_reference)) {
+      stop("temperature_method = 'reference' requires argument 'temperature_reference'.")
+    }
+    if (!is.numeric(temperature_reference) || any(!is.finite(temperature_reference))) {
+      stop("temperature_reference must be a finite numeric value or vector.")
+    }
+    if (length(temperature_reference) != 1L && length(temperature_reference) != n_rows) {
+      stop("temperature_reference must have length 1 or match nrow(df) (", n_rows, ").")
+    }
+    if (is.null(col_temp)) {
+      stop("temperature_method = 'reference' requires water temperature column ('temperatura') in df.")
+    }
+  }
+
+  if (temperature_method != "cetesb_default") {
+    warning("The package's delta-T sub-index curve does not match the CETESB ",
+            "q6 curve (Appendix D 2023, Figure 1); temperature_method = '",
+            temperature_method, "' results are not reliable. See ",
+            "inst/audit/IQA_AUDITORIA.md (EQ-07/08).", call. = FALSE)
+  }
+
   # Extrai e trata valores numericos aplicando politica de censura
   v_od     <- if (!is.null(col_od))     .parse_nd_ld(df[[col_od]], censor_policy)     else rep(NA_real_, n_rows)
   v_temp   <- if (!is.null(col_temp))   .parse_nd_ld(df[[col_temp]], censor_policy)   else rep(NA_real_, n_rows)
-  v_deltaT <- if (!is.null(col_deltaT)) .parse_nd_ld(df[[col_deltaT]], censor_policy) else NULL
   v_ph     <- if (!is.null(col_ph))     .parse_nd_ld(df[[col_ph]], censor_policy)     else rep(NA_real_, n_rows)
   v_dbo    <- if (!is.null(col_dbo))    .parse_nd_ld(df[[col_dbo]], censor_policy)    else rep(NA_real_, n_rows)
   v_colif  <- if (!is.null(col_colif))  .parse_nd_ld(df[[col_colif]], censor_policy)  else rep(NA_real_, n_rows)
@@ -437,6 +559,18 @@ iqa_components <- function(
   v_pt     <- if (!is.null(col_pt))     .parse_nd_ld(df[[col_pt]], censor_policy)     else rep(NA_real_, n_rows)
   v_turb   <- if (!is.null(col_turb))   .parse_nd_ld(df[[col_turb]], censor_policy)   else rep(NA_real_, n_rows)
   v_st     <- if (!is.null(col_st))     .parse_nd_ld(df[[col_st]], censor_policy)     else rep(NA_real_, n_rows)
+
+  # Valores fisicamente impossiveis (negativos, pH fora de 0-14, Inf) viram NA
+  # com aviso, em vez de serem truncados silenciosamente por pmax().
+  v_od    <- .iqa_flag_invalid(v_od,    "od",             lower = 0)
+  v_temp  <- .iqa_flag_invalid(v_temp,  "temperatura",    lower = -2, upper = 50)
+  v_ph    <- .iqa_flag_invalid(v_ph,    "ph",             lower = 0,  upper = 14)
+  v_dbo   <- .iqa_flag_invalid(v_dbo,   "dbo",            lower = 0)
+  v_colif <- .iqa_flag_invalid(v_colif, "coliformes",     lower = 0)
+  v_nt    <- .iqa_flag_invalid(v_nt,    "nt_total",       lower = 0)
+  v_pt    <- .iqa_flag_invalid(v_pt,    "p_total",        lower = 0)
+  v_turb  <- .iqa_flag_invalid(v_turb,  "turbidez",       lower = 0)
+  v_st    <- .iqa_flag_invalid(v_st,    "solidos_totais", lower = 0)
 
   # Calculo de Qi para cada componente
   qi_od   <- .qi_cetesb_od(v_od, v_temp, altitude_m)

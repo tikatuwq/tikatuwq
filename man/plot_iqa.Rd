@@ -18,7 +18,7 @@ Bar plot of IQA values per site/date. Requires an \code{IQA} column.
 \examples{
 \donttest{
 data(wq_demo)
-d <- iqa(wq_demo, na_rm = TRUE)
+d <- iqa(wq_demo, allow_partial = TRUE)
 plot_iqa(d)
 }
 

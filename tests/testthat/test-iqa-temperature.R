@@ -39,7 +39,7 @@ test_that("Caso C - Delta T fornecido explicitamente calcula Qi pela curva termi
     ph = 7.2, nt_total = 1.2, p_total = 0.05, turbidez = 8,
     solidos_totais = 120
   )
-  comps <- iqa_components(d, temperature_method = "delta")
+  expect_warning(comps <- iqa_components(d, temperature_method = "delta"), "does not match")
   # 0 < dT <= 5: 100 - 3.8*2 + 0.1*(2^2) = 100 - 7.6 + 0.4 = 92.8
   expect_equal(comps$qi_temp, 92.8, tolerance = 0.01)
 })
@@ -50,7 +50,7 @@ test_that("Caso D - Referencia termica fornecida calcula Delta T = T_agua - T_re
     ph = 7.2, nt_total = 1.2, p_total = 0.05, turbidez = 8,
     solidos_totais = 120
   )
-  comps <- iqa_components(d, temperature_method = "reference", temperature_reference = 27)
+  expect_warning(comps <- iqa_components(d, temperature_method = "reference", temperature_reference = 27), "does not match")
   # Delta T = 29 - 27 = 2 -> Qi = 92.8
   expect_equal(comps$qi_temp, 92.8, tolerance = 0.01)
 })

@@ -4,25 +4,75 @@
 \alias{classify_iqa}
 \title{Classifica valores do IQA/WQI em faixas qualitativas}
 \usage{
-classify_iqa(x, scheme = c("cetesb", "legacy"), locale = c("pt", "en"))
+classify_iqa(
+  x,
+  classification = c("cetesb", "igam", "ana", "legacy"),
+  locale = c("pt", "en"),
+  scheme = NULL
+)
 }
 \arguments{
-\item{x}{Vetor numerico com IQA em 0-100. Valores NA sao preservados.}
+\item{x}{Vetor numerico com IQA em 0-100.}
 
-\item{scheme}{Esquema de classificacao: \code{"cetesb"} (padrao oficial) ou \code{"legacy"} (escala 25/50/70/90).}
+\item{classification}{Escala de classificacao: \code{"cetesb"} (padrao),
+\code{"igam"}, \code{"ana"} ou \code{"legacy"}.}
 
 \item{locale}{Idioma dos rotulos: \code{"pt"} (padrao) ou \code{"en"}.}
+
+\item{scheme}{Depreciado (desde 0.11.0); use \code{classification}. Se ambos
+forem informados com valores diferentes, ocorre erro.}
 }
 \value{
 Um fator ordenado com os rotulos de classe.
 }
 \description{
-Converte valores numericos de IQA (0-100) em classes qualitativas
-padronizadas. O padrao oficial CETESB utiliza as faixas:
-Pessima (0-19), Ruim (19-36), Regular (36-51), Boa (51-79) e Otima (79-100).
+Converte valores numericos de IQA (0-100) em classes qualitativas conforme a
+escala institucional escolhida. A classificacao nao altera o valor numerico:
+ela apenas aplica cortes e rotulos a um IQA ja calculado.
+
+Escalas disponiveis (intervalos fechados a direita, ex.: Ruim = (19, 36]):
+\describe{
+\item{\code{"cetesb"}}{CETESB/SP (padrao): Pessima [0, 19], Ruim (19, 36],
+Regular (36, 51], Boa (51, 79], Otima (79, 100] (Apendice D CETESB 2023,
+Tabela 1, p. 5).}
+\item{\code{"ana"}}{Portal de Qualidade das Aguas da ANA
+(qualidadedaagua.ana.gov.br/iqa.html, consultado em 2026-10-15), que
+apresenta os mesmos cortes 19/36/51/79 da CETESB. E, portanto, um alias
+de \code{"cetesb"}. Faixas historicas de outros estados (ex.: 20/37/52/79)
+citadas em publicacoes antigas da ANA nao estao implementadas.}
+\item{\code{"igam"}}{IGAM/MG: Muito Ruim [0, 25], Ruim (25, 50],
+Medio (50, 70], Bom (70, 90], Excelente (90, 100]. Os rotulos ainda
+precisam ser conferidos visualmente na Tabela 2 do portal Infohidro/IGAM,
+que e publicada como imagem.}
+\item{\code{"legacy"}}{Escala aproximada mantida por compatibilidade com
+versoes antigas do pacote (cortes 25/50/70/90, rotulos Muito ruim/Ruim/
+Regular/Boa/Otima). Nao corresponde a nenhuma escala institucional verificada.}
+}
+
+Valores \code{NA}/\code{NaN} resultam em \code{NA}. Valores fora de
+[0, 100] (inclusive \code{Inf}) tambem resultam em \code{NA}, com aviso.
+A classificacao e feita sobre o valor recebido, sem arredondamento adicional.
+}
+\note{
+Usar \code{classification = "igam"} sobre um IQA calculado pelo metodo
+CETESB nao equivale ao IQA calculado integralmente pelo IGAM, que usa
+parametros (nitrato, fosfato total), qi de temperatura (92) e regra de dados
+ausentes proprios.
 }
 \examples{
-classify_iqa(c(15, 30, 45, 70, 85))
-classify_iqa(c(15, 30, 45, 70, 85), locale = "en")
+vals <- c(15, 28, 45, 65, 85, 95)
+
+# Classificacao CETESB (padrao)
+classify_iqa(vals)
+
+# Classificacao IGAM (Minas Gerais)
+classify_iqa(vals, classification = "igam")
+
+# Comparar escalas lado a lado
+data.frame(
+  IQA    = vals,
+  CETESB = classify_iqa(vals, classification = "cetesb"),
+  IGAM   = classify_iqa(vals, classification = "igam")
+)
 
 }

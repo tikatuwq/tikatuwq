@@ -38,7 +38,7 @@
 #' data("wq_demo", package = "tikatuwq")
 #' d2 <- wq_demo |>
 #'   validate_wq() |>
-#'   iqa(na_rm = TRUE)
+#'   iqa(allow_partial = TRUE)
 #' d2$year <- as.integer(format(d2$data, "%Y"))
 #'
 #' # Marcadores padrao + legenda de IQA

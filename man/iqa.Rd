@@ -2,12 +2,12 @@
 % Please edit documentation in R/iqa.R
 \name{iqa}
 \alias{iqa}
-\title{Water Quality Index (WQI / IQA CETESB Oficial)}
+\title{Water Quality Index (WQI / IQA CETESB)}
 \usage{
 iqa(
   df,
   method = c("CETESB", "CETESB_equations", "CETESB_legacy_approx", "NSF_approx"),
-  classification = c("cetesb", "legacy"),
+  classification = c("cetesb", "igam", "ana", "legacy"),
   altitude_m = 0,
   phosphorus_basis = c("P", "PO4"),
   microbial_type = c("thermotolerant_coliforms", "e_coli"),
@@ -25,63 +25,132 @@ iqa(
 }
 \arguments{
 \item{df}{Data frame ou tibble com as colunas de monitoramento.
-Nomes canônicos reconhecidos: \code{od}, \code{solidos_totais} (ou \code{residuo_total}),
+Nomes canonicos reconhecidos: \code{od}, \code{solidos_totais} (ou \code{residuo_total}),
 \code{ph}, \code{dbo}, \code{coliformes_termotolerantes} (ou \code{coliformes}),
 \code{nt_total}, \code{p_total}, \code{turbidez}, \code{temperatura}.}
 
 \item{method}{Metodo de calculo:
 \itemize{
-\item \code{"CETESB"} (padrao) — equacoes analiticas continuas oficiais CETESB/INEMA
-com media geometrica ponderada.
-\item \code{"CETESB_equations"} — alias de \code{"CETESB"}.
-\item \code{"CETESB_legacy_approx"} — subindices por curvas interpoladas aproximadas (legado).
-\item \code{"NSF_approx"} — subindices por curvas aproximadas com media aritmetica (legado).
+\item \code{"CETESB"} (padrao) - equacoes analiticas por partes com media
+geometrica ponderada.
+\item \code{"CETESB_equations"} - alias de \code{"CETESB"}.
+\item \code{"CETESB_legacy_approx"} - subindices por curvas interpoladas aproximadas (legado).
+\item \code{"NSF_approx"} - subindices por curvas aproximadas com media aritmetica (legado).
 }}
 
-\item{classification}{Esquema de classificacao qualitativa: \code{"cetesb"} (padrao: 19/36/51/79)
-ou \code{"legacy"} (25/50/70/90).}
+\item{classification}{Escala de classificacao qualitativa (nao altera o valor
+numerico): \code{"cetesb"} (padrao, 19/36/51/79), \code{"ana"} (alias de
+\code{"cetesb"}), \code{"igam"} (25/50/70/90) ou \code{"legacy"}
+(25/50/70/90, escala aproximada). Veja \code{\link{classify_iqa}}.}
 
-\item{altitude_m}{Altitude em metros acima do nivel do mar (default \code{0}), usada no calculo
-da concentracao de saturacao de OD.}
+\item{altitude_m}{Altitude em metros (escalar ou vetor com uma altitude por
+linha), entre -500 e 9000 m; usada na concentracao de saturacao de OD.}
 
-\item{phosphorus_basis}{Base do fosforo informado: \code{"P"} (default, aplica fator 3.066 para PO4)
-ou \code{"PO4"}.}
+\item{phosphorus_basis}{Base do fosforo informado: \code{"P"} (default, aplica
+o fator 3,066 para PO4) ou \code{"PO4"}. A curva CETESB e de fosfato (PO4);
+o fator 3,066 consta no Apendice D 2023, p. 5.}
 
-\item{microbial_type}{Tipo microbiologico informado: \code{"thermotolerant_coliforms"} (default)
-ou \code{"e_coli"} (aplica fator 1.25x da CETESB).}
+\item{microbial_type}{Tipo microbiologico informado: \code{"thermotolerant_coliforms"}
+(default) ou \code{"e_coli"} (multiplica por 1,25 para equivaler a
+termotolerantes, conforme o Apendice D CETESB 2023, p. 5).}
 
-\item{temperature_method}{Metodo para o componente termico: \code{"cetesb_default"} (default: Qi=94),
-\code{"delta"} (usa delta_temperatura) ou \code{"reference"} (calcula temp_agua - temp_ref).}
+\item{temperature_method}{Componente termico: \code{"cetesb_default"} (default,
+qi = 94 constante; a CETESB usa "o valor correspondente a melhor qualidade",
+com \eqn{q^w = 1,58}, compativel com qi = 94), \code{"delta"} (usa \code{delta_temperature} ou a coluna
+\code{delta_temperatura}; erro se nenhum for informado) ou \code{"reference"}
+(usa \code{temperatura - temperature_reference}; erro se faltar algum).
+Os modos \code{"delta"} e \code{"reference"} sao \strong{experimentais e nao
+validados}: a curva de Delta T do pacote nao tem fonte rastreavel e diverge
+da curva q6 da CETESB. Eles emitem aviso e marcam
+\code{"experimental_temperature_curve"} em \code{attr(, "iqa_nonstandard")}.
+Delta T < -5 C resulta em \code{NA} (qi indefinido pela fonte).}
 
-\item{temperature_reference}{Temperatura de referencia quando \code{temperature_method = "reference"}.}
+\item{temperature_reference}{Temperatura de referencia (escalar ou um valor por
+linha) quando \code{temperature_method = "reference"}.}
 
-\item{delta_temperature}{Variacao de temperatura quando \code{temperature_method = "delta"}.}
+\item{delta_temperature}{Variacao de temperatura (escalar ou um valor por
+linha) quando \code{temperature_method = "delta"}. Tem precedencia sobre a
+coluna \code{delta_temperatura}.}
 
 \item{censor_policy}{Politica para dados censurados: \code{"limit"} (default: <X -> X),
 \code{"half_limit"} (<X -> X/2), \code{"zero"}, \code{"na"}, ou \code{"preserve"}.}
 
-\item{allow_partial}{Logico; se \code{FALSE} (padrao estrito), exige todos os componentes presentes.
-Se \code{TRUE}, permite calculo parcial renormalizando pesos dos parametros disponiveis.}
+\item{allow_partial}{Logico; se \code{FALSE} (padrao), exige os 9 componentes.
+Se \code{TRUE}, calcula estimativa parcial (veja a secao Dados ausentes).}
 
-\item{details}{Logico; se \code{TRUE}, anexa o dataframe detalhado de componentes no atributo \code{"components"}.}
+\item{details}{Logico; se \code{TRUE}, anexa no atributo \code{"components"} a
+tabela de \code{\link{iqa_components}} com os pesos \strong{efetivos} usados em
+cada linha, de modo que \code{prod(qi^wi)} reproduz \code{IQA_unrounded}.}
 
 \item{add_status}{Logico; se \code{TRUE} (padrao), adiciona a coluna \code{IQA_status}.}
 
 \item{locale}{Idioma dos rotulos qualitativos: \code{"pt"} (padrao) ou \code{"en"}.}
 
-\item{pesos}{Pesos customizados (opcional; padrao sao os 9 pesos oficiais CETESB).}
+\item{pesos}{Vetor nomeado de pesos customizados (opcional). Nomes aceitos sao
+os canonicos ou aliases dos 9 parametros; componentes omitidos mantem o peso
+CETESB e o conjunto e renormalizado para soma 1. Pesos devem ser finitos e
+nao negativos. Com pesos customizados o resultado deixa de ser o IQA CETESB
+(registrado em \code{attr(, "iqa_nonstandard")}).}
 
-\item{...}{Parametros adicionais reservados.}
+\item{...}{Apenas argumentos legados: \code{na_rm} (depreciado, use
+\code{allow_partial}) e \code{scheme} (depreciado, use \code{classification}).
+Outros argumentos geram aviso e sao ignorados.}
 }
 \value{
-O data frame de entrada com a coluna numerica \code{IQA} (0-100) e,
-quando \code{add_status = TRUE}, a coluna fator \code{IQA_status}.
+O data frame de entrada com a coluna numerica \code{IQA} (0-100, arredondada a
+2 casas) e, quando \code{add_status = TRUE}, a coluna fator \code{IQA_status}.
+A classe e atribuida sobre o valor nao arredondado (\code{IQA_unrounded} nos
+detalhes); o arredondamento e apenas de apresentacao.
+Atributos de proveniencia: \code{iqa_method}, \code{iqa_method_reference},
+\code{iqa_classification}, \code{iqa_weights}, \code{iqa_custom_weights},
+\code{iqa_censor_policy}, \code{iqa_phosphorus_basis}, \code{iqa_microbial_type},
+\code{iqa_temperature_method}, \code{iqa_altitude_m}, \code{iqa_allow_partial},
+\code{iqa_partial_rows}, \code{iqa_complete} e \code{iqa_nonstandard}.
 }
 \description{
-Computa o IQA brasileiro oficial conforme a metodologia da CETESB/INEMA
-utilizando equacoes analiticas continuas validadas e agregacao por
-\strong{media geometrica ponderada}: \eqn{IQA = \prod_{i=1}^{9} q_i^{w_i}}.
+Calcula o IQA segundo a metodologia CETESB (Apendice D, 2023): subindices
+\eqn{q_i} agregados por \strong{media geometrica ponderada},
+\eqn{IQA = \prod_{i=1}^{9} q_i^{w_i}}.
+
+A CETESB publica os \eqn{q_i} apenas como curvas graficas (Figura 1 do
+Apendice D). O pacote usa equacoes analiticas por partes que aproximam essas
+curvas; os pesos, os valores fixos fora do dominio (ex.: DBO > 30 -> 2,
+OD > 140\\% -> 47) e a classificacao conferem com a fonte. Na versao 0.11.0
+os trechos de DBO (5-15 mg/L), nitrogenio total (10-60 mg/L) e pH (8,5-10)
+foram corrigidos apos comparacao com as curvas. A curva de variacao de
+temperatura (usada so com \code{temperature_method} diferente do padrao) nao
+acompanha a curva oficial. Veja
+\code{system.file("audit", "IQA_AUDITORIA.md", package = "tikatuwq")}.
 }
+\section{Metodo x classificacao}{
+
+\code{method} define equacoes, pesos e parametros (o numero). \code{classification}
+define apenas os cortes e rotulos aplicados ao numero ja calculado. Assim,
+\code{iqa(df, classification = "igam")} classifica pela escala IGAM um IQA
+calculado pelo metodo CETESB; isso nao equivale ao IQA calculado
+integralmente pelo IGAM.
+}
+
+\section{Dados ausentes}{
+
+Pela CETESB, sem algum dos nove parametros "o calculo do IQA e inviabilizado"
+(Apendice D 2023, p. 4). Assim, com \code{allow_partial = FALSE} (padrao),
+essas linhas recebem \code{NA}. Com \code{allow_partial = TRUE}, os pesos dos parametros
+disponiveis sao renormalizados proporcionalmente (\eqn{w_i / \sum w_{disp}}).
+Esta e uma estimativa parcial do pacote, nao uma regra institucional: o IGAM,
+por exemplo, nao calcula o IQA sem OD ou coliformes e reparte o peso dos
+demais ausentes igualmente. Linhas parciais ficam registradas no atributo
+\code{"iqa_partial_rows"} e, com \code{details = TRUE}, nas colunas
+\code{IQA_partial} e \code{missing_params}.
+}
+
+\section{Valores invalidos}{
+
+Concentracoes negativas, pH fora de [0, 14], temperatura fora de [-2, 50] C e
+valores nao finitos sao convertidos em \code{NA} com aviso (e nao truncados
+para zero).
+}
+
 \examples{
 d <- data.frame(
   od = 6.5, temperatura = 25, dbo = 2, coliformes = 200,
@@ -91,4 +160,11 @@ d <- data.frame(
 out <- iqa(d)
 out$IQA
 out$IQA_status
+
+# Mesmo numero, outra escala de classificacao
+iqa(d, classification = "igam")$IQA_status
+
+# Auditoria: pesos efetivos e termos por componente
+comps <- attr(iqa(d, details = TRUE), "components")
+prod(unlist(comps[1, grep("^term_", names(comps))]))
 }

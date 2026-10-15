@@ -80,7 +80,7 @@ ok_iqa <- TRUE
 df <- tryCatch({
   wq_demo |>
     validate_wq() |>
-    iqa(na_rm = TRUE)
+    iqa(allow_partial = TRUE)
 }, error = function(e) {
   ok_iqa <<- FALSE
   message("iqa() failed in vignette build: ", conditionMessage(e))

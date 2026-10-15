@@ -27,7 +27,7 @@ checks against CONAMA 357/2005, visualizations, and rule-based analytical text.
 data(wq_demo)
 
 # compute IQA
-d1 <- iqa(wq_demo, na_rm = TRUE)
+d1 <- iqa(wq_demo, allow_partial = TRUE)
 
 # check compliance (CONAMA class "2")
 d2 <- conama_check(d1, classe = "2")
