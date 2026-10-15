@@ -136,16 +136,27 @@ test_that("classification nunca altera o valor numerico do IQA", {
   ref <- iqa(d)$IQA
   expect_equal(attr(iqa(d), "iqa_classification"), "cetesb")
   for (cl in c("cetesb", "igam", "ana", "legacy")) {
-    out <- iqa(d, classification = cl)
+    # classification em iqa() esta depreciado: sempre avisa; escala diferente
+    # da do metodo e classificacao cruzada
+    msg <- if (cl %in% c("cetesb", "ana")) "deprecated" else "Cross-classification"
+    expect_warning(out <- iqa(d, classification = cl), msg)
     expect_equal(out$IQA, ref)
     expect_equal(attr(out, "iqa_classification"), cl)
     expect_equal(attr(out, "iqa_method"), "CETESB")
+    expect_equal(attr(out, "iqa_calculation_method"), "CETESB")
+    expect_identical("cross_classification" %in% attr(out, "iqa_nonstandard"),
+                     cl %in% c("igam", "legacy"))
   }
 })
 
 test_that("API: argumentos legados 'scheme' e 'na_rm' em iqa()", {
   d <- d1()
-  expect_warning(o1 <- iqa(d, scheme = "igam"), "deprecated")
+  w <- character(0)
+  o1 <- withCallingHandlers(iqa(d, scheme = "igam"), warning = function(cnd) {
+    w <<- c(w, conditionMessage(cnd)); invokeRestart("muffleWarning")
+  })
+  expect_true(any(grepl("'scheme' is deprecated", w)))
+  expect_true(any(grepl("Cross-classification", w)))
   expect_equal(attr(o1, "iqa_classification"), "igam")
   expect_error(
     suppressWarnings(iqa(d, classification = "cetesb", scheme = "igam")),
@@ -299,7 +310,7 @@ test_that("API: iqa() valida altitude_m", {
 
 test_that("Formatos de entrada: vazio, tibble e censurados", {
   d0 <- data.frame(od = numeric(0), ph = numeric(0))
-  out0 <- iqa(d0, classification = "igam")
+  out0 <- suppressWarnings(iqa(d0, classification = "igam"))
   expect_equal(nrow(out0), 0L)
   expect_s3_class(out0$IQA_status, "ordered")
   expect_equal(attr(out0, "iqa_classification"), "igam")

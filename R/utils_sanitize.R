@@ -70,6 +70,9 @@
   # Ortofosfato
   p_ortofosfato           = c("p_ortofosfato", "po4", "orthophosphate",
                               "phosphate", "ortofosfato"),
+  # Fosfato total expresso como PO4 (IGAM). Distinto de ortofosfato e de
+  # fosforo total expresso como P.
+  fosfato_total           = c("fosfato_total", "po4_total", "total_phosphate_po4"),
   # Vazao
   vazao                   = c("vazao", "flow", "discharge", "q_m3s", "q"),
   # Coordenadas

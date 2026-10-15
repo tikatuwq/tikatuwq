@@ -41,9 +41,9 @@ apresenta os mesmos cortes 19/36/51/79 da CETESB. E, portanto, um alias
 de \code{"cetesb"}. Faixas historicas de outros estados (ex.: 20/37/52/79)
 citadas em publicacoes antigas da ANA nao estao implementadas.}
 \item{\code{"igam"}}{IGAM/MG: Muito Ruim [0, 25], Ruim (25, 50],
-Medio (50, 70], Bom (70, 90], Excelente (90, 100]. Os rotulos ainda
-precisam ser conferidos visualmente na Tabela 2 do portal Infohidro/IGAM,
-que e publicada como imagem.}
+Medio (50, 70], Bom (70, 90], Excelente (90, 100] (IGAM, relatorio de
+monitoramento da sub-bacia do ribeirao Pampulha, 3o trimestre de 2017,
+p. 9).}
 \item{\code{"legacy"}}{Escala aproximada mantida por compatibilidade com
 versoes antigas do pacote (cortes 25/50/70/90, rotulos Muito ruim/Ruim/
 Regular/Boa/Otima). Nao corresponde a nenhuma escala institucional verificada.}

@@ -6,8 +6,8 @@
 \usage{
 iqa(
   df,
-  method = c("CETESB", "CETESB_equations", "CETESB_legacy_approx", "NSF_approx"),
-  classification = c("cetesb", "igam", "ana", "legacy"),
+  method = c("CETESB", "CETESB_equations", "IGAM", "CETESB_legacy_approx", "NSF_approx"),
+  classification = NULL,
   altitude_m = 0,
   phosphorus_basis = c("P", "PO4"),
   microbial_type = c("thermotolerant_coliforms", "e_coli"),
@@ -34,14 +34,17 @@ Nomes canonicos reconhecidos: \code{od}, \code{solidos_totais} (ou \code{residuo
 \item \code{"CETESB"} (padrao) - equacoes analiticas por partes com media
 geometrica ponderada.
 \item \code{"CETESB_equations"} - alias de \code{"CETESB"}.
+\item \code{"IGAM"} - \strong{bloqueado}: as equacoes dos qi do IGAM
+(SCQA, SEMAD 2005) nao foram obtidas de fonte primaria. Gera erro de
+classe \code{tikatuwq_method_unavailable}; ver \code{\link{iqa_methods}}.
 \item \code{"CETESB_legacy_approx"} - subindices por curvas interpoladas aproximadas (legado).
 \item \code{"NSF_approx"} - subindices por curvas aproximadas com media aritmetica (legado).
 }}
 
-\item{classification}{Escala de classificacao qualitativa (nao altera o valor
-numerico): \code{"cetesb"} (padrao, 19/36/51/79), \code{"ana"} (alias de
-\code{"cetesb"}), \code{"igam"} (25/50/70/90) ou \code{"legacy"}
-(25/50/70/90, escala aproximada). Veja \code{\link{classify_iqa}}.}
+\item{classification}{Depreciado desde 0.11.0. Por padrao (\code{NULL}) a
+escala segue \code{method}. Valores aceitos por compatibilidade:
+\code{"cetesb"}, \code{"ana"} (mesmos cortes da CETESB), \code{"igam"} e
+\code{"legacy"}; emitem aviso. Use \code{\link{classify_iqa}}.}
 
 \item{altitude_m}{Altitude em metros (escalar ou vetor com uma altitude por
 linha), entre -500 e 9000 m; usada na concentracao de saturacao de OD.}
@@ -124,11 +127,17 @@ acompanha a curva oficial. Veja
 }
 \section{Metodo x classificacao}{
 
-\code{method} define equacoes, pesos e parametros (o numero). \code{classification}
-define apenas os cortes e rotulos aplicados ao numero ja calculado. Assim,
-\code{iqa(df, classification = "igam")} classifica pela escala IGAM um IQA
-calculado pelo metodo CETESB; isso nao equivale ao IQA calculado
-integralmente pelo IGAM.
+\code{method} define o motor de calculo completo (parametros, curvas, pesos,
+politica de ausentes) e a escala de classificacao correspondente:
+\code{iqa(df)} calcula e classifica pela CETESB. Para aplicar outra escala a
+um IQA ja calculado, use \code{\link{classify_iqa}}. O argumento
+\code{classification} de \code{iqa()} esta depreciado desde 0.11.0: ainda
+funciona, com aviso, e uma escala diferente da do metodo (ex.:
+\code{iqa(df, classification = "igam")}) e registrada como classificacao
+cruzada em \code{attr(, "iqa_nonstandard")}. Isso nao e um IQA IGAM.
+
+Plano de depreciacao: 0.11.0 aviso; remocao do argumento nao antes da 0.13.0,
+anunciada no NEWS com uma versao de antecedencia.
 }
 
 \section{Dados ausentes}{
@@ -161,8 +170,11 @@ out <- iqa(d)
 out$IQA
 out$IQA_status
 
-# Mesmo numero, outra escala de classificacao
-iqa(d, classification = "igam")$IQA_status
+# Outra escala para o mesmo numero: use classify_iqa()
+classify_iqa(out$IQA, classification = "igam")
+
+# Metodos disponiveis (IGAM esta bloqueado)
+iqa_methods()
 
 # Auditoria: pesos efetivos e termos por componente
 comps <- attr(iqa(d, details = TRUE), "components")

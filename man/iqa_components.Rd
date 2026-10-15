@@ -12,7 +12,8 @@ iqa_components(
   temperature_method = c("cetesb_default", "delta", "reference"),
   temperature_reference = NULL,
   delta_temperature = NULL,
-  censor_policy = c("limit", "half_limit", "zero", "na", "preserve")
+  censor_policy = c("limit", "half_limit", "zero", "na", "preserve"),
+  method = c("CETESB", "IGAM")
 )
 }
 \arguments{
@@ -31,6 +32,10 @@ iqa_components(
 \item{delta_temperature}{Vetor ou escalar com a variacao de temperatura (Delta T em graus Celsius).}
 
 \item{censor_policy}{Politica de tratamento de dados censurados ("limit", "half_limit", "zero", "na", "preserve").}
+
+\item{method}{Motor de calculo: \code{"CETESB"} (padrao) ou \code{"IGAM"}.
+O metodo IGAM esta bloqueado (ver \code{\link{iqa_methods}}) e gera erro
+de classe \code{tikatuwq_method_unavailable}.}
 }
 \value{
 Um tibble ou data frame detalhado com colunas para cada parametro e o IQA calculado.
