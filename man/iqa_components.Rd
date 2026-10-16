@@ -34,8 +34,9 @@ iqa_components(
 \item{censor_policy}{Politica de tratamento de dados censurados ("limit", "half_limit", "zero", "na", "preserve").}
 
 \item{method}{Motor de calculo: \code{"CETESB"} (padrao) ou \code{"IGAM"}.
-O metodo IGAM esta bloqueado (ver \code{\link{iqa_methods}}) e gera erro
-de classe \code{tikatuwq_method_unavailable}.}
+Para o IGAM os componentes sao obtidos com
+\code{iqa(df, method = "IGAM", details = TRUE)}; aqui \code{"IGAM"} gera
+erro com essa orientacao.}
 }
 \value{
 Um tibble ou data frame detalhado com colunas para cada parametro e o IQA calculado.

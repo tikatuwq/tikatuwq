@@ -14,17 +14,28 @@ test_that("mk_seasonal() p_value esta entre 0 e 1", {
 })
 
 test_that("mk_seasonal() tendencia crescente para serie monotonica crescente", {
+  # Serie mensal sintetica de 5 anos, estritamente crescente (sem empates).
+  # Valores esperados calculados a mao (Hirsch, Slack & Smith 1982): em cada
+  # um dos 12 meses n = 5, S_m = C(5,2) = 10 e VAR(S_m) = 5*4*15/18; logo
+  # S = 120, VAR(S) = 200 e Z = (120 - 1) / sqrt(200).
   d <- data.frame(
-    ponto    = rep("P1", 12),
-    data     = as.Date(paste0(2020:2021, rep(paste0("-0", 1:6, "-01"), each = 2))[1:12]),
-    turbidez = seq(10, 120, length.out = 12)
+    ponto    = "P1",
+    data     = seq(as.Date("2015-01-15"), by = "month", length.out = 60),
+    turbidez = 10 + seq_len(60)
   )
-  # Ordenar datas corretamente
-  d <- d[order(d$data), ]
-  out <- suppressWarnings(mk_seasonal(d, param = "turbidez", by = "ponto", alpha = 0.05))
-  if (!is.na(out$Z[1]) && abs(out$Z[1]) > 0) {
-    expect_true(out$Z[1] > 0)
-  }
+  out <- mk_seasonal(d, param = "turbidez", by = "ponto", alpha = 0.05)
+  expect_equal(out$n_estacoes, 12L)
+  expect_equal(out$S, 120)
+  expect_equal(out$varS, 200)
+  expect_equal(out$Z, round(119 / sqrt(200), 4))
+  expect_true(out$significativo)
+  expect_equal(out$tendencia, "crescente")
+  # Controle: a serie invertida da tendencia decrescente com Z simetrico
+  d$turbidez <- rev(d$turbidez)
+  dec <- mk_seasonal(d, param = "turbidez", by = "ponto", alpha = 0.05)
+  expect_equal(dec$S, -120)
+  expect_equal(dec$Z, -out$Z)
+  expect_equal(dec$tendencia, "decrescente")
 })
 
 test_that("mk_seasonal() aceita period = 'season' com assign_season()", {

@@ -7,8 +7,18 @@
 iqa_methods()
 }
 \value{
-Data frame com as colunas \code{method}, \code{available},
-\code{status}, \code{classification} e \code{reference}.
+Data frame com as colunas \code{method}, \code{implemented}
+(motor presente no pacote), \code{documented} (fontes registradas),
+\code{reference_validated}, \code{available} (pode ser usado em
+\code{iqa()}), \code{classification}, \code{limitation} e
+\code{reference}.
+
+\strong{Semantica de \code{reference_validated}:} \code{TRUE} significa
+que o motor reproduz valores de IQA \emph{publicados} pela fonte de
+referencia (exemplo resolvido, no caso CETESB; IQAs por amostra publicados
+pelo IGAM, no caso IGAM), com o escopo descrito em \code{limitation}.
+\strong{Nao} significa homologacao, certificacao ou endosso da instituicao,
+nem validacao em todas as bacias ou condicoes analiticas.
 }
 \description{
 Lista os motores de calculo do IQA, sua situacao de validacao e a escala de
@@ -20,9 +30,12 @@ calcular, se um metodo esta disponivel.
 \item \code{"CETESB"}: padrao. Equacoes que aproximam as curvas da CETESB
 (Apendice D 2023); ver \code{system.file("audit", "VALIDACAO_CETESB.md",
     package = "tikatuwq")}.
-\item \code{"IGAM"}: \strong{bloqueado}. Pesos, regra de ausentes, qs de
-temperatura e classes estao documentados, mas as equacoes dos qi (SCQA,
-SEMAD 2005) nao foram obtidas de fonte primaria.
+\item \code{"IGAM"}: reproducao computacional documentada do IQA do IGAM
+(equacoes do SCQA, SEMAD 2005; regras do Projeto Aguas de Minas), com a
+turbidez em \code{k = 1,5} (Bucci 2011; Nunes 2008). Reproduz 49/49 IQAs
+publicados pelo IGAM na sub-bacia da Pampulha (2017-2018).
+\strong{Nao e homologada pelo IGAM.} Ver \code{system.file("methodology",
+    "IGAM_VALIDATION.md", package = "tikatuwq")}.
 \item \code{"CETESB_legacy_approx"} e \code{"NSF_approx"}: rotas legadas
 por curvas interpoladas aproximadas.
 }

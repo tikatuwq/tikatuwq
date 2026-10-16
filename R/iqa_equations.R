@@ -448,8 +448,9 @@
 #' @param delta_temperature Vetor ou escalar com a variacao de temperatura (Delta T em graus Celsius).
 #' @param censor_policy Politica de tratamento de dados censurados ("limit", "half_limit", "zero", "na", "preserve").
 #' @param method Motor de calculo: \code{"CETESB"} (padrao) ou \code{"IGAM"}.
-#'   O metodo IGAM esta bloqueado (ver \code{\link{iqa_methods}}) e gera erro
-#'   de classe \code{tikatuwq_method_unavailable}.
+#'   Para o IGAM os componentes sao obtidos com
+#'   \code{iqa(df, method = "IGAM", details = TRUE)}; aqui \code{"IGAM"} gera
+#'   erro com essa orientacao.
 #'
 #' @return Um tibble ou data frame detalhado com colunas para cada parametro e o IQA calculado.
 #' @export
@@ -473,7 +474,13 @@ iqa_components <- function(
 ) {
   method <- match.arg(method)
   if (method == "IGAM") {
-    stop(.iqa_method_unavailable("IGAM", .iqa_igam_spec$blocked_reason, df))
+    if (!isTRUE(.iqa_igam_spec$available)) {
+      stop(.iqa_method_unavailable("IGAM", .iqa_igam_spec$blocked_reason, df))
+    }
+    stop("For method = 'IGAM' use iqa(df, method = 'IGAM', details = TRUE): ",
+         "the components (qi, effective weights, unrounded IQA) are in ",
+         "attr(, 'components'). IGAM needs arguments (e.g. nitrate_unit) that ",
+         "iqa_components() does not take.", call. = FALSE)
   }
   phosphorus_basis   <- match.arg(phosphorus_basis)
   microbial_type     <- match.arg(microbial_type)

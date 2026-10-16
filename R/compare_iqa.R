@@ -15,9 +15,13 @@
 #'   \item Cada metodo usa a sua propria regra oficial de completude
 #'     (\code{allow_partial = FALSE}); linhas que um metodo nao calcula ficam
 #'     inelegiveis, com o motivo em \code{motivo_<metodo>}.
-#'   \item Metodo indisponivel (ex.: \code{"IGAM"}, bloqueado; ver
-#'     \code{\link{iqa_methods}}) nao gera erro: todas as linhas ficam
-#'     inelegiveis para ele, com o motivo.
+#'   \item Os metodos usam entradas diferentes: o CETESB usa nitrogenio total
+#'     e fosforo total; o IGAM usa nitrato (com \code{nitrate_unit}), fosfato
+#'     total ou fosforo total com \code{phosphorus_basis} explicito, e cloreto.
+#'     Informe esses argumentos em \code{...}; eles valem para ambos os
+#'     metodos (o CETESB ignora \code{nitrate_unit}).
+#'   \item Metodo indisponivel em \code{\link{iqa_methods}} nao gera erro:
+#'     todas as linhas ficam inelegiveis para ele, com o motivo.
 #'   \item As escalas de classe CETESB e IGAM tem rotulos e cortes diferentes.
 #'     A funcao nao calcula "percentual de concordancia" comparando rotulos;
 #'     em vez disso devolve a tabela de transicoes de classe (atributo
@@ -55,17 +59,21 @@
 #'   \code{"methods"}, \code{"missing_policy"} e, se pedido, \code{"components"}.
 #'
 #' @examples
+#' # Dados ilustrativos (nao sao medicoes reais) com as entradas dos dois
+#' # metodos; P4 nao tem cloreto e fica inelegivel para o IGAM.
 #' d <- data.frame(
-#'   ponto = c("P1", "P2"),
-#'   od = c(6.5, 4), temperatura = 25, dbo = c(2, 6), coliformes = c(200, 3000),
-#'   ph = c(7.2, 7.8), nt_total = c(1.2, 4), p_total = c(0.05, 0.2),
-#'   turbidez = c(8, 40), solidos_totais = c(120, 250)
+#'   ponto = c("P1", "P2", "P3", "P4"),
+#'   od = c(7, 5, 3, 6), temperatura = 24, cloreto = c(10, 30, 60, NA),
+#'   coliformes = c(100, 2000, 20000, 500), ph = c(7.2, 7.5, 7, 7.4),
+#'   dbo = c(2, 5, 15, 3), nt_total = c(1, 3, 8, 2), nitrato = c(0.5, 1, 2, 0.8),
+#'   p_total = c(0.05, 0.2, 0.8, 0.1), turbidez = c(5, 20, 60, 10),
+#'   solidos_totais = c(100, 200, 400, 150)
 #' )
-#' # O metodo IGAM esta bloqueado e exige nitrato e fosfato total: todas as
-#' # linhas ficam inelegiveis para IGAM e nao ha pares.
-#' cmp <- compare_iqa(d, id_cols = "ponto")
-#' cmp[, c("ponto", "IQA_CETESB", "elegivel_IGAM", "motivo_IGAM")]
+#' cmp <- compare_iqa(d, id_cols = "ponto", phosphorus_basis = "P",
+#'                    nitrate_unit = "N", altitude_m = 800)
+#' cmp[, c("ponto", "IQA_CETESB", "IQA_IGAM", "par_valido", "motivo_IGAM")]
 #' attr(cmp, "summary")
+#' attr(cmp, "class_transitions")
 #'
 #' @seealso \code{\link{iqa}}, \code{\link{iqa_methods}}, \code{\link{classify_iqa}}
 #' @export

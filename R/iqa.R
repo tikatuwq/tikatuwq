@@ -129,14 +129,15 @@ classify_iqa <- function(
 #' \code{method} define o motor de calculo completo (parametros, curvas, pesos,
 #' politica de ausentes) e a escala de classificacao correspondente:
 #' \code{iqa(df)} calcula e classifica pela CETESB. Para aplicar outra escala a
-#' um IQA ja calculado, use \code{\link{classify_iqa}}. O argumento
-#' \code{classification} de \code{iqa()} esta depreciado desde 0.11.0: ainda
-#' funciona, com aviso, e uma escala diferente da do metodo (ex.:
-#' \code{iqa(df, classification = "igam")}) e registrada como classificacao
-#' cruzada em \code{attr(, "iqa_nonstandard")}. Isso nao e um IQA IGAM.
+#' um IQA ja calculado, use \code{\link{classify_iqa}}; isso nao transforma o
+#' numero em um IQA de outra instituicao.
 #'
-#' Plano de depreciacao: 0.11.0 aviso; remocao do argumento nao antes da 0.13.0,
-#' anunciada no NEWS com uma versao de antecedencia.
+#' \strong{Mudanca incompativel na 0.11.0:} o argumento \code{classification}
+#' de \code{iqa()}, presente na 0.10.0 (\code{"cetesb"}, \code{"legacy"}), foi
+#' removido. Passa-lo (assim como \code{scheme}) gera erro com a orientacao de
+#' migracao: \code{classify_iqa(iqa(df)$IQA, classification = "legacy")}. A
+#' chamada posicional da 0.10.0 (\code{iqa(df, "CETESB", "legacy")}) tambem gera
+#' erro de migracao, pois o 3o argumento passou a ser \code{altitude_m}.
 #'
 #' @section Dados ausentes:
 #' Pela CETESB, sem algum dos nove parametros "o calculo do IQA e inviabilizado"
@@ -148,6 +149,32 @@ classify_iqa <- function(
 #' demais ausentes igualmente. Linhas parciais ficam registradas no atributo
 #' \code{"iqa_partial_rows"} e, com \code{details = TRUE}, nas colunas
 #' \code{IQA_partial} e \code{missing_params}.
+#'
+#' @section Metodo IGAM:
+#' \code{method = "IGAM"} calcula pelas equacoes do SCQA (SEMAD/UCEMG/PNMA II,
+#' 2005) e pelas regras do Projeto Aguas de Minas: pesos 0,17 (OD), 0,15
+#' (microbiologico), 0,12 (pH), 0,10 (DBO, nitrato, fosfato total,
+#' temperatura), 0,08 (turbidez, solidos totais); qs de temperatura constante
+#' igual a 92; sem OD ou microbiologico o IQA nao e calculado; o peso dos
+#' demais ausentes e repartido igualmente. A turbidez usa o coeficiente
+#' \code{1,5} no termo do cosseno (Bucci 2011; Nunes 2008), em vez do
+#' \code{15} impresso em copias do SCQA. A implementacao reproduz 49/49 IQAs
+#' publicados pelo IGAM (sub-bacia da Pampulha, 2017-2018), mas \strong{nao e
+#' homologada pelo IGAM} e nao foi validada em outras bacias.
+#'
+#' Entradas: \code{od} (mg/L), \code{temperatura} e \code{cloreto} (mg/L; a
+#' saturacao de OD do SCQA exige cloreto, sem valor padrao), \code{e_coli} ou
+#' \code{coliformes_termotolerantes} (sem fator de conversao; se ambas
+#' existirem, informe \code{microbial_type}), \code{ph}, \code{dbo},
+#' \code{nitrato} (exige \code{nitrate_unit}), \code{fosfato_total} (PO4) ou
+#' \code{p_total} (exige \code{phosphorus_basis} explicito), \code{turbidez} e
+#' \code{solidos_totais}. Nitrogenio total, ortofosfato e TDS nao substituem
+#' nitrato, fosfato total e solidos totais. \code{allow_partial}, \code{pesos}
+#' e os argumentos de temperatura do CETESB nao se aplicam (erro).
+#' O \code{IQA} e arredondado a 1 casa (como o IGAM publica) e a classe IGAM e
+#' atribuida sobre esse valor; \code{details = TRUE} traz o valor bruto, os qi
+#' e os pesos efetivos. Nota completa: \code{system.file("methodology",
+#' "IGAM_VALIDATION.md", package = "tikatuwq")}.
 #'
 #' @section Valores invalidos:
 #' Concentracoes negativas, pH fora de \[0, 14\], temperatura fora de \[-2, 50\] C e
@@ -163,24 +190,23 @@ classify_iqa <- function(
 #'     \item \code{"CETESB"} (padrao) - equacoes analiticas por partes com media
 #'           geometrica ponderada.
 #'     \item \code{"CETESB_equations"} - alias de \code{"CETESB"}.
-#'     \item \code{"IGAM"} - \strong{bloqueado}: as equacoes dos qi do IGAM
-#'           (SCQA, SEMAD 2005) nao foram obtidas de fonte primaria. Gera erro de
-#'           classe \code{tikatuwq_method_unavailable}; ver \code{\link{iqa_methods}}.
+#'     \item \code{"IGAM"} - reproducao computacional documentada do IQA do
+#'           IGAM (Minas Gerais), motor independente do CETESB e \strong{nao
+#'           homologado pelo IGAM}. Ver a secao Metodo IGAM.
 #'     \item \code{"CETESB_legacy_approx"} - subindices por curvas interpoladas aproximadas (legado).
 #'     \item \code{"NSF_approx"} - subindices por curvas aproximadas com media aritmetica (legado).
 #'   }
-#' @param classification Depreciado desde 0.11.0. Por padrao (\code{NULL}) a
-#'   escala segue \code{method}. Valores aceitos por compatibilidade:
-#'   \code{"cetesb"}, \code{"ana"} (mesmos cortes da CETESB), \code{"igam"} e
-#'   \code{"legacy"}; emitem aviso. Use \code{\link{classify_iqa}}.
 #' @param altitude_m Altitude em metros (escalar ou vetor com uma altitude por
 #'   linha), entre -500 e 9000 m; usada na concentracao de saturacao de OD.
 #' @param phosphorus_basis Base do fosforo informado: \code{"P"} (default, aplica
 #'   o fator 3,066 para PO4) ou \code{"PO4"}. A curva CETESB e de fosfato (PO4);
-#'   o fator 3,066 consta no Apendice D 2023, p. 5.
+#'   o fator 3,066 consta no Apendice D 2023, p. 5. Em \code{method = "IGAM"},
+#'   deve ser informado explicitamente quando a entrada for \code{p_total}.
 #' @param microbial_type Tipo microbiologico informado: \code{"thermotolerant_coliforms"}
 #'   (default) ou \code{"e_coli"} (multiplica por 1,25 para equivaler a
-#'   termotolerantes, conforme o Apendice D CETESB 2023, p. 5).
+#'   termotolerantes, conforme o Apendice D CETESB 2023, p. 5). Em
+#'   \code{method = "IGAM"} nao ha fator; o argumento so escolhe a coluna
+#'   quando ambas existem.
 #' @param temperature_method Componente termico: \code{"cetesb_default"} (default,
 #'   qi = 94 constante; a CETESB usa "o valor correspondente a melhor qualidade",
 #'   com \eqn{q^w = 1,58}, compativel com qi = 94), \code{"delta"} (usa \code{delta_temperature} ou a coluna
@@ -210,9 +236,13 @@ classify_iqa <- function(
 #'   CETESB e o conjunto e renormalizado para soma 1. Pesos devem ser finitos e
 #'   nao negativos. Com pesos customizados o resultado deixa de ser o IQA CETESB
 #'   (registrado em \code{attr(, "iqa_nonstandard")}).
-#' @param ... Apenas argumentos legados: \code{na_rm} (depreciado, use
-#'   \code{allow_partial}) e \code{scheme} (depreciado, use \code{classification}).
-#'   Outros argumentos geram aviso e sao ignorados.
+#' @param nitrate_unit Usado apenas por \code{method = "IGAM"}: unidade da
+#'   coluna \code{nitrato}, \code{"N"} (mg/L N-NO3, convertido por
+#'   62,004/14,007) ou \code{"NO3"} (mg/L NO3). Obrigatorio quando houver
+#'   nitrato; nao ha unidade presumida.
+#' @param ... Apenas o argumento legado \code{na_rm} (depreciado, use
+#'   \code{allow_partial}). \code{classification} e \code{scheme} geram erro
+#'   (removidos na 0.11.0). Outros argumentos geram aviso e sao ignorados.
 #'
 #' @returns
 #' O data frame de entrada com a coluna numerica \code{IQA} (0-100, arredondada a
@@ -239,8 +269,18 @@ classify_iqa <- function(
 #' # Outra escala para o mesmo numero: use classify_iqa()
 #' classify_iqa(out$IQA, classification = "igam")
 #'
-#' # Metodos disponiveis (IGAM esta bloqueado)
+#' # Metodos disponiveis e escopo de validacao
 #' iqa_methods()
+#'
+#' # IQA pelo metodo IGAM (reproducao documentada, nao homologada pelo IGAM).
+#' # Amostra sintetica; as unidades de nitrato (mg/L N) e de fosforo total
+#' # (mg/L P) sao declaradas explicitamente.
+#' g <- data.frame(
+#'   od = 7, temperatura = 25, cloreto = 10, e_coli = 100, ph = 7.3,
+#'   dbo = 2, nitrato = 1, p_total = 0.1, turbidez = 5, solidos_totais = 100
+#' )
+#' iqa(g, method = "IGAM", altitude_m = 0, nitrate_unit = "N",
+#'     phosphorus_basis = "P")   # IQA 75.5, "Bom"
 #'
 #' # Auditoria: pesos efetivos e termos por componente
 #' comps <- attr(iqa(d, details = TRUE), "components")
@@ -248,7 +288,6 @@ classify_iqa <- function(
 iqa <- function(
   df,
   method = c("CETESB", "CETESB_equations", "IGAM", "CETESB_legacy_approx", "NSF_approx"),
-  classification = NULL,
   altitude_m = 0,
   phosphorus_basis = c("P", "PO4"),
   microbial_type = c("thermotolerant_coliforms", "e_coli"),
@@ -261,16 +300,26 @@ iqa <- function(
   add_status = TRUE,
   locale = c("pt", "en"),
   pesos = NULL,
+  nitrate_unit = NULL,
   ...
 ) {
-  method         <- match.arg(method)
-  # Cada motor define sua escala de classificacao; 'classification' em iqa()
-  # fica apenas por compatibilidade (depreciado desde 0.11.0).
-  native_class   <- if (method == "IGAM") "igam" else "cetesb"
-  classification_given <- !is.null(classification)
-  if (classification_given) {
-    classification <- match.arg(classification, c("cetesb", "igam", "ana", "legacy"))
+  # Argumentos informados explicitamente (o metodo IGAM nao converte unidades
+  # sem declaracao do usuario)
+  given <- list(phosphorus_basis = !missing(phosphorus_basis),
+                microbial_type = !missing(microbial_type))
+  # Chamada posicional da 0.10.0, iqa(df, method, classification): o 3o
+  # argumento agora e altitude_m. Erro de migracao explicito.
+  if (is.character(altitude_m) && length(altitude_m) == 1L &&
+      tolower(altitude_m) %in% c("cetesb", "legacy", "igam", "ana")) {
+    stop("The third positional argument of iqa() is now 'altitude_m'; the ",
+         "'classification' argument (third in tikatuwq 0.10.0) was removed in ",
+         "0.11.0. Use classify_iqa(iqa(df)$IQA, classification = \"",
+         tolower(altitude_m), "\").", call. = FALSE)
   }
+  method         <- match.arg(method)
+  # A escala de classificacao e a do motor de calculo. Para outra escala sobre o
+  # mesmo numero, use classify_iqa().
+  classification <- if (method == "IGAM") "igam" else "cetesb"
   phosphorus_basis <- match.arg(phosphorus_basis)
   microbial_type <- match.arg(microbial_type)
   temperature_method <- match.arg(temperature_method)
@@ -278,49 +327,39 @@ iqa <- function(
   locale         <- match.arg(locale)
 
   # Argumentos legados aceitos via `...`:
-  #   na_rm  -> alias depreciado de allow_partial
-  #   scheme -> alias depreciado de classification
+  #   na_rm -> alias depreciado de allow_partial
+  # 'classification' e 'scheme' foram removidos de iqa() na 0.11.0 (a escala
+  # segue 'method'); seu uso gera erro com orientacao de migracao.
   dots <- list(...)
+  removed <- intersect(names(dots), c("classification", "scheme"))
+  if (length(removed)) {
+    stop("Argument '", removed[1], "' was removed from iqa() in tikatuwq 0.11.0: ",
+         "the classification scale now follows 'method'. To classify an IQA on ",
+         "another scale use classify_iqa(x, classification = ...).", call. = FALSE)
+  }
   if (!is.null(dots$na_rm)) {
     warning("Argument 'na_rm' is deprecated in iqa(); use 'allow_partial' instead.", call. = FALSE)
     if (isTRUE(dots$na_rm)) allow_partial <- TRUE
   }
-  if (!is.null(dots$scheme)) {
-    scheme <- match.arg(dots$scheme, c("cetesb", "igam", "ana", "legacy"))
-    if (classification_given && scheme != classification) {
-      stop("Conflicting arguments: 'scheme' and 'classification' differ. Use 'classification' only.")
-    }
-    warning("Argument 'scheme' is deprecated in iqa(); the scale now follows 'method'.", call. = FALSE)
-    classification <- scheme
-    classification_given <- TRUE
-  }
-  cross_classification <- FALSE
-  if (classification_given) {
-    # "ana" usa os mesmos cortes da CETESB: nao e classificacao cruzada
-    same_scale <- classification == native_class ||
-      (native_class == "cetesb" && classification == "ana")
-    cross_classification <- !same_scale
-    if (cross_classification) {
-      warning("Cross-classification: the IQA is computed with method '", method,
-              "' but classified on the '", classification, "' scale. This is not an ",
-              toupper(classification), " IQA. Argument 'classification' in iqa() is ",
-              "deprecated; use classify_iqa(x, classification = ...) instead.", call. = FALSE)
-    } else {
-      warning("Argument 'classification' in iqa() is deprecated: the scale follows ",
-              "'method'. Use classify_iqa() for other scales.", call. = FALSE)
-    }
-  } else {
-    classification <- native_class
-  }
-
-  if (method == "IGAM") {
-    stop(.iqa_method_unavailable("IGAM", .iqa_igam_spec$blocked_reason, df))
-  }
-  unrecognized <- setdiff(names(dots), c("na_rm", "scheme"))
+  unrecognized <- setdiff(names(dots), "na_rm")
   if (length(unrecognized) > 0L || (length(dots) > 0L && is.null(names(dots)))) {
     warning("Unrecognized argument(s) passed to iqa() were ignored: ",
             paste(if (length(unrecognized)) unrecognized else "<unnamed>", collapse = ", "),
             call. = FALSE)
+  }
+
+  if (method == "IGAM") {
+    if (!isTRUE(.iqa_igam_spec$available)) {
+      stop(.iqa_method_unavailable("IGAM", .iqa_igam_spec$blocked_reason, df))
+    }
+    return(.iqa_igam_route(
+      df, altitude_m = altitude_m, phosphorus_basis = phosphorus_basis,
+      microbial_type = microbial_type, temperature_method = temperature_method,
+      temperature_reference = temperature_reference, delta_temperature = delta_temperature,
+      censor_policy = censor_policy, allow_partial = allow_partial, details = details,
+      add_status = add_status, locale = locale, pesos = pesos,
+      nitrate_unit = nitrate_unit, given = given
+    ))
   }
 
   if (nrow(df) == 0L) {
@@ -340,7 +379,7 @@ iqa <- function(
       custom_weights = !is.null(pesos),
       allow_partial = allow_partial,
       partial_rows = integer(0),
-      nonstandard = if (cross_classification) "cross_classification" else character(0)
+      nonstandard = character(0)
     )
     return(out)
   }
@@ -427,7 +466,7 @@ iqa <- function(
       attr(out, "components") <- comps
     }
 
-    nonstandard <- if (cross_classification) "cross_classification" else character(0)
+    nonstandard <- character(0)
     if (custom_weights) nonstandard <- c(nonstandard, "custom_weights")
     if (any(partial & !is.na(IQA_raw))) nonstandard <- c(nonstandard, "partial_rows")
     if (temperature_method != "cetesb_default") nonstandard <- c(nonstandard, "experimental_temperature_curve")
@@ -534,8 +573,7 @@ iqa <- function(
     custom_weights = custom_legacy,
     allow_partial = allow_partial,
     partial_rows = which(!is.na(IQA_val) & rowSums(!is.finite(as.matrix(qi_df))) > 0),
-    nonstandard = c("legacy_approximate_curves", if (custom_legacy) "custom_weights",
-                    if (cross_classification) "cross_classification")
+    nonstandard = c("legacy_approximate_curves", if (custom_legacy) "custom_weights")
   )
   out
 }
@@ -583,6 +621,8 @@ iqa <- function(
   attr(out, "iqa_method_version")     <- paste0("tikatuwq ", as.character(utils::packageVersion("tikatuwq")))
   attr(out, "iqa_method_reference")   <- if (method == "CETESB") {
     "CETESB (2023), Apendice D - Indices de Qualidade das Aguas, secao 2 (pp. 3-5); qi por equacoes analiticas que aproximam as curvas da Figura 1 (ver inst/audit/IQA_AUDITORIA.md)"
+  } else if (method == "IGAM") {
+    "SEMAD/UCEMG/PNMA II (2005), SCQA Relatorio 1 (equacoes); IGAM, Projeto Aguas de Minas (regras); turbidez k = 1.5 (Bucci 2011, p. 51; Nunes 2008, Quadro 10). Reproducao documentada, nao homologada pelo IGAM (ver inst/methodology/IGAM_VALIDATION.md)"
   } else {
     "Curvas aproximadas por interpolacao (rota legada; nao corresponde a metodologia oficial)"
   }

@@ -12,17 +12,24 @@ d_cetesb <- function() {
   )
 }
 
-test_that("method = 'IGAM' esta declarado mas bloqueado, com erro diagnostico", {
+test_that("method = 'IGAM' esta disponivel; entradas ambiguas geram erro", {
   d <- d_cetesb()
-  e <- tryCatch(iqa(d, method = "IGAM"), error = function(e) e)
-  expect_s3_class(e, "tikatuwq_method_unavailable")
-  expect_match(conditionMessage(e), "SCQA")
-  # Diagnostico das entradas: NT nao substitui nitrato; P nao e convertido
-  expect_match(conditionMessage(e), "nt_total")
-  expect_match(conditionMessage(e), "p_total")
-  expect_error(iqa_components(d, method = "IGAM"), class = "tikatuwq_method_unavailable")
+  # p_total sem base declarada: erro (sem conversao implicita)
+  expect_error(iqa(d, method = "IGAM"), "phosphorus_basis")
+  # Com a base declarada: calcula; sem cloreto/nitrato nao inventa valores
+  o <- iqa(d, method = "IGAM", phosphorus_basis = "P", details = TRUE)
+  expect_true(all(is.na(o$IQA)))
+  expect_match(attr(o, "components")$observacao[1], "cloreto")
+  expect_equal(attr(o, "iqa_calculation_method"), "IGAM")
+  expect_equal(attr(o, "iqa_classification"), "igam")
+  expect_match(attr(o, "iqa_note"), "Not endorsed")
+  expect_error(iqa_components(d, method = "IGAM"), "details = TRUE")
   m <- iqa_methods()
-  expect_false(m$available[m$method == "IGAM"])
+  expect_true(all(c("implemented", "documented", "reference_validated", "available", "limitation") %in% names(m)))
+  expect_true(m$available[m$method == "IGAM"])
+  expect_true(m$documented[m$method == "IGAM"])
+  expect_match(m$limitation[m$method == "IGAM"], "not endorsed by IGAM")
+  expect_match(m$limitation[m$method == "IGAM"], "Pampulha")
   expect_true(m$available[m$method == "CETESB"])
 })
 
@@ -30,8 +37,13 @@ test_that("Especificacao IGAM: pesos, obrigatorios, temperatura e classes", {
   s <- .iqa_igam_spec
   expect_equal(sum(s$weights), 1)
   expect_setequal(s$mandatory, c("od", "microbiologico"))
+  # Regra do Projeto Aguas de Minas (portal IGAM): 92; o SCQA 2005 da 93
   expect_equal(s$temperature_qs, 92)
-  expect_null(s$qi_equations)
+  expect_equal(s$temperature_qs_scqa_2005, 93)
+  # Liberado; reference_validated = reproduz IQAs publicados (nao homologacao)
+  expect_true(s$implemented)
+  expect_true(s$available)
+  expect_true(s$reference_validated)
   # Classes do relatorio IGAM 2017 (p. 9): Muito Ruim [0,25], Ruim (25,50],
   # Medio (50,70], Bom (70,90], Excelente (90,100]
   expect_equal(as.character(classify_iqa(c(25, 25.01, 50, 50.01, 70, 70.01, 90, 90.01), "igam")),
@@ -62,27 +74,31 @@ test_that("IGAM: entradas nao sao substituidas por analitos diferentes", {
   expect_true(any(grepl("total nitrogen", p)))
   expect_true(any(grepl("orthophosphate", p)))
   expect_true(any(grepl("TDS", p)))
-  ok <- data.frame(od = 7, coliformes = 10, ph = 7, dbo = 2, nitrato = 1,
-                   fosfato_total = 0.1, turbidez = 5, solidos_totais = 50)
+  ok <- data.frame(od = 7, temperatura = 25, cloreto = 10, coliformes = 10, ph = 7, dbo = 2,
+                   nitrato = 1, fosfato_total = 0.1, turbidez = 5, solidos_totais = 50)
   expect_length(.igam_check_inputs(ok)$problems, 0)
+  # Sem cloreto a saturacao de OD do SCQA nao e calculada (sem valor padrao)
+  expect_true(any(grepl("chloride", .igam_check_inputs(ok[, names(ok) != "cloreto"])$problems)))
 })
 
-test_that("iqa(): escala segue method; classification e depreciado", {
+test_that("iqa(): escala segue method; classification nao e aceito", {
   d <- d_cetesb()
   o <- iqa(d)
   expect_equal(attr(o, "iqa_classification"), "cetesb")
   expect_equal(attr(o, "iqa_calculation_method"), "CETESB")
-  expect_false("cross_classification" %in% attr(o, "iqa_nonstandard"))
-  expect_warning(x <- iqa(d, classification = "igam"), "Cross-classification")
-  expect_identical(x$IQA, o$IQA)
-  expect_true("cross_classification" %in% attr(x, "iqa_nonstandard"))
-  expect_warning(iqa(d, classification = "cetesb"), "deprecated")
+  expect_error(iqa(d, classification = "igam"), "removed from iqa")
   # classify_iqa() continua disponivel
   expect_equal(as.character(classify_iqa(80, classification = "igam")), "Bom")
 })
 
-test_that("compare_iqa(): IGAM indisponivel deixa todas as linhas inelegiveis", {
+test_that("compare_iqa(): metodo indisponivel deixa todas as linhas inelegiveis", {
   d <- d_cetesb()
+  # Simula o motor IGAM desligado (o caminho continua existindo)
+  iqa_orig <- iqa
+  local_mocked_bindings(iqa = function(df, method = "CETESB", ...) {
+    if (identical(method, "IGAM")) stop(.iqa_method_unavailable("IGAM", "disabled for test"))
+    iqa_orig(df, method = method, ...)
+  })
   cmp <- compare_iqa(d, id_cols = "ponto")
   expect_equal(nrow(cmp), 3L)
   expect_equal(cmp$ponto, d$ponto)
@@ -110,10 +126,10 @@ test_that("compare_iqa(): validacoes de argumentos e identificadores", {
   expect_error(compare_iqa(d, id_cols = "nao_existe"), "not found")
   d2 <- d; d2$ponto <- "P1"
   expect_error(compare_iqa(d2, id_cols = "ponto"), "share the same")
-  e <- compare_iqa(d[0, ])
+  e <- compare_iqa(d[0, ], phosphorus_basis = "P")
   expect_equal(nrow(e), 0L)
   expect_equal(attr(e, "summary")$n_total, 0L)
-  one <- compare_iqa(d[1, ], details = TRUE)
+  one <- compare_iqa(d[1, ], details = TRUE, phosphorus_basis = "P")
   expect_equal(nrow(one), 1L)
   expect_true(is.list(attr(one, "components")))
 })
