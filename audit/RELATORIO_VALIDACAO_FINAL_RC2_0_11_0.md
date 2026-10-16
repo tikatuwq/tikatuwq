@@ -61,8 +61,8 @@
 | Windows 11 local, R 4.5.1, `--as-cran` com manual PDF | **Executado** sobre o tarball recém-construído, de SHA idêntico ao RC2 (rodada anterior, `RELATORIO_TESTES_EXTERNOS_0_11_0.md` §6) | 0 | 0 | 0 |
 | Linux: WSL Ubuntu 26.04, R 4.5.3 (micromamba), `--as-cran --no-manual` (sem LaTeX) | **Executado** sobre o RC2 exato, sem rebuild | 0 | 0 | 0 |
 | macOS R-release: R 4.6.1 Patched r90311, aarch64, macOS Tahoe 26.6, Apple M1 | **Executado** sobre o RC2 | 0 | 0 | 0 (Status OK) |
-| win-builder R-devel | **Enviado** às 23:16 UTC; **resultado pendente** (e-mail ao mantenedor) | — | — | — |
-| win-builder R-release | **Enviado** às 23:16 UTC; **resultado pendente** | — | — | — |
+| win-builder R-devel: R-devel 2026-10-14 r90673 ucrt, Windows Server 2022 x64 | **Executado** sobre o RC2; log lido diretamente do servidor (`win_devel/`) | 0 | 0 | 1 |
+| win-builder R-release: R 4.6.1 (2026-06-24 ucrt), Windows Server 2022 x64 | **Executado** sobre o RC2; resultado informado pelo mantenedor a partir do log completo, em 2026-10-16. O link não foi repassado ao agente, então este log não foi lido por ele | 0 | 0 | 1 |
 | win-builder R-devel e R-release com o RC1 | *Resultado de outra versão*, não do RC2 | 0 | 0 | 1 cada |
 
 **Linux** (`linux/linux_resumo.log`):
@@ -92,18 +92,20 @@
 - Biblioteca de dependências do CRAN presente (`RLIBS` com `CRANlib`).
 - Exemplos, testes, vinhetas e manual PDF ok.
 
-**win-builder:**
-- **Ainda sem resultado.** Os resultados do RC1 **não** são usados como
-  resultado do RC2.
-- Com o RC1, a única NOTE foi "Possibly misspelled words in DESCRIPTION:
-  Minas / Gerais". O `DESCRIPTION` de origem é idêntico no RC2, então é
-  provável que ela se repita, mas isso só vale depois de confirmado.
+**win-builder R-devel** (`win_devel/00check.log`):
+- Instalação, exemplos, testes, vinhetas e manuais PDF e HTML ok.
+- Identidade: o binário gerado pelo serviço tem
+  `Packaged: 2026-10-16 22:33:24 UTC`, igual ao RC2, e um `NEWS.md` idêntico
+  ao do RC2.
+
+**win-builder R-release:** 0/0/1 com a mesma NOTE, conforme o log completo
+fornecido pelo mantenedor.
 
 ## 5. NOTEs
 
 | NOTE | Onde | Classificação |
 |---|---|---|
-| `Possibly misspelled words in DESCRIPTION: Gerais (25:62), Minas (25:56)` | win-builder, com o RC1. Para o RC2, aguardando | Falso positivo: nome próprio do estado, escrito corretamente. Justificado no `cran-comments.md`. `DESCRIPTION` não alterado |
+| `Possibly misspelled words in DESCRIPTION: Gerais (25:62), Minas (25:56)` | win-builder R-devel e R-release, com o RC2 (e antes com o RC1) | Falso positivo: nome próprio do estado, escrito corretamente. Justificado no `cran-comments.md`. `DESCRIPTION` não alterado |
 | Nenhuma | Windows, Linux e macOS com o RC2 | — |
 
 ## 6. Documentação
@@ -140,20 +142,12 @@ um novo SHA-256 e nova reavaliação.
 
 ## 9. Parecer
 
-**APTA COM RESSALVAS.**
-
-**Razões verificáveis:**
-- identidade do RC2 confirmada;
-- diferenças para o RC1 restritas à documentação e ao metadado de build;
-- nenhum dado privado ou do IGAM;
-- 0/0/0 no Windows, no Linux e no macOS.
-
-**Ressalva única:** faltam os resultados do win-builder R-devel e R-release
-para o RC2.
-- **Passa a APTA** se ambos derem 0 ERROR e 0 WARNING, com no máximo a NOTE
-  "Minas Gerais".
-- **Fica BLOQUEADA** em caso de ERROR, WARNING ou NOTE nova.
-- Os resultados devem ser registrados aqui e no `cran-comments.md`.
+**APTA.**
+- Os cinco ambientes do RC2 deram 0 ERROR e 0 WARNING.
+- A única NOTE é a do nome próprio "Minas Gerais", no win-builder, que é um
+  falso positivo justificado no `cran-comments.md`.
+- A ressalva da versão anterior deste relatório (win-builder pendente) foi
+  resolvida em 2026-10-16.
 
 ## 10. Próximo portão: GitHub `main` e site (não executado)
 

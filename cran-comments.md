@@ -60,11 +60,11 @@ SHA-256 was checked before each upload.
 
 ### win-builder (R-devel and R-release)
 
-* **PENDING:** submitted on 2026-10-16 at 23:16 UTC; results not yet
-  received. To be filled in with the real results before submission.
-* An earlier candidate, identical except for README.md and NEWS.md, gave
-  0 errors | 0 warnings | 1 note on both R-devel (2026-10-14 r90673 ucrt) and
-  R-release (R 4.6.1). The note was in "checking CRAN incoming feasibility":
+* **R-devel** (2026-10-14 r90673 ucrt), Windows Server 2022 x64:
+  0 errors | 0 warnings | 1 note.
+* **R-release** (R 4.6.1, 2026-06-24 ucrt), Windows Server 2022 x64:
+  0 errors | 0 warnings | 1 note.
+* The note, on both, is in "checking CRAN incoming feasibility":
 
   ```
   Possibly misspelled words in DESCRIPTION:
