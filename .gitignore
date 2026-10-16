@@ -11,3 +11,19 @@ R/testando.R
 inst/doc
 /doc/
 /Meta/
+
+# Dados historicos do IGAM por amostra: nunca versionar (ficam no arquivo de
+# pesquisa privado, fora do repositorio). Ver audit/DADOS_IGAM_PRIVADOS.md.
+tests/testthat/fixtures/igam_*
+audit/dados/igam_*.csv
+audit/dados/*entradas*.csv
+audit/resultados/*_casos*.csv
+audit/resultados/igam_validacao_externa.csv
+audit/resultados/igam_divergencias_por_amostra.csv
+inst/audit/IGAM_VALIDACAO_REFERENCIAS.csv
+inst/audit/referencias_igam/
+inst/audit/IGAM_DIVERGENCIAS.md
+inst/audit/IGAM_RELEASE_READINESS.md
+inst/audit/IGAM_VALIDACAO_TURBIDEZ_1_5.md
+inst/audit/SCQA_FONTES_E_EQUACOES.md
+*.xlsx
