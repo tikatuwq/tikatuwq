@@ -180,6 +180,7 @@ O ORCID não precisa esperar o CRAN. O Zenodo não precisa ser o último.
 
 ## Situação
 
-Todos os portões estão **NÃO EXECUTADOS**.
+- **Portão 1: EXECUTADO** em 2026-10-16, com autorização expressa (ver `RELATORIO_TESTES_EXTERNOS_0_11_0.md`).
+- **Portões 2 a 6: NÃO EXECUTADOS.**
 
-> Nenhum push, Pull Request, merge, tag, release, deploy pkgdown, upload para serviço externo, depósito ou reserva de DOI, alteração no ORCID ou submissão ao CRAN foi realizado nesta etapa.
+> Nenhum push, Pull Request, merge, tag, release, deploy pkgdown, depósito ou reserva de DOI, alteração no ORCID ou submissão ao CRAN foi realizado. O único envio externo foi o do tarball candidato ao win-builder e ao mac builder (Portão 1), autorizado.

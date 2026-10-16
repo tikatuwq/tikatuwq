@@ -33,8 +33,9 @@ Results of previously published analyses may change. This is described in
 
 ## R CMD check results
 
-All checks were run locally on 2026-10-16, on a tarball built from a clean
-clone of the release candidate.
+All checks were run on 2026-10-16 on the same release candidate (built from a
+clean clone). The remote services received the exact local tarball
+(SHA-256 checked before each upload).
 
 ### Windows 11 x64 (build 26200)
 
@@ -54,10 +55,30 @@ clone of the release candidate.
     moment, while cran.r-project.org did. The Windows run on the same day
     passed this check.
 
-### Not run (remote services, pending)
+### win-builder (same tarball)
 
-* win-builder (R-devel, R-release);
-* macOS (mac builder).
+* **R-devel** (2026-10-14 r90673 ucrt), Windows Server 2022 x64:
+  0 errors | 0 warnings | 1 note.
+* **R-release** (R 4.6.1, 2026-06-24 ucrt), Windows Server 2022 x64:
+  0 errors | 0 warnings | 1 note.
+* The note, on both, is in "checking CRAN incoming feasibility":
+
+  ```
+  Possibly misspelled words in DESCRIPTION:
+    Gerais (25:62)
+    Minas (25:56)
+  ```
+
+  "Minas Gerais" is the name of a Brazilian state, spelled correctly. It
+  identifies the state water agency (IGAM) whose index the package
+  reproduces.
+
+### macOS (mac builder, same tarball)
+
+* **Environment:** R 4.6.1 Patched (2026-07-27 r90311), aarch64-apple-darwin23,
+  macOS Tahoe 26.6, Apple M1.
+* **Result:** Status OK (0 errors | 0 warnings | 0 notes), including the PDF
+  manual.
 
 ## Reverse dependencies
 
