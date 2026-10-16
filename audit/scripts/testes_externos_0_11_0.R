@@ -53,8 +53,11 @@ if (alvo %in% c("win-devel", "win-release")) {
   curl::curl_fetch_memory(url, handle = h)
   cat("Enviado ao win-builder (", pasta, "). Aguarde o e-mail do mantenedor com o link dos resultados.\n", sep = "")
 } else {
-  # O mac builder recebe o pacote via devtools::check_mac_release(), que
-  # reconstroi a partir do diretorio do pacote (mesmo commit).
-  devtools::check_mac_release(pkg = ".")
-  cat("Enviado ao mac builder. Use o link de resultados exibido acima.\n")
+  # Mesmo endpoint de devtools::check_mac_release() (devtools 2.4.5), mas com
+  # o tarball EXATO conferido acima, em vez de reconstruir o pacote.
+  res <- httr::POST("https://mac.r-project.org/macbuilder/v1/submit",
+                    body = list(pkgfile = httr::upload_file(tarball)),
+                    encode = "multipart")
+  httr::stop_for_status(res, task = "Uploading package")
+  cat("Enviado ao mac builder. Resultados em:", httr::content(res)$url, "\n")
 }
