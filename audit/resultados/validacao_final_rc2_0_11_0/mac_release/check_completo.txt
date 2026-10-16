@@ -1,0 +1,201 @@
+ 
+ 
+   
+     
+     
+     
+     macOS build result for 1792192575-e16304564a080316 
+     
+     
+   
+   
+      
+     
+       macOS builder results 
+       Build system:  r-release-macosx-arm64|4.6.1|macosx|macOS 26.6 (25G72)|Mac mini|Apple M1||en_US.UTF-8|macOS 14.4|clang-1700.6.3.2|GNU Fortran (GCC) 14.2.0
+  
+       You can download a full tar ball  results.tar.bz2  which contains the check results, tests, installed packages and binaries. A subset of the files are shown below. 
+       
+	 
+	   Build Log 
+	 
+	 
+	   00install.out 
+	 
+	 
+	   Check Log 
+	 
+       
+       
+	 
+	   Resetting rust
+gcc -o watchdog src/watchdog.c -O3
+gcc -o sched src/sched.c -O3
+gcc -Wall -o should_build src/should_build.c -O3
+mkdir CRAN.meta
+mkdir -p CRAN/src/contrib
+*** use 'sync.bioc.in' to run CRAN+BioC sync
+/Library/Developer/CommandLineTools/usr/bin/make  -C CRAN -f ../Makefile.CRAN cache
+ln -s ../CRAN.meta meta
+mkdir -p meta/src/contrib
+tar fxzO src/contrib/tikatuwq_0.11.0.tar.gz `echo src/contrib/tikatuwq_0.11.0.tar.gz | sed -e 's:.*/::' -e 's:_.*::'`/DESCRIPTION > meta/src/contrib/tikatuwq_0.11.0.DESCRIPTION
+../rmdup 'meta/src/contrib/*.DESCRIPTION'
+RBUILDS: /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages
+base: /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN
+sources: /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/src/contrib
+meta: /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/meta/src/contrib
+RBIN: R
+CLANGPATH: 
+minos target: macOS 14.0 (darwin23)
+SDK: 14.4 (MacOSX14.sdk)
+ [X11] Existing session at /var/run/com.apple.launchd.2kC1trQE5V/org.xquartz:0
+R version 4.6.1
+ SKIP_CHK: no
+ CHK_ONLY: no
+ UPDATE  : no
+OUTPUT:
+  Rlib: /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/sonoma-arm64/Rlib/4.6
+  bin : /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/sonoma-arm64/bin/4.6
+  res : /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/sonoma-arm64/results/4.6
+RLIBS=/Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/sonoma-arm64/Rlib/4.6:/Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/sonoma-arm64/CRANlib/4.6
+2026-10-17 12:16:35.095 system_profiler[47754:24603022] hw.cpufamily: 0x1b588bb3
+2026-10-17 12:16:35.199 system_profiler[47758:24603041] hw.cpufamily: 0x1b588bb3
+2026-10-17 12:16:35.362 system_profiler[47763:24603057] hw.cpufamily: 0x1b588bb3
+2026-10-17 12:16:35.464 system_profiler[47767:24603073] hw.cpufamily: 0x1b588bb3
+Machine : Mac mini, Apple M1 
+System  : macOS 26.6 (25G72)
+Profile : r-release-macosx-arm64
+SDK     : macOS 14.4 (C compiler: clang-1700.6.3.2, FORTRAN compiler: GNU Fortran (GCC) 14.2.0)
+
+Building package dependency tree..
+(from /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/src/contrib)
+./dtree --desc /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/meta/src/contrib /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/src/contrib > /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/dep.list
+NOTE: there is no source for package testthat [testthat], installed CRAN version will be used.
+NOTE: there is no source for package spelling [spelling], installed CRAN version will be used.
+NOTE: there is no source for package rmarkdown [rmarkdown], installed CRAN version will be used.
+NOTE: there is no source for package knitr [knitr], installed CRAN version will be used.
+NOTE: there is no source for package pkgdown [pkgdown], installed CRAN version will be used.
+NOTE: there is no source for package leaflet [leaflet], installed CRAN version will be used.
+NOTE: there is no source for package withr [withr], installed CRAN version will be used.
+NOTE: there is no source for package dplyr [dplyr], installed CRAN version will be used.
+NOTE: there is no source for package readr [readr], installed CRAN version will be used.
+NOTE: there is no source for package tibble [tibble], installed CRAN version will be used.
+NOTE: there is no source for package rlang [rlang], installed CRAN version will be used.
+NOTE: there is no source for package ggplot2 [ggplot2], installed CRAN version will be used.
+NOTE: there is no source for package tidyr [tidyr], installed CRAN version will be used.
+NOTE: there is no source for package lubridate [lubridate], installed CRAN version will be used.
+NOTE: there is no source for package stringr [stringr], installed CRAN version will be used.
+NOTE: there is no source for package glue [glue], installed CRAN version will be used.
+NOTE: there is no source for package scales [scales], installed CRAN version will be used.
+NOTE: there is no source for package broom [broom], installed CRAN version will be used.
+NOTE: there is no source for package purrr [purrr], installed CRAN version will be used.
+Checking all packages..
+1792192596:20261017:121636:tikatuwq:
+  /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/src/contrib/tikatuwq_0.11.0.tar.gz
+ - looking for /Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/CRAN/meta/src/contrib/tikatuwq_0.11.0.DESCRIPTION
+ - using cached DESCRIPTION file for detection
+  - unpacking
+  - checking tikatuwq 
+  - installing from sources
+* installing *binary* package ‘tikatuwq’ ...
+* package ‘tikatuwq’ successfully unpacked and SHA256 sums checked
+* DONE (tikatuwq)
+ 
+	 
+	 
+	   * installing *source* package ‘tikatuwq’ ...
+** this is package ‘tikatuwq’ version ‘0.11.0’
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tikatuwq)
+ 
+	 
+	 
+	   * using log directory ‘/Volumes/PkgBuild/work/1792192575-e16304564a080316/packages/sonoma-arm64/results/4.6/tikatuwq.Rcheck’
+* using R version 4.6.1 Patched (2026-07-27 r90311)
+* using platform: aarch64-apple-darwin23
+* R was compiled by
+    Apple clang version 17.0.0 (clang-1700.3.19.1)
+    GNU Fortran (GCC) 14.2.0
+* running under: macOS Tahoe 26.6
+* using session charset: UTF-8
+* current time: 2026-10-16 23:16:36 UTC
+* checking for file ‘tikatuwq/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tikatuwq’ version ‘0.11.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘tikatuwq’ can be installed ... [3s/3s] OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... [1s/1s] OK
+* checking whether the package can be loaded with stated dependencies ... [0s/0s] OK
+* checking whether the package can be unloaded cleanly ... [0s/0s] OK
+* checking whether the namespace can be loaded with stated dependencies ... [1s/1s] OK
+* checking whether the namespace can be unloaded cleanly ... [1s/1s] OK
+* checking loading without being on the library search path ... [1s/1s] OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [3s/3s] OK
+* checking Rd files ... [0s/0s] OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... [0s/0s] OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... [2s/2s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... [4s/4s] OK
+  Running ‘testthat.R’ [4s/4s]
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [10s/10s] OK
+* checking PDF version of manual ... [3s/3s] OK
+* DONE
+Status: OK
+* using check arguments '--no-clean-on-error '
+* elapsed time (check, wall clock): 0:44
+* result classification: OK, errors:no, warnings:no, notes:no
+ 
+	 
+       
+       
+      
+   
+ 

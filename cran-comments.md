@@ -33,38 +33,38 @@ Results of previously published analyses may change. This is described in
 
 ## R CMD check results
 
-All checks were run on 2026-10-16 on tarballs built from a clean clone of the
-release candidate. The remote services received the exact local tarball
-(SHA-256 checked before each upload). README.md and NEWS.md were updated
-afterwards; the code, tests and documentation are otherwise identical, and
-the updated tarball passed `R CMD check --as-cran` on Windows with the PDF
-manual (0 errors | 0 warnings | 0 notes).
+All results below are for the submitted tarball (release candidate 2,
+SHA-256 `0775fc48e6659c7698f7043cbcb9a906c56482219d45a5196373cc4f282b793d`),
+checked on 2026-10-16. The remote services received this exact file; the
+SHA-256 was checked before each upload.
 
-### Windows 11 x64 (build 26200)
+### Windows 11 x64 (local)
 
 * **Environment:** R 4.5.1 (ucrt), Rtools 4.5, pandoc 3.8.3, TinyTeX.
 * **Command:** `R CMD check --as-cran`, **with** the PDF manual.
 * **Result:** 0 errors | 0 warnings | 0 notes.
 
-### Ubuntu 26.04 LTS (WSL2)
+### Ubuntu 26.04 LTS (WSL2, local)
 
 * **Environment:** R 4.5.3 (conda-forge), locale C.UTF-8, pandoc 3.12.1.
 * **Command:** `R CMD check --as-cran --no-manual` (no LaTeX on this machine;
-  the PDF manual was checked on Windows).
-* **Result:** 0 errors | 0 warnings | 1 note.
-  * The note is "checking for future file timestamps ... unable to verify
-    current time". The time services queried by R (worldtimeapi.org,
-    worldclockapi.com) did not respond from the local network at that
-    moment, while cran.r-project.org did. The Windows run on the same day
-    passed this check.
+  the PDF manual was checked on Windows and macOS).
+* **Result:** 0 errors | 0 warnings | 0 notes.
 
-### win-builder (same tarball)
+### macOS (mac builder)
 
-* **R-devel** (2026-10-14 r90673 ucrt), Windows Server 2022 x64:
-  0 errors | 0 warnings | 1 note.
-* **R-release** (R 4.6.1, 2026-06-24 ucrt), Windows Server 2022 x64:
-  0 errors | 0 warnings | 1 note.
-* The note, on both, is in "checking CRAN incoming feasibility":
+* **Environment:** R 4.6.1 Patched (2026-07-27 r90311), aarch64-apple-darwin23,
+  macOS Tahoe 26.6, Apple M1.
+* **Result:** Status OK (0 errors | 0 warnings | 0 notes), including the PDF
+  manual.
+
+### win-builder (R-devel and R-release)
+
+* **PENDING:** submitted on 2026-10-16 at 23:16 UTC; results not yet
+  received. To be filled in with the real results before submission.
+* An earlier candidate, identical except for README.md and NEWS.md, gave
+  0 errors | 0 warnings | 1 note on both R-devel (2026-10-14 r90673 ucrt) and
+  R-release (R 4.6.1). The note was in "checking CRAN incoming feasibility":
 
   ```
   Possibly misspelled words in DESCRIPTION:
@@ -75,13 +75,6 @@ manual (0 errors | 0 warnings | 0 notes).
   "Minas Gerais" is the name of a Brazilian state, spelled correctly. It
   identifies the state water agency (IGAM) whose index the package
   reproduces.
-
-### macOS (mac builder, same tarball)
-
-* **Environment:** R 4.6.1 Patched (2026-07-27 r90311), aarch64-apple-darwin23,
-  macOS Tahoe 26.6, Apple M1.
-* **Result:** Status OK (0 errors | 0 warnings | 0 notes), including the PDF
-  manual.
 
 ## Reverse dependencies
 

@@ -1,0 +1,50 @@
+== ambiente
+Ubuntu 26.04 LTS | Linux 6.18.33.2-microsoft-standard-WSL2
+R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+pandoc: pandoc 3.12.1
+locale: C.UTF-8
+pdflatex: ausente
+sha256: 0775fc48e6659c7698f7043cbcb9a906c56482219d45a5196373cc4f282b793d
+SHA confere com o RC2
+== R CMD check --as-cran --no-manual (sobre o tarball RC2, sem rebuild)
+* checking CRAN incoming feasibility ... [6s/30s] OK
+* checking for future file timestamps ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking tests ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... OK
+Status: OK
+[ FAIL 0 | WARN 11 | SKIP 16 | PASS 736 ]
+== teste de rede dos servidores de hora (para classificar eventual NOTE)
+http://worldtimeapi.org/api/timezone/etc/UTC -> HTTP 000 em 2026-10-16T23:15:36Z
+http://worldclockapi.com/api/json/utc/now -> HTTP 200 em 2026-10-16T23:15:36Z
+https://cran.r-project.org -> HTTP 200 em 2026-10-16T23:15:37Z
+== instalacao em biblioteca limpa e smoke
+install: DONE
+tikatuwq 0.11.0 
+CETESB: 74.96 Boa 
+IGAM: 75.5 Bom bruto 75.479124819574 
+igual ao valor independente (Python): TRUE 
+erro sem nitrate_unit: sim 
+               method available reference_validated
+               CETESB      TRUE                TRUE
+                 IGAM      TRUE                TRUE
+ CETESB_legacy_approx      TRUE               FALSE
+           NSF_approx      TRUE               FALSE
+ ponto IQA_CETESB IQA_IGAM par_valido
+    P1      79.06     78.4       TRUE
+    P2      57.22     57.0       TRUE
+    P3      31.18     30.4       TRUE
+    P4      69.21       NA      FALSE
+pares validos: 3 
+[1] Muito Ruim Medio      Excelente 
+Levels: Muito Ruim < Ruim < Medio < Bom < Excelente
+[1] Ruim    Regular Otima  
+Levels: Pessima < Ruim < Regular < Boa < Otima
+Santos V (2026). _tikatuwq: Water Quality Assessment and Environmental
+Compliance in Brazil_. doi:10.5281/zenodo.17407296
+<https://doi.org/10.5281/zenodo.17407296>, R package version 0.11.0
+(Zenodo concept DOI, all versions),
+<https://github.com/tikatuwq/tikatuwq>.
