@@ -9,7 +9,7 @@ O pacote também inclui análise sazonal, cálculo de carga poluidora, probabili
 [![CRAN status](https://www.r-pkg.org/badges/version/tikatuwq)](https://cran.r-project.org/package=tikatuwq) 
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq)](https://cran.r-project.org/package=tikatuwq) 
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/tikatuwq)](https://cran.r-project.org/package=tikatuwq) 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg)](https://doi.org/10.5281/zenodo.17407297) 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17407296.svg)](https://doi.org/10.5281/zenodo.17407296) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 [![R-CMD-check](https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tikatuwq/tikatuwq/actions) 
 ![Status do manuscrito](https://img.shields.io/badge/manuscrito-em_avaliação-yellow) 
@@ -90,9 +90,69 @@ aproximações analíticas delas. Veja o
 para a comparação antes/depois e a lista de pendências.
 
 - `classify_iqa()` usa `classification` (como `iqa()`); `scheme` foi depreciado.
-- `classify_iqa()` oferece as escalas `"cetesb"`, `"igam"` e `"ana"` (mesmos cortes da `"cetesb"`); elas mudam apenas os rótulos, nunca o valor do IQA. Em `iqa()` a escala passa a seguir `method`; `iqa(classification = ...)` foi depreciado e uma escala diferente é marcada como classificação cruzada.
-- `iqa_methods()` lista os motores de cálculo. `method = "IGAM"` está declarado, mas **bloqueado**: as equações dos sub-índices do IGAM (SCQA, SEMAD 2005) não foram obtidas de fonte primária.
-- `compare_iqa()` compara motores de cálculo em amostras pareadas (pronta para o IGAM quando ele for desbloqueado).
+- `classify_iqa()` oferece as escalas `"cetesb"`, `"igam"` e `"ana"` (mesmos cortes da `"cetesb"`); elas mudam apenas os rótulos, nunca o valor do IQA. Em `iqa()` a escala segue `method`; o argumento `classification` de `iqa()` foi removido (mudança incompatível com a 0.10.0): use `classify_iqa()`.
+- `iqa(df, method = "IGAM")` calcula o IQA do IGAM (Minas Gerais) com motor próprio (veja abaixo).
+- `iqa_methods()` lista os motores de cálculo e o escopo de validação de cada um.
+- `compare_iqa(df, methods = c("CETESB", "IGAM"))` compara os dois motores em amostras pareadas.
+
+#### IQA-IGAM: implementação e validação
+
+O `tikatuwq` implementa uma reprodução computacional documentada do IQA adotado
+pelo Instituto Mineiro de Gestão das Águas (IGAM). Ela se baseia no SCQA
+(2005), na documentação institucional e na literatura acadêmica.
+
+- **Turbidez:** o subíndice usa o coeficiente `1,5` no termo trigonométrico,
+  registrado por Bucci (2011, p. 51) e Nunes (2008, Quadro 10). Cópias do SCQA
+  trazem `15`.
+- **Resultados:** a escolha foi respaldada pela reprodução dos resultados
+  publicados pelo IGAM. Os **49 registros** de três campanhas na sub-bacia da
+  Pampulha (2017–2018) coincidem com o valor publicado após arredondar a uma
+  casa decimal. O maior erro absoluto sem arredondamento é 0,048876. Quinze
+  desses registros serviram à investigação; os outros 34 foram conferidos com
+  critérios pré-registrados.
+- **Dados não redistribuídos:** os 49 registros históricos são dados do IGAM e
+  não acompanham o pacote. Só as métricas agregadas são documentadas, com as
+  fontes e o procedimento de reprodução. Os testes do pacote usam dados
+  sintéticos.
+- **Sem homologação:** a implementação **não é homologada pelo IGAM**.
+- **Não coberto:** outras bacias, nitrato acima do limite de detecção e as
+  regras do IGAM para valores censurados, cloreto ausente e arredondamento.
+- **Entradas:** o IGAM exige cloreto (saturação de OD) e unidade explícita do
+  nitrato (`nitrate_unit = "N"` ou `"NO3"`). O fósforo total (`p_total`) exige
+  `phosphorus_basis`.
+
+Equações, fontes (com páginas), requisitos de entrada, métricas de validação e
+o procedimento de reprodução estão em `system.file("methodology", "IGAM_VALIDATION.md", package = "tikatuwq")`.
+
+```r
+# Amostra sintética; nitrato em mg/L N e fósforo total em mg/L P são declarados
+g <- data.frame(od = 7, temperatura = 25, cloreto = 10, e_coli = 100, ph = 7.3,
+                dbo = 2, nitrato = 1, p_total = 0.1, turbidez = 5, solidos_totais = 100)
+iqa(g, method = "IGAM", altitude_m = 0, nitrate_unit = "N", phosphorus_basis = "P")
+#> IQA 75,5 (Bom)
+```
+
+Comparação dos dois motores nas mesmas amostras (dados ilustrativos; só as linhas
+válidas nos dois métodos entram nas estatísticas). Os métodos não usam os mesmos
+parâmetros: o CETESB usa nitrogênio total e fósforo total; o IGAM usa nitrato,
+fosfato total e cloreto. As classes também têm cortes diferentes; portanto, as
+diferenças refletem a metodologia, não erro de medição:
+
+```r
+d <- data.frame(
+  ponto = c("P1", "P2", "P3", "P4"),
+  od = c(7, 5, 3, 6), temperatura = 24, cloreto = c(10, 30, 60, NA),
+  coliformes = c(100, 2000, 20000, 500), ph = c(7.2, 7.5, 7, 7.4),
+  dbo = c(2, 5, 15, 3), nt_total = c(1, 3, 8, 2), nitrato = c(0.5, 1, 2, 0.8),
+  p_total = c(0.05, 0.2, 0.8, 0.1), turbidez = c(5, 20, 60, 10),
+  solidos_totais = c(100, 200, 400, 150)
+)
+cmp <- compare_iqa(d, methods = c("CETESB", "IGAM"), id_cols = "ponto",
+                   phosphorus_basis = "P", nitrate_unit = "N", altitude_m = 800)
+cmp[, c("ponto", "IQA_CETESB", "IQA_IGAM", "par_valido", "motivo_IGAM")]
+attr(cmp, "summary")            # estatísticas pareadas (3 pares válidos aqui)
+attr(cmp, "class_transitions")  # classe CETESB -> classe IGAM (escalas diferentes)
+```
 - `iqa(details = TRUE)` informa os pesos efetivamente usados, inclusive com `pesos` customizados e `allow_partial = TRUE`.
 - `delta_temperature` agora é repassado; valores físicos inválidos viram `NA` com aviso.
 
@@ -148,8 +208,8 @@ install.packages("remotes")
 # development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
-# versão estável (por tag)
-remotes::install_github("tikatuwq/tikatuwq@v0.10.0", build_vignettes = TRUE)
+# uma versão específica por tag (a última tag no GitHub é v0.8.2; para a 0.10.0 use o CRAN)
+remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 ```
 
 ---
@@ -220,17 +280,19 @@ conama_freq_check(df, classe = "2", by = "ponto")
 
 Se você utilizar o **tikatuwq** em sua pesquisa ou projeto, por favor cite:
 
-> Santos, V. S. (2025). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (v0.10.0). Zenodo. [https://doi.org/10.5281/zenodo.17407297](https://doi.org/10.5281/zenodo.17407297)
+> Santos, V. S. (2026). *tikatuwq: Avaliação da Qualidade da Água e Conformidade Ambiental no Brasil* (pacote R versão 0.11.0). Zenodo (DOI de conceito, todas as versões). [https://doi.org/10.5281/zenodo.17407296](https://doi.org/10.5281/zenodo.17407296)
 
 Entrada BibTeX:
 
 ```bibtex
-@Manual{Santos2025tikatuwq,
+@Manual{Santos2026tikatuwq,
   title  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},
   author = {Vinicius Saraiva Santos},
-  year   = {2025},
-  note   = {R package version 0.10.0},
-  doi    = {10.5281/zenodo.17407297},
+  year   = {2026},
+  note   = {R package version 0.11.0},
+  doi    = {10.5281/zenodo.17407296},
   url    = {https://github.com/tikatuwq/tikatuwq},
 }
 ```
+
+O DOI é o DOI de *conceito* do Zenodo, que aponta para a versão depositada mais recente (hoje a v0.7.0); a versão 0.11.0 ainda não tem depósito próprio. `citation("tikatuwq")` traz a mesma referência.

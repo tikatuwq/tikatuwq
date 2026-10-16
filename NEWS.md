@@ -5,6 +5,13 @@ Scientific stabilization of the IQA core and of the trophic state indices.
 and `inst/audit/REGRESSAO_0_10_0_0_11_0.csv` for the full before/after
 comparison.
 
+This release also includes:
+- a **breaking change**: the `classification` argument of `iqa()` was removed
+  (see "Calculation engines and comparison");
+- a new IGAM engine, `iqa(method = "IGAM")`, which is a documented
+  reproduction and is not endorsed by IGAM;
+- `compare_iqa()`.
+
 CETESB (2023) Appendix D gives the IQA sub-indices only as graphical curves
 (Figure 1). The package's piecewise equations come from the CETESB spreadsheet
 as transcribed by CPRH (PNMA II) and by von Sperling (2007, p. 255; reproduced
@@ -66,25 +73,65 @@ the published IBEAS/von Sperling worked example (IQA = 81) is reproduced.
 
 - New `iqa_methods()` lists the IQA calculation engines and their validation
   status.
-- `method = "IGAM"` is declared in `iqa()` and `iqa_components()` but
-  **blocked**: the IGAM sub-index equations (SCQA, SEMAD/PNMA II 2005) could
-  not be obtained from a primary source, and the CETESB equations are not
-  reused for IGAM (different analytes: nitrate and total phosphate). The call
-  fails with an error of class `tikatuwq_method_unavailable` that also
-  diagnoses the inputs (e.g. `nt_total` is not used for nitrate). Weights,
-  mandatory parameters, missing-data rule, temperature qs = 92 and classes are
-  documented in `inst/audit/VALIDACAO_IGAM.md`.
+- New `iqa(df, method = "IGAM")`: an engine independent of the CETESB one,
+  giving a documented computational reproduction of the IGAM (Minas Gerais)
+  IQA. **It is not endorsed by IGAM.**
+  - **Sources:** SCQA equations (SEMAD/UCEMG/PNMA II 2005, Relatorio 1; the
+    copy IGAM hosted, SHA-1 verified) and the Projeto Aguas de Minas rules:
+    temperature qs = 92; no index without dissolved oxygen or the microbial
+    parameter; other missing weights shared equally.
+  - **Turbidity:** uses the coefficient 1.5 in the cosine term, as recorded by
+    Bucci (2011, p. 51) and Nunes (2008, Table 10). Copies of the SCQA print
+    15.
+  - **Validation:** reproduces all 49 IQA values published by IGAM for the
+    Pampulha sub-basin, after rounding to one decimal place (maximum
+    unrounded error 0.049). Fifteen of them come from the 3rd quarter of 2017
+    and were used in the investigation. The other 34 come from the 3rd
+    quarter of 2018 and the 4th quarter of 2017, selected with pre-registered
+    criteria.
+  - **Strict inputs (no unit is assumed):**
+    - `nitrate_unit` ("N" or "NO3") is required with nitrate;
+    - `p_total` requires `phosphorus_basis`, while `fosfato_total` (PO4) is
+      used as is;
+    - chloride is required for oxygen saturation, with no default;
+    - if both E. coli and thermotolerant coliforms are present,
+      `microbial_type` must choose one;
+    - `allow_partial`, `pesos` and the CETESB temperature options raise an
+      error.
+  - **Output:** the IQA is rounded to one decimal place, as IGAM publishes it.
+    Censoring is recorded per row.
+  - **Data not redistributed:** the 49 historical records are IGAM data and
+    do not ship with the package. The methodology note documents the
+    aggregate metrics, the sources (with SHA-1) and how to reproduce the
+    check. The package tests use synthetic data, with expected values
+    computed independently.
+  - See `system.file("methodology", "IGAM_VALIDATION.md", package =
+    "tikatuwq")`.
+- `iqa_methods()`: IGAM is `available = TRUE` and `reference_validated =
+  TRUE`. `reference_validated` is now documented as reproducing values
+  *published* by the reference institution, within the scope stated in
+  `limitation`. It is not endorsement or validation in every basin.
+- `compare_iqa()` now compares CETESB and IGAM on paired samples.
+- `iqa_components(method = "IGAM")` points to
+  `iqa(df, method = "IGAM", details = TRUE)`.
+- New argument `nitrate_unit` in `iqa()`, used only by IGAM.
+- New column alias `cloreto` (chloride, mg/L).
 - New `compare_iqa()`: runs each engine on the same rows, keeps row identity
   (`id_cols`), reports eligibility and reasons per method, and computes paired
   statistics (mean/median difference, MAE, RMSE, correlations with >= 3 pairs)
   only on rows valid for all methods. Class differences are reported as a
   transition table, not as label agreement. Unavailable methods make all rows
   ineligible instead of failing.
-- `iqa()`: the classification scale now follows `method`. `classification` is
-  deprecated (warning); a scale different from the method's own is flagged as
-  `"cross_classification"` in `attr(, "iqa_nonstandard")`. New attributes
-  `iqa_calculation_method` and `iqa_method_version`. Planned removal of the
-  argument: not before 0.13.0. Use `classify_iqa()` for other scales.
+- **Breaking:** `iqa()` no longer has a `classification` argument (it existed
+  in 0.10.0 with `"cetesb"`/`"legacy"`). The scale follows `method`; passing
+  `classification` or `scheme` is an error that points to
+  `classify_iqa(iqa(df)$IQA, classification = ...)`. Positional calls from
+  0.10.0 with the classification as third argument (`iqa(df, "CETESB",
+  "legacy")`) now fail with the same migration message, because the third
+  argument is now `altitude_m`. `classify_iqa()` is unchanged.
+  New attributes `iqa_calculation_method` and `iqa_method_version`.
+- `iqa_methods()` reports `implemented`, `documented`, `reference_validated`,
+  `available` and `limitation` for each engine.
 - New canonical column `fosfato_total` (total phosphate as PO4), distinct from
   `p_ortofosfato` and `p_total`.
 - ANA: no `method = "ANA"` (see `inst/audit/ANA_VS_CETESB.md`);
@@ -139,6 +186,19 @@ the published IBEAS/von Sperling worked example (IQA = 81) is reproduced.
 - `?wq_demo` now states that the dataset has TDS but not total solids, so its
   IQA values are partial estimates (8 parameters), not CETESB IQA values, and
   that it is not an independent benchmark.
+
+## Known open items
+
+- CETESB pH 9-10: two published transcriptions differ. The package uses
+  `288 - 27 pH`, which is continuous and follows the curve; the alternative is
+  `50 - 32 (pH - 9)`. The effect is at most 0.9 IQA points, with no class
+  change in the tests. Decision pending.
+- CETESB delta-T curve (`temperature_method = "delta"`/`"reference"`): it has
+  no traceable source and stays experimental, with a warning. The default
+  (qi = 94) is not affected.
+- IGAM: no institutional confirmation of the turbidity coefficient 1.5; not
+  validated outside the Pampulha sub-basin; IGAM rules for censored values,
+  missing chloride and rounding are not documented (package policies apply).
 
 # tikatuwq 0.10.0
 

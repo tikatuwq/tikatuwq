@@ -2,7 +2,9 @@ cff-version: 1.2.0
 message: "Se usar este pacote, por favor cite:"
 title: "tikatuwq: Ferramentas para Análise de Qualidade da Água (Brasil)"
 version: 0.11.0
-date-released: 2025-09-04
+# 0.11.0 ainda nao foi lancada: sem date-released. O DOI abaixo e o DOI de
+# conceito do Zenodo (todas as versoes); o ultimo deposito e a v0.7.0.
+doi: 10.5281/zenodo.17407296
 authors:
   - family-names: Santos
     given-names: Vinicius Saraiva

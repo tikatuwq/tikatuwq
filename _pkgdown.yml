@@ -24,6 +24,9 @@ reference:
   - title: Indices de qualidade
     contents:
       - iqa
+      - iqa_components
+      - iqa_methods
+      - compare_iqa
       - classify_iqa
       - iet_carlson
       - classify_tsi_carlson
@@ -31,26 +34,46 @@ reference:
       - classify_tsi_lamparelli
       - nsfwqi
 
-  - title: Conformidade CONAMA
+  - title: Conformidade CONAMA e balneabilidade
     contents:
       - conama_limits
       - conama_check
+      - conama_freq_check
       - conama_summary
       - conama_report
       - conama_text
+      - balnear_check
 
-  - title: Analises
+  - title: Analise sazonal e tendencia
     contents:
+      - assign_season
+      - compare_seasons
+      - mk_seasonal
       - trend_param
+
+  - title: Carga e probabilidade
+    contents:
+      - compute_load
+      - exceedance_prob
+
+  - title: Multivariada
+    contents:
+      - wq_pca
 
   - title: Visualizacoes
     contents:
       - plot_iqa
+      - plot_iet
       - plot_series
       - plot_box
       - plot_heatmap
       - plot_map
+      - plot_map_quality
       - plot_trend
+
+  - title: Utilitarios internos
+    contents:
+      - normalize_param_names
 
   - title: Relatorios e texto
     contents:
