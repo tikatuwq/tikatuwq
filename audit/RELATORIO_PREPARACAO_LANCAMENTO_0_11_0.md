@@ -209,3 +209,16 @@ Os detalhes estão no plano.
 |---|---|
 | `5c7d05b` | `DESCRIPTION`: a descrição passa a mencionar o motor IGAM e `compare_iqa()` (só texto) |
 | (seguinte) | `cran-comments.md` atualizado, este relatório, o plano e os logs (todos fora do tarball) |
+
+## 10. Equivalência entre o tarball testado e o commit final
+
+- **Construção:** a partir de um clone novo do commit `68441b7`, que acrescenta
+  `cran-comments.md` e `audit/` sobre o `5c7d05b` testado.
+- **Comparação, arquivo por arquivo**, com o tarball testado: mesma lista
+  (161 arquivos) e **conteúdo idêntico**, exceto a linha `Packaged:` do
+  `DESCRIPTION` (carimbo de build).
+- **Conclusão:** os resultados da §4 valem para os commits `68441b7` e
+  seguintes que só alterem `audit/`, que fica fora do tarball (`^audit$` no
+  `.Rbuildignore`).
+- **No portão E:** reconstruir o tarball a partir do commit aprovado, repetir
+  a comparação e registrar o SHA-256 enviado.
