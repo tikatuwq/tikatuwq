@@ -33,9 +33,12 @@ Results of previously published analyses may change. This is described in
 
 ## R CMD check results
 
-All checks were run on 2026-10-16 on the same release candidate (built from a
-clean clone). The remote services received the exact local tarball
-(SHA-256 checked before each upload).
+All checks were run on 2026-10-16 on tarballs built from a clean clone of the
+release candidate. The remote services received the exact local tarball
+(SHA-256 checked before each upload). README.md and NEWS.md were updated
+afterwards; the code, tests and documentation are otherwise identical, and
+the updated tarball passed `R CMD check --as-cran` on Windows with the PDF
+manual (0 errors | 0 warnings | 0 notes).
 
 ### Windows 11 x64 (build 26200)
 

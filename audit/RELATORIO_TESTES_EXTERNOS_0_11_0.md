@@ -104,7 +104,30 @@ Packages required but not available:
 - **macOS R-devel:** o mac builder só oferece R-release pelo endpoint usado.
 - **R-hub:** opcional e exige push de um workflow, o que é outro portão.
 
-## 6. Parecer
+## 6. Atualização posterior do README e do NEWS
+
+A pedido do mantenedor, depois dos testes externos foram atualizados o
+`README.md`, o `README-pt.md` e o `NEWS.md` (commit `14d015a`). Só
+documentação mudou.
+- **Mudanças:** correção do IET, funções novas do IQA, linha de verificações
+  e nota da 0.10.0.
+- **Efeito no tarball:** `README.md` e `NEWS.md` entram no tarball, então o
+  SHA-256 mudou.
+
+| Item | Valor |
+|---|---|
+| Novo tarball candidato | `<LOCAL_WORKDIR>/tikatuwq_release_candidato_0_11_0/rc2_14d015a/tikatuwq_0.11.0.tar.gz` |
+| SHA-256 | `0775fc48e6659c7698f7043cbcb9a906c56482219d45a5196373cc4f282b793d` (317.353 bytes, 174 entradas) |
+| Diferença para o testado externamente (`92cfc6c7…`) | Só `README.md`, `NEWS.md` e a linha `Packaged:` do `DESCRIPTION`. Código, testes, vinhetas, `man/` e dados idênticos |
+| `R CMD check --as-cran` com manual PDF (Windows, R 4.5.1, clone limpo do `14d015a`) | **Status: OK, 0/0/0**, incluindo "CRAN incoming feasibility" (URLs do README e do NEWS) e testes (736 aprovados, 0 falhas) |
+
+- **O tarball anterior** foi preservado.
+- **Testes externos:** não foram repetidos com o novo tarball, porque a
+  autorização se referia ao SHA-256 anterior. Como só a documentação mudou,
+  os resultados externos continuam representativos. Um novo envio ao
+  win-builder, se desejado, exige nova autorização.
+
+## 7. Parecer
 
 **APTA PARA O PRÓXIMO PORTÃO DE PUBLICAÇÃO.**
 - Nenhuma plataforma externa tem ERROR ou WARNING atribuível ao pacote.
