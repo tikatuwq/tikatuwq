@@ -33,44 +33,43 @@ Results of previously published analyses may change. This is described in
 
 ## R CMD check results
 
-* **Local:** Windows 11 x64 (build 26200), R 4.5.1 (ucrt), Rtools 4.5,
-  pandoc 3.8.3.
-* **Command:** `R CMD check --as-cran --no-manual` on the tarball built from
-  a clean clone (2026-10-16), including the CRAN incoming feasibility and URL
-  checks.
+All checks were run locally on 2026-10-16, on a tarball built from a clean
+clone of the release candidate.
+
+### Windows 11 x64 (build 26200)
+
+* **Environment:** R 4.5.1 (ucrt), Rtools 4.5, pandoc 3.8.3, TinyTeX.
+* **Command:** `R CMD check --as-cran`, **with** the PDF manual.
+* **Result:** 0 errors | 0 warnings | 0 notes.
+
+### Ubuntu 26.04 LTS (WSL2)
+
+* **Environment:** R 4.5.3 (conda-forge), locale C.UTF-8, pandoc 3.12.1.
+* **Command:** `R CMD check --as-cran --no-manual` (no LaTeX on this machine;
+  the PDF manual was checked on Windows).
 * **Result:** 0 errors | 0 warnings | 1 note.
   * The note is "checking for future file timestamps ... unable to verify
-    current time". The time services R queries were unreachable from the
-    local machine: worldtimeapi.org gave no answer and worldclockapi.com
-    returned HTTP 503, while cran.r-project.org was reachable. An earlier
-    local run on the same day passed this check. This note is expected to
-    disappear on CRAN machines.
+    current time". The time services queried by R (worldtimeapi.org,
+    worldclockapi.com) did not respond from the local network at that
+    moment, while cran.r-project.org did. The Windows run on the same day
+    passed this check.
 
-## Not yet done (required before submission)
+### Not run (remote services, pending)
 
-* **win-builder** (R-devel and R-release) and **macOS** checks: not run.
-  Remote services were not used at this stage.
-* **Linux check:** not run (no local R on Linux).
-* **PDF manual:** not built, because LaTeX is not available on the local
-  machine. The conversion of the Rd files to LaTeX succeeded.
-* **Final R CMD check** on the current R-devel: still to be run.
+* win-builder (R-devel, R-release);
+* macOS (mac builder).
 
 ## Reverse dependencies
 
 There are none on CRAN. This was checked on 2026-10-16 with
-`tools::package_dependencies(reverse = TRUE)` over Depends, Imports,
-LinkingTo, Suggests and Enhances.
+`tools::package_dependencies(reverse = TRUE)`.
 
 ## Test results
 
-`devtools::test()` (local): 37 test files, 181 tests, 803 expectations,
-0 failures, 0 errors, 4 skipped.
+`devtools::test()` (Windows): 37 test files, 181 tests, 806 expectations,
+0 failures, 0 errors, 2 skipped by design:
+* the leaflet fallback test, skipped when leaflet is installed;
+* one `render_report` test, skipped when rmarkdown is installed.
 
-* 3 tests in `test-render_report.R` are skipped when pandoc is not on the
-  path. With pandoc available, 2 of them run and pass; the third is skipped
-  by design when rmarkdown is installed.
-* 1 test in `test-plot_map_quality.R` is skipped by design when leaflet is
-  installed.
-
-Inside `R CMD check` (CRAN mode): 736 passed, 16 skipped (15 by
-`skip_on_cran()`, plus the leaflet fallback test), 0 failures.
+Inside `R CMD check` (CRAN mode, Windows and Linux): 736 passed, 16 skipped
+(15 by `skip_on_cran()`, plus the leaflet fallback test), 0 failures.
