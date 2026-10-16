@@ -1,0 +1,14 @@
+﻿Hmm ... looks like a package
+R.exe : Converting Rd files to LaTeX .....
+No linha:1 caractere:1044
++ ... "$p\build"; & "$r\bin\R.exe" CMD Rd2pdf --no-preview --force -o manua ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Converting Rd files to LaTeX .....:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Creating pdf output from LaTeX ...
+Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+  pdflatex is not available
+Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+  pdflatex is not available
+Error in running tools::texi2pdf()

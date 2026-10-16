@@ -33,28 +33,44 @@ Results of previously published analyses may change. This is described in
 
 ## R CMD check results
 
-* **Local:** Windows 11 x64 (build 26200), R 4.5.1 (ucrt), pandoc 3.8.3.
-* **Command:** `R CMD check --as-cran --no-manual` on the built tarball
-  (2026-10-16), including the CRAN incoming feasibility and URL checks.
-* **Result:** 0 errors | 0 warnings | 0 notes.
+* **Local:** Windows 11 x64 (build 26200), R 4.5.1 (ucrt), Rtools 4.5,
+  pandoc 3.8.3.
+* **Command:** `R CMD check --as-cran --no-manual` on the tarball built from
+  a clean clone (2026-10-16), including the CRAN incoming feasibility and URL
+  checks.
+* **Result:** 0 errors | 0 warnings | 1 note.
+  * The note is "checking for future file timestamps ... unable to verify
+    current time". The time services R queries were unreachable from the
+    local machine: worldtimeapi.org gave no answer and worldclockapi.com
+    returned HTTP 503, while cran.r-project.org was reachable. An earlier
+    local run on the same day passed this check. This note is expected to
+    disappear on CRAN machines.
 
 ## Not yet done (required before submission)
 
-* win-builder (R-devel and R-release) and macOS checks: **not run**.
-* Check with the PDF manual: **not run** (LaTeX is not available on the local
-  machine).
-* Reverse dependencies: none known; to be confirmed with `revdepcheck` or the
-  CRAN reverse-dependency list.
+* **win-builder** (R-devel and R-release) and **macOS** checks: not run.
+  Remote services were not used at this stage.
+* **Linux check:** not run (no local R on Linux).
+* **PDF manual:** not built, because LaTeX is not available on the local
+  machine. The conversion of the Rd files to LaTeX succeeded.
+* **Final R CMD check** on the current R-devel: still to be run.
+
+## Reverse dependencies
+
+There are none on CRAN. This was checked on 2026-10-16 with
+`tools::package_dependencies(reverse = TRUE)` over Depends, Imports,
+LinkingTo, Suggests and Enhances.
 
 ## Test results
 
-`devtools::test()` (local): 37 test files, 182 tests, 801 expectations,
-0 failures, 0 errors, 5 skipped.
+`devtools::test()` (local): 37 test files, 181 tests, 803 expectations,
+0 failures, 0 errors, 4 skipped.
 
 * 3 tests in `test-render_report.R` are skipped when pandoc is not on the
-  path. With pandoc available, 2 of them run and pass; the third is skipped by
-  design when rmarkdown is installed.
+  path. With pandoc available, 2 of them run and pass; the third is skipped
+  by design when rmarkdown is installed.
 * 1 test in `test-plot_map_quality.R` is skipped by design when leaflet is
   installed.
-* 1 test in `test-mk_seasonal.R` is recorded as empty: its expectation is
-  conditional and its synthetic series does not trigger it.
+
+Inside `R CMD check` (CRAN mode): 736 passed, 16 skipped (15 by
+`skip_on_cran()`, plus the leaflet fallback test), 0 failures.

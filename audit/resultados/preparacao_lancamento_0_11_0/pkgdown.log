@@ -1,0 +1,148 @@
+﻿Rscript.exe : ✔ No problems found.
+No linha:1 caractere:901
++ ... ocation $c; & "$r\bin\Rscript.exe" -e "pkgdown::check_pkgdown(); d <- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (✔ No problems found.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+── Installing package tikatuwq into temporary library ──────────────────────────
+── Building pkgdown site for package tikatuwq ──────────────────────────────────
+Reading from: <TMP>/tkw_c
+Writing to: <TMP>/tkw_site_0110
+── Sitrep ──────────────────────────────────────────────────────────────────────
+✔ URLs ok.
+✔ Favicons ok.
+✔ Open graph metadata ok.
+✔ Articles metadata ok.
+✔ Reference metadata ok.
+── Initialising site ───────────────────────────────────────────────────────────
+── Building home ───────────────────────────────────────────────────────────────
+Reading EXEMPLOS_TIKATUWQ.md
+Reading README-pt.md
+Reading LICENSE.md
+Reading README.md
+Writing `404.html`
+── Building function reference ─────────────────────────────────────────────────
+Reading man/assign_season.Rd
+Writing `reference/assign_season.html`
+Reading man/balnear_check.Rd
+Writing `reference/balnear_check.html`
+Reading man/classify_iqa.Rd
+Writing `reference/classify_iqa.html`
+Reading man/classify_tsi_carlson.Rd
+Writing `reference/classify_tsi_carlson.html`
+Reading man/classify_tsi_lamparelli.Rd
+Writing `reference/classify_tsi_lamparelli.html`
+Reading man/clean_units.Rd
+Writing `reference/clean_units.html`
+Reading man/compare_iqa.Rd
+Writing `reference/compare_iqa.html`
+Reading man/compare_seasons.Rd
+Writing `reference/compare_seasons.html`
+Reading man/compute_load.Rd
+Writing `reference/compute_load.html`
+Reading man/conama_check.Rd
+Writing `reference/conama_check.html`
+Reading man/conama_freq_check.Rd
+Writing `reference/conama_freq_check.html`
+Reading man/conama_limits.Rd
+Writing `reference/conama_limits.html`
+Reading man/conama_report.Rd
+Writing `reference/conama_report.html`
+Reading man/conama_summary.Rd
+Writing `reference/conama_summary.html`
+Reading man/conama_text.Rd
+Writing `reference/conama_text.html`
+Reading man/exceedance_prob.Rd
+Writing `reference/exceedance_prob.html`
+Reading man/fix_coords.Rd
+Writing `reference/fix_coords.html`
+Reading man/generate_analysis.Rd
+Writing `reference/generate_analysis.html`
+Reading man/iet_carlson.Rd
+Writing `reference/iet_carlson.html`
+Reading man/iet_lamparelli.Rd
+Writing `reference/iet_lamparelli.html`
+Reading man/iqa.Rd
+Writing `reference/iqa.html`
+Reading man/iqa_components.Rd
+Writing `reference/iqa_components.html`
+Reading man/iqa_methods.Rd
+Writing `reference/iqa_methods.html`
+Reading man/mk_seasonal.Rd
+Writing `reference/mk_seasonal.html`
+Reading man/normalize_param_names.Rd
+Writing `reference/normalize_param_names.html`
+Reading man/nsfwqi.Rd
+Writing `reference/nsfwqi.html`
+Reading man/param_analysis.Rd
+Writing `reference/param_analysis.html`
+Reading man/param_analysis_multi.Rd
+Writing `reference/param_analysis_multi.html`
+Reading man/param_plot.Rd
+Writing `reference/param_plot.html`
+Reading man/param_plot_multi.Rd
+Writing `reference/param_plot_multi.html`
+Reading man/param_summary.Rd
+Writing `reference/param_summary.html`
+Reading man/param_summary_multi.Rd
+Writing `reference/param_summary_multi.html`
+Reading man/param_trend.Rd
+Writing `reference/param_trend.html`
+Reading man/param_trend_multi.Rd
+Writing `reference/param_trend_multi.html`
+Reading man/plot_box.Rd
+Writing `reference/plot_box.html`
+Reading man/plot_heatmap.Rd
+Writing `reference/plot_heatmap.html`
+Reading man/plot_iet.Rd
+Writing `reference/plot_iet.html`
+Reading man/plot_iqa.Rd
+Writing `reference/plot_iqa.html`
+Reading man/plot_map.Rd
+Writing `reference/plot_map.html`
+Reading man/plot_map_quality.Rd
+Writing `reference/plot_map_quality.html`
+Reading man/plot_series.Rd
+Writing `reference/plot_series.html`
+Reading man/plot_trend.Rd
+Writing `reference/plot_trend.html`
+Reading man/read_wq.Rd
+Writing `reference/read_wq.html`
+Reading man/render_report.Rd
+Writing `reference/render_report.html`
+Reading man/resume_wq.Rd
+Writing `reference/resume_wq.html`
+Reading man/tikatuwq-package.Rd
+Writing `reference/tikatuwq-package.html`
+Reading man/trend_param.Rd
+Writing `reference/trend_param.html`
+Reading man/validate_wq.Rd
+Writing `reference/validate_wq.html`
+Reading man/wq_demo.Rd
+Writing `reference/wq_demo.html`
+Reading man/wq_pca.Rd
+Writing `reference/wq_pca.html`
+── Building articles ───────────────────────────────────────────────────────────
+Writing `articles/index.html`
+Reading vignettes/tikatuwq-methods.Rmd
+Writing `articles/tikatuwq-methods.html`
+[WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
+Reading vignettes/tikatuwq-workflow.Rmd
+Writing `articles/tikatuwq-workflow.html`
+[WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
+Reading vignettes/tikatuwq.Rmd
+Writing `articles/tikatuwq.html`
+[WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
+── Building news ───────────────────────────────────────────────────────────────
+Writing `news/index.html`
+── Building sitemap ────────────────────────────────────────────────────────────
+Writing `sitemap.xml`
+── Building redirects ──────────────────────────────────────────────────────────
+Adding redirect from reference/tikatuwq.html to
+reference/tikatuwq-package.html.
+── Building search index ───────────────────────────────────────────────────────
+── Checking for problems ───────────────────────────────────────────────────────
+── Finished building pkgdown site for package tikatuwq ─────────────────────────
+SITE_LOCAL_OK 132 arquivos
+paginas: TRUE TRUE TRUE 

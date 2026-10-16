@@ -1,0 +1,4 @@
+﻿http://worldtimeapi.org/api/timezone/etc/UTC -> HTTP 000
+https://worldtimeapi.org/api/timezone/etc/UTC -> HTTP 000
+http://worldclockapi.com/api/json/utc/now -> HTTP 503
+controle (cran.r-project.org) -> HTTP 200
