@@ -1,0 +1,10 @@
+﻿Rscript.exe : ✔ No problems found.
+No linha:1 caractere:1151
++ ... one_limpo"; & "$r\bin\Rscript.exe" -e "pkgdown::check_pkgdown(); d <- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (✔ No problems found.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Version: 0.11.0 
+Erro: '\\' inesperado em " cat('exports:', length(getNamespaceExports(asNamespace(pkgload::load_all(quietly=TRUE)\"
+Execução interrompida

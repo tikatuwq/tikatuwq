@@ -1,0 +1,15 @@
+﻿* checking for file '<LOCAL_WORKDIR>\san\clone_limpo/DESCRIPTION' ... OK
+* preparing 'tikatuwq':
+* checking DESCRIPTION meta-information ... OK
+* installing the package to build vignettes
+* creating vignettes ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* building 'tikatuwq_0.11.0.tar.gz'
+R.exe : 
+No linha:1 caractere:989
++ ... -Location $b; & "$r\bin\R.exe" CMD build $c *> "$o\build.log"; & "$r\ ...
++                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
