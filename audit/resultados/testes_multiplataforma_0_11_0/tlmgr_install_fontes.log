@@ -1,0 +1,33 @@
+﻿tlmgr.bat : tlmgr.pl: prefetching 1 containers using 1 parallel downloads (curl)
+No linha:1 caractere:577
++ ... ma_0_11_0"; tlmgr.bat install courier times helvetic psnfss inconsola ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (tlmgr.pl: prefe...ownloads (curl):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+tlmgr.pl: package repository https://tlnet.yihui.org (verified)
+tlmgr.pl install: package already present: helvetic
+tlmgr.pl install: package already present: inconsolata
+tlmgr.pl install: package already present: psnfss
+tlmgr.pl install: package already present: times
+[1/1, ??:??/??:??] install: courier [470k]
+running mktexlsr ...
+done running mktexlsr.
+running updmap-sys ...
+done running updmap-sys.
+tlmgr.pl: package log updated: <HOME>/AppData/Roaming/TinyTeX/texmf-var/web2c/tlmgr.log
+tlmgr.pl: command log updated: <HOME>/AppData/Roaming/TinyTeX/texmf-var/web2c/tlmgr-commands.log
+tlmgr.bat : tlmgr.pl: prefetching 2 containers using 2 parallel downloads (curl)
+No linha:1 caractere:457
++ ... ma_0_11_0"; tlmgr.bat install makeindex *>> "$o\tlmgr_install_fontes. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (tlmgr.pl: prefe...ownloads (curl):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+tlmgr.pl: package repository https://tlnet.yihui.org (verified)
+[1/2, ??:??/??:??] install: makeindex.windows [21k]
+[2/2, 00:01/00:01] install: makeindex [5k]
+running mktexlsr ...
+done running mktexlsr.
+tlmgr.pl: package log updated: <HOME>/AppData/Roaming/TinyTeX/texmf-var/web2c/tlmgr.log
+tlmgr.pl: command log updated: <HOME>/AppData/Roaming/TinyTeX/texmf-var/web2c/tlmgr-commands.log

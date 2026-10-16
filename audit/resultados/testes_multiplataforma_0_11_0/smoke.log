@@ -1,0 +1,44 @@
+﻿tikatuwq 0.11.0 de <TMP>/mp/lib/tikatuwq 
+
+CETESB: 74.96 Boa CETESB 
+IGAM: 75.5 Bom bruto 75.47912 
+nota: IQA-IGAM: documented computational reproduction of the IGAM method (SCQA 2005 equations; Projeto Aguas de Minas rules). Not endorsed or certified by IGAM. Turbidity uses k = 1.5 (Bucci 2011; Nunes 2008) instead of the k = 15 printed in some SCQA copies. Reproduces 49/49 published IGAM IQAs (Pampulha sub-basin, 2017-2018). See system.file('methodology', 'IGAM_VALIDATION.md', package = 'tikatuwq'). 
+erro sem nitrate_unit: nitrate_unit must be given explicitly ('N' for mg/L N-NO3 or 'NO3' for mg/L NO3): the IGAM curve is in mg/L NO3 and no unit is assumed. 
+migracao: Argument 'classification' was removed from iqa() in tikatuwq 0.11.0: the classification scale now follows 'method'. To classify an IQA on another scale use classify_iqa(x, classification = ...). 
+
+               method implemented documented reference_validated available
+               CETESB        TRUE       TRUE                TRUE      TRUE
+                 IGAM        TRUE       TRUE                TRUE      TRUE
+ CETESB_legacy_approx        TRUE       TRUE               FALSE      TRUE
+           NSF_approx        TRUE       TRUE               FALSE      TRUE
+ classification
+         cetesb
+           igam
+         cetesb
+         cetesb
+ ponto IQA_CETESB IQA_IGAM par_valido
+    P1      79.06     78.4       TRUE
+    P2      57.22     57.0       TRUE
+    P3      31.18     30.4       TRUE
+    P4      69.21       NA      FALSE
+                                                         motivo_IGAM
+                                                                <NA>
+                                                                <NA>
+                                                                <NA>
+ parametros ausentes ou invalidos: cloreto ausente (saturacao de OD)
+pares: 3 media: -0.5587 rmse: 0.6061 
+ classe_CETESB classe_IGAM n
+         Otima         Bom 1
+           Boa       Medio 1
+          Ruim        Ruim 1
+[1] Muito Ruim Ruim       Medio      Excelente 
+Levels: Muito Ruim < Ruim < Medio < Bom < Excelente
+[1] Ruim    Regular Otima  
+Levels: Pessima < Ruim < Regular < Boa < Otima
+
+metodologia instalada: TRUE 
+Santos V (2026). _tikatuwq: Water Quality Assessment and Environmental
+Compliance in Brazil_. doi:10.5281/zenodo.17407296
+<https://doi.org/10.5281/zenodo.17407296>, R package version 0.11.0
+(Zenodo concept DOI, all versions),
+<https://github.com/tikatuwq/tikatuwq>.

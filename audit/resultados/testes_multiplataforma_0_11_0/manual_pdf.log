@@ -1,0 +1,524 @@
+﻿Hmm ... looks like a package
+R.exe : Converting Rd files to LaTeX .....
+No linha:1 caractere:768
++ ... $m\manual"; & "$r\bin\R.exe" CMD Rd2pdf --no-preview --force --output ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Converting Rd files to LaTeX .....:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Creating pdf output from LaTeX ...
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Rd2.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-09-09>
+
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.clo)) (c:/Program Files/R/R-4.5.1/share/texmf/tex/latex/Rd.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/eucal.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/times.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/zi4.sty `inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/keyval.tex))))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/color.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makeidx.sty)
+Writing index file Rd2.idx
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def)
+No file Rd2.aux.
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/t1zi4.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{<HOME>/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
+No file Rd2.toc.
+[2]
+Overfull \hbox (0.68869pt too wide) in paragraph at lines 109--111
+[]\T1/ptm/m/n/10 se []\T1/zi4/m/n/10 wet_months []\T1/ptm/m/n/10 for fornecido, ele e us-ado di-re-ta-mente (equiv-a-lente a []\T1/zi4/m/n/10 region
+[3]
+Overfull \hbox (0.53699pt too wide) in paragraph at lines 178--184
+[]\T1/ptm/m/n/10 Classifica pon-tos de amostragem quanto a bal-ne-abil-i-dade para recrea-cao de con-tato pri-mario (banho,
+
+Overfull \hbox (5.12793pt too wide) in paragraph at lines 213--216
+[]\T1/ptm/m/n/10 Character; nome da col-una de datas, us-ada para se-le-cionar as []\T1/zi4/m/n/10 n_samples []\T1/ptm/m/n/10 amostras
+
+Overfull \hbox (14.76753pt too wide) in paragraph at lines 244--249
+\T1/ptm/m/n/10 clas-si-fi-ca-cao e re-al-izada mesmo as-sim mas a col-una []\T1/zi4/m/n/10 amostras_insuficientes []\T1/ptm/m/n/10 sera []\T1/zi4/m/n/10 TRUE[]\T1/ptm/m/n/10 . Recomenda-
+[4] [5] [6] [7] [8]
+Overfull \hbox (36.97906pt too wide) in paragraph at lines 534--538
+[]\T1/ptm/m/n/10 Argumentos repas-sa-dos a [][][]\T1/zi4/m/n/10 iqa[][][] []\T1/ptm/m/n/10 para to-dos os meto-dos (ex.: []\T1/zi4/m/n/10 altitude_m[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 censor_policy[]\T1/ptm/m/n/10 ).
+
+Overfull \hbox (31.0681pt too wide) in paragraph at lines 560--563
+[]\T1/zi4/m/n/10 details = TRUE []\T1/ptm/m/n/10 anexa os com-po-nentes (qi, pe-sos efe-tivos) de cada metodo no atrib-uto []\T1/zi4/m/n/10 "components"[]\T1/ptm/m/n/10 .
+
+Overfull \hbox (33.70815pt too wide) in paragraph at lines 563--566
+[]\T1/ptm/m/n/10 ANA nao e in-clu-ida (nao ha mo-tor ANA dis-tinto; ver []\T1/zi4/m/n/10 system.file("audit", "ANA_VS_CETESB.md",
+[9]
+Overfull \hbox (143.10963pt too wide) in paragraph at lines 572--579
+[]\T1/zi4/m/n/10 elegivel_<metodo>[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 motivo_<metodo>[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 par_valido []\T1/ptm/m/n/10 e, para cada metodo alem do primeiro, []\T1/zi4/m/n/10 delta_<metodo>_minus_<referencia>
+[10]
+Overfull \hbox (2.7787pt too wide) in paragraph at lines 654--659
+[]\T1/ptm/m/n/10 O teste es-col-hido por []\T1/zi4/m/n/10 test []\T1/ptm/m/n/10 e apli-cado por grupo ([]\T1/zi4/m/n/10 by[]\T1/ptm/m/n/10 ). Para []\T1/zi4/m/n/10 "wilcoxon" []\T1/ptm/m/n/10 usa []\T1/zi4/m/n/10 stats::wilcox.test()
+[11] [12]
+Overfull \hbox (12.84866pt too wide) in paragraph at lines 808--811
+[]\T1/ptm/m/n/10 Optional aquatic en-vi-ron-ment con-text: []\T1/zi4/m/n/10 "all" []\T1/ptm/m/n/10 (de-fault), []\T1/zi4/m/n/10 "lotic" []\T1/ptm/m/n/10 (rivers), []\T1/zi4/m/n/10 "lentic"
+
+Overfull \hbox (1.188pt too wide) in paragraph at lines 808--811
+[]\T1/ptm/m/n/10 (lakes/reservoirs), or []\T1/zi4/m/n/10 "intermediate"[]\T1/ptm/m/n/10 . Used to se-lect spe-cific reg-u-la-tory thresh-
+[13]
+Overfull \hbox (9.17697pt too wide) in paragraph at lines 836--841
+[]\T1/ptm/m/n/10 Avalia a con-formi-dade com a Res-olu-cao CONAMA 357/2005 pela re-gra de \T1/ptm/b/n/10 fre-quen-cia\T1/ptm/m/n/10 : um parametro
+[14] [15] [16] [17] [18] [19] [20]
+Overfull \hbox (5.57904pt too wide) in paragraph at lines 1270--1273
+[]\T1/ptm/m/n/10 Lista com metada-dos op-cionais (PT/EN), por ex-em-plo []\T1/zi4/m/n/10 list(rio = "Rio Pardo",
+
+Overfull \hbox (31.33986pt too wide) in paragraph at lines 1270--1273
+\T1/zi4/m/n/10 periodo = "jan^^Ujun/2025", cidade = "Lencois")[]\T1/ptm/m/n/10 . As chaves aceitas sao []\T1/zi4/m/n/10 rio[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 river[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.82683pt too wide) in paragraph at lines 1305--1308
+[]\T1/ptm/m/n/10 Computa o in-dice trofico de Carl-son (TSI/IET) a par-tir de pro-fun-di-dade de disco de Sec-chi, clorofila-
+[21] [22] [23]
+Overfull \hbox (13.08038pt too wide) in paragraph at lines 1468--1470
+[]\T1/ptm/m/n/10 Rios: []\T1/zi4/m/n/10 IET(CL) = 10 (6 - ((-0.7 - 0.6 ln CL) / ln 2)) - 20[]\T1/ptm/m/n/10 ; []\T1/zi4/m/n/10 IET(PT) = 10 (6 - ((0.42 - 0.36
+
+Overfull \hbox (4.4799pt too wide) in paragraph at lines 1470--1472
+[]\T1/ptm/m/n/10 Reservatorios: []\T1/zi4/m/n/10 IET(CL) = 10 (6 - ((0.92 - 0.34 ln CL) / ln 2))[]\T1/ptm/m/n/10 ; []\T1/zi4/m/n/10 IET(PT) = 10 (6 - ((1.77
+[24]
+Overfull \hbox (36.42029pt too wide) in paragraph at lines 1543--1543
+ []  \T1/zi4/m/n/10 method = c("CETESB", "CETESB_equations", "IGAM", "CETESB_legacy_approx", "NSF_approx"),[] 
+
+Overfull \hbox (71.1604pt too wide) in paragraph at lines 1564--1568
+\T1/ptm/m/n/10 con-heci-dos: []\T1/zi4/m/n/10 od[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 solidos_totais []\T1/ptm/m/n/10 (ou []\T1/zi4/m/n/10 residuo_total[]\T1/ptm/m/n/10 ), []\T1/zi4/m/n/10 ph[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 dbo[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 coliformes_termotolerantes
+
+Overfull \hbox (6.85889pt too wide) in paragraph at lines 1578--1579
+[]\T1/zi4/m/n/10 "CETESB_legacy_approx" []\T1/ptm/m/n/10 - subindices por cur-vas in-ter-po-ladas aprox-i-madas
+[25]
+Overfull \hbox (3.94849pt too wide) in paragraph at lines 1598--1608
+[]\T1/ptm/m/n/10 Componente ter-mico: []\T1/zi4/m/n/10 "cetesb_default" []\T1/ptm/m/n/10 (de-fault, qi = 94 con-stante; a CETESB
+
+Overfull \hbox (13.18008pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 com qi = 94), []\T1/zi4/m/n/10 "delta" []\T1/ptm/m/n/10 (usa []\T1/zi4/m/n/10 delta_temperature []\T1/ptm/m/n/10 ou a col-una []\T1/zi4/m/n/10 delta_temperatura[]\T1/ptm/m/n/10 ;
+
+Overfull \hbox (64.98978pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 erro se nen-hum for in-for-mado) ou []\T1/zi4/m/n/10 "reference" []\T1/ptm/m/n/10 (usa []\T1/zi4/m/n/10 temperatura - temperature_reference[]\T1/ptm/m/n/10 ;
+
+Overfull \hbox (56.39902pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 da curva q6 da CETESB. Eles emitem aviso e mar-cam []\T1/zi4/m/n/10 "experimental_temperature_curve"
+
+Overfull \hbox (31.11874pt too wide) in paragraph at lines 1609--1611
+[]\T1/ptm/m/n/10 Temperatura de ref-er-en-cia (es-calar ou um valor por linha) quando []\T1/zi4/m/n/10 temperature_method
+
+Overfull \hbox (23.49872pt too wide) in paragraph at lines 1612--1615
+[]\T1/ptm/m/n/10 Variacao de tem-per-atura (es-calar ou um valor por linha) quando []\T1/zi4/m/n/10 temperature_method
+
+Overfull \hbox (31.26976pt too wide) in paragraph at lines 1641--1644
+[]\T1/ptm/m/n/10 Apenas o ar-gu-mento legado []\T1/zi4/m/n/10 na_rm []\T1/ptm/m/n/10 (de-pre-ci-ado, use []\T1/zi4/m/n/10 allow_partial[]\T1/ptm/m/n/10 ). []\T1/zi4/m/n/10 classification
+
+Overfull \hbox (44.82045pt too wide) in paragraph at lines 1648--1657
+\T1/ptm/m/n/10 nien-cia: []\T1/zi4/m/n/10 iqa_method[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_method_reference[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_classification[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_weights[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_custom_weights[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (5.84094pt too wide) in paragraph at lines 1648--1657
+[]\T1/zi4/m/n/10 iqa_censor_policy[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_phosphorus_basis[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_microbial_type[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_temperature_method[]\T1/ptm/m/n/10 ,
+[26]
+Overfull \hbox (27.31898pt too wide) in paragraph at lines 1701--1714
+\T1/ptm/m/n/10 bruto, os qi e os pe-sos efe-tivos. Nota com-pleta: []\T1/zi4/m/n/10 system.file("methodology","IGAM_VALIDATION.md",
+[27] [28]
+Overfull \hbox (5.65993pt too wide) in paragraph at lines 1797--1801
+\T1/ptm/m/n/10 sao obti-dos com []\T1/zi4/m/n/10 iqa(df, method = "IGAM", details = TRUE)[]\T1/ptm/m/n/10 ; aqui []\T1/zi4/m/n/10 "IGAM" []\T1/ptm/m/n/10 gera
+
+Overfull \hbox (40.78995pt too wide) in paragraph at lines 1838--1844
+\T1/ptm/m/n/10 2018). \T1/ptm/b/n/10 Nao e ho-molo-gada pelo IGAM. \T1/ptm/m/n/10 Ver []\T1/zi4/m/n/10 system.file("methodology", "IGAM_VALIDATION.md",
+[29]
+Overfull \hbox (9.92911pt too wide) in paragraph at lines 1849--1852
+\T1/ptm/m/n/10 mas a equiv-a-len-cia das cur-vas nao foi ver-i-fi-cada (ver []\T1/zi4/m/n/10 system.file("audit", "ANA_VS_CETESB.md",
+[30] [31] [32]
+Overfull \hbox (8.21895pt too wide) in paragraph at lines 2052--2056
+[]\T1/ptm/m/n/10 Vetor nomeado nu-merico com os pe-sos ofi-ci-ais NSF: []\T1/zi4/m/n/10 do=0.17[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 fc=0.16[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 ph=0.11[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (7.15097pt too wide) in paragraph at lines 2052--2056
+[]\T1/zi4/m/n/10 bod=0.11[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 temp_change=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 po4=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 no3=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 turbidez=0.08[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 ts=0.07[]\T1/ptm/m/n/10 . 
+[33] [34]
+Overfull \hbox (48.64975pt too wide) in paragraph at lines 2174--2180
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[35]
+Overfull \hbox (18.64975pt too wide) in paragraph at lines 2240--2246
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[36]
+Overfull \hbox (33.64975pt too wide) in paragraph at lines 2304--2310
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[37]
+Overfull \hbox (3.64975pt too wide) in paragraph at lines 2365--2371
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (43.64975pt too wide) in paragraph at lines 2418--2424
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 ,
+[38]
+Overfull \hbox (43.64975pt too wide) in paragraph at lines 2469--2475
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 ,
+[39] [40]
+Overfull \hbox (10.13834pt too wide) in paragraph at lines 2594--2596
+[]\T1/ptm/m/n/10 Character; metodo de clas-si-fi-ca-cao trofica: []\T1/zi4/m/n/10 "carlson" []\T1/ptm/m/n/10 (de-fault) ou []\T1/zi4/m/n/10 "lamparelli"[]\T1/ptm/m/n/10 . 
+[41] [42]
+Overfull \hbox (13.85815pt too wide) in paragraph at lines 2714--2716
+[]\T1/ptm/m/n/10 data.frame/tibble with co-or-di-nates; must con-tain []\T1/zi4/m/n/10 lat[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 lon []\T1/ptm/m/n/10 (or []\T1/zi4/m/n/10 latitude[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 longitude[]\T1/ptm/m/n/10 ,
+[43]
+Overfull \hbox (37.08812pt too wide) in paragraph at lines 2790--2795
+[]\T1/ptm/m/n/10 Character; nome do in-dice para de-ter-mi-nacao da paleta: []\T1/zi4/m/n/10 "IQA" []\T1/ptm/m/n/10 (de-fault), []\T1/zi4/m/n/10 "IET_carlson"[]\T1/ptm/m/n/10 ,
+[44] [45] [46] [47]
+Overfull \hbox (1274.78088pt too wide) in paragraph at lines 3042--3043
+[]\T1/zi4/m/n/10 c("ph","od","turbidez","dbo","coliformes","p_total","ptotal","fosforo_total","temperatura","ec","condutividade","n_nitrato","n_nitrito","amonia","nt_total","n_total","ntk","nkjeldahl","nitrogenio_total","solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet","iet_carlson","iet_lamparelli","nsfwqi","vazao","lat","lon") 
+[48] [49] [50] (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [51{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}] [52] [53] [54]
+No file Rd2.ind.
+[55] (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{Rfn.param.Rul.analysis} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.dplyr::across\(\)} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.dplyr::summarise\(\)} has been referenced but does not exist, replaced by a fixed one
+
+<<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (55 pages, 268138 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.18 [TeX Live 2026] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (177 entries accepted, 0 rejected).
+Sorting entries....done (1428 comparisons).
+Generating output file Rd2.ind....done (209 lines written, 6 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Rd2.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-09-09>
+
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.clo)) (c:/Program Files/R/R-4.5.1/share/texmf/tex/latex/Rd.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/eucal.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/times.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/zi4.sty `inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/keyval.tex))))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/color.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makeidx.sty)
+Writing index file Rd2.idx
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./Rd2.aux) (./Rd2.out) (./Rd2.out) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/t1zi4.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{<HOME>/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}] (./Rd2.toc [2])
+Overfull \hbox (0.68869pt too wide) in paragraph at lines 109--111
+[]\T1/ptm/m/n/10 se []\T1/zi4/m/n/10 wet_months []\T1/ptm/m/n/10 for fornecido, ele e us-ado di-re-ta-mente (equiv-a-lente a []\T1/zi4/m/n/10 region
+[3]
+Overfull \hbox (0.53699pt too wide) in paragraph at lines 178--184
+[]\T1/ptm/m/n/10 Classifica pon-tos de amostragem quanto a bal-ne-abil-i-dade para recrea-cao de con-tato pri-mario (banho,
+[4]
+Overfull \hbox (5.12793pt too wide) in paragraph at lines 213--216
+[]\T1/ptm/m/n/10 Character; nome da col-una de datas, us-ada para se-le-cionar as []\T1/zi4/m/n/10 n_samples []\T1/ptm/m/n/10 amostras
+
+Overfull \hbox (14.76753pt too wide) in paragraph at lines 244--249
+\T1/ptm/m/n/10 clas-si-fi-ca-cao e re-al-izada mesmo as-sim mas a col-una []\T1/zi4/m/n/10 amostras_insuficientes []\T1/ptm/m/n/10 sera []\T1/zi4/m/n/10 TRUE[]\T1/ptm/m/n/10 . Recomenda-
+[5] [6] [7] [8] [9]
+Overfull \hbox (36.97906pt too wide) in paragraph at lines 534--538
+[]\T1/ptm/m/n/10 Argumentos repas-sa-dos a [][][]\T1/zi4/m/n/10 iqa[][][] []\T1/ptm/m/n/10 para to-dos os meto-dos (ex.: []\T1/zi4/m/n/10 altitude_m[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 censor_policy[]\T1/ptm/m/n/10 ).
+
+Overfull \hbox (31.0681pt too wide) in paragraph at lines 560--563
+[]\T1/zi4/m/n/10 details = TRUE []\T1/ptm/m/n/10 anexa os com-po-nentes (qi, pe-sos efe-tivos) de cada metodo no atrib-uto []\T1/zi4/m/n/10 "components"[]\T1/ptm/m/n/10 .
+
+Overfull \hbox (33.70815pt too wide) in paragraph at lines 563--566
+[]\T1/ptm/m/n/10 ANA nao e in-clu-ida (nao ha mo-tor ANA dis-tinto; ver []\T1/zi4/m/n/10 system.file("audit", "ANA_VS_CETESB.md",
+[10]
+Overfull \hbox (143.10963pt too wide) in paragraph at lines 572--579
+[]\T1/zi4/m/n/10 elegivel_<metodo>[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 motivo_<metodo>[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 par_valido []\T1/ptm/m/n/10 e, para cada metodo alem do primeiro, []\T1/zi4/m/n/10 delta_<metodo>_minus_<referencia>
+[11]
+Overfull \hbox (2.7787pt too wide) in paragraph at lines 654--659
+[]\T1/ptm/m/n/10 O teste es-col-hido por []\T1/zi4/m/n/10 test []\T1/ptm/m/n/10 e apli-cado por grupo ([]\T1/zi4/m/n/10 by[]\T1/ptm/m/n/10 ). Para []\T1/zi4/m/n/10 "wilcoxon" []\T1/ptm/m/n/10 usa []\T1/zi4/m/n/10 stats::wilcox.test()
+[12] [13]
+Overfull \hbox (12.84866pt too wide) in paragraph at lines 808--811
+[]\T1/ptm/m/n/10 Optional aquatic en-vi-ron-ment con-text: []\T1/zi4/m/n/10 "all" []\T1/ptm/m/n/10 (de-fault), []\T1/zi4/m/n/10 "lotic" []\T1/ptm/m/n/10 (rivers), []\T1/zi4/m/n/10 "lentic"
+
+Overfull \hbox (1.188pt too wide) in paragraph at lines 808--811
+[]\T1/ptm/m/n/10 (lakes/reservoirs), or []\T1/zi4/m/n/10 "intermediate"[]\T1/ptm/m/n/10 . Used to se-lect spe-cific reg-u-la-tory thresh-
+[14]
+Overfull \hbox (9.17697pt too wide) in paragraph at lines 836--841
+[]\T1/ptm/m/n/10 Avalia a con-formi-dade com a Res-olu-cao CONAMA 357/2005 pela re-gra de \T1/ptm/b/n/10 fre-quen-cia\T1/ptm/m/n/10 : um parametro
+[15] [16] [17] [18] [19] [20] [21]
+Overfull \hbox (5.57904pt too wide) in paragraph at lines 1270--1273
+[]\T1/ptm/m/n/10 Lista com metada-dos op-cionais (PT/EN), por ex-em-plo []\T1/zi4/m/n/10 list(rio = "Rio Pardo",
+
+Overfull \hbox (31.33986pt too wide) in paragraph at lines 1270--1273
+\T1/zi4/m/n/10 periodo = "jan^^Ujun/2025", cidade = "Lencois")[]\T1/ptm/m/n/10 . As chaves aceitas sao []\T1/zi4/m/n/10 rio[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 river[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.82683pt too wide) in paragraph at lines 1305--1308
+[]\T1/ptm/m/n/10 Computa o in-dice trofico de Carl-son (TSI/IET) a par-tir de pro-fun-di-dade de disco de Sec-chi, clorofila-
+[22] [23] [24]
+Overfull \hbox (13.08038pt too wide) in paragraph at lines 1468--1470
+[]\T1/ptm/m/n/10 Rios: []\T1/zi4/m/n/10 IET(CL) = 10 (6 - ((-0.7 - 0.6 ln CL) / ln 2)) - 20[]\T1/ptm/m/n/10 ; []\T1/zi4/m/n/10 IET(PT) = 10 (6 - ((0.42 - 0.36
+
+Overfull \hbox (4.4799pt too wide) in paragraph at lines 1470--1472
+[]\T1/ptm/m/n/10 Reservatorios: []\T1/zi4/m/n/10 IET(CL) = 10 (6 - ((0.92 - 0.34 ln CL) / ln 2))[]\T1/ptm/m/n/10 ; []\T1/zi4/m/n/10 IET(PT) = 10 (6 - ((1.77
+[25]
+Overfull \hbox (36.42029pt too wide) in paragraph at lines 1543--1543
+ []  \T1/zi4/m/n/10 method = c("CETESB", "CETESB_equations", "IGAM", "CETESB_legacy_approx", "NSF_approx"),[] 
+
+Overfull \hbox (71.1604pt too wide) in paragraph at lines 1564--1568
+\T1/ptm/m/n/10 con-heci-dos: []\T1/zi4/m/n/10 od[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 solidos_totais []\T1/ptm/m/n/10 (ou []\T1/zi4/m/n/10 residuo_total[]\T1/ptm/m/n/10 ), []\T1/zi4/m/n/10 ph[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 dbo[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 coliformes_termotolerantes
+
+Overfull \hbox (6.85889pt too wide) in paragraph at lines 1578--1579
+[]\T1/zi4/m/n/10 "CETESB_legacy_approx" []\T1/ptm/m/n/10 - subindices por cur-vas in-ter-po-ladas aprox-i-madas
+[26]
+Overfull \hbox (3.94849pt too wide) in paragraph at lines 1598--1608
+[]\T1/ptm/m/n/10 Componente ter-mico: []\T1/zi4/m/n/10 "cetesb_default" []\T1/ptm/m/n/10 (de-fault, qi = 94 con-stante; a CETESB
+
+Overfull \hbox (13.18008pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 com qi = 94), []\T1/zi4/m/n/10 "delta" []\T1/ptm/m/n/10 (usa []\T1/zi4/m/n/10 delta_temperature []\T1/ptm/m/n/10 ou a col-una []\T1/zi4/m/n/10 delta_temperatura[]\T1/ptm/m/n/10 ;
+
+Overfull \hbox (64.98978pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 erro se nen-hum for in-for-mado) ou []\T1/zi4/m/n/10 "reference" []\T1/ptm/m/n/10 (usa []\T1/zi4/m/n/10 temperatura - temperature_reference[]\T1/ptm/m/n/10 ;
+
+Overfull \hbox (56.39902pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 da curva q6 da CETESB. Eles emitem aviso e mar-cam []\T1/zi4/m/n/10 "experimental_temperature_curve"
+
+Overfull \hbox (31.11874pt too wide) in paragraph at lines 1609--1611
+[]\T1/ptm/m/n/10 Temperatura de ref-er-en-cia (es-calar ou um valor por linha) quando []\T1/zi4/m/n/10 temperature_method
+
+Overfull \hbox (23.49872pt too wide) in paragraph at lines 1612--1615
+[]\T1/ptm/m/n/10 Variacao de tem-per-atura (es-calar ou um valor por linha) quando []\T1/zi4/m/n/10 temperature_method
+
+Overfull \hbox (31.26976pt too wide) in paragraph at lines 1641--1644
+[]\T1/ptm/m/n/10 Apenas o ar-gu-mento legado []\T1/zi4/m/n/10 na_rm []\T1/ptm/m/n/10 (de-pre-ci-ado, use []\T1/zi4/m/n/10 allow_partial[]\T1/ptm/m/n/10 ). []\T1/zi4/m/n/10 classification
+
+Overfull \hbox (44.82045pt too wide) in paragraph at lines 1648--1657
+\T1/ptm/m/n/10 nien-cia: []\T1/zi4/m/n/10 iqa_method[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_method_reference[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_classification[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_weights[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_custom_weights[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (5.84094pt too wide) in paragraph at lines 1648--1657
+[]\T1/zi4/m/n/10 iqa_censor_policy[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_phosphorus_basis[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_microbial_type[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_temperature_method[]\T1/ptm/m/n/10 ,
+[27]
+Overfull \hbox (27.31898pt too wide) in paragraph at lines 1701--1714
+\T1/ptm/m/n/10 bruto, os qi e os pe-sos efe-tivos. Nota com-pleta: []\T1/zi4/m/n/10 system.file("methodology","IGAM_VALIDATION.md",
+[28] [29]
+Overfull \hbox (5.65993pt too wide) in paragraph at lines 1797--1801
+\T1/ptm/m/n/10 sao obti-dos com []\T1/zi4/m/n/10 iqa(df, method = "IGAM", details = TRUE)[]\T1/ptm/m/n/10 ; aqui []\T1/zi4/m/n/10 "IGAM" []\T1/ptm/m/n/10 gera
+
+Overfull \hbox (40.78995pt too wide) in paragraph at lines 1838--1844
+\T1/ptm/m/n/10 2018). \T1/ptm/b/n/10 Nao e ho-molo-gada pelo IGAM. \T1/ptm/m/n/10 Ver []\T1/zi4/m/n/10 system.file("methodology", "IGAM_VALIDATION.md",
+[30]
+Overfull \hbox (9.92911pt too wide) in paragraph at lines 1849--1852
+\T1/ptm/m/n/10 mas a equiv-a-len-cia das cur-vas nao foi ver-i-fi-cada (ver []\T1/zi4/m/n/10 system.file("audit", "ANA_VS_CETESB.md",
+[31] [32] [33]
+Overfull \hbox (8.21895pt too wide) in paragraph at lines 2052--2056
+[]\T1/ptm/m/n/10 Vetor nomeado nu-merico com os pe-sos ofi-ci-ais NSF: []\T1/zi4/m/n/10 do=0.17[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 fc=0.16[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 ph=0.11[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (7.15097pt too wide) in paragraph at lines 2052--2056
+[]\T1/zi4/m/n/10 bod=0.11[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 temp_change=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 po4=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 no3=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 turbidez=0.08[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 ts=0.07[]\T1/ptm/m/n/10 . 
+[34] [35]
+Overfull \hbox (48.64975pt too wide) in paragraph at lines 2174--2180
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[36]
+Overfull \hbox (18.64975pt too wide) in paragraph at lines 2240--2246
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[37]
+Overfull \hbox (33.64975pt too wide) in paragraph at lines 2304--2310
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[38]
+Overfull \hbox (3.64975pt too wide) in paragraph at lines 2365--2371
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (43.64975pt too wide) in paragraph at lines 2418--2424
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 ,
+[39]
+Overfull \hbox (43.64975pt too wide) in paragraph at lines 2469--2475
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 ,
+[40] [41]
+Overfull \hbox (10.13834pt too wide) in paragraph at lines 2594--2596
+[]\T1/ptm/m/n/10 Character; metodo de clas-si-fi-ca-cao trofica: []\T1/zi4/m/n/10 "carlson" []\T1/ptm/m/n/10 (de-fault) ou []\T1/zi4/m/n/10 "lamparelli"[]\T1/ptm/m/n/10 . 
+[42] [43]
+Overfull \hbox (13.85815pt too wide) in paragraph at lines 2714--2716
+[]\T1/ptm/m/n/10 data.frame/tibble with co-or-di-nates; must con-tain []\T1/zi4/m/n/10 lat[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 lon []\T1/ptm/m/n/10 (or []\T1/zi4/m/n/10 latitude[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 longitude[]\T1/ptm/m/n/10 ,
+[44]
+Overfull \hbox (37.08812pt too wide) in paragraph at lines 2790--2795
+[]\T1/ptm/m/n/10 Character; nome do in-dice para de-ter-mi-nacao da paleta: []\T1/zi4/m/n/10 "IQA" []\T1/ptm/m/n/10 (de-fault), []\T1/zi4/m/n/10 "IET_carlson"[]\T1/ptm/m/n/10 ,
+[45] [46] [47] [48]
+Overfull \hbox (1274.78088pt too wide) in paragraph at lines 3042--3043
+[]\T1/zi4/m/n/10 c("ph","od","turbidez","dbo","coliformes","p_total","ptotal","fosforo_total","temperatura","ec","condutividade","n_nitrato","n_nitrito","amonia","nt_total","n_total","ntk","nkjeldahl","nitrogenio_total","solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet","iet_carlson","iet_lamparelli","nsfwqi","vazao","lat","lon") 
+[49] [50] [51] (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [52{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}] [53] [54] [55] (./Rd2.ind [56] [57] [58]) (./Rd2.aux)
+
+Package rerunfilecheck Warning: File `Rd2.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{Rfn.param.Rul.analysis} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.dplyr::across\(\)} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.dplyr::summarise\(\)} has been referenced but does not exist, replaced by a fixed one
+
+<<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (58 pages, 283164 bytes).
+Transcript written on Rd2.log.
+This is makeindex, version 2.18 [TeX Live 2026] (kpathsea + Thai support).
+Scanning input file Rd2.idx....done (177 entries accepted, 0 rejected).
+Sorting entries....done (1428 comparisons).
+Generating output file Rd2.ind....done (209 lines written, 6 warnings).
+Output written in Rd2.ind.
+Transcript written in Rd2.ilg.
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./Rd2.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-09-09>
+
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2025/01/22 v1.4n Standard LaTeX document class
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/bk10.clo)) (c:/Program Files/R/R-4.5.1/share/texmf/tex/latex/Rd.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ifthen.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/bm.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/alltt.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/eucal.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/times.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/zi4.sty `inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/keyval.tex))))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/color.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/makeidx.sty)
+Writing index file Rd2.idx
+(<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def) (./Rd2.aux) (./Rd2.out) (./Rd2.out) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/t1zi4.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{<HOME>/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}] (./Rd2.toc [2])
+Overfull \hbox (0.68869pt too wide) in paragraph at lines 109--111
+[]\T1/ptm/m/n/10 se []\T1/zi4/m/n/10 wet_months []\T1/ptm/m/n/10 for fornecido, ele e us-ado di-re-ta-mente (equiv-a-lente a []\T1/zi4/m/n/10 region
+[3]
+Overfull \hbox (0.53699pt too wide) in paragraph at lines 178--184
+[]\T1/ptm/m/n/10 Classifica pon-tos de amostragem quanto a bal-ne-abil-i-dade para recrea-cao de con-tato pri-mario (banho,
+[4]
+Overfull \hbox (5.12793pt too wide) in paragraph at lines 213--216
+[]\T1/ptm/m/n/10 Character; nome da col-una de datas, us-ada para se-le-cionar as []\T1/zi4/m/n/10 n_samples []\T1/ptm/m/n/10 amostras
+
+Overfull \hbox (14.76753pt too wide) in paragraph at lines 244--249
+\T1/ptm/m/n/10 clas-si-fi-ca-cao e re-al-izada mesmo as-sim mas a col-una []\T1/zi4/m/n/10 amostras_insuficientes []\T1/ptm/m/n/10 sera []\T1/zi4/m/n/10 TRUE[]\T1/ptm/m/n/10 . Recomenda-
+[5] [6] [7] [8] [9]
+Overfull \hbox (36.97906pt too wide) in paragraph at lines 534--538
+[]\T1/ptm/m/n/10 Argumentos repas-sa-dos a [][][]\T1/zi4/m/n/10 iqa[][][] []\T1/ptm/m/n/10 para to-dos os meto-dos (ex.: []\T1/zi4/m/n/10 altitude_m[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 censor_policy[]\T1/ptm/m/n/10 ).
+
+Overfull \hbox (31.0681pt too wide) in paragraph at lines 560--563
+[]\T1/zi4/m/n/10 details = TRUE []\T1/ptm/m/n/10 anexa os com-po-nentes (qi, pe-sos efe-tivos) de cada metodo no atrib-uto []\T1/zi4/m/n/10 "components"[]\T1/ptm/m/n/10 .
+
+Overfull \hbox (33.70815pt too wide) in paragraph at lines 563--566
+[]\T1/ptm/m/n/10 ANA nao e in-clu-ida (nao ha mo-tor ANA dis-tinto; ver []\T1/zi4/m/n/10 system.file("audit", "ANA_VS_CETESB.md",
+[10]
+Overfull \hbox (143.10963pt too wide) in paragraph at lines 572--579
+[]\T1/zi4/m/n/10 elegivel_<metodo>[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 motivo_<metodo>[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 par_valido []\T1/ptm/m/n/10 e, para cada metodo alem do primeiro, []\T1/zi4/m/n/10 delta_<metodo>_minus_<referencia>
+[11]
+Overfull \hbox (2.7787pt too wide) in paragraph at lines 654--659
+[]\T1/ptm/m/n/10 O teste es-col-hido por []\T1/zi4/m/n/10 test []\T1/ptm/m/n/10 e apli-cado por grupo ([]\T1/zi4/m/n/10 by[]\T1/ptm/m/n/10 ). Para []\T1/zi4/m/n/10 "wilcoxon" []\T1/ptm/m/n/10 usa []\T1/zi4/m/n/10 stats::wilcox.test()
+[12] [13]
+Overfull \hbox (12.84866pt too wide) in paragraph at lines 808--811
+[]\T1/ptm/m/n/10 Optional aquatic en-vi-ron-ment con-text: []\T1/zi4/m/n/10 "all" []\T1/ptm/m/n/10 (de-fault), []\T1/zi4/m/n/10 "lotic" []\T1/ptm/m/n/10 (rivers), []\T1/zi4/m/n/10 "lentic"
+
+Overfull \hbox (1.188pt too wide) in paragraph at lines 808--811
+[]\T1/ptm/m/n/10 (lakes/reservoirs), or []\T1/zi4/m/n/10 "intermediate"[]\T1/ptm/m/n/10 . Used to se-lect spe-cific reg-u-la-tory thresh-
+[14]
+Overfull \hbox (9.17697pt too wide) in paragraph at lines 836--841
+[]\T1/ptm/m/n/10 Avalia a con-formi-dade com a Res-olu-cao CONAMA 357/2005 pela re-gra de \T1/ptm/b/n/10 fre-quen-cia\T1/ptm/m/n/10 : um parametro
+[15] [16] [17] [18] [19] [20] [21]
+Overfull \hbox (5.57904pt too wide) in paragraph at lines 1270--1273
+[]\T1/ptm/m/n/10 Lista com metada-dos op-cionais (PT/EN), por ex-em-plo []\T1/zi4/m/n/10 list(rio = "Rio Pardo",
+
+Overfull \hbox (31.33986pt too wide) in paragraph at lines 1270--1273
+\T1/zi4/m/n/10 periodo = "jan^^Ujun/2025", cidade = "Lencois")[]\T1/ptm/m/n/10 . As chaves aceitas sao []\T1/zi4/m/n/10 rio[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 river[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (0.82683pt too wide) in paragraph at lines 1305--1308
+[]\T1/ptm/m/n/10 Computa o in-dice trofico de Carl-son (TSI/IET) a par-tir de pro-fun-di-dade de disco de Sec-chi, clorofila-
+[22] [23] [24]
+Overfull \hbox (13.08038pt too wide) in paragraph at lines 1468--1470
+[]\T1/ptm/m/n/10 Rios: []\T1/zi4/m/n/10 IET(CL) = 10 (6 - ((-0.7 - 0.6 ln CL) / ln 2)) - 20[]\T1/ptm/m/n/10 ; []\T1/zi4/m/n/10 IET(PT) = 10 (6 - ((0.42 - 0.36
+
+Overfull \hbox (4.4799pt too wide) in paragraph at lines 1470--1472
+[]\T1/ptm/m/n/10 Reservatorios: []\T1/zi4/m/n/10 IET(CL) = 10 (6 - ((0.92 - 0.34 ln CL) / ln 2))[]\T1/ptm/m/n/10 ; []\T1/zi4/m/n/10 IET(PT) = 10 (6 - ((1.77
+[25]
+Overfull \hbox (36.42029pt too wide) in paragraph at lines 1543--1543
+ []  \T1/zi4/m/n/10 method = c("CETESB", "CETESB_equations", "IGAM", "CETESB_legacy_approx", "NSF_approx"),[] 
+
+Overfull \hbox (71.1604pt too wide) in paragraph at lines 1564--1568
+\T1/ptm/m/n/10 con-heci-dos: []\T1/zi4/m/n/10 od[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 solidos_totais []\T1/ptm/m/n/10 (ou []\T1/zi4/m/n/10 residuo_total[]\T1/ptm/m/n/10 ), []\T1/zi4/m/n/10 ph[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 dbo[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 coliformes_termotolerantes
+
+Overfull \hbox (6.85889pt too wide) in paragraph at lines 1578--1579
+[]\T1/zi4/m/n/10 "CETESB_legacy_approx" []\T1/ptm/m/n/10 - subindices por cur-vas in-ter-po-ladas aprox-i-madas
+[26]
+Overfull \hbox (3.94849pt too wide) in paragraph at lines 1598--1608
+[]\T1/ptm/m/n/10 Componente ter-mico: []\T1/zi4/m/n/10 "cetesb_default" []\T1/ptm/m/n/10 (de-fault, qi = 94 con-stante; a CETESB
+
+Overfull \hbox (13.18008pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 com qi = 94), []\T1/zi4/m/n/10 "delta" []\T1/ptm/m/n/10 (usa []\T1/zi4/m/n/10 delta_temperature []\T1/ptm/m/n/10 ou a col-una []\T1/zi4/m/n/10 delta_temperatura[]\T1/ptm/m/n/10 ;
+
+Overfull \hbox (64.98978pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 erro se nen-hum for in-for-mado) ou []\T1/zi4/m/n/10 "reference" []\T1/ptm/m/n/10 (usa []\T1/zi4/m/n/10 temperatura - temperature_reference[]\T1/ptm/m/n/10 ;
+
+Overfull \hbox (56.39902pt too wide) in paragraph at lines 1598--1608
+\T1/ptm/m/n/10 da curva q6 da CETESB. Eles emitem aviso e mar-cam []\T1/zi4/m/n/10 "experimental_temperature_curve"
+
+Overfull \hbox (31.11874pt too wide) in paragraph at lines 1609--1611
+[]\T1/ptm/m/n/10 Temperatura de ref-er-en-cia (es-calar ou um valor por linha) quando []\T1/zi4/m/n/10 temperature_method
+
+Overfull \hbox (23.49872pt too wide) in paragraph at lines 1612--1615
+[]\T1/ptm/m/n/10 Variacao de tem-per-atura (es-calar ou um valor por linha) quando []\T1/zi4/m/n/10 temperature_method
+
+Overfull \hbox (31.26976pt too wide) in paragraph at lines 1641--1644
+[]\T1/ptm/m/n/10 Apenas o ar-gu-mento legado []\T1/zi4/m/n/10 na_rm []\T1/ptm/m/n/10 (de-pre-ci-ado, use []\T1/zi4/m/n/10 allow_partial[]\T1/ptm/m/n/10 ). []\T1/zi4/m/n/10 classification
+
+Overfull \hbox (44.82045pt too wide) in paragraph at lines 1648--1657
+\T1/ptm/m/n/10 nien-cia: []\T1/zi4/m/n/10 iqa_method[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_method_reference[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_classification[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_weights[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_custom_weights[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (5.84094pt too wide) in paragraph at lines 1648--1657
+[]\T1/zi4/m/n/10 iqa_censor_policy[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_phosphorus_basis[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_microbial_type[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 iqa_temperature_method[]\T1/ptm/m/n/10 ,
+[27]
+Overfull \hbox (27.31898pt too wide) in paragraph at lines 1701--1714
+\T1/ptm/m/n/10 bruto, os qi e os pe-sos efe-tivos. Nota com-pleta: []\T1/zi4/m/n/10 system.file("methodology","IGAM_VALIDATION.md",
+[28] [29]
+Overfull \hbox (5.65993pt too wide) in paragraph at lines 1797--1801
+\T1/ptm/m/n/10 sao obti-dos com []\T1/zi4/m/n/10 iqa(df, method = "IGAM", details = TRUE)[]\T1/ptm/m/n/10 ; aqui []\T1/zi4/m/n/10 "IGAM" []\T1/ptm/m/n/10 gera
+
+Overfull \hbox (40.78995pt too wide) in paragraph at lines 1838--1844
+\T1/ptm/m/n/10 2018). \T1/ptm/b/n/10 Nao e ho-molo-gada pelo IGAM. \T1/ptm/m/n/10 Ver []\T1/zi4/m/n/10 system.file("methodology", "IGAM_VALIDATION.md",
+[30]
+Overfull \hbox (9.92911pt too wide) in paragraph at lines 1849--1852
+\T1/ptm/m/n/10 mas a equiv-a-len-cia das cur-vas nao foi ver-i-fi-cada (ver []\T1/zi4/m/n/10 system.file("audit", "ANA_VS_CETESB.md",
+[31] [32] [33]
+Overfull \hbox (8.21895pt too wide) in paragraph at lines 2052--2056
+[]\T1/ptm/m/n/10 Vetor nomeado nu-merico com os pe-sos ofi-ci-ais NSF: []\T1/zi4/m/n/10 do=0.17[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 fc=0.16[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 ph=0.11[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (7.15097pt too wide) in paragraph at lines 2052--2056
+[]\T1/zi4/m/n/10 bod=0.11[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 temp_change=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 po4=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 no3=0.10[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 turbidez=0.08[]\T1/ptm/m/n/10 , []\T1/zi4/m/n/10 ts=0.07[]\T1/ptm/m/n/10 . 
+[34] [35]
+Overfull \hbox (48.64975pt too wide) in paragraph at lines 2174--2180
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[36]
+Overfull \hbox (18.64975pt too wide) in paragraph at lines 2240--2246
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[37]
+Overfull \hbox (33.64975pt too wide) in paragraph at lines 2304--2310
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+[38]
+Overfull \hbox (3.64975pt too wide) in paragraph at lines 2365--2371
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_trend[][][]()[]\T1/ptm/m/n/10 ,
+
+Overfull \hbox (43.64975pt too wide) in paragraph at lines 2418--2424
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 ,
+[39]
+Overfull \hbox (43.64975pt too wide) in paragraph at lines 2469--2475
+[]\T1/ptm/m/n/10 Other parameter-tools: [][][]\T1/zi4/m/n/10 param_plot[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_plot_multi[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary[][][]()[]\T1/ptm/m/n/10 , [][][]\T1/zi4/m/n/10 param_summary_multi[][][]()[]\T1/ptm/m/n/10 ,
+[40] [41]
+Overfull \hbox (10.13834pt too wide) in paragraph at lines 2594--2596
+[]\T1/ptm/m/n/10 Character; metodo de clas-si-fi-ca-cao trofica: []\T1/zi4/m/n/10 "carlson" []\T1/ptm/m/n/10 (de-fault) ou []\T1/zi4/m/n/10 "lamparelli"[]\T1/ptm/m/n/10 . 
+[42] [43]
+Overfull \hbox (13.85815pt too wide) in paragraph at lines 2714--2716
+[]\T1/ptm/m/n/10 data.frame/tibble with co-or-di-nates; must con-tain []\T1/zi4/m/n/10 lat[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 lon []\T1/ptm/m/n/10 (or []\T1/zi4/m/n/10 latitude[]\T1/ptm/m/n/10 /[]\T1/zi4/m/n/10 longitude[]\T1/ptm/m/n/10 ,
+[44]
+Overfull \hbox (37.08812pt too wide) in paragraph at lines 2790--2795
+[]\T1/ptm/m/n/10 Character; nome do in-dice para de-ter-mi-nacao da paleta: []\T1/zi4/m/n/10 "IQA" []\T1/ptm/m/n/10 (de-fault), []\T1/zi4/m/n/10 "IET_carlson"[]\T1/ptm/m/n/10 ,
+[45] [46] [47] [48]
+Overfull \hbox (1274.78088pt too wide) in paragraph at lines 3042--3043
+[]\T1/zi4/m/n/10 c("ph","od","turbidez","dbo","coliformes","p_total","ptotal","fosforo_total","temperatura","ec","condutividade","n_nitrato","n_nitrito","amonia","nt_total","n_total","ntk","nkjeldahl","nitrogenio_total","solidos_totais","solidos_suspensos","tds","conducao","qi","iqa","iet","iet_carlson","iet_lamparelli","nsfwqi","vazao","lat","lon") 
+[49] [50] [51] (<HOME>/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/inconsolata/ts1zi4.fd) [52{<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc}] [53] [54] [55] (./Rd2.ind [56] [57] [58]) (./Rd2.aux) )
+(see the transcript file for additional information)
+pdfTeX warning (dest): name{Rfn.param.Rul.analysis} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.dplyr::across\(\)} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{Rfn.dplyr::summarise\(\)} has been referenced but does not exist, replaced by a fixed one
+
+<<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><<HOME>/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Rd2.pdf (58 pages, 283521 bytes).
+Transcript written on Rd2.log.
+Saving output to 'tikatuwq-manual-0.11.0.pdf' ...
+Done

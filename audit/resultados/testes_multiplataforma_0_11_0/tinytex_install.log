@@ -1,0 +1,877 @@
+﻿pacote 'tinytex' desempacotado com sucesso e somas MD5 verificadas
+Rscript.exe : Mensagen de aviso:
+No linha:1 caractere:675
++ ... ).FullName; & "$r\bin\Rscript.exe" -e "lib <- commandArgs(TRUE)[1]; i ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Mensagen de aviso::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+pacote 'tinytex' foi compilado no R versão 4.5.3 
+tinytex (temp lib) 0.61 
+tentando a URL 'https://github.com/rstudio/tinytex-releases/releases/download/daily/TinyTeX-1-windows.exe'
+Content type 'application/octet-stream' length 73694842 bytes (70.3 MB)
+==================================================
+downloaded 70.3 MB
+
+
+7-Zip SFX 26.04 (x86) : Copyright (c) 1999-2026 Igor Pavlov : 2026-10-05
+
+Extracting archive: <TMP>\RTMPWH~1\TINYTE~1.EXE
+--
+Path = <TMP>\RTMPWH~1\TINYTE~1.EXE
+Type = 7z
+
+  0%
+    
+  0% 398 - TinyTeX\texmf-dist\tex\generic\babel\locale\peo
+                                                          
+  0% 713 - TinyTeX\tlpkg\tlperl\lib\auto\File
+                                             
+  0% 972 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Lower
+                                                     
+ 10% 1101
+         
+ 25% 1101
+         
+ 31% 1101
+         
+ 32% 1101
+         
+ 34% 1101
+         
+ 42% 1101
+         
+ 48% 1101
+         
+ 52% 1101
+         
+ 54% 1101
+         
+ 59% 1101
+         
+ 61% 1213 - TinyTeX\texmf-dist\fonts\afm\public\amsfonts\cm\cmitt10.afm
+                                                                       
+ 61% 1382 - TinyTeX\texmf-dist\fonts\afm\public\lm\lmr12.afm
+                                                            
+ 61% 1388 - TinyTeX\texmf-dist\fonts\afm\public\lm\lmr9.afm
+                                                           
+ 61% 1414 - TinyTeX\texmf-dist\fonts\afm\public\lm\lmssqbo8.afm
+                                                               
+ 61% 1435 - TinyTeX\texmf-dist\fonts\afm\public\lm\lmtlco10.afm
+                                                               
+ 61% 1459 - TinyTeX\texmf-dist\fonts\afm\urw\times\utmb8a.afm
+                                                             
+ 61% 1484 - TinyTeX\texmf-dist\fonts\enc\dvips\base\q-l7x-uni.enc
+                                                                 
+ 61% 1505 - TinyTeX\texmf-dist\fonts\enc\dvips\inconsolata\i4-ly1-5.enc
+                                                                       
+ 61% 1516 - TinyTeX\texmf-dist\fonts\enc\dvips\inconsolata\i4-qx-0.enc
+                                                                      
+ 61% 1529 - TinyTeX\texmf-dist\fonts\enc\dvips\inconsolata\i4-t1-5.enc
+                                                                      
+ 61% 1558 - TinyTeX\texmf-dist\fonts\enc\dvips\lm\lm-rep-plsc.enc
+                                                                 
+ 61% 1584 - TinyTeX\texmf-dist\fonts\map\dvipdfmx\ckx.map
+                                                         
+ 61% 1612 - TinyTeX\texmf-dist\fonts\map\dvips\psnfss\fpls.map
+                                                              
+ 61% 1642 - TinyTeX\texmf-dist\fonts\opentype\public\lm\lmmono12-regular.otf
+                                                                            
+ 61% 1671 - TinyTeX\texmf-dist\fonts\opentype\public\lm\lmroman6-regular.otf
+                                                                            
+ 61% 1689 - TinyTeX\texmf-dist\fonts\openty . c\lm\lmromanslant12-regular.otf
+                                                                             
+ 61% 1706 - TinyTeX\texmf-dist\fonts\openty . \lm\lmsansdemicond10-oblique.otf
+                                                                              
+ 61% 1725 - TinyTeX\texmf-dist\fonts\pk\ljfour\public\cm\dpi600\cmsy7.pk
+                                                                        
+ 61% 1750 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecbl1200.mf
+                                                                   
+ 61% 1775 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\eccc0600.mf
+                                                                   
+ 61% 1805 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecdh0600.mf
+                                                                   
+ 61% 1831 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecit2488.mf
+                                                                   
+ 61% 1849 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecoc1728.mf
+                                                                   
+ 61% 1866 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecrb2074.mf
+                                                                   
+ 61% 1887 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecsc0600.mf
+                                                                   
+ 61% 1915 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecsl.mf
+                                                               
+ 61% 1940 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecso1728.mf
+                                                                   
+ 61% 1963 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecst0800.mf
+                                                                   
+ 61% 1987 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecsx2986.mf
+                                                                   
+ 61% 2008 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecti1095.mf
+                                                                   
+ 61% 2028 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecui.mf
+                                                               
+ 61% 2055 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecvt.mf
+                                                               
+ 61% 2079 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\ecxc2488.mf
+                                                                   
+ 61% 2091 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\exilig.mf
+                                                                 
+ 61% 2104 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\exrllett.mf
+                                                                   
+ 61% 2129 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcbi1728.mf
+                                                                   
+ 61% 2151 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcbx0500.mf
+                                                                   
+ 61% 2170 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcci0900.mf
+                                                                   
+ 61% 2190 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcit1200.mf
+                                                                   
+ 61% 2213 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcrm0500.mf
+                                                                   
+ 61% 2230 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcsi0700.mf
+                                                                   
+ 61% 2250 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcsl1200.mf
+                                                                   
+ 61% 2277 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcss0900.mf
+                                                                   
+ 61% 2299 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcsx.mf
+                                                               
+ 61% 2314 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcti.mf
+                                                               
+ 61% 2337 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tctt2074.mf
+                                                                   
+ 61% 2364 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\tcvi2074.mf
+                                                                   
+ 61% 2383 - TinyTeX\texmf-dist\fonts\source\jknappen\ec\txisuper.mf
+                                                                   
+ 61% 2400 - TinyTeX\texmf-dist\fonts\source\public\amsfonts\cmextra\cmex9.mf
+                                                                            
+ 61% 2423 - TinyTeX\texmf-dist\fonts\source\public\amsfonts\cyrillic\wncyi10.mf
+                                                                               
+ 61% 2448 - TinyTeX\texmf-dist\fonts\source\public\amsfonts\symbols\msam8.mf
+                                                                            
+ 61% 2463 - TinyTeX\texmf-dist\fonts\source\public\cm\calu.mf
+                                                             
+ 61% 2482 - TinyTeX\texmf-dist\fonts\source\public\cm\cminch.mf
+                                                               
+ 61% 2509 - TinyTeX\texmf-dist\fonts\source\public\cm\cmss8.mf
+                                                              
+ 61% 2528 - TinyTeX\texmf-dist\fonts\source\public\cm\cmtex8.mf
+                                                               
+ 61% 2545 - TinyTeX\texmf-dist\fonts\source\public\cm\greeku.mf
+                                                               
+ 61% 2567 - TinyTeX\texmf-dist\fonts\source\public\cm\sym.mf
+                                                            
+ 61% 2589 - TinyTeX\texmf-dist\fonts\source\public\knuth-lib\rtest.mf
+                                                                     
+ 61% 2604 - TinyTeX\texmf-dist\fonts\source\public\latex-fonts\lasy.mf
+                                                                      
+ 61% 2626 - TinyTeX\texmf-dist\fonts\source\public\tipa\tipa17.mf
+                                                                 
+ 61% 2650 - TinyTeX\texmf-dist\fonts\source\public\tipa\tipass10.mf
+                                                                   
+ 61% 2667 - TinyTeX\texmf-dist\fonts\source\public\tipa\tipx10.mf
+                                                                 
+ 61% 2684 - TinyTeX\texmf-dist\fonts\source\public\tipa\tipxss10.mf
+                                                                   
+ 61% 2707 - TinyTeX\texmf-dist\fonts\source\public\tipa\xipxsl10.mf
+                                                                   
+ 61% 2732 - TinyTeX\texmf-dist\fonts\tfm\adobe\helvetic\phvbon.tfm
+                                                                  
+ 61% 2753 - TinyTeX\texmf-dist\fonts\tfm\adobe\helvetic\phvro8r.tfm
+                                                                   
+ 61% 2775 - TinyTeX\texmf-dist\fonts\tfm\adobe\times\ptmbo7t.tfm
+                                                                
+ 61% 2815 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecbi1000.tfm
+                                                                 
+ 61% 2842 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecbx0900.tfm
+                                                                 
+ 61% 2864 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\eccc2986.tfm
+                                                                 
+ 61% 2892 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecdh2986.tfm
+                                                                 
+ 61% 2920 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecoc2074.tfm
+                                                                 
+ 61% 2944 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecrm1095.tfm
+                                                                 
+ 61% 2973 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecsi1200.tfm
+                                                                 
+ 61% 2997 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecso0800.tfm
+                                                                 
+ 61% 3022 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecst0800.tfm
+                                                                 
+ 61% 3043 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecsx2074.tfm
+                                                                 
+ 61% 3075 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ectt1095.tfm
+                                                                 
+ 61% 3099 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecvi1000.tfm
+                                                                 
+ 61% 3120 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\ecxc0600.tfm
+                                                                 
+ 61% 3150 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcbi2986.tfm
+                                                                 
+ 61% 3172 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcbx1095.tfm
+                                                                 
+ 61% 3186 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcci1095.tfm
+                                                                 
+ 61% 3197 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcit1095.tfm
+                                                                 
+ 61% 3224 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcrm1000.tfm
+                                                                 
+ 61% 3244 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcsi2488.tfm
+                                                                 
+ 61% 3261 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcso0500.tfm
+                                                                 
+ 61% 3277 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcss0700.tfm
+                                                                 
+ 61% 3297 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcst2488.tfm
+                                                                 
+ 61% 3318 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcti0900.tfm
+                                                                 
+ 61% 3330 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tctt1000.tfm
+                                                                 
+ 61% 3355 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcvi1000.tfm
+                                                                 
+ 61% 3374 - TinyTeX\texmf-dist\fonts\tfm\jknappen\ec\tcvt3583.tfm
+                                                                 
+ 61% 3398 - TinyTeX\texmf-dist\fonts\tfm\monotype\helvetic\mhvbi8t.tfm
+                                                                      
+ 61% 3430 - TinyTeX\texmf-dist\fonts\tfm\public\amsfonts\cyrillic\wncyi9.tfm
+                                                                            
+ 61% 3457 - TinyTeX\texmf-dist\fonts\tfm\public\amsfonts\euler\eufm9.tfm
+                                                                        
+ 61% 3478 - TinyTeX\texmf-dist\fonts\tfm\public\amsfonts\euler\eusm6.tfm
+                                                                        
+ 61% 3495 - TinyTeX\texmf-dist\fonts\tfm\public\cm\cmbsy10.tfm
+                                                              
+ 61% 3521 - TinyTeX\texmf-dist\fonts\tfm\public\cm\cmr10.tfm
+                                                            
+ 61% 3547 - TinyTeX\texmf-dist\fonts\tfm\public\cm\cmssqi8.tfm
+                                                              
+ 61% 3567 - TinyTeX\texmf-dist\fonts\tfm\public\cm\cmu10.tfm
+                                                            
+ 61% 3594 - TinyTeX\texmf-dist\fonts\tfm\public\inconsolata\ly1-zi4r-0.tfm
+                                                                          
+ 61% 3630 - TinyTeX\texmf-dist\fonts\tfm\public\inconsolata\ot1-zi4r-4.tfm
+                                                                          
+ 61% 3642 - TinyTeX\texmf-dist\fonts\tfm\public\inconsolata\qx-zi4nb-0.tfm
+                                                                          
+ 61% 3662 - TinyTeX\texmf-dist\fonts\tfm\public\inconsolata\qx-zi4r-4.tfm
+                                                                         
+ 61% 3689 - TinyTeX\texmf-dist\fonts\tfm\public\inconsolata\t1-zi4nr-7.tfm
+                                                                          
+ 61% 3713 - TinyTeX\texmf-dist\fonts\tfm\public\latex-fonts\ilasy8.tfm
+                                                                      
+ 61% 3741 - TinyTeX\texmf-dist\fonts\tfm\public\lm\cs-lmbxo10.tfm
+                                                                 
+ 61% 3761 - TinyTeX\texmf-dist\fonts\tfm\public\lm\cs-lmro17.tfm
+                                                                
+ 61% 3782 - TinyTeX\texmf-dist\fonts\tfm\public\lm\cs-lmtcsc10.tfm
+                                                                  
+ 61% 3802 - TinyTeX\texmf-dist\fonts\tfm\public\lm\cs-lmvtto10.tfm
+                                                                  
+ 61% 3829 - TinyTeX\texmf-dist\fonts\tfm\public\lm\ec-lmri8.tfm
+                                                               
+ 61% 3858 - TinyTeX\texmf-dist\fonts\tfm\public\lm\ec-lmtl10.tfm
+                                                                
+ 61% 3877 - TinyTeX\texmf-dist\fonts\tfm\public\lm\l7x-lmbx10.tfm
+                                                                 
+ 61% 3901 - TinyTeX\texmf-dist\fonts\tfm\public\lm\l7x-lmri8.tfm
+                                                                
+ 61% 3934 - TinyTeX\texmf-dist\fonts\tfm\public\lm\l7x-lmtt10.tfm
+                                                                 
+ 61% 3964 - TinyTeX\texmf-dist\fonts\tfm\public\lm\lmsy7.tfm
+                                                            
+ 61% 3981 - TinyTeX\texmf-dist\fonts\tfm\public\lm\qx-lmduno10.tfm
+                                                                  
+ 61% 3998 - TinyTeX\texmf-dist\fonts\tfm\public\lm\qx-lmro8.tfm
+                                                               
+ 61% 4020 - TinyTeX\texmf-dist\fonts\tfm\public\lm\qx-lmtk10.tfm
+                                                                
+ 61% 4036 - TinyTeX\texmf-dist\fonts\tfm\public\lm\qx-lmvtlo10.tfm
+                                                                  
+ 61% 4059 - TinyTeX\texmf-dist\fonts\tfm\public\lm\rm-lmr7.tfm
+                                                              
+ 61% 4083 - TinyTeX\texmf-dist\fonts\tfm\public\lm\rm-lmsso17.tfm
+                                                                 
+ 61% 4117 - TinyTeX\texmf-dist\fonts\tfm\public\lm\t5-lmbx7.tfm
+                                                               
+ 61% 4137 - TinyTeX\texmf-dist\fonts\tfm\public\lm\t5-lmri8.tfm
+                                                               
+ 61% 4160 - TinyTeX\texmf-dist\fonts\tfm\public\lm\t5-lmssqbx8.tfm
+                                                                  
+ 61% 4186 - TinyTeX\texmf-dist\fonts\tfm\public\lm\texnansi-lmbx12.tfm
+                                                                      
+ 61% 4209 - TinyTeX\texmf-dist\fonts\tfm\public\lm\texnansi-lmri8.tfm
+                                                                     
+ 61% 4235 - TinyTeX\texmf-dist\fonts\tfm\public\lm\texnansi-lmtcso10.tfm
+                                                                        
+ 61% 4263 - TinyTeX\texmf-dist\fonts\tfm\public\lm\ts1-lmbx9.tfm
+                                                                
+ 61% 4283 - TinyTeX\texmf-dist\fonts\tfm\public\lm\ts1-lmro10.tfm
+                                                                 
+ 61% 4303 - TinyTeX\texmf-dist\fonts\tfm\public\lm\ts1-lmssqbo8.tfm
+                                                                   
+ 61% 4327 - TinyTeX\texmf-dist\fonts\tfm\public\pdftex\dummy-space.tfm
+                                                                      
+ 61% 4352 - TinyTeX\texmf-dist\fonts\tfm\public\tipa\tipatt10.tfm
+                                                                 
+ 61% 4373 - TinyTeX\texmf-dist\fonts\tfm\public\tipa\tipxss10.tfm
+                                                                 
+ 61% 4401 - TinyTeX\texmf-dist\fonts\tfm\urw35vf\helvetic\uhvb8r.tfm
+                                                                    
+ 61% 4439 - TinyTeX\texmf-dist\fonts\tfm\urw35vf\helvetic\uhvri8t.tfm
+                                                                     
+ 61% 4461 - TinyTeX\texmf-dist\fonts\tfm\urw35vf\times\utmbo8c.tfm
+                                                                  
+ 61% 4486 - TinyTeX\texmf-dist\fonts\type1\public\amsfonts\cm\cmbx12.pfm
+                                                                        
+ 61% 4533 - TinyTeX\texmf-dist\fonts\type1\public\amsfonts\cm\cmr10.pfb
+                                                                       
+ 61% 4577 - TinyTeX\texmf-dist\fonts\type1\public\amsfonts\cm\cmssi17.pfb
+                                                                         
+ 61% 4610 - TinyTeX\texmf-dist\fonts\type1\public\amsfonts\cm\cmti12.pfm
+                                                                        
+ 61% 4660 - TinyTeX\texmf-dist\fonts\type1\public\amsfonts\cyrillic\wncyb10.pfm
+                                                                               
+ 61% 4727 - TinyTeX\texmf-dist\fonts\type1 . amsfonts\latxfont\lcircle1.pfb
+                                                                           
+ 61% 4775 - TinyTeX\texmf-dist\fonts\type1\public\lm\lmbsy5.pfb
+                                                               
+ 61% 4816 - TinyTeX\texmf-dist\fonts\type1\public\lm\lmmi7.pfm
+                                                              
+ 61% 4859 - TinyTeX\texmf-dist\fonts\type1\public\lm\lmro8.pfb
+                                                              
+ 61% 4892 - TinyTeX\texmf-dist\fonts\type1\public\lm\lmssq8.pfm
+                                                               
+ 61% 4942 - TinyTeX\texmf-dist\fonts\type1\public\lm\lmvtk10.pfm
+                                                                
+ 61% 5025 - TinyTeX\texmf-dist\fonts\type1\urw\helvetic\uhvb8a.pfm
+                                                                  
+ 61% 5076 - TinyTeX\texmf-dist\fonts\vf\adobe\helvetic\phvr7t.vf
+                                                                
+ 61% 5099 - TinyTeX\texmf-dist\fonts\vf\adobe\times\ptmb8t.vf
+                                                             
+ 61% 5119 - TinyTeX\texmf-dist\fonts\vf\adobe\times\ptmri7t.vf
+                                                              
+ 61% 5144 - TinyTeX\texmf-dist\fonts\vf\urw35vf\helvetic\uhvb7t.vf
+                                                                  
+ 61% 5164 - TinyTeX\texmf-dist\fonts\vf\urw35vf\helvetic\uhvr7tn.vf
+                                                                   
+ 61% 5199 - TinyTeX\texmf-dist\fonts\vf\urw35vf\times\utmrc7t.vf
+                                                                
+ 61% 5230 - TinyTeX\texmf-dist\scripts\simpdftex\simpdftex
+                                                          
+ 61% 5260 - TinyTeX\texmf-dist\scripts\texlive-extra\texlinks.sh
+                                                                
+ 61% 5280 - TinyTeX\texmf-dist\tex\generic\babel\babel-bidi-basic.lua
+                                                                     
+ 61% 5297 - TinyTeX\texmf-dist\tex\generic\babel\basque.sty
+                                                           
+ 61% 5320 - TinyTeX\texmf-dist\tex\generic\babel\icelandic.sty
+                                                              
+ 61% 5338 - TinyTeX\texmf-dist\tex\generic\babel\locale\akk\babel-akkadian.tex
+                                                                              
+ 61% 5363 - TinyTeX\texmf-dist\tex\generic\ . cale\ar\babel-arabic-lebanon.tex
+                                                                              
+ 61% 5396 - TinyTeX\texmf-dist\tex\generic\babel\locale\ay\babel-aymara.tex
+                                                                           
+ 61% 5421 - TinyTeX\texmf-dist\tex\generic\babel\locale\bem\babel-bem.ini
+                                                                         
+ 61% 5439 - TinyTeX\texmf-dist\tex\generic\babel\locale\bo\babel-tibetan.tex
+                                                                            
+ 61% 5459 - TinyTeX\texmf-dist\tex\generic\babel\locale\cch\babel-cch.ini
+                                                                         
+ 61% 5487 - TinyTeX\texmf-dist\tex\generic . ocale\cu\babel-churchslavic.tex
+                                                                            
+ 61% 5504 - TinyTeX\texmf-dist\tex\generic\babel\locale\de\babel-de-AT-1901.ini
+                                                                               
+ 61% 5527 - TinyTeX\texmf-dist\tex\generic . an-switzerland-traditional.tex
+                                                                           
+ 61% 5543 - TinyTeX\texmf-dist\tex\generic\babel\locale\dyo\babel-jolafonyi.tex
+                                                                               
+ 61% 5568 - TinyTeX\texmf-dist\tex\generic\babel\locale\en\babel-en-GB.ini
+                                                                          
+ 61% 5592 - TinyTeX\texmf-dist\tex\generic\ . cale\es\babel-spanish-mexico.tex
+                                                                              
+ 61% 5615 - TinyTeX\texmf-dist\tex\generic\babel\locale\fo\babel-faroese.tex
+                                                                            
+ 61% 5640 - TinyTeX\texmf-dist\tex\generic\ . cale\fy\babel-westernfrisian.tex
+                                                                              
+ 61% 5663 - TinyTeX\texmf-dist\tex\generic\babel\locale\gu\babel-gu.ini
+                                                                       
+ 61% 5687 - TinyTeX\texmf-dist\tex\generic\babel\locale\hr\babel-croatian.tex
+                                                                             
+ 61% 5717 - TinyTeX\texmf-dist\tex\generic\ . cale\invalid\babel-naustrian.tex
+                                                                              
+ 61% 5744 - TinyTeX\texmf-dist\tex\generic\babel\locale\ka\babel-georgian.tex
+                                                                             
+ 61% 5762 - TinyTeX\texmf-dist\tex\generic\babel\locale\khq\babel-khq.ini
+                                                                         
+ 61% 5782 - TinyTeX\texmf-dist\tex\generic\babel\locale\ko\babel-korean.tex
+                                                                           
+ 61% 5799 - TinyTeX\texmf-dist\tex\generic . babel-northernkurdish-arab.tex
+                                                                           
+ 61% 5816 - TinyTeX\texmf-dist\tex\generic\babel\locale\lab\babel-lab.ini
+                                                                         
+ 61% 5837 - TinyTeX\texmf-dist\tex\generic\babel\locale\lmo\babel-lmo.ini
+                                                                         
+ 61% 5864 - TinyTeX\texmf-dist\tex\generic\babel\locale\mer\babel-mer.ini
+                                                                         
+ 61% 5893 - TinyTeX\texmf-dist\tex\generic\babel\locale\ms\babel-ms.ini
+                                                                       
+ 61% 5909 - TinyTeX\texmf-dist\tex\generic\babel\locale\naq\babel-naq.ini
+                                                                         
+ 61% 5928 - TinyTeX\texmf-dist\tex\generic\babel\locale\nnh\babel-nnh.ini
+                                                                         
+ 61% 5951 - TinyTeX\texmf-dist\tex\generic\babel\locale\om\babel-oromo.tex
+                                                                          
+ 61% 5970 - TinyTeX\texmf-dist\tex\generic . ocale\pap\babel-papiamento.tex
+                                                                           
+ 61% 5996 - TinyTeX\texmf-dist\tex\generic\babel\locale\qu\babel-qu.ini
+                                                                       
+ 61% 6027 - TinyTeX\texmf-dist\tex\generic\ . ale\sa\babel-sanskrit-bangla.tex
+                                                                              
+ 61% 6060 - TinyTeX\texmf-dist\tex\generic\ . cale\sd\babel-sindhi-khojki.tex
+                                                                             
+ 61% 6080 - TinyTeX\texmf-dist\tex\generic\babel\locale\shi\babel-shi.ini
+                                                                         
+ 61% 6104 - TinyTeX\texmf-dist\tex\generic\babel\locale\sq\babel-sq.ini
+                                                                       
+ 61% 6131 - TinyTeX\texmf-dist\tex\generic\babel\locale\sr\babel-sr-Latn-ME.ini
+                                                                               
+ 61% 6147 - TinyTeX\texmf-dist\tex\generic\babel\locale\syr\babel-syr.ini
+                                                                         
+ 61% 6171 - TinyTeX\texmf-dist\tex\generic\babel\locale\to\babel-to.ini
+                                                                       
+ 61% 6196 - TinyTeX\texmf-dist\tex\generic\babel\locale\und\babel-und.ini
+                                                                         
+ 61% 6221 - TinyTeX\texmf-dist\tex\generic\babel\locale\vec\babel-venetian.tex
+                                                                              
+ 61% 6237 - TinyTeX\texmf-dist\tex\generic\babel\locale\wo\babel-wolof.tex
+                                                                          
+ 61% 6257 - TinyTeX\texmf-dist\tex\generic\babel\locale\yo\babel-yoruba.tex
+                                                                           
+ 61% 6287 - TinyTeX\texmf-dist\tex\generic\babel\locale\zh\babel-zh-Hant-MO.ini
+                                                                               
+ 61% 6306 - TinyTeX\texmf-dist\tex\generic\babel\scottish.sty
+                                                             
+ 61% 6330 - TinyTeX\texmf-dist\tex\generic\config\language.us.def
+                                                                 
+ 61% 6359 - TinyTeX\texmf-dist\tex\generic\iftex\ifetex.sty
+                                                           
+ 61% 6385 - TinyTeX\texmf-dist\tex\generic\stringenc\se-cp855.def
+                                                                 
+ 61% 6408 - TinyTeX\texmf-dist\tex\generic\stringenc\se-mac-roman.def
+                                                                     
+ 61% 6427 - TinyTeX\texmf-dist\tex\generic\unicode-data\CaseFolding.txt
+                                                                       
+ 61% 6449 - TinyTeX\texmf-dist\tex\latex\amscls\amsbook.cls
+                                                           
+ 61% 6470 - TinyTeX\texmf-dist\tex\latex\amsmath\amscd.sty
+                                                          
+ 61% 6494 - TinyTeX\texmf-dist\tex\latex\base\checkencodingsubset.tex
+                                                                     
+ 61% 6518 - TinyTeX\texmf-dist\tex\latex\base\fontmath.ltx
+                                                          
+ 61% 6545 - TinyTeX\texmf-dist\tex\latex\base\lppl.tex
+                                                      
+ 61% 6568 - TinyTeX\texmf-dist\tex\latex\base\omsenc.def
+                                                        
+ 61% 6588 - TinyTeX\texmf-dist\tex\latex\base\preload.ltx
+                                                         
+ 61% 6610 - TinyTeX\texmf-dist\tex\latex\base\t1cmr.fd
+                                                      
+ 61% 6622 - TinyTeX\texmf-dist\tex\latex\base\testpage.tex
+                                                          
+ 61% 6639 - TinyTeX\texmf-dist\tex\latex\base\tulmvtt.fd
+                                                        
+ 61% 6667 - TinyTeX\texmf-dist\tex\latex\euenc\eu1lmvtt.fd
+                                                          
+ 61% 6697 - TinyTeX\texmf-dist\tex\latex\geometry\geometry.sty
+                                                              
+ 61% 6718 - TinyTeX\texmf-dist\tex\latex\graphics\truetex.def
+                                                             
+ 61% 6737 - TinyTeX\texmf-dist\tex\latex\hyperref\hdvips.def
+                                                            
+ 61% 6754 - TinyTeX\texmf-dist\tex\latex\hyperref\nohyperref.sty
+                                                                
+ 61% 6775 - TinyTeX\texmf-dist\tex\latex\kvsetkeys\kvsetkeys.sty
+                                                                
+ 61% 6791 - TinyTeX\texmf-dist\tex\latex\l3kernel\l3docstrip.tex
+                                                                
+ 61% 6817 - TinyTeX\texmf-dist\tex\latex\latexconfig\lualatexiniconfig.tex
+                                                                          
+ 61% 6842 - TinyTeX\texmf-dist\tex\latex\lm\omxlmex.fd
+                                                      
+ 61% 6868 - TinyTeX\texmf-dist\tex\latex\lm\t5lmr.fd
+                                                    
+ 61% 6886 - TinyTeX\texmf-dist\tex\latex\mdwtools\mdwtab.sty
+                                                            
+ 61% 6911 - TinyTeX\texmf-dist\tex\latex\psnfss\mathptm.sty
+                                                           
+ 61% 6939 - TinyTeX\texmf-dist\tex\latex\psnfss\omszplm.fd
+                                                          
+ 61% 6962 - TinyTeX\texmf-dist\tex\latex\psnfss\palatino.sty
+                                                            
+ 61% 6993 - TinyTeX\texmf-dist\tex\latex\psnfss\utopia.sty
+                                                          
+ 61% 7024 - TinyTeX\texmf-dist\tex\latex\tipa\ts3enc.def
+                                                        
+ 61% 7050 - TinyTeX\texmf-dist\tex\latex\tools\hhline.sty
+                                                         
+ 61% 7067 - TinyTeX\texmf-dist\tex\latex\tools\somedefs.sty
+                                                           
+ 61% 7084 - TinyTeX\texmf-dist\tex\latex\tools\xr.sty
+                                                     
+ 61% 7100 - TinyTeX\texmf-dist\tex\lualatex\lualatex-math\lualatex-math.lua
+                                                                           
+ 61% 7114 - TinyTeX\texmf-dist\tex\luatex\lualibs\lualibs-basic-merged.lua
+                                                                          
+ 61% 7136 - TinyTeX\texmf-dist\tex\luatex\lualibs\lualibs-url.lua
+                                                                 
+ 61% 7158 - TinyTeX\texmf-dist\tex\luatex\luaotfload\fontloader-font-cid.lua
+                                                                            
+ 61% 7177 - TinyTeX\texmf-dist\tex\luatex\luaotfload\fontloader-font-otl.lua
+                                                                            
+ 61% 7197 - TinyTeX\texmf-dist\tex\luatex\luaotfload\fontloader-l-io.lua
+                                                                        
+ 61% 7217 - TinyTeX\texmf-dist\tex\luatex\luaotfload\luaotfload-dvi.lua
+                                                                       
+ 61% 7233 - TinyTeX\texmf-dist\tex\luatex\luaotfload\luaotfload-multiscript.lua
+                                                                               
+ 61% 7249 - TinyTeX\texmf-dist\tex\plain\base\fontchart.tex
+                                                           
+ 61% 7275 - TinyTeX\texmf-dist\tex\xelatex\xetexconfig\crop.cfg
+                                                               
+ 61% 7308 - TinyTeX\texmf-dist\web2c\mktexnam.opt
+                                                 
+ 61% 7339 - TinyTeX\texmf-var\tex\generic\config\language.dat
+                                                             
+ 61% 7362 - TinyTeX\tlpkg\installer\config.guess
+                                                
+ 61% 7378 - TinyTeX\tlpkg\TeXLive\TLPSRC.pm
+                                           
+ 61% 7393 - TinyTeX\tlpkg\tlgs\iccprofiles\gray_to_k.icc
+                                                        
+ 61% 7416 - TinyTeX\tlpkg\tlgs\kanji\useopentype.ps
+                                                   
+ 61% 7435 - TinyTeX\tlpkg\tlgs\lib\gs_wl2_e.ps
+                                              
+ 61% 7462 - TinyTeX\tlpkg\tlgs\lib\viewjpeg.ps
+                                              
+ 61% 7491 - TinyTeX\tlpkg\tlgs\Resource\CMap\Add-RKSJ-H
+                                                       
+ 61% 7518 - TinyTeX\tlpkg\tlgs\Resource\CMap\Adobe-Korea1-2
+                                                           
+ 61% 7534 - TinyTeX\tlpkg\tlgs\Resource\CMap\ETHK-B5-V
+                                                      
+ 61% 7552 - TinyTeX\tlpkg\tlgs\Resource\CMap\GBpc-EUC-V
+                                                       
+ 61% 7572 - TinyTeX\tlpkg\tlgs\Resource\CMap\HKscs-B5-H
+                                                       
+ 61% 7584 - TinyTeX\tlpkg\tlgs\Resource\CMap\KSC-H
+                                                  
+ 61% 7604 - TinyTeX\tlpkg\tlgs\Resource\CMap\UniCNS-UTF32-V
+                                                           
+ 61% 7634 - TinyTeX\tlpkg\tlgs\Resource\CMap\UniJIS2004-UTF16-V
+                                                               
+ 61% 7661 - TinyTeX\tlpkg\tlgs\Resource\ColorSpace\TrivialCMYK
+                                                              
+ 61% 7690 - TinyTeX\tlpkg\tlgs\Resource\Font\putri8a.afm
+                                                        
+ 61% 7725 - TinyTeX\tlpkg\tlgs\Resource\Font\uhvbo8ac.afm
+                                                         
+ 61% 7759 - TinyTeX\tlpkg\tlgs\Resource\Font\utmr8a.afm
+                                                       
+ 61% 7780 - TinyTeX\tlpkg\tlgs\Resource\Init\gs_cidtt.ps
+                                                        
+ 61% 7798 - TinyTeX\tlpkg\tlgs\Resource\Init\gs_mex_e.ps
+                                                        
+ 61% 7816 - TinyTeX\tlpkg\tlgs\Resource\Init\xlatmap
+                                                    
+ 61% 7841 - TinyTeX\tlpkg\tlperl\lib\AutoLoader.pm
+                                                  
+ 61% 7860 - TinyTeX\tlpkg\tlperl\lib\Carp\Heavy.pm
+                                                  
+ 61% 7877 - TinyTeX\tlpkg\tlperl\lib\CORE\av.h
+                                              
+ 61% 7889 - TinyTeX\tlpkg\tlperl\lib\CORE\fakesdio.h
+                                                    
+ 61% 7909 - TinyTeX\tlpkg\tlperl\lib\CORE\mg_data.h
+                                                   
+ 61% 7935 - TinyTeX\tlpkg\tlperl\lib\CORE\perl_siphash.h
+                                                        
+ 61% 7966 - TinyTeX\tlpkg\tlperl\lib\CORE\vutil.h
+                                                 
+ 61% 7994 - TinyTeX\tlpkg\tlperl\lib\CPAN\Index.pm
+                                                  
+ 61% 8010 - TinyTeX\tlpkg\tlperl\lib\CPAN\Meta\Requirements\Range.pm
+                                                                    
+ 61% 8025 - TinyTeX\tlpkg\tlperl\lib\CPAN\URL.pm
+                                                
+ 61% 8041 - TinyTeX\tlpkg\tlperl\lib\diagnostics.pm
+                                                   
+ 61% 8058 - TinyTeX\tlpkg\tlperl\lib\Encode\ConfigLocal_PM.e2x
+                                                              
+ 61% 8081 - TinyTeX\tlpkg\tlperl\lib\Encode\_PM.e2x
+                                                   
+ 61% 8109 - TinyTeX\tlpkg\tlperl\lib\ExtUtils\Constant\ProxySubs.pm
+                                                                   
+ 61% 8135 - TinyTeX\tlpkg\tlperl\lib\ExtUtils\MM_DOS.pm
+                                                       
+ 61% 8158 - TinyTeX\tlpkg\tlperl\lib\ExtUtils\typemap
+                                                     
+ 61% 8177 - TinyTeX\tlpkg\tlperl\lib\File\Path.pm
+                                                 
+ 61% 8192 - TinyTeX\tlpkg\tlperl\lib\filetest.pm
+                                                
+ 61% 8208 - TinyTeX\tlpkg\tlperl\lib\integer.pm
+                                               
+ 61% 8227 - TinyTeX\tlpkg\tlperl\lib\IO\File.pm
+                                               
+ 61% 8253 - TinyTeX\tlpkg\tlperl\lib\JSON\PP\Boolean.pm
+                                                       
+ 61% 8279 - TinyTeX\tlpkg\tlperl\lib\Memoize\Expire.pm
+                                                      
+ 61% 8299 - TinyTeX\tlpkg\tlperl\lib\Net\FTP\dataconn.pm
+                                                        
+ 61% 8315 - TinyTeX\tlpkg\tlperl\lib\NEXT.pm
+                                            
+ 61% 8333 - TinyTeX\tlpkg\tlperl\lib\PerlIO\via\QuotedPrint.pm
+                                                              
+ 61% 8343 - TinyTeX\tlpkg\tlperl\lib\Pod\ParseLink.pm
+                                                     
+ 61% 8360 - TinyTeX\tlpkg\tlperl\lib\Pod\Simple\DumpAsText.pm
+                                                             
+ 61% 8381 - TinyTeX\tlpkg\tlperl\lib\Pod\Simple\Transcode.pm
+                                                            
+ 61% 8406 - TinyTeX\tlpkg\tlperl\lib\source\encoding.pm
+                                                       
+ 61% 8429 - TinyTeX\tlpkg\tlperl\lib\TAP\Parser\Iterator\Array.pm
+                                                                 
+ 61% 8451 - TinyTeX\tlpkg\tlperl\lib\TAP\Parser\SourceHandler\Handle.pm
+                                                                       
+ 61% 8465 - TinyTeX\tlpkg\tlperl\lib\Term\Table\LineBreak.pm
+                                                            
+ 61% 8473 - TinyTeX\tlpkg\tlperl\lib\Test\Builder\TodoDiag.pm
+                                                             
+ 61% 8492 - TinyTeX\tlpkg\tlperl\lib\Test2\API\InterceptResult.pm
+                                                                 
+ 61% 8519 - TinyTeX\tlpkg\tlperl\lib\Test2\Compare\Object.pm
+                                                            
+ 61% 8548 - TinyTeX\tlpkg\tlperl\lib\Test2\EventFacet\Amnesty.pm
+                                                                
+ 61% 8566 - TinyTeX\tlpkg\tlperl\lib\Test2\Hub.pm
+                                                 
+ 61% 8586 - TinyTeX\tlpkg\tlperl\lib\Test2\Manual\Tooling\Formatter.pm
+                                                                      
+ 61% 8600 - TinyTeX\tlpkg\tlperl\lib\Test2\Plugin\ExitSummary.pm
+                                                                
+ 61% 8609 - TinyTeX\tlpkg\tlperl\lib\Test2\Require\Fork.pm
+                                                          
+ 61% 8630 - TinyTeX\tlpkg\tlperl\lib\Test2\Tools\Grab.pm
+                                                        
+ 61% 8653 - TinyTeX\tlpkg\tlperl\lib\Test2\Util\Table\LineBreak.pm
+                                                                  
+ 61% 8679 - TinyTeX\tlpkg\tlperl\lib\Tie\File.pm
+                                                
+ 61% 8706 - TinyTeX\tlpkg\tlperl\lib\Unicode\Collate\Locale\as.pl
+                                                                 
+ 61% 8736 - TinyTeX\tlpkg\tlperl\lib\Unicode\Collate\Locale\hy.pl
+                                                                 
+ 61% 8757 - TinyTeX\tlpkg\tlperl\lib\Unicode\Collate\Locale\or.pl
+                                                                 
+ 61% 8769 - TinyTeX\tlpkg\tlperl\lib\Unicode\Collate\Locale\sv.pl
+                                                                 
+ 61% 8783 - TinyTeX\tlpkg\tlperl\lib\Unicode\Collate\Locale\wo.pl
+                                                                 
+ 61% 8809 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Age\V31.pl
+                                                           
+ 61% 8832 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Bc\ON.pl
+                                                         
+ 61% 8855 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\CompEx\Y.pl
+                                                            
+ 61% 8879 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Dt\Vert.pl
+                                                           
+ 61% 8903 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Gc\Mn.pl
+                                                         
+ 61% 8918 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Gc\Sk.pl
+                                                         
+ 61% 8926 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\GCB\LVT.pl
+                                                           
+ 61% 8944 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\IdType\Exclusio.pl
+                                                                   
+ 61% 8965 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\In\3_0.pl
+                                                          
+ 61% 8988 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\InPC\NA.pl
+                                                           
+ 61% 9013 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\InSC\Other.pl
+                                                              
+ 61% 9036 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Jg\Reh.pl
+                                                          
+ 61% 9055 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Lb\BA.pl
+                                                         
+ 61% 9064 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Lb\IN.pl
+                                                         
+ 61% 9079 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\NFCQC\Y.pl
+                                                           
+ 61% 9102 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Nv\17.pl
+                                                         
+ 61% 9127 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Nv\4000.pl
+                                                           
+ 61% 9153 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Nv\90000.pl
+                                                            
+ 61% 9174 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Perl\_PerlNch.pl
+                                                                 
+ 61% 9196 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Sc\Cyrl.pl
+                                                           
+ 61% 9206 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Sc\Gujr.pl
+                                                           
+ 61% 9215 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Sc\Limb.pl
+                                                           
+ 61% 9239 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Scx\Cakm.pl
+                                                            
+ 61% 9263 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Scx\Hira.pl
+                                                            
+ 61% 9290 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Scx\Perm.pl
+                                                            
+ 61% 9313 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\Scx\Vith.pl
+                                                            
+ 61% 9334 - TinyTeX\tlpkg\tlperl\lib\unicore\lib\WB\KA.pl
+                                                         
+ 61% 9346 - TinyTeX\tlpkg\tlperl\lib\unicore\NamedSequences.txt
+                                                               
+ 61% 9356 - TinyTeX\tlpkg\tlperl\lib\unicore\To\EqUIdeo.pl
+                                                          
+ 61% 9372 - TinyTeX\tlpkg\tlperl\lib\unicore\To\kEHFVal.pl
+                                                          
+ 61% 9392 - TinyTeX\tlpkg\tlperl\lib\unicore\To\Scx.pl
+                                                      
+ 61% 9416 - TinyTeX\tlpkg\tlperl\lib\Win32API\File.pm
+                                                     
+ 61% 9440 - TinyTeX\tlpkg\tlperl\site\lib\auto\Win32\API\API.exp
+                                                                
+ 61% 9468 - TinyTeX\tlpkg\tlperl\site\lib\Date\Language\French.pm
+                                                                 
+ 61% 9492 - TinyTeX\tlpkg\tlperl\site\lib\Digest\SHA.pm
+                                                       
+ 61% 9500 - TinyTeX\tlpkg\tlperl\site\lib\ExtUtils\Helpers\Unix.pm
+                                                                  
+ 61% 9511 - TinyTeX\tlpkg\tlperl\site\lib\HTML\Parser.pm
+                                                        
+ 61% 9532 - TinyTeX\tlpkg\tlperl\site\lib\HTTP\Status.pm
+                                                        
+ 61% 9553 - TinyTeX\tlpkg\tlperl\site\lib\LWP\Protocol\mailto.pm
+                                                                
+ 61% 9575 - TinyTeX\tlpkg\tlperl\site\lib\Socket.pm
+                                                   
+ 61% 9600 - TinyTeX\tlpkg\tlperl\site\lib\TAP\Parser\Result\Pragma.pm
+                                                                     
+ 61% 9631 - TinyTeX\tlpkg\tlperl\site\lib\Test\Deep\Class.pm
+                                                            
+ 61% 9645 - TinyTeX\tlpkg\tlperl\site\lib\Test\Deep\NoTest.pm
+                                                             
+ 61% 9658 - TinyTeX\tlpkg\tlperl\site\lib\Test\Deep\Set.pm
+                                                          
+ 61% 9679 - TinyTeX\tlpkg\tlperl\site\lib\URI\file\Mac.pm
+                                                         
+ 61% 9707 - TinyTeX\tlpkg\tlperl\site\lib\URI\pop.pm
+                                                    
+ 61% 9739 - TinyTeX\tlpkg\tlperl\site\lib\URI\_segment.pm
+                                                         
+ 61% 9762 - TinyTeX\tlpkg\tlpobj\babel.tlpobj
+                                             
+ 61% 9791 - TinyTeX\tlpkg\tlpobj\geometry.tlpobj
+                                                
+ 61% 9809 - TinyTeX\tlpkg\tlpobj\kvdefinekeys.tlpobj
+                                                    
+ 61% 9823 - TinyTeX\tlpkg\tlpobj\lm.tlpobj
+                                          
+ 61% 9839 - TinyTeX\tlpkg\tlpobj\mfware.windows.tlpobj
+                                                      
+ 61% 9862 - TinyTeX\tlpkg\tlpobj\tipa.tlpobj
+                                            
+ 62% 9883
+         
+ 65% 9883
+         
+ 67% 9883
+         
+ 70% 9883
+         
+ 72% 9883
+         
+ 75% 9883
+         
+ 77% 9883
+         
+ 80% 9883
+         
+ 83% 9883
+         
+ 86% 9883
+         
+ 88% 9883
+         
+ 90% 9883
+         
+ 91% 9883
+         
+ 96% 9883
+         
+ 99% 9883
+         
+100% 9914 - TinyTeX\bin\windows\extractbb.exe
+                                             
+100% 9929 - TinyTeX\bin\windows\icudt78.dll
+                                           
+100% 9930 - TinyTeX\bin\windows\inimf.exe
+                                         
+100% 9940 - TinyTeX\bin\windows\luahbtex.dll
+                                            
+100% 9945 - TinyTeX\bin\windows\luatex.exe
+                                          
+100% 9966 - TinyTeX\bin\windows\pktogf.exe
+                                          
+100% 9997 - TinyTeX\bin\windows\xetex.exe
+                                         
+100% 10006 - TinyTeX\tlpkg\tlgs\bin\gswin64c.exe
+                                                
+100% 10017 - TinyTeX\tlpkg\tlperl\lib\auto\Compress\Raw\Zlib\Zlib.dll
+                                                                     
+100% 10022 - TinyTeX\tlpkg\tlperl\lib\auto\Digest\SHA\SHA.dll
+                                                             
+100% 10025 - TinyTeX\tlpkg\tlperl\lib\auto\Encode\EBCDIC\EBCDIC.dll
+                                                                   
+100% 10031 - TinyTeX\tlpkg\tlperl\lib\auto\Encode\Unicode\Unicode.dll
+                                                                     
+100% 10041 - TinyTeX\tlpkg\tlperl\lib\auto\Math\BigInt\FastCalc\FastCalc.dll
+                                                                            
+100% 10051 - TinyTeX\tlpkg\tlperl\lib\auto\Socket\Socket.dll
+                                                            
+100% 10060 - TinyTeX\tlpkg\tlperl\lib\auto\Win32\Win32.dll
+                                                          
+100% 10069 - TinyTeX\tlpkg\tlperl\site\lib\auto\Win32\API\API.dll
+                                                                 
+Everything is Ok
+3 arquivo(s) copiado(s)
+1 arquivo(s) copiado(s)
+Running fc-cache -v -r
+tlmgr --repository https://texlive.info/tlgpg/ install tlgpg
+tlmgr.pl: prefetching 2 containers using 2 parallel downloads (curl)
+tlmgr.pl: package repository https://texlive.info/tlgpg/ (not verified: pubkey missing)
+[1/2, ??:??/??:??] install: tlgpg.windows [1761k]
+[2/2, 00:02/00:02] install: tlgpg [1k]
+running mktexlsr ...
+done running mktexlsr.
+tlmgr.pl: package log updated: <HOME>/AppData/Roaming/TinyTeX/texmf-var/web2c/tlmgr.log
+tlmgr.pl: command log updated: <HOME>/AppData/Roaming/TinyTeX/texmf-var/web2c/tlmgr-commands.log
+tlmgr option repository "https://tlnet.yihui.org"
+tlmgr.pl: setting default package repository to https://tlnet.yihui.org
+tlmgr.pl: updating <HOME>/AppData/Roaming/TinyTeX/tlpkg/texlive.tlpdb
+tlmgr update --list
+tlmgr.pl: package repository https://tlnet.yihui.org (not verified: pubkey missing)
+tlmgr.pl: no updates available
+is_tinytex: TRUE | root: <HOME>\AppData\Roaming\TinyTeX 

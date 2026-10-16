@@ -1,0 +1,16 @@
+﻿2.9.0
+366cd9cd8be14df1ab8ed50352a82111082a36686b2d389fdb79a92c3fafb3e3  <HOME_WSL>/mm/bin/micromamba
+R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+2.5G	<HOME_WSL>/mm
+wsl.exe : /bin/bash: -c: line 1: syntax error near unexpected token `('
+No linha:1 caractere:384
++ ... ma_0_11_0"; wsl.exe -d Ubuntu -- bash -lc "export MAMBA_ROOT_PREFIX=~ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (/bin/bash: -c: ...ected token `(':String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+/bin/bash: -c: line 1: `bash -lc "export MAMBA_ROOT_PREFIX=~/mm/root; ~/mm/bin/micromamba install -y -q -p 
+~/mm/envs/r45 -c conda-forge --override-channels r-pkgdown 2>&1 | tail -2; ~/mm/envs/r45/bin/Rscript -e 'cat(\" 
+"pkgdown\, as.character(packageVersion(\pkgdown\)), \\n\)'"'
+pkgdown 2.2.1 
+2.5G	<HOME_WSL>/mm

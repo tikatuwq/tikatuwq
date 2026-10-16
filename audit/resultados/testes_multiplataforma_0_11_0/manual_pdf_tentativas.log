@@ -1,0 +1,11 @@
+﻿Rscript.exe : Mensagen de aviso:
+No linha:1 caractere:917
++ ... ).FullName; & "$r\bin\Rscript.exe" -e "library(tinytex, lib.loc = com ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Mensagen de aviso::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+pacote 'tinytex' foi compilado no R versão 4.5.3 
+tentativa 1 pdf: FALSE 
+  faltando:  
+  pacotes:  
