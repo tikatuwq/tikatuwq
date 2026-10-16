@@ -101,6 +101,12 @@ curves, so the package equations are analytical approximations of them. See `NEW
 `system.file("audit", "IQA_AUDITORIA.md", package = "tikatuwq")` for the
 before/after comparison and the list of open items.
 
+**Trophic state values also change.** `iet_lamparelli()` now uses the
+Lamparelli (2004) equations given by CETESB (Appendix D 2023, p. 10), which
+differ for rivers and reservoirs; `iet_carlson()` now uses the natural
+logarithm, as defined by Carlson (1977).
+
+- `nsfwqi()` is documented as an approximation; with `na_rm = FALSE`, a missing component now gives `NA`.
 - `classify_iqa()` uses `classification` (as `iqa()` does); `scheme` is deprecated.
 - `classify_iqa()` offers the scales `"cetesb"`, `"igam"` and `"ana"` (same cuts as `"cetesb"`); they change only the labels, never the IQA value. In `iqa()` the scale follows `method`; the `classification` argument of `iqa()` was removed (breaking change from 0.10.0): use `classify_iqa()`.
 - `iqa(df, method = "IGAM")` computes the IGAM (Minas Gerais) IQA with its own engine (see below).
@@ -168,11 +174,17 @@ attr(cmp, "class_transitions")  # CETESB class -> IGAM class (different scales)
 - `iqa(details = TRUE)` reports the effective weights actually used, including with custom `pesos` and `allow_partial = TRUE`.
 - `delta_temperature` is now forwarded; invalid physical values become `NA` with a warning.
 
+✔️ `R CMD check --as-cran`: **0 errors | 0 warnings** on Windows, Linux and macOS (win-builder reports 1 note: the place name "Minas Gerais" flagged as a possible misspelling)  
+✔️ **181 automated tests (806 expectations) passing**  
+✔️ Checked on Windows (local, win-builder R-devel and R-release), Linux (Ubuntu) and macOS (R-release, Apple silicon)
+
+---
+
 ### 🆕 What's new in v0.10.0
 
 **🔬 Scientific & Metrological Audit of the Brazilian IQA (CETESB/INEMA)**
 
-- **Analytical Equations**: `iqa()` implements piecewise analytical equations for all 9 CETESB sub-indices ($Q_1$ to $Q_9$), including altitude- and temperature-corrected DO saturation ($C_s$). *Note: the 2026 audit found errors in some pieces of these equations (fixed in development).*
+- **Analytical Equations**: `iqa()` implements piecewise analytical equations for all 9 CETESB sub-indices ($Q_1$ to $Q_9$), including altitude- and temperature-corrected DO saturation ($C_s$). *Note: the 2026 audit found errors in some pieces of these equations (fixed in v0.11.0).*
 - **Stoichiometric Phosphorus Conversion**: Automatic conversion of total elemental phosphorus to phosphate ($\text{P}_{\text{total}} \times 3.066 = \text{PO}_4$) when `phosphorus_basis = "P"`.
 - **E. coli Factor ($1.25\times$)**: Native support for `microbial_type = "e_coli"`, applying a $1.25\times$ conversion factor (CETESB Appendix D 2023, p. 5).
 - **Strict Separation of Total Solids vs. TDS**: Total Dissolved Solids (`tds`) is no longer accepted as an interchangeable alias for Total Solids (`solidos_totais`/`residuo_total`) in strict CETESB mode, preventing systematic overestimation of water quality.
@@ -220,7 +232,7 @@ install.packages("remotes")
 # development version
 remotes::install_github("tikatuwq/tikatuwq", dependencies = TRUE)
 
-# a specific release by tag (the latest tag on GitHub is v0.8.2; for 0.10.0 use CRAN)
+# a specific release by tag (the latest tag on GitHub is v0.8.2; for later versions use CRAN)
 remotes::install_github("tikatuwq/tikatuwq@v0.8.2", build_vignettes = TRUE)
 ```
 
@@ -246,7 +258,11 @@ conama_freq_check(df, classe = "2", by = "ponto")
 ## Main functions
 
 **Water quality indices**
-- `iqa(df, method = "CETESB", na_rm = TRUE, ...)` — Water Quality Index; weighted geometric mean (CETESB/NSF default).
+- `iqa(df, method = "CETESB", ...)` — Water Quality Index; weighted geometric mean (CETESB default). `method = "IGAM"` uses the IGAM (Minas Gerais) engine.
+- `iqa_components(df)` — sub-indices, weights and weighted factors of each sample (CETESB).
+- `iqa_methods()` — available calculation engines and their scope of validation.
+- `compare_iqa(df, methods = c("CETESB", "IGAM"))` — paired comparison between engines.
+- `classify_iqa(x, classification)` — IQA classes on the CETESB, IGAM or ANA scale.
 - `iet_carlson(df)` / `iet_lamparelli(df)` — Trophic State Index.
 - `nsfwqi(df, na_rm = TRUE, add_status = TRUE)` — NSF WQI with geometric mean aggregation.
 

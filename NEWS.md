@@ -187,6 +187,17 @@ the published IBEAS/von Sperling worked example (IQA = 81) is reproduced.
   IQA values are partial estimates (8 parameters), not CETESB IQA values, and
   that it is not an independent benchmark.
 
+## Tests and checks
+
+- 37 test files, 181 tests and 806 expectations. Includes a CETESB regression
+  baseline (131 cases, `inst/audit/REGRESSAO_CETESB_POS_API.csv`) and IGAM
+  tests on synthetic samples, whose expected values come from an independent
+  implementation.
+- `R CMD check --as-cran`: 0 errors and 0 warnings on Windows (local, and
+  win-builder R-devel and R-release), Linux (Ubuntu) and macOS (R-release,
+  Apple silicon). win-builder reports 1 note: the place name "Minas Gerais" in
+  DESCRIPTION is flagged as a possible misspelling.
+
 ## Known open items
 
 - CETESB pH 9-10: two published transcriptions differ. The package uses
