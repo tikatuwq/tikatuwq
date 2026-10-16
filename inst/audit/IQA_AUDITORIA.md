@@ -30,7 +30,7 @@ Categorias usadas em todo o material:
 | CPRH, PNMA II — *Índices e indicadores de qualidade da água: seleção preliminar e material de apoio* (Pernambuco), seção 4.1 "IQA-CETESB", fórmulas da planilha Excel da CETESB. http://www.cprh.pe.gov.br/downloads/indice-agua-volume2.pdf (acesso 2026-10-15) | Equações por trecho dos 9 qi; Cs(T, h); qi de temperatura = 94 | (b) |
 | von Sperling, M. (2007). *Estudos e modelagem da qualidade da água de rios*, p. 254–255, **via** IBEAS (2015), Oliveira & Xavier, VI Congresso Brasileiro de Gestão Ambiental, trabalho VIII-041, Tabela 2. https://www.ibeas.org.br/congresso/Trabalhos2015/VIII-041.pdf | Mesmas equações, com LOG10 em DBO/NT e outra reta em pH 9–10; exemplo numérico (IQA = 81) e qi calculados (Tabelas 4–12) | (b) e gabarito externo |
 | ANA, Portal de Qualidade das Águas — IQA (acesso 2026-10-15) | Faixas 19/36/51/79 | (a) para `classification = "ana"` |
-| IGAM, Índice de Qualidade das Águas — IQA (acesso 2026-10-15); IGAM (2017), relatório Pampulha 3º trim., p. 9 | Regras próprias; classes em texto no relatório de 2017 | Rótulos e cortes IGAM: (a). Motor IGAM: bloqueado (`VALIDACAO_IGAM.md`) |
+| IGAM, Índice de Qualidade das Águas — IQA (acesso 2026-10-15); IGAM (2017), relatório Pampulha 3º trim., p. 9 | Regras próprias; classes em texto no relatório de 2017 | Rótulos e cortes IGAM: (a). Motor IGAM: liberado em 2026-10-16 como reprodução documentada, não homologada (`inst/methodology/IGAM_VALIDATION.md`) |
 
 **Achado central.** A CETESB publica os qi **só como curvas**. As equações do
 pacote são o ajuste da planilha CETESB transcrito por terceiros. As duas
@@ -107,7 +107,7 @@ publicado para essas amostras, então o `wq_demo` não serve de benchmark.
 |---|---|---|---|
 | 1 | P1 | pH 9–10 (EQ-03) | (i) manter `288 − 27 pH` (CPRH com o dígito corrigido; contínua; coerente com a curva); (ii) voltar a `50 − 32 (pH − 9)` (von Sperling/IBEAS; salto +5 em pH 9, contrário à curva). Efeito ≤ 0,9 ponto, sem mudança de classe nos testes |
 | 2 | P1 | Curva de ΔT (EQ-07/08) | (i) manter como experimental, com aviso e marcação (atual); (ii) desativar `delta`/`reference` até haver fonte; (iii) ajustar à curva q6 por digitalização documentada, com erro estimado e aprovação. A opção (iii) é proibida sem aprovação explícita |
-| 3 | ~~P2~~ | ~~Rótulos IGAM~~ | **Resolvido (3ª rodada):** confirmados em texto no relatório IGAM 2017, p. 9 (ver `VALIDACAO_IGAM.md`) |
+| 3 | ~~P2~~ | ~~Rótulos IGAM~~ | **Resolvido (3ª rodada):** confirmados em texto no relatório IGAM 2017, p. 9 (classes reproduzidas em `inst/methodology/IGAM_VALIDATION.md`) |
 | 4 | P2 | von Sperling (2007), p. 255 | Consultar o livro para saber se o `LOG10` é do autor ou do IBEAS |
 | 5 | P2 | Zenodo | Depositar a 0.11.0 e atualizar o DOI do README |
 | 6 | backlog | COT → DBO (p. 5: DBO = 0,510658 · COT^1,27831) | Opção futura configurável e marcada como estimativa |

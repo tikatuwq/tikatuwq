@@ -1,0 +1,22 @@
+﻿R.exe : * installing *source* package 'tikatuwq' ...
+No linha:1 caractere:1231
++ ... | Out-Null; & "$r\bin\R.exe" CMD INSTALL --library="$f\lib2" "$b\tika ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (* installing *s... 'tikatuwq' ...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+** this is package 'tikatuwq' version '0.11.0'
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tikatuwq)

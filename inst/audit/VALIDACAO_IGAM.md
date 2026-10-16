@@ -1,75 +1,79 @@
 # Validação do método IGAM — tikatuwq 0.11.0
 
-- **Data:** 2026-10-15
-- **Estado:** **BLOQUEADO para cálculo numérico.** `iqa(df, method = "IGAM")` e
+> **6ª rodada (2026-10-16):** método IGAM **liberado** em `iqa()`. Ver
+> `IGAM_RELEASE_READINESS.md`.
+>
+> **5ª rodada (2026-10-15):** este documento registra o estado da 4ª rodada.
+> - **Novo estado:** motor IGAM **implementado em caráter experimental**
+>   (`implemented = TRUE`) e **não liberado** (`available = FALSE`,
+>   `reference_validated = FALSE`).
+> - **Ver:** `RELATORIO_IGAM_IMPLEMENTACAO.md`,
+>   `IGAM_VALIDACAO_TURBIDEZ_1_5.md` e `IGAM_METODOLOGIA_E_UNIDADES.md`.
+
+- **Data:** 2026-10-15 (4ª rodada)
+- **Estado final:** **BLOQUEADO.** `iqa(df, method = "IGAM")` e
   `iqa_components(df, method = "IGAM")` geram erro de classe
-  `tikatuwq_method_unavailable`. `iqa_methods()` mostra o status.
-- **Código:** `R/iqa_igam.R` (independente de `R/iqa_equations.R`; não reaproveita
-  nenhum coeficiente CETESB).
-- **Testes:** `tests/testthat/test-iqa-igam-compare.R`.
+  `tikatuwq_method_unavailable`.
+- **`iqa_methods()`:** IGAM com `implemented = FALSE`, `documented = TRUE`,
+  `reference_validated = FALSE` e `available = FALSE`.
+- **Fontes e equações:** `SCQA_FONTES_E_EQUACOES.md`.
+- **Validação externa:** `IGAM_VALIDACAO_REFERENCIAS.csv`.
+- **Script reproduzível:** `audit/igam_scqa_validation.R`, com dados em
+  `audit/dados/`.
 
-## 1. Motivo do bloqueio
+## 1. O que mudou desde a 3ª rodada
 
-As equações dos qi do IGAM foram estabelecidas no documento:
+- **O SCQA 2005 foi obtido e autenticado.** O mantenedor forneceu uma
+  reprodução, e a cópia oficial que estava no servidor do IGAM foi recuperada
+  do Internet Archive, com SHA-1 conferido, em duas versões de 2007.
+- **As 9 equações foram transcritas duas vezes** e checadas contra as figuras
+  do próprio documento.
+- **Foram encontrados 15 pares oficiais:** entradas da série histórica do IGAM
+  e o IQA publicado pelo IGAM (Pampulha, 3º trimestre de 2017).
 
-> SEMAD; UCEMG / PNMA II (2005). *Sistema de Cálculo da Qualidade da Água
-> (SCQA) — Estabelecimento das equações do Índice de Qualidade das Águas
-> (IQA)*. Relatório I. Belo Horizonte, junho de 2005.
+## 2. Critério de desbloqueio e situação
 
-Segundo trabalhos que o citam (ver seção 4), o SCQA criou **equações próprias**
-por regressão polinomial (Excel) sobre as curvas médias da NSF e estudos
-brasileiros. **Elas não são as equações da CETESB.** O documento não foi
-encontrado online (portal IGAM, repositório institucional, buscas por título),
-e nenhuma fonte acessível transcreve as equações. Também não há caso numérico
-oficial do IGAM com entradas e IQA publicados que permita validar.
+| Requisito | Situação |
+|---|---|
+| Evidência rastreável para todas as equações | 8 de 9: sim. **Turbidez: não.** A equação impressa é refutada pela figura do próprio documento e pelos resultados publicados |
+| Unidades verificadas | Fosfato: o IGAM usa P × 3,066 (empírico). Nitrato: **não resolvido** (SCQA em NO₃; dados em N; os dados não discriminam) |
+| Temperatura | **Não resolvido:** 93 (SCQA 2005) × 92 (portal atual). As duas são declarações institucionais de datas diferentes |
+| Dados ausentes | Portal: OD e coliformes obrigatórios; peso dos demais repartido igualmente. Com vários ausentes, é **interpretação** |
+| Referências independentes reproduzidas | 2 de 15 dentro do arredondamento (ambas com turbidez > 100 UNT). Nas outras 13 a equação de turbidez influi e os erros vão até 1,5 ponto |
 
-Sem as equações, implementar o cálculo exigiria:
-- reutilizar as curvas da CETESB, o que é proibido: o IGAM usa nitrato e
-  fosfato, e o SCQA tem regressões próprias; ou
-- inventar ou digitalizar curvas, o que também é proibido.
+**Conclusão:** os requisitos essenciais não foram cumpridos (turbidez, nitrato,
+temperatura). O motor não foi incorporado ao pacote. A transcrição fica só no
+script de auditoria, para reprodução e para o próximo passo.
 
-**Por isso o motor não foi habilitado.**
+## 3. Decisão sobre a temperatura
 
-## 2. O que foi verificado e implementado
+O SCQA 2005 (p. 12) dá qs = 93, com a justificativa de que ΔT ≅ 0. O portal
+Infohidro/IGAM atual dá 92 "no âmbito do Projeto Águas de Minas". São
+documentos institucionais de épocas diferentes, e nenhum explica a mudança.
+**Não se escolhe um dos valores:** os dois ficam em
+`.iqa_igam_spec$temperature_qs`. Os 15 pares não distinguem os valores, porque
+o efeito no IQA (fator (93/92)^0,1 ≈ 1,001) é menor que o arredondamento
+publicado.
 
-| Elemento | Valor no pacote | Fonte | Status |
-|---|---|---|---|
-| Parâmetros | OD (% sat.), coliformes termotolerantes ou *E. coli*, pH, DBO, **nitrato**, **fosfato total**, variação de temperatura, turbidez, sólidos totais | Portal Infohidro/IGAM, "Índice de Qualidade das Águas – IQA" (acesso 2026-10-15); IGAM, *Monitoramento da qualidade das águas superficiais na sub-bacia do ribeirão Pampulha — 3º trimestre 2017*, p. 9 (cita *E. coli*) | (a) |
-| Pesos | 0,17 OD; 0,15 microbiológico; 0,12 pH; 0,10 DBO, nitrato, fosfato, temperatura; 0,08 turbidez, ST | Portal IGAM: tabela em imagem. Valores citados como "IGAM (2004)" em *Geografias* (UFMG) 6(2), 2010, Tabela 1 | (b) |
-| Obrigatórios | Sem OD e/ou coliformes/*E. coli*, o indicador não é calculado | Portal IGAM (texto) | (a) |
-| Demais ausentes | "o peso é repartido igualmente entre os demais parâmetros" | Portal IGAM (texto) | (a) para um ausente; com vários, soma repartida igualmente (**interpretação**) |
-| Temperatura | qs constante = 92 | Portal IGAM (texto) | (a) |
-| Classes | Muito Ruim [0, 25]; Ruim (25, 50]; Médio (50, 70]; Bom (70, 90]; Excelente (90, 100] | IGAM 2017, p. 9 (texto: "Muito Ruim (0 ≤ IQA ≤ 25), Ruim (25 < IQA ≤ 50)…") | (a). Resolve a pendência CL-01 |
-| Equações dos qi | — | SCQA 2005 (não obtido) | **(d) bloqueado** |
-| Unidade do nitrato | mg/L NO₃ (*Geografias* 2010) × N-NO₃ | Não confirmada em fonte primária | **(d)** |
-| Conversões | Nenhuma implícita: `nt_total` não substitui nitrato; `p_total` (P) e ortofosfato não substituem fosfato total; TDS não substitui ST | Regra do projeto | — |
+## 4. Dados ausentes, limites e domínio
 
-Implementado em `R/iqa_igam.R`:
-- `.iqa_igam_spec`: especificação, com o status de cada item;
-- `.igam_effective_weights()`: regra de ausentes, com testes;
-- `.igam_check_inputs()`: diagnóstico de entradas, sem substituição de analitos;
-- `.iqa_method_unavailable()`: erro classificado;
-- `iqa_methods()` (exportada).
+- **Sem OD ou microbiológico:** o IQA não é calculado (portal IGAM).
+- **Outro parâmetro ausente:** o peso é repartido igualmente entre os
+  presentes, conforme o portal; para vários ausentes a repartição da soma é
+  interpretação. Implementado e testado em `.igam_effective_weights()`.
+- **Classes** (SCQA, Tabela 2.2; IGAM 2017): Muito Ruim 0 ≤ IQA ≤ 25; Ruim
+  (25, 50]; Médio (50, 70]; Bom (70, 90]; Excelente (90, 100]. Implementadas em
+  `classify_iqa(classification = "igam")`.
+- **Não definidos pelo SCQA:** CF < 1 NMP/100 mL; cloreto ausente; censura;
+  negativos. A validação usou o limite como valor para os censurados.
 
-Nome canônico novo: `fosfato_total` (aliases `po4_total`, `total_phosphate_po4`).
-É distinto de `p_ortofosfato` e de `p_total`.
+## 5. Próximos passos para desbloquear
 
-## 3. Como desbloquear
-
-1. Obter o SCQA (SEMAD/PNMA II, 2005), Relatório I, junto ao IGAM ou SEMAD,
-   ou o manual do programa SCQA.
-2. Transcrever as equações com dupla verificação. Confirmar a unidade do
-   nitrato e a forma microbiológica atual (*E. coli* desde quando).
-3. Montar fixtures independentes: amostras com entradas e IQA publicados pelo
-   IGAM. A Série Histórica do Repositório Institucional IGAM traz dados
-   primários desde 1997, e os relatórios trazem IQA por estação.
-4. Implementar os qi em `R/iqa_igam.R`, ligar `available = TRUE` e validar
-   contra as fixtures antes de documentar como disponível.
-
-## 4. Fontes consultadas
-
-- IGAM. Índice de Qualidade das Águas – IQA. https://portalinfohidro.igam.mg.gov.br/w/indice-de-qualidade-das-aguas-iqa (acesso 2026-10-15).
-- IGAM (2017). *Monitoramento da qualidade das águas superficiais na sub-bacia do ribeirão Pampulha — Relatório trimestral, 3º trimestre 2017*, seção 3, p. 9. https://repositorioigam.meioambiente.mg.gov.br/bitstream/123456789/2370/1/
-- *Geografias* (UFMG), 6(2), 2010, pp. 134–147: tabela de pesos "IGAM (2004)". https://periodicos.ufmg.br/index.php/geografias/article/download/13301/10533/35366
-- XII Simpósio de Recursos Hídricos do Nordeste (2014), estudo do rio Piabanha: descreve o SCQA (regressões sobre as curvas da NSF; temperatura próxima de zero; classes NSF/IGAM). https://www.comitepiabanha.org.br/piabanha/trabalhos-academicos//academico/42014%20-%20(SETTA%20CANESIN%20SILVA%20VILLAS-BOAS%202014).pdf
-- Busca sem sucesso pelo SCQA 2005 (título exato, portal IGAM, repositório IGAM, Google Scholar indireto).
+1. Obter do IGAM a equação de turbidez efetivamente usada: código do SCQA/Java,
+   planilha de cálculo atual ou errata.
+2. Confirmar com o IGAM o qs de temperatura vigente e a conversão do nitrato.
+3. Ampliar a validação com amostras de nitrato acima do limite de detecção e
+   turbidez em 5–100 UNT de outros trimestres ou bacias. O script aceita novos
+   pares sem alteração.
+4. Só então incorporar as equações ao pacote, repetir a validação e ligar
+   `available = TRUE`.

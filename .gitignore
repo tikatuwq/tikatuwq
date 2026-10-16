@@ -26,4 +26,4 @@ inst/audit/IGAM_DIVERGENCIAS.md
 inst/audit/IGAM_RELEASE_READINESS.md
 inst/audit/IGAM_VALIDACAO_TURBIDEZ_1_5.md
 inst/audit/SCQA_FONTES_E_EQUACOES.md
-*.xlsx
+audit/**/*.xlsx

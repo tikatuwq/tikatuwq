@@ -1,0 +1,9 @@
+﻿Rscript.exe : ℹ Updating tikatuwq documentation
+No linha:1 caractere:459
++ ... ).FullName; & "$r\bin\Rscript.exe" -e "devtools::document()" *> "$o\d ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ℹ Updating tikatuwq documentation:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ℹ Loading tikatuwq
+Writing 'iqa.Rd'

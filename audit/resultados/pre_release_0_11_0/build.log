@@ -1,0 +1,16 @@
+﻿* checking for file '<LOCAL_WORKDIR>\tikatuwq/DESCRIPTION' ... OK
+* preparing 'tikatuwq':
+* checking DESCRIPTION meta-information ... OK
+* installing the package to build vignettes
+* creating vignettes ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+Removed empty directory 'tikatuwq/tests/testthat/_snaps'
+* building 'tikatuwq_0.11.0.tar.gz'
+R.exe : 
+No linha:1 caractere:845
++ ... ocation $b; & "$r\bin\R.exe" CMD build "<LOCAL_WORKDIR>\tikatuwq" *> "$ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

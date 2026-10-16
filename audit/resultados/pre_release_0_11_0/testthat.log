@@ -1,0 +1,32 @@
+﻿Rscript.exe : ℹ Testing tikatuwq
+No linha:1 caractere:406
++ ... ).FullName; & "$r\bin\Rscript.exe" "<USER_HOME>\AppData\Local\Temp\ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ℹ Testing tikatuwq:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+arquivos 37 | testes 182 | expectativas 801 | falhas 0 | erros 0 | avisos 11 | pulados 5 
+                    file
+      test-mk_seasonal.R
+ test-plot_map_quality.R
+    test-render_report.R
+    test-render_report.R
+    test-render_report.R
+                                                              test
+ mk_seasonal() tendencia crescente para serie monotonica crescente
+             plot_map_quality() retorna NULL invisivel sem leaflet
+        render_report creates output file when rmarkdown available
+                 render_report errors when rmarkdown not available
+                              render_report accepts meta parameter
+
+testes com avisos:
+               file                                                  test
+ test-clean_units.R    clean_units validates ranges and warns on outliers
+ test-clean_units.R clean_units converts units when units_map is provided
+ test-mk_seasonal.R    mk_seasonal() retorna tibble com colunas esperadas
+ test-mk_seasonal.R                mk_seasonal() p_value esta entre 0 e 1
+ warning
+       2
+       1
+       4
+       4
