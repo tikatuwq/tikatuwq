@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -220,28 +220,28 @@ provided</p>
 <p>The IQA combines multiple parameters into a single score (0-100):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute IQA</span></span>
-<span><span class="va">df_iqa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/iqa.html">iqa</a></span><span class="op">(</span><span class="va">df_clean</span>, na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">df_iqa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/iqa.html">iqa</a></span><span class="op">(</span><span class="va">df_clean</span>, allow_partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df_iqa</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ponto"</span>, <span class="st">"IQA"</span>, <span class="st">"IQA_status"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   ponto         IQA IQA_status</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> FBS-BRH-250  89.8 Boa       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> FBS-BRH-250  93.1 Otima     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> FBS-BRH-250  92.2 Otima     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> FBS-BRH-250  87.6 Boa       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> FBS-BRH-250  95.7 Otima     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> FBS-BRH-300  89.3 Boa</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> FBS-BRH-250  75.5 Boa       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> FBS-BRH-250  81.1 Otima     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> FBS-BRH-250  81.2 Otima     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> FBS-BRH-250  66.8 Boa       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> FBS-BRH-250  89.4 Otima     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> FBS-BRH-300  81.7 Otima</span></span>
 <span></span>
 <span><span class="co"># Summary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">df_iqa</span><span class="op">$</span><span class="va">IQA</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
-<span><span class="co">#&gt;   85.35   89.18   91.91   91.35   93.88   95.72</span></span>
+<span><span class="co">#&gt;   66.77   79.86   81.17   80.43   84.32   89.35</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">df_iqa</span><span class="op">$</span><span class="va">IQA_status</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Muito ruim       Ruim    Regular        Boa      Otima </span></span>
-<span><span class="co">#&gt;          0          0          0          8         12</span></span></code></pre></div>
+<span><span class="co">#&gt; Pessima    Ruim Regular     Boa   Otima </span></span>
+<span><span class="co">#&gt;       0       0       0       4      16</span></span></code></pre></div>
 <p>The <code>IQA_status</code> column provides qualitative
 classification (Very Poor, Poor, Fair, Good, Excellent).</p>
 </div>
@@ -273,15 +273,15 @@ provides several functions to check compliance:</p>
 <span></span>
 <span><span class="co"># View compliance columns (one per parameter)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">df_conama</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"_ok$"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">df_conama</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
-<span><span class="co">#&gt;   ph_ok od_ok turbidez_ok dbo_ok coliformes_ok p_total_ok</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> TRUE  TRUE  FALSE       TRUE   TRUE          FALSE     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> TRUE  TRUE  TRUE        FALSE  TRUE          TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
+<span><span class="co">#&gt;   ph_ok od_ok turbidez_ok dbo_ok coliformes_ok p_total_ok tds_ok</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE       TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE       TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE       TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> TRUE  TRUE  FALSE       TRUE   TRUE          TRUE       TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> TRUE  TRUE  TRUE        TRUE   TRUE          TRUE       TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> TRUE  TRUE  TRUE        FALSE  TRUE          TRUE       TRUE</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="summary-and-reports">Summary and reports<a class="anchor" aria-label="anchor" href="#summary-and-reports"></a>
 </h3>
@@ -302,20 +302,17 @@ provides several functions to check compliance:</p>
 <span><span class="co"># Report table (violations only, formatted)</span></span>
 <span><span class="va">report_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conama_report.html">conama_report</a></span><span class="op">(</span><span class="va">df_conama</span>, classe <span class="op">=</span> <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">report_tab</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 6</span></span></span>
-<span><span class="co">#&gt;    parametro valor lim_min lim_max status           delta </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> dbo       7     <span style="color: #BB0000;">NA</span>      5       acima_do_maximo  +2    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> dbo       6     <span style="color: #BB0000;">NA</span>      5       acima_do_maximo  +1    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> od        4,9   5       <span style="color: #BB0000;">NA</span>      abaixo_do_minimo -0,09 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> p_total   0,08  <span style="color: #BB0000;">NA</span>      0,05    acima_do_maximo  +0,03 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> p_total   0,1   <span style="color: #BB0000;">NA</span>      0,05    acima_do_maximo  +0,05 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> p_total   0,1   <span style="color: #BB0000;">NA</span>      0,05    acima_do_maximo  +0,05 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> p_total   0,06  <span style="color: #BB0000;">NA</span>      0,05    acima_do_maximo  +0,010</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> p_total   0,09  <span style="color: #BB0000;">NA</span>      0,05    acima_do_maximo  +0,04 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> ph        5,9   6       9       abaixo_do_minimo -0,13 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> turbidez  112   <span style="color: #BB0000;">NA</span>      100     acima_do_maximo  +12   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> turbidez  141   <span style="color: #BB0000;">NA</span>      100     acima_do_maximo  +41</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span></span>
+<span><span class="co">#&gt;   parametro valor lim_min lim_max status           delta </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> dbo       7     <span style="color: #BB0000;">NA</span>      5       acima_do_maximo  +2    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> dbo       6     <span style="color: #BB0000;">NA</span>      5       acima_do_maximo  +1    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> od        4,9   5       <span style="color: #BB0000;">NA</span>      abaixo_do_minimo -0,09 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ph        5,9   6       9       abaixo_do_minimo -0,13 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> tds       9.910 <span style="color: #BB0000;">NA</span>      500     acima_do_maximo  +9.410</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> tds       580   <span style="color: #BB0000;">NA</span>      500     acima_do_maximo  +80   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> turbidez  112   <span style="color: #BB0000;">NA</span>      100     acima_do_maximo  +12   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> turbidez  141   <span style="color: #BB0000;">NA</span>      100     acima_do_maximo  +41</span></span>
 <span></span>
 <span><span class="co"># Textual summary</span></span>
 <span><span class="va">summary_text</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/conama_text.html">conama_text</a></span><span class="op">(</span><span class="va">df_conama</span>, classe <span class="op">=</span> <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -323,8 +320,8 @@ provides several functions to check compliance:</p>
 <span><span class="co">#&gt; Conformidade CONAMA classe 2:</span></span>
 <span><span class="co">#&gt; - dbo: 2/20 violacoes (ex.: valor=7 (lim_max=5 delta=+2))</span></span>
 <span><span class="co">#&gt; - od: 1/20 violacoes (ex.: valor=4,9 (lim_min=5 delta=-0,09))</span></span>
-<span><span class="co">#&gt; - p_total: 5/20 violacoes (ex.: valor=0,1 (lim_max=0,05 delta=+0,05))</span></span>
 <span><span class="co">#&gt; - ph: 1/20 violacoes (ex.: valor=5,9 (lim_min=6 lim_max=9 delta=-0,13))</span></span>
+<span><span class="co">#&gt; - tds: 2/20 violacoes (ex.: valor=9.910 (lim_max=500 delta=+9.410))</span></span>
 <span><span class="co">#&gt; - turbidez: 2/20 violacoes (ex.: valor=141 (lim_max=100 delta=+41))</span></span></code></pre></div>
 </div>
 </div>
@@ -394,11 +391,11 @@ paragraphs summarizing water quality:</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">analysis_text</span>, collapse <span class="op">=</span> <span class="st">"\n\n"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Assessing the Water Quality Index (IQA) for the Demo River river in 2025 we observed an average of 91.4, ranging from 85.4 to 95.7. The dominant class was excellent. The best-performing point was FBS-BRH-450 (IQA~92.1), whereas FBS-BRH-300 presented the lowest value (IQA~90.7).</span></span>
+<span><span class="co">#&gt; Assessing the Water Quality Index (IQA) for the Demo River river in 2025 we observed an average of 80.4, ranging from 66.8 to 89.3. The dominant class (CETESB scale) was excellent. The best-performing point was FBS-BRH-950 (IQA~82.8), whereas FBS-BRH-300 presented the lowest value (IQA~77.6).</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Regarding compliance with CONAMA 357/2005 (class 2), violations were recorded, with p_total as the most critical parameter and point FBS-BRH-300 concentrating the highest number of occurrences.</span></span>
+<span><span class="co">#&gt; Regarding compliance with CONAMA 357/2005 (class 2), violations were recorded, with dbo as the most critical parameter and point FBS-BRH-300 concentrating the highest number of occurrences.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; The spatial variation of IQA was approximately 10.4 points between extremes.</span></span>
+<span><span class="co">#&gt; The spatial variation of IQA was approximately 22.6 points between extremes.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; It is recommended to assess organic load/BOD and re-aeration in affected stretches; inspect bank erosion and soil management in the basin; prioritizing critical points.</span></span></code></pre></div>
 <p>For a full HTML report:</p>

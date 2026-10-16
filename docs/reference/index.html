@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +88,25 @@
           <code><a href="iqa.html">iqa()</a></code>
 
         </dt>
-        <dd>Water Quality Index (WQI / IQA)</dd>
+        <dd>Water Quality Index (WQI / IQA CETESB)</dd>
+      </dl><dl><dt>
+
+          <code><a href="iqa_components.html">iqa_components()</a></code>
+
+        </dt>
+        <dd>Auditoria detalhada dos subindices do IQA (metodo CETESB)</dd>
+      </dl><dl><dt>
+
+          <code><a href="iqa_methods.html">iqa_methods()</a></code>
+
+        </dt>
+        <dd>Metodos de calculo do IQA disponiveis no pacote</dd>
+      </dl><dl><dt>
+
+          <code><a href="compare_iqa.html">compare_iqa()</a></code>
+
+        </dt>
+        <dd>Compara motores de calculo do IQA em amostras pareadas</dd>
       </dl><dl><dt>
 
           <code><a href="classify_iqa.html">classify_iqa()</a></code>
@@ -124,9 +142,9 @@
           <code><a href="nsfwqi.html">nsfwqi()</a></code>
 
         </dt>
-        <dd>NSF Water Quality Index (NSF WQI, prototype)</dd>
+        <dd>National Sanitation Foundation Water Quality Index (NSF WQI)</dd>
       </dl></div><div class="section level2">
-      <h2 id="conformidade-conama">Conformidade CONAMA<a class="anchor" aria-label="anchor" href="#conformidade-conama"></a></h2>
+      <h2 id="conformidade-conama-e-balneabilidade">Conformidade CONAMA e balneabilidade<a class="anchor" aria-label="anchor" href="#conformidade-conama-e-balneabilidade"></a></h2>
 
 
 
@@ -150,6 +168,12 @@
         <dd>CONAMA conformity check (detailed; default class = "2")</dd>
       </dl><dl><dt>
 
+          <code><a href="conama_freq_check.html">conama_freq_check()</a></code>
+
+        </dt>
+        <dd>Conformidade CONAMA 357/2005 por frequencia</dd>
+      </dl><dl><dt>
+
           <code><a href="conama_summary.html">conama_summary()</a></code>
 
         </dt>
@@ -166,8 +190,14 @@
 
         </dt>
         <dd>Text summary of conformity (bulleted, formatted)</dd>
+      </dl><dl><dt>
+
+          <code><a href="balnear_check.html">balnear_check()</a></code>
+
+        </dt>
+        <dd>Avaliacao de balneabilidade — CONAMA 274/2000</dd>
       </dl></div><div class="section level2">
-      <h2 id="analises">Analises<a class="anchor" aria-label="anchor" href="#analises"></a></h2>
+      <h2 id="analise-sazonal-e-tendencia">Analise sazonal e tendencia<a class="anchor" aria-label="anchor" href="#analise-sazonal-e-tendencia"></a></h2>
 
 
 
@@ -179,10 +209,68 @@
 
       <dl><dt>
 
+          <code><a href="assign_season.html">assign_season()</a></code>
+
+        </dt>
+        <dd>Atribui periodo hidrologico (chuvoso / seco) a cada amostra</dd>
+      </dl><dl><dt>
+
+          <code><a href="compare_seasons.html">compare_seasons()</a></code>
+
+        </dt>
+        <dd>Comparacao estatistica entre periodos hidrologicos</dd>
+      </dl><dl><dt>
+
+          <code><a href="mk_seasonal.html">mk_seasonal()</a></code>
+
+        </dt>
+        <dd>Teste de Mann-Kendall sazonal</dd>
+      </dl><dl><dt>
+
           <code><a href="trend_param.html">trend_param()</a></code>
 
         </dt>
         <dd>Tendencia monotona por parametro e ponto (Theil-Sen + Spearman)</dd>
+      </dl></div><div class="section level2">
+      <h2 id="carga-e-probabilidade">Carga e probabilidade<a class="anchor" aria-label="anchor" href="#carga-e-probabilidade"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="compute_load.html">compute_load()</a></code>
+
+        </dt>
+        <dd>Carga poluidora (concentracao x vazao)</dd>
+      </dl><dl><dt>
+
+          <code><a href="exceedance_prob.html">exceedance_prob()</a></code>
+
+        </dt>
+        <dd>Probabilidade de excedencia de um limite</dd>
+      </dl></div><div class="section level2">
+      <h2 id="multivariada">Multivariada<a class="anchor" aria-label="anchor" href="#multivariada"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="wq_pca.html">wq_pca()</a></code>
+
+        </dt>
+        <dd>Analise de Componentes Principais (PCA) de parametros de qualidade da agua</dd>
       </dl></div><div class="section level2">
       <h2 id="visualizacoes">Visualizacoes<a class="anchor" aria-label="anchor" href="#visualizacoes"></a></h2>
 
@@ -200,6 +288,12 @@
 
         </dt>
         <dd>Plot IQA by site/date</dd>
+      </dl><dl><dt>
+
+          <code><a href="plot_iet.html">plot_iet()</a></code>
+
+        </dt>
+        <dd>Visualiza o Indice de Estado Trofico (IET / TSI)</dd>
       </dl><dl><dt>
 
           <code><a href="plot_series.html">plot_series()</a></code>
@@ -226,10 +320,33 @@
         <dd>Plot interactive map of sampling points (default Leaflet pins)</dd>
       </dl><dl><dt>
 
+          <code><a href="plot_map_quality.html">plot_map_quality()</a></code>
+
+        </dt>
+        <dd>Mapa interativo de qualidade da agua por ponto de amostragem</dd>
+      </dl><dl><dt>
+
           <code><a href="plot_trend.html">plot_trend()</a></code>
 
         </dt>
         <dd>Linha de tendencia temporal para parametros de qualidade da agua</dd>
+      </dl></div><div class="section level2">
+      <h2 id="utilitarios-internos">Utilitarios internos<a class="anchor" aria-label="anchor" href="#utilitarios-internos"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="normalize_param_names.html">normalize_param_names()</a></code>
+
+        </dt>
+        <dd>Normaliza nomes de colunas de um df para os nomes canonicos do pacote</dd>
       </dl></div><div class="section level2">
       <h2 id="relatorios-e-texto">Relatorios e texto<a class="anchor" aria-label="anchor" href="#relatorios-e-texto"></a></h2>
 

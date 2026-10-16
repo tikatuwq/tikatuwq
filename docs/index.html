@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Water Quality Assessment and Environmental Compliance in Brazil">
-<meta name="description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows. The example dataset (`wq_demo`) is now a real subset from monitoring data (BURANHEM river, 2020-2024, 4 points, 20 rows, 14 columns including extra `rio`, `lat`, `lon`). All core examples and vignettes use this realistic sample, improving reproducibility and documentation value for users.">
-<meta property="og:description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://www.teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI) &lt;doi:10.1007/s11157-023-09650-7&gt;. The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; and generates reproducible reports for routine monitoring workflows. The example dataset (`wq_demo`) is now a real subset from monitoring data (BURANHEM river, 2020-2024, 4 points, 20 rows, 14 columns including extra `rio`, `lat`, `lon`). All core examples and vignettes use this realistic sample, improving reproducibility and documentation value for users.">
+<meta name="description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA) using the weighted geometric mean following CETESB methodology, an independent engine reproducing the IQA of the Minas Gerais water agency IGAM (a documented reproduction, not endorsed by the agency), paired comparison of IQA engines with compare_iqa(), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI, Brown (1970)). The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; including the legal frequency rule (Art. 15, 80% conformity over six or more samples per year), and provides seasonal analysis with regional flow-season calendars, pollutant load computation, exceedance probability estimation, IET visualization, and multivariate PCA tools for routine monitoring workflows. The example dataset (wq_demo) is a real subset from INEMA monitoring data from a river in Bahia, Brazil (2020-2024).">
+<meta property="og:description" content="Tools to import, clean, validate, and analyze freshwater quality data in Brazil. Implements water quality indices including the Water Quality Index (WQI/IQA) using the weighted geometric mean following CETESB methodology, an independent engine reproducing the IQA of the Minas Gerais water agency IGAM (a documented reproduction, not endorsed by the agency), paired comparison of IQA engines with compare_iqa(), the Trophic State Index (TSI/IET) after Carlson (1977) &lt;doi:10.4319/lo.1977.22.2.0361&gt; and Lamparelli (2004) &lt;https://teses.usp.br/teses/disponiveis/41/41134/tde-20032006-075813/publico/TeseLamparelli2004.pdf&gt;, and the National Sanitation Foundation Water Quality Index (NSF WQI, Brown (1970)). The package also checks compliance with Brazilian standard CONAMA Resolution 357/2005 &lt;https://conama.mma.gov.br/?id=450&amp;option=com_sisconama&amp;task=arquivo.download&gt; including the legal frequency rule (Art. 15, 80% conformity over six or more samples per year), and provides seasonal analysis with regional flow-season calendars, pollutant load computation, exceedance probability estimation, IET visualization, and multivariate PCA tools for routine monitoring workflows. The example dataset (wq_demo) is a real subset from INEMA monitoring data from a river in Bahia, Brazil (2020-2024).">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,53 +49,71 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="droplet-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil">💧 TikatuWQ: An R Package for Water Quality Assessment and Environmental Compliance in Brazil<a class="anchor" aria-label="anchor" href="#droplet-tikatuwq-an-r-package-for-water-quality-assessment-and-environmental-compliance-in-brazil"></a>
 </h1></div>
+<p><strong>Reproducible freshwater monitoring workflows for Brazil, including water quality indices, regulatory compliance checks, and automated reporting.</strong></p>
 <p><strong>TikatuWQ</strong> is an open-source R package designed to analyze, visualize, and report water quality data according to Brazilian environmental standards.<br>
-It implements the main indices used in the country <strong>IQA/NSFWQI</strong> and <strong>IET (Carlson and Lamparelli)</strong> and provides automated checks for <strong>CONAMA Resolution 357/2005</strong> compliance.<br>
-The package also includes trend analysis, data validation, and automatic report generation.</p>
+It implements the main indices used in the country <strong>IQA/NSFWQI</strong> and <strong>IET (Carlson and Lamparelli)</strong> and provides automated checks for <strong>CONAMA Resolution 357/2005</strong> compliance — including the legal frequency rule (Art. 15).<br>
+The package also includes seasonal analysis, pollutant load computation, exceedance probability, multivariate PCA, trend analysis, data validation, and automatic report generation.</p>
 <p>📄 <a href="https://github.com/tikatuwq/tikatuwq/blob/main/README-pt.md" class="external-link">Ler em Português</a></p>
-<!-- Zenodo DOI -->
-<p><a href="https://doi.org/10.5281/zenodo.17407297" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17407297.svg" alt="DOI"></a></p>
-<!-- CRAN status -->
-<p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://www.r-pkg.org/badges/version/tikatuwq" alt="CRAN status"></a></p>
-<!-- CRAN logs - downloads -->
-<p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq" alt="CRAN downloads"></a> <a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/tikatuwq" alt="CRAN monthly downloads"></a></p>
-<!-- License -->
-<p><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
-<!-- R CMD check results -->
-<p><a href="https://github.com/tikatuwq/tikatuwq/actions" class="external-link"><img src="https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
-<!-- Lifecycle -->
-<p><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>**Author:** Vinícius Saraiva Santos  </span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>**Institution:** Federal University of Southern Bahia (UFSB) – Graduate Program in Biosystems  </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>**Research Group:** Tropical Ecosystems Research Center (NuPEcoTropic)  </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>**Project:** Tikatu – Ecosystem of tools for water quality monitoring and interpretation  </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>**License:** MIT  </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>**Software DOI (Zenodo concept DOI, all versions):** https://doi.org/10.5281/zenodo.17407296  </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>**Manuscript status:** scientific article currently under review in an international journal</span></code></pre></div>
+<p><a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://www.r-pkg.org/badges/version/tikatuwq" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/tikatuwq" alt="CRAN downloads"></a> <a href="https://cran.r-project.org/package=tikatuwq" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/tikatuwq" alt="CRAN monthly downloads"></a> <a href="https://doi.org/10.5281/zenodo.17407296" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17407296.svg" alt="DOI"></a> <a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a> <a href="https://github.com/tikatuwq/tikatuwq/actions" class="external-link"><img src="https://github.com/tikatuwq/tikatuwq/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <img src="https://img.shields.io/badge/manuscript-under_review-yellow" alt="Manuscript status"></p>
 <hr>
 <div class="section level2">
-<h2 id="installation-development">Installation (development)<a class="anchor" aria-label="anchor" href="#installation-development"></a>
+<h2 id="scientific-scope">Scientific Scope<a class="anchor" aria-label="anchor" href="#scientific-scope"></a>
 </h2>
-<p>To install development dependencies and check the package locally:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"devtools"</span>,<span class="st">"testthat"</span>,<span class="st">"rmarkdown"</span>,<span class="st">"ggplot2"</span>,<span class="st">"dplyr"</span>,<span class="st">"tidyr"</span>,</span>
-<span>                   <span class="st">"readr"</span>,<span class="st">"lubridate"</span>,<span class="st">"stringr"</span>,<span class="st">"glue"</span>,<span class="st">"scales"</span>,<span class="st">"broom"</span>,<span class="st">"purrr"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
+<p>The <strong>tikatuwq</strong> package was designed to support reproducible scientific workflows in freshwater monitoring and environmental assessment. Environmental monitoring datasets often present challenges such as heterogeneous formats, inconsistent parameter names, and the need to interpret regulatory thresholds.</p>
+<p>By integrating data validation, environmental indices, regulatory compliance checks, visualization, and automated reporting in a single analytical framework, <strong>tikatuwq</strong> enables researchers to move efficiently from <strong>raw monitoring data to interpretable environmental assessments</strong>.</p>
+<p>The package is particularly suited for:</p>
+<ul>
+<li>freshwater monitoring programs<br>
+</li>
+<li>environmental impact assessments<br>
+</li>
+<li>academic research in aquatic sciences<br>
+</li>
+<li>environmental agencies and regulatory analysis<br>
+</li>
+<li>long-term environmental datasets</li>
+</ul>
 <hr>
 </div>
 <div class="section level2">
 <h2 id="included-real-dataset-rio-buranhem---inema">Included real dataset: Rio Buranhem - INEMA<a class="anchor" aria-label="anchor" href="#included-real-dataset-rio-buranhem---inema"></a>
 </h2>
-<p>This package now includes a real water quality dataset extracted from INEMA (the Bahia State Environmental Agency) monitoring campaigns conducted in the Rio Buranhem watershed (Porto Seguro, Bahia, Brazil) between 2021 and 2024. The included data provide site IDs, sampling dates, and diverse physicochemical variables measured during field campaigns. See documentation for <code>wq_demo</code> for details on columns and usage in analyses.</p>
+<p>This package includes a real water quality dataset extracted from INEMA (the Bahia State Environmental Agency) monitoring campaigns conducted in the Rio Buranhem watershed (Porto Seguro, Bahia, Brazil) between 2021 and 2024. The included data provide site IDs, sampling dates, and diverse physicochemical variables measured during field campaigns. See documentation for <code>wq_demo</code> for details on columns and usage in analyses.</p>
 <p>All main documentation and vignettes use this realistic sample for demonstration and reproducible workflows.</p>
 </div>
 <div class="section level2">
 <h2 id="basic-workflow">Basic workflow<a class="anchor" aria-label="anchor" href="#basic-workflow"></a>
 </h2>
+<p>A typical analysis workflow using <strong>tikatuwq</strong> follows a reproducible pipeline:</p>
+<p><code>read_wq → validate_wq → index calculation → regulatory check → visualization → reporting</code></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tikatuwq/tikatuwq" class="external-link">tikatuwq</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Typical analysis</span></span>
-<span><span class="va">wq_demo</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/validate_wq.html">validate_wq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span>na_rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># IQA calculation with the CETESB analytical equations</span></span>
+<span><span class="va">wq_demo</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/validate_wq.html">validate_wq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span>allow_partial <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/plot_iqa.html">plot_iqa</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Detailed component-level audit of the 9 CETESB sub-indices</span></span>
+<span><span class="fu"><a href="reference/iqa_components.html">iqa_components</a></span><span class="op">(</span><span class="va">wq_demo</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Trophic state visualization</span></span>
+<span><span class="va">wq_demo</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/iet_carlson.html">iet_carlson</a></span><span class="op">(</span>.keep_ids <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/plot_iet.html">plot_iet</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"carlson"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Seasonal analysis</span></span>
+<span><span class="va">wq_demo</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/assign_season.html">assign_season</a></span><span class="op">(</span>region <span class="op">=</span> <span class="st">"bahia"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/compare_seasons.html">compare_seasons</a></span><span class="op">(</span>param <span class="op">=</span> <span class="st">"turbidez"</span>, by <span class="op">=</span> <span class="st">"ponto"</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
-<h3 id="books-scientific-and-institutional-context">📚 Scientific and Institutional Context<a class="anchor" aria-label="anchor" href="#books-scientific-and-institutional-context"></a>
+<h3 id="books-project-and-institutional-context">📚 Project and Institutional Context<a class="anchor" aria-label="anchor" href="#books-project-and-institutional-context"></a>
 </h3>
 <p>The <strong>TikatuWQ</strong> package was developed by <strong>Vinícius Saraiva Santos</strong> (author and maintainer)<br>
 as part of the <strong>Tikatu Research Project</strong>, conducted within the <strong>Nucleus for Research in Tropical Ecosystems – NuPEcoTropic</strong>, a research group linked to the <strong>Federal University of Southern Bahia (UFSB)</strong> and coordinated by <strong>Prof. Dr. Fabrício Berton Zanchi</strong>.</p>
@@ -108,193 +126,176 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <h2 id="new-news">🆕 News<a class="anchor" aria-label="anchor" href="#new-news"></a>
 </h2>
 <div class="section level3">
-<h3 id="new-whats-new-in-v082">🆕 What’s new in v0.8.2<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v082"></a>
+<h3 id="new-whats-new-in-v0110-current">🆕 What’s new in v0.11.0 (current)<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v0110-current"></a>
 </h3>
-<ul>
-<li>CRAN maintenance: Fixed example in <code><a href="reference/plot_map.html">plot_map()</a></code> to use internal dataset <code>wq_demo</code> instead of external file reference. All examples and tests now comply with CRAN policies.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="new-whats-new-in-v081">🆕 What’s new in v0.8.1<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v081"></a>
-</h3>
-<ul>
-<li>Internal adjustments to ensure full compliance with CRAN policies regarding file system access.</li>
-<li>Examples and documentation now rely exclusively on the internal dataset <code>wq_demo</code>, removing any dependency on external or local files.</li>
-<li>The <code><a href="reference/render_report.html">render_report()</a></code> function now writes output <strong>only to temporary directories</strong> (<code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>) or to directories explicitly provided by the user.</li>
-<li>Examples, tests, and documentation were reviewed to guarantee safe execution in restricted environments (e.g., CRAN check systems).</li>
-<li>No API changes and no functional impact for users.</li>
-</ul>
-<p>✔️ <code>R CMD check --as-cran</code>: <strong>0 errors | 0 warnings | 0 notes</strong><br>
-✔️ Compatible with CRAN, Windows, Linux, and macOS</p>
-</div>
-<div class="section level3">
-<h3 id="new-whats-new-in-v080">🆕 What’s new in v0.8.0<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v080"></a>
-</h3>
-<ul>
-<li>The <code>wq_demo</code> example dataset is now a subset of real data (INEMA, Rio Buranhem, Porto Seguro-BA, 2021–2024), with 20 rows and 14 columns (including <code>rio</code>, <code>lat</code>, <code>lon</code>).</li>
-<li>All examples and vignettes use this realistic dataset to improve reproducibility and clarity.</li>
-<li>Documentation updated accordingly (dataset help, README, vignette).</li>
-<li>No API break; behavior remains consistent with previous versions.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="whats-new-in-v073">What’s new in v0.7.3<a class="anchor" aria-label="anchor" href="#whats-new-in-v073"></a>
-</h3>
-<ul>
-<li>More robust IQA Accepts temp as an alias for temperatura. Automatic numeric sanitization for comma decimals and &lt;/&gt; signs. With na_rm = TRUE, weights are re-scaled if some inputs are missing.</li>
-<li>IET (Carlson / Lamparelli) with data.frame input iet_carlson() and iet_lamparelli() now accept a “raw” data.frame containing extra ID columns like rio, ponto, data, lat, lon.</li>
-<li>Relevant parameters are auto-detected (secchi/sd, clorofila/chla, tp/p_total). p_total in mg/L is auto-converted to tp in µg/L.</li>
-<li>Use .keep_ids = TRUE to preserve identifiers in the output. No new dependencies, no API break. Legacy vector calls keep working as before.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="news-v072">News v0.7.2<a class="anchor" aria-label="anchor" href="#news-v072"></a>
-</h3>
-<ul>
-<li>Fixed CRAN incoming NOTE:
-<ul>
-<li>Removed non-standard fields (<code>DOI</code>, <code>Citation</code>) from <code>DESCRIPTION</code>.</li>
-<li>Updated <code>inst/CITATION</code> to use <code><a href="https://rdrr.io/r/utils/bibentry.html" class="external-link">bibentry()</a></code> (replacing deprecated <code><a href="https://rdrr.io/r/utils/citEntry.html" class="external-link">citEntry()</a></code>).</li>
-</ul>
-</li>
-<li>No functional or API changes.</li>
-<li>Minor documentation improvements.</li>
-<li>R CMD check: <strong>0 errors | 0 warnings | 0 notes</strong> ✅</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="news-v070">News v0.7.0<a class="anchor" aria-label="anchor" href="#news-v070"></a>
-</h3>
-<ul>
-<li>New functions <strong><code><a href="reference/param_analysis.html">param_analysis()</a></code></strong> and <strong><code><a href="reference/param_analysis_multi.html">param_analysis_multi()</a></code></strong>:
-<ul>
-<li>Allow flexible parameter-based analyses by site or river.</li>
-<li>Support cross-comparisons (multiple parameters per site or vice versa).</li>
-<li>Include descriptive statistics and temporal trend detection.</li>
-</ul>
-</li>
-<li>Full test coverage for new modules.</li>
-<li>Minor improvements to <code><a href="reference/plot_trend.html">plot_trend()</a></code> and <code><a href="reference/plot_map.html">plot_map()</a></code> (controlled messages).</li>
-<li>All CRAN and <code><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">devtools::check()</a></code> validations passed without errors.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="news-v062">News v0.6.2<a class="anchor" aria-label="anchor" href="#news-v062"></a>
-</h3>
-<ul>
-<li>Corrective update requested by CRAN.</li>
-<li>Fixed <strong>codoc</strong> WARNING in <code><a href="reference/generate_analysis.html">generate_analysis()</a></code> documentation.</li>
-<li>Removed deprecated parameters <code>id_cols</code> and <code>filter</code> to match current signature.</li>
-<li>No functional or code changes made.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="news-v061">News v0.6.1<a class="anchor" aria-label="anchor" href="#news-v061"></a>
-</h3>
-<ul>
-<li>Maintenance update requested by CRAN.</li>
-<li>Fixed relative link <code>README-pt.md</code>, now converted to absolute HTTPS URL.</li>
-<li>No functional or code changes made.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="news-v060">News v0.6.0<a class="anchor" aria-label="anchor" href="#news-v060"></a>
-</h3>
-<ul>
-<li>New function <code><a href="reference/plot_trend.html">plot_trend()</a></code> for temporal trend analysis:
-<ul>
-<li>Trend lines per parameter/site with <strong>Theil-Sen</strong>, <strong>OLS</strong>, and <strong>LOESS</strong> methods.</li>
-<li>Supports faceting by river/site and point customization.</li>
-<li>Returns <code>ggplot</code> object ready for visualization or reports.</li>
-</ul>
-</li>
-<li>Updated documentation and examples on the pkgdown site.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="v051">v0.5.1<a class="anchor" aria-label="anchor" href="#v051"></a>
-</h3>
-<ul>
-<li>Fixed <strong>invalid URLs</strong> reported by CRAN (updated links and DOIs included).</li>
-<li>Minor documentation adjustments for R-devel compatibility.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="v050">v0.5.0<a class="anchor" aria-label="anchor" href="#v050"></a>
-</h3>
-<ul>
-<li>Added internal <strong>helper</strong> functions to simplify workflow.</li>
-<li>New feature <code><a href="reference/plot_map.html">plot_map()</a></code> for spatial visualization of sampling sites.</li>
-<li>Revised validation messages and standardized formatting.</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="v021">v0.2.1<a class="anchor" aria-label="anchor" href="#v021"></a>
-</h3>
+<p><strong>IQA results change for some inputs.</strong> The pH (8.5–10), BOD (5–15 mg/L) and total nitrogen (10–60 mg/L) sub-index equations were corrected to remove discontinuities found in v0.10.0, after comparison with the curves in CETESB Appendix D (2023, Figure 1). CETESB publishes the sub-indices only as graphical curves, so the package equations are analytical approximations of them. See <code>NEWS.md</code> and <code>system.file("audit", "IQA_AUDITORIA.md", package = "tikatuwq")</code> for the before/after comparison and the list of open items.</p>
+<p><strong>Trophic state values also change.</strong> <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> now uses the Lamparelli (2004) equations given by CETESB (Appendix D 2023, p. 10), which differ for rivers and reservoirs; <code><a href="reference/iet_carlson.html">iet_carlson()</a></code> now uses the natural logarithm, as defined by Carlson (1977).</p>
 <ul>
 <li>
-<code><a href="reference/generate_analysis.html">generate_analysis()</a></code> — automatic rule-based analytical paragraphs.</li>
-<li>Report template updated to include textual analysis.</li>
-<li>Structures added for <code><a href="reference/iet_lamparelli.html">iet_lamparelli()</a></code> and <code><a href="reference/nsfwqi.html">nsfwqi()</a></code>.</li>
+<code><a href="reference/nsfwqi.html">nsfwqi()</a></code> is documented as an approximation; with <code>na_rm = FALSE</code>, a missing component now gives <code>NA</code>.</li>
+<li>
+<code><a href="reference/classify_iqa.html">classify_iqa()</a></code> uses <code>classification</code> (as <code><a href="reference/iqa.html">iqa()</a></code> does); <code>scheme</code> is deprecated.</li>
+<li>
+<code><a href="reference/classify_iqa.html">classify_iqa()</a></code> offers the scales <code>"cetesb"</code>, <code>"igam"</code> and <code>"ana"</code> (same cuts as <code>"cetesb"</code>); they change only the labels, never the IQA value. In <code><a href="reference/iqa.html">iqa()</a></code> the scale follows <code>method</code>; the <code>classification</code> argument of <code><a href="reference/iqa.html">iqa()</a></code> was removed (breaking change from 0.10.0): use <code><a href="reference/classify_iqa.html">classify_iqa()</a></code>.</li>
+<li>
+<code>iqa(df, method = "IGAM")</code> computes the IGAM (Minas Gerais) IQA with its own engine (see below).</li>
+<li>
+<code><a href="reference/iqa_methods.html">iqa_methods()</a></code> lists the calculation engines with their scope of validation.</li>
+<li>
+<code>compare_iqa(df, methods = c("CETESB", "IGAM"))</code> compares the two engines on paired samples.</li>
+</ul>
+<div class="section level4">
+<h4 id="iqa-igam-implementation-and-validation">IQA-IGAM: implementation and validation<a class="anchor" aria-label="anchor" href="#iqa-igam-implementation-and-validation"></a>
+</h4>
+<p><code>tikatuwq</code> implements a documented computational reproduction of the IQA used by the Instituto Mineiro de Gestão das Águas (IGAM). It is based on the SCQA (2005), IGAM’s institutional documentation and the academic literature.</p>
+<ul>
+<li>
+<strong>Turbidity:</strong> the sub-index uses the coefficient <code>1.5</code> in the trigonometric term, as recorded by Bucci (2011, p. 51) and Nunes (2008, Table 10). Copies of the SCQA print <code>15</code>.</li>
+<li>
+<strong>Results:</strong> the choice is supported by reproducing IGAM’s published results. All <strong>49 records</strong> from three campaigns in the Pampulha sub-basin (2017–2018) match the published value after rounding to one decimal place. The largest unrounded absolute error is 0.048876. Fifteen of these records were used in the investigation; the other 34 were checked with pre-registered criteria.</li>
+<li>
+<strong>Data not redistributed:</strong> the 49 historical records are IGAM data and do not ship with the package. Only aggregate metrics are documented, with the sources and the reproduction procedure. The package tests use synthetic data.</li>
+<li>
+<strong>Not endorsed:</strong> the implementation is <strong>not endorsed by IGAM</strong>.</li>
+<li>
+<strong>Not covered:</strong> other basins, nitrate above the detection limit, and IGAM’s rules for censored values, missing chloride and rounding.</li>
+<li>
+<strong>Inputs:</strong> IGAM needs chloride (for oxygen saturation) and an explicit nitrate unit (<code>nitrate_unit = "N"</code> or <code>"NO3"</code>). Total phosphorus (<code>p_total</code>) needs <code>phosphorus_basis</code>.</li>
+</ul>
+<p>Equations, sources (with pages), input requirements, validation metrics and the reproduction procedure are in <code>system.file("methodology", "IGAM_VALIDATION.md", package = "tikatuwq")</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Synthetic sample; nitrate in mg/L N and total phosphorus in mg/L P are declared</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>od <span class="op">=</span> <span class="fl">7</span>, temperatura <span class="op">=</span> <span class="fl">25</span>, cloreto <span class="op">=</span> <span class="fl">10</span>, e_coli <span class="op">=</span> <span class="fl">100</span>, ph <span class="op">=</span> <span class="fl">7.3</span>,</span>
+<span>                dbo <span class="op">=</span> <span class="fl">2</span>, nitrato <span class="op">=</span> <span class="fl">1</span>, p_total <span class="op">=</span> <span class="fl">0.1</span>, turbidez <span class="op">=</span> <span class="fl">5</span>, solidos_totais <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/iqa.html">iqa</a></span><span class="op">(</span><span class="va">g</span>, method <span class="op">=</span> <span class="st">"IGAM"</span>, altitude_m <span class="op">=</span> <span class="fl">0</span>, nitrate_unit <span class="op">=</span> <span class="st">"N"</span>, phosphorus_basis <span class="op">=</span> <span class="st">"P"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; IQA 75.5 (Bom)</span></span></code></pre></div>
+<p>Comparing both engines on the same samples (illustrative data; only rows valid for both methods enter the statistics). The methods do not use the same parameters: CETESB uses total nitrogen and total phosphorus, while IGAM uses nitrate, total phosphate and chloride. Their classes also have different cut-offs, so differences reflect methodology, not measurement error:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  ponto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P1"</span>, <span class="st">"P2"</span>, <span class="st">"P3"</span>, <span class="st">"P4"</span><span class="op">)</span>,</span>
+<span>  od <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">6</span><span class="op">)</span>, temperatura <span class="op">=</span> <span class="fl">24</span>, cloreto <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">60</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>  coliformes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">2000</span>, <span class="fl">20000</span>, <span class="fl">500</span><span class="op">)</span>, ph <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7.2</span>, <span class="fl">7.5</span>, <span class="fl">7</span>, <span class="fl">7.4</span><span class="op">)</span>,</span>
+<span>  dbo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">15</span>, <span class="fl">3</span><span class="op">)</span>, nt_total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">8</span>, <span class="fl">2</span><span class="op">)</span>, nitrato <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">0.8</span><span class="op">)</span>,</span>
+<span>  p_total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="fl">0.1</span><span class="op">)</span>, turbidez <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">20</span>, <span class="fl">60</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  solidos_totais <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">400</span>, <span class="fl">150</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/compare_iqa.html">compare_iqa</a></span><span class="op">(</span><span class="va">d</span>, methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CETESB"</span>, <span class="st">"IGAM"</span><span class="op">)</span>, id_cols <span class="op">=</span> <span class="st">"ponto"</span>,</span>
+<span>                   phosphorus_basis <span class="op">=</span> <span class="st">"P"</span>, nitrate_unit <span class="op">=</span> <span class="st">"N"</span>, altitude_m <span class="op">=</span> <span class="fl">800</span><span class="op">)</span></span>
+<span><span class="va">cmp</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ponto"</span>, <span class="st">"IQA_CETESB"</span>, <span class="st">"IQA_IGAM"</span>, <span class="st">"par_valido"</span>, <span class="st">"motivo_IGAM"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">cmp</span>, <span class="st">"summary"</span><span class="op">)</span>            <span class="co"># paired statistics (3 valid pairs here)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">cmp</span>, <span class="st">"class_transitions"</span><span class="op">)</span>  <span class="co"># CETESB class -&gt; IGAM class (different scales)</span></span></code></pre></div>
+<ul>
+<li>
+<code>iqa(details = TRUE)</code> reports the effective weights actually used, including with custom <code>pesos</code> and <code>allow_partial = TRUE</code>.</li>
+<li>
+<code>delta_temperature</code> is now forwarded; invalid physical values become <code>NA</code> with a warning.</li>
+</ul>
+<p>✔️ <code>R CMD check --as-cran</code>: <strong>0 errors | 0 warnings</strong> on Windows, Linux and macOS (win-builder reports 1 note: the place name “Minas Gerais” flagged as a possible misspelling)<br>
+✔️ <strong>181 automated tests (806 expectations) passing</strong><br>
+✔️ Checked on Windows (local, win-builder R-devel and R-release), Linux (Ubuntu) and macOS (R-release, Apple silicon)</p>
+<hr>
+</div>
+</div>
+<div class="section level3">
+<h3 id="new-whats-new-in-v0100">🆕 What’s new in v0.10.0<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v0100"></a>
+</h3>
+<p><strong>🔬 Scientific &amp; Metrological Audit of the Brazilian IQA (CETESB/INEMA)</strong></p>
+<ul>
+<li>
+<strong>Analytical Equations</strong>: <code><a href="reference/iqa.html">iqa()</a></code> implements piecewise analytical equations for all 9 CETESB sub-indices (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mn>1</mn></msub><annotation encoding="application/x-tex">Q_1</annotation></semantics></math> to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mn>9</mn></msub><annotation encoding="application/x-tex">Q_9</annotation></semantics></math>), including altitude- and temperature-corrected DO saturation (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>s</mi></msub><annotation encoding="application/x-tex">C_s</annotation></semantics></math>). <em>Note: the 2026 audit found errors in some pieces of these equations (fixed in v0.11.0).</em>
+</li>
+<li>
+<strong>Stoichiometric Phosphorus Conversion</strong>: Automatic conversion of total elemental phosphorus to phosphate (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="normal">P</mtext><mtext mathvariant="normal">total</mtext></msub><mo>×</mo><mn>3.066</mn><mo>=</mo><msub><mtext mathvariant="normal">PO</mtext><mn>4</mn></msub></mrow><annotation encoding="application/x-tex">\text{P}_{\text{total}} \times 3.066 = \text{PO}_4</annotation></semantics></math>) when <code>phosphorus_basis = "P"</code>.</li>
+<li>
+<strong>E. coli Factor (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.25</mn><mo>×</mo></mrow><annotation encoding="application/x-tex">1.25\times</annotation></semantics></math>)</strong>: Native support for <code>microbial_type = "e_coli"</code>, applying a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.25</mn><mo>×</mo></mrow><annotation encoding="application/x-tex">1.25\times</annotation></semantics></math> conversion factor (CETESB Appendix D 2023, p. 5).</li>
+<li>
+<strong>Strict Separation of Total Solids vs. TDS</strong>: Total Dissolved Solids (<code>tds</code>) is no longer accepted as an interchangeable alias for Total Solids (<code>solidos_totais</code>/<code>residuo_total</code>) in strict CETESB mode, preventing systematic overestimation of water quality.</li>
+<li>
+<strong>Component-Level Audit Layer</strong>: New exported function <code><a href="reference/iqa_components.html">iqa_components()</a></code> and <code>iqa(..., details = TRUE)</code> returning raw values, analytical sub-indices (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mi>i</mi></msub><annotation encoding="application/x-tex">Q_i</annotation></semantics></math>), official weights (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>W</mi><mi>i</mi></msub><annotation encoding="application/x-tex">W_i</annotation></semantics></math>), and weighted factors (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Q</mi><mi>i</mi><msub><mi>W</mi><mi>i</mi></msub></msubsup><annotation encoding="application/x-tex">Q_i^{W_i}</annotation></semantics></math>) for full scientific reproducibility.</li>
+<li>
+<strong>Official CETESB Qualitative Ranges</strong>: <code><a href="reference/classify_iqa.html">classify_iqa()</a></code> updated to official CETESB rating thresholds: <em>Péssima</em> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>19</mn></mrow><annotation encoding="application/x-tex">\le 19</annotation></semantics></math>), <em>Ruim</em> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>19</mn><mtext mathvariant="normal">–</mtext><mn>36</mn></mrow><annotation encoding="application/x-tex">19\text{--}36</annotation></semantics></math>), <em>Regular</em> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>36</mn><mtext mathvariant="normal">–</mtext><mn>51</mn></mrow><annotation encoding="application/x-tex">36\text{--}51</annotation></semantics></math>), <em>Boa</em> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>51</mn><mtext mathvariant="normal">–</mtext><mn>79</mn></mrow><annotation encoding="application/x-tex">51\text{--}79</annotation></semantics></math>), <em>Ótima</em> (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>79</mn></mrow><annotation encoding="application/x-tex">&gt; 79</annotation></semantics></math>).</li>
+<li>
+<strong>Aquatic Environment Context for CONAMA</strong>: <code><a href="reference/conama_check.html">conama_check()</a></code> now accepts <code>environment = c("all", "lotic", "lentic", "intermediate")</code> for automatic selection of regulatory phosphorus thresholds and pH-conditioned ammonia limits.</li>
+<li>
+<strong>INEMA example data</strong>: Test case built from INEMA monitoring data from Rio Buranhém (2024 Campaign 3). It checks the class and a plausible range; it does not compare against IQA values published by INEMA.</li>
+</ul>
+<p>✔️ <code>R CMD check --as-cran</code>: <strong>0 errors | 0 warnings | 0 notes</strong><br>
+✔️ <strong>299 automated unit tests passing</strong><br>
+✔️ Compatible with CRAN, Windows, Linux, and macOS</p>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="new-whats-new-in-v090">🆕 What’s new in v0.9.0<a class="anchor" aria-label="anchor" href="#new-whats-new-in-v090"></a>
+</h3>
+<p><strong>⚠️ Breaking change — IQA now uses the correct weighted geometric mean</strong></p>
+<p><code><a href="reference/iqa.html">iqa()</a></code> now defaults to <code>method = "CETESB"</code>, which computes the weighted geometric mean <code>∏(Qi^Wi)</code> as specified by CETESB and the original NSF WQI formulation (Brown et al., 1970). The previous (incorrect) arithmetic mean behavior is preserved via <code>method = "NSF_approx"</code>. Users relying on the default will see more accurate — and generally lower — IQA values.</p>
+<p><strong>New functions in v0.9.0:</strong></p>
+<ul>
+<li>
+<code><a href="reference/conama_freq_check.html">conama_freq_check()</a></code> — implements the legal frequency rule of CONAMA 357/2005 Art. 15: a parameter is considered in conformity only when ≥ 80% of at least 6 samples per year are within limits.</li>
+<li>
+<code><a href="reference/assign_season.html">assign_season()</a></code> — classifies each sample as <code>"chuvoso"</code> (wet) or <code>"seco"</code> (dry) based on regional Brazilian hydrological calendars.</li>
+<li>
+<code><a href="reference/compare_seasons.html">compare_seasons()</a></code> — compares water quality parameters between wet and dry seasons.</li>
+<li>
+<code><a href="reference/plot_iet.html">plot_iet()</a></code> — bar chart for the Trophic State Index with color-coded trophic classes.</li>
+<li>
+<code><a href="reference/compute_load.html">compute_load()</a></code> — computes pollutant load (kg/day, t/day, kg/year, g/s).</li>
+<li>
+<code><a href="reference/exceedance_prob.html">exceedance_prob()</a></code> — empirical exceedance probability with Wilson confidence intervals.</li>
+<li>
+<code><a href="reference/wq_pca.html">wq_pca()</a></code> — PCA wrapper with biplot, screeplot, and loadings plots.</li>
+<li>
+<code><a href="reference/nsfwqi.html">nsfwqi()</a></code> — updated with geometric mean aggregation and multilingual status labels.</li>
 </ul>
 <hr>
 </div>
 </div>
 <div class="section level2">
-<h2 id="installation-via-github">Installation via GitHub<a class="anchor" aria-label="anchor" href="#installation-via-github"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>  <span class="co"># or devtools</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Install the released version from CRAN:</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Installation via GitHub</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># development version</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># stable version (by tag)</span></span>
+<span><span class="co"># a specific release by tag (the latest tag on GitHub is v0.8.2; for later versions use CRAN)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tikatuwq/tikatuwq@v0.8.2"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <div class="section level3">
 <h3 id="conama-compliance-class-2">CONAMA compliance (class 2)<a class="anchor" aria-label="anchor" href="#conama-compliance-class-2"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_wq.html">read_wq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,<span class="st">"exemplo_chamagunga.csv"</span>, package<span class="op">=</span><span class="st">"tikatuwq"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Table with only violations, ready for report</span></span>
 <span><span class="fu"><a href="reference/conama_report.html">conama_report</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Short textual summary</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="reference/conama_text.html">conama_text</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="reference/conama_text.html">conama_text</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"2"</span>, only_violations <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Legal frequency rule (CONAMA 357/2005 Art. 15)</span></span>
+<span><span class="fu"><a href="reference/conama_freq_check.html">conama_freq_check</a></span><span class="op">(</span><span class="va">df</span>, classe <span class="op">=</span> <span class="st">"2"</span>, by <span class="op">=</span> <span class="st">"ponto"</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 </div>
 <div class="section level2">
 <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
-<ul>
-<li>
-<code>read_wq(path)</code> — reads water quality datasets (CSV).<br>
-</li>
-<li>
-<code>validate_wq(df)</code> — validates/normalizes columns and units.<br>
-</li>
-<li>
-<code>iqa(df, na_rm = TRUE, ...)</code> — Water Quality Index (CETESB/NSF).<br>
-</li>
-<li>
-<code>iet_carlson(df)</code> / <code>iet_lamparelli(df)</code> — Trophic State Index.<br>
-</li>
-<li>
-<code>nsfwqi(df)</code> — NSFWQI (framework ready).<br>
-</li>
-<li>
-<code>conama_limits(class)</code> — limits from CONAMA 357/2005 Resolution.<br>
-</li>
-<li>
-<code>conama_check(df, class)</code> — compliance by parameter (*_ok columns).<br>
-</li>
-<li>Visualizations: <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_map.html">plot_map()</a></code>, <code><a href="reference/plot_trend.html">plot_trend()</a></code> (returns <code>ggplot</code> object).<br>
-</li>
-<li>Reporting/Text: <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code>.<br>
-</li>
-<li>Example data: <code>system.file("extdata", "exemplo_chamagunga.csv", package = "tikatuwq")</code>.</li>
-</ul>
+<p><strong>Water quality indices</strong> - <code>iqa(df, method = "CETESB", ...)</code> — Water Quality Index; weighted geometric mean (CETESB default). <code>method = "IGAM"</code> uses the IGAM (Minas Gerais) engine. - <code>iqa_components(df)</code> — sub-indices, weights and weighted factors of each sample (CETESB). - <code><a href="reference/iqa_methods.html">iqa_methods()</a></code> — available calculation engines and their scope of validation. - <code>compare_iqa(df, methods = c("CETESB", "IGAM"))</code> — paired comparison between engines. - <code>classify_iqa(x, classification)</code> — IQA classes on the CETESB, IGAM or ANA scale. - <code>iet_carlson(df)</code> / <code>iet_lamparelli(df)</code> — Trophic State Index. - <code>nsfwqi(df, na_rm = TRUE, add_status = TRUE)</code> — NSF WQI with geometric mean aggregation.</p>
+<p><strong>CONAMA compliance and balneability</strong> - <code>conama_limits(class)</code> — limits from CONAMA 357/2005. - <code>conama_check(df, class)</code> — compliance by parameter (<code>*_ok</code> columns). - <code>conama_freq_check(df, classe, by)</code> — Art. 15 frequency rule (≥ 80% conformity in ≥ 6 samples/year). - <code>balnear_check(df, by)</code> — balneability classification under CONAMA 274/2000 (Excelente → Imprópria).</p>
+<p><strong>Seasonal analysis and trend</strong> - <code>assign_season(df, region)</code> — classifies samples by hydrological season using regional calendars. - <code>compare_seasons(df, param, test)</code> — statistical comparison between wet and dry seasons. - <code>mk_seasonal(df, param, period)</code> — seasonal Mann-Kendall trend test (Hirsch et al., 1982); returns Z, p-value, tau, and Sen’s slope.</p>
+<p><strong>Load and risk</strong> - <code>compute_load(df, param, flow_col, unit_out)</code> — pollutant load (kg/day, t/day, etc.). - <code>exceedance_prob(df, param, threshold, direction, by)</code> — empirical exceedance probability with Wilson CI.</p>
+<p><strong>Multivariate</strong> - <code>wq_pca(df, params, color_by)</code> — PCA with biplot, screeplot, and loadings plot.</p>
+<p><strong>Visualization</strong> - <code><a href="reference/plot_iqa.html">plot_iqa()</a></code>, <code><a href="reference/plot_iet.html">plot_iet()</a></code>, <code><a href="reference/plot_series.html">plot_series()</a></code>, <code><a href="reference/plot_box.html">plot_box()</a></code>, <code><a href="reference/plot_heatmap.html">plot_heatmap()</a></code>, <code><a href="reference/plot_trend.html">plot_trend()</a></code> — return <code>ggplot</code> objects. - <code><a href="reference/plot_map.html">plot_map()</a></code>, <code><a href="reference/plot_map_quality.html">plot_map_quality()</a></code> — interactive Leaflet maps; <code><a href="reference/plot_map_quality.html">plot_map_quality()</a></code> colors sites by IQA/IET/NSF WQI class.</p>
+<p><strong>Data and reports</strong> - <code>read_wq(path)</code> — reads water quality datasets (CSV). - <code>validate_wq(df)</code> — validates/normalizes columns and units. - <code><a href="reference/generate_analysis.html">generate_analysis()</a></code>, <code><a href="reference/render_report.html">render_report()</a></code> — automated textual and document reporting.</p>
 <hr>
 </div>
 <div class="section level2">
@@ -315,28 +316,23 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 </li>
 </ul>
 <hr>
-</div>
-<div class="section level2">
-<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tikatuwq"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="how-to-cite">How to cite<a class="anchor" aria-label="anchor" href="#how-to-cite"></a>
 </h3>
 <p>If you use <strong>tikatuwq</strong> in your research, please cite it as follows:</p>
 <blockquote>
-<p>Santos, V. S. (2025). <em>tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil</em> (v0.8.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.17407297" class="external-link">https://doi.org/10.5281/zenodo.17407297</a></p>
+<p>Santos, V. S. (2026). <em>tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil</em> (R package version 0.11.0). Zenodo (concept DOI, all versions). <a href="https://doi.org/10.5281/zenodo.17407296" class="external-link">https://doi.org/10.5281/zenodo.17407296</a></p>
 </blockquote>
 <p>BibTeX entry:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="va">@Manual</span>{<span class="ot">Santos2025tikatuwq</span>,</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="dt">title</span>  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="dt">author</span> = {Vinicius Saraiva Santos},</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="dt">year</span>   = {2025},</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.8.0},</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="dt">doi</span>    = {10.5281/zenodo.17407297},</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="dt">url</span>    = {https://github.com/tikatuwq/tikatuwq},</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="va">@Manual</span>{<span class="ot">Santos2026tikatuwq</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="dt">title</span>  = {tikatuwq: Water Quality Assessment and Environmental Compliance in Brazil},</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="dt">author</span> = {Vinicius Saraiva Santos},</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="dt">year</span>   = {2026},</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="dt">note</span>   = {R package version 0.11.0},</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="dt">doi</span>    = {10.5281/zenodo.17407296},</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="dt">url</span>    = {https://github.com/tikatuwq/tikatuwq},</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>}</span></code></pre></div>
+<p>The DOI is the Zenodo <em>concept</em> DOI, which resolves to the latest deposited version (currently v0.7.0); version 0.11.0 has no deposit of its own yet. <code>citation("tikatuwq")</code> gives the same reference.</p>
 </div>
 </div>
 </div>
@@ -369,6 +365,7 @@ as part of the <strong>Tikatu Research Project</strong>, conducted within the <s
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Vinicius Saraiva Santos <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0009-0007-1387-7927" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 

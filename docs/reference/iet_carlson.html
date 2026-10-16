@@ -13,7 +13,7 @@ Pode receber um data.frame como primeiro argumento (ver Detalhes)."></head><body
 
     <a class="navbar-brand me-2" href="../index.html">tikatuwq</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.11.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,10 +107,13 @@ Padrao <code>FALSE</code>.</p></dd>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Formulas implementadas (Carlson 1977):</p><ul><li><p><code>TSI_Secchi = 60 - 14.41 * log10(secchi)</code></p></li>
-<li><p><code>TSI_Chla  = 9.81 * log10(clorofila) + 30.6</code></p></li>
-<li><p><code>TSI_TP    = 14.42 * log10(tp) + 4.15</code></p></li>
-</ul><p>Quando um data.frame e fornecido, strings com virgula decimal (ex.: "3,2")
+    <p>Formulas implementadas (Carlson 1977), com logaritmo natural:</p><ul><li><p><code>TSI_Secchi = 60 - 14.41 * log(secchi)</code></p></li>
+<li><p><code>TSI_Chla  = 9.81 * log(clorofila) + 30.6</code></p></li>
+<li><p><code>TSI_TP    = 14.42 * log(tp) + 4.15</code></p></li>
+</ul><p>Os coeficientes derivam da definicao TSI = 10 (6 - log2 SD): 10 / ln 2 =
+14,43. Ate a v0.10.0 o pacote usava <code>log10</code>, o que subestimava o
+indice (ex.: TP = 48 ug/L dava 28,4 em vez de 60).</p>
+<p>Quando um data.frame e fornecido, strings com virgula decimal (ex.: "3,2")
 ou sinais de desigualdade (ex.: "&lt;0,1") sao convertidas com seguranca.
 Se existir <code>p_total</code> (mg/L) em vez de <code>tp</code> (ug/L),
 e feita conversao interna (<code>tp = p_total * 1000</code>).</p>
@@ -135,10 +138,10 @@ Limnology and Oceanography, 22(2), 361-369. doi:10.4319/lo.1977.22.2.0361</p>
 <span class="r-in"><span><span class="va">clorofila</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">12</span>, <span class="fl">30</span><span class="op">)</span>         <span class="co"># ug/L</span></span></span>
 <span class="r-in"><span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">40</span>, <span class="fl">70</span><span class="op">)</span>               <span class="co"># ug/L</span></span></span>
 <span class="r-in"><span><span class="fu">iet_carlson</span><span class="op">(</span>secchi <span class="op">=</span> <span class="va">secchi</span>, clorofila <span class="op">=</span> <span class="va">clorofila</span>, tp <span class="op">=</span> <span class="va">tp</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   TSI_Secchi TSI_Chla   TSI_TP      IET   TSI_status</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   58.85900 37.45690 22.91085 39.74225 Oligotrofico</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   61.39647 41.18677 27.25171 43.27832  Mesotrofico</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   65.73432 45.09056 30.75631 47.19373  Mesotrofico</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   TSI_Secchi TSI_Chla   TSI_TP      IET TSI_status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   57.37275 46.38859 47.34846 50.36993  Eutrofico</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   63.21550 54.97693 57.34364 58.51202  Eutrofico</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   73.20375 63.96575 65.41330 67.52760  Eutrofico</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Data frame</span></span></span>
 <span class="r-in"><span><span class="co"># df &lt;- data.frame(secchi = secchi, clorofila = clorofila, p_total = c(0.02, 0.04, 0.07))</span></span></span>
