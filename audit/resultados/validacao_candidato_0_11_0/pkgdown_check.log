@@ -1,0 +1,7 @@
+﻿Rscript.exe : ✔ No problems found.
+No linha:1 caractere:2102
++ ... "$f\clone"; & "$r\bin\Rscript.exe" -e "pkgdown::check_pkgdown()" *> " ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (✔ No problems found.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

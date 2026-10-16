@@ -1,0 +1,22 @@
+== ambiente
+Ubuntu 26.04 LTS | Linux 6.18.33.2-microsoft-standard-WSL2
+R version 4.5.3 (2026-03-11) -- "Reassured Reassurer"
+pandoc pandoc 3.12.1
+locale: C.UTF-8
+commit: 21069f5f6013375350f23b1462c8cc7f47f8bf89
+== build
+* checking for empty or unneeded directories
+* building ‘tikatuwq_0.11.0.tar.gz’
+
+e2a7e3973c1e72cbd4bfd473d94d6810a28a2a96d5023b4b6493406ef6967362  tikatuwq_0.11.0.tar.gz
+== check --as-cran --no-manual (sem LaTeX no Linux)
+* checking CRAN incoming feasibility ... [6s/31s] OK
+* checking for future file timestamps ... NOTE
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking tests ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... OK
+Status: 1 NOTE
+[ FAIL 0 | WARN 11 | SKIP 16 | PASS 736 ]
+== instalacao em biblioteca limpa e smoke

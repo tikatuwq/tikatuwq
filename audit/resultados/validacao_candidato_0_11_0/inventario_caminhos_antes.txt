@@ -1,0 +1,26 @@
+commits: 17 | blobs: 212 | blobs com ocorrencia: 0
+por categoria (blobs): {'pasta_pesquisa': 5, 'dir_trabalho_local': 10, 'usuario_windows': 15, 'usuario_windows_sem_drive': 15, 'scratchpad': 15, 'pasta_backup': 1}
+mensagens de commit com ocorrencia: {}
+arquivos (caminho no repo) com ocorrencias: 22
+   audit/DADOS_IGAM_PRIVADOS.md -> pasta_pesquisa
+   audit/PLANO_LANCAMENTO_DIRETO_0_11_0.md -> dir_trabalho_local
+   audit/PLANO_PUBLICACAO_GITHUB_ZENODO_ORCID_CRAN_0_11_0.md -> dir_trabalho_local
+   audit/RELATORIO_FECHAMENTO_PRE_RELEASE_0_11_0.md -> dir_trabalho_local,pasta_pesquisa
+   audit/RELATORIO_PREPARACAO_LANCAMENTO_0_11_0.md -> dir_trabalho_local,pasta_pesquisa,scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/RELATORIO_SANITIZACAO_GIT_0_11_0.md -> dir_trabalho_local,pasta_backup,pasta_pesquisa
+   audit/resultados/00check.log -> dir_trabalho_local
+   audit/resultados/pre_release_0_11_0/00check.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0/build.log -> dir_trabalho_local
+   audit/resultados/pre_release_0_11_0/check.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0/testthat.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0_fechamento/00check.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0_fechamento/00check_execucao1.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0_fechamento/build.log -> dir_trabalho_local
+   audit/resultados/pre_release_0_11_0_fechamento/check.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0_fechamento/smoke.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/pre_release_0_11_0_fechamento/testthat.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/sanitizacao_0_11_0/00check.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/sanitizacao_0_11_0/build.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/sanitizacao_0_11_0/check.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/sanitizacao_0_11_0/smoke.log -> scratchpad,usuario_windows,usuario_windows_sem_drive
+   audit/resultados/sanitizacao_0_11_0/testthat.log -> scratchpad,usuario_windows,usuario_windows_sem_drive

@@ -1,0 +1,8 @@
+commits: 17 | blobs: 212 | blobs com ocorrencia: 0
+por categoria (blobs): {'scratchpad': 5}
+mensagens de commit com ocorrencia: {}
+arquivos (caminho no repo) com ocorrencias: 4
+   audit/RELATORIO_PREPARACAO_LANCAMENTO_0_11_0.md -> scratchpad
+   audit/resultados/pre_release_0_11_0/testthat.log -> scratchpad
+   audit/resultados/pre_release_0_11_0_fechamento/testthat.log -> scratchpad
+   audit/resultados/sanitizacao_0_11_0/testthat.log -> scratchpad

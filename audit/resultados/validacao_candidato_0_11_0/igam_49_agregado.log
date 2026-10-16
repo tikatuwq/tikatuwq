@@ -1,0 +1,6 @@
+﻿Extrato 2017T3 identico a planilha (10 parametros, 15 linhas): TRUE 
+                  total (49) 49        49           49          49 0.025295
+ externa pre-registrada (34) 34        34           34          34 0.026201
+           investigacao (15) 15        15           15          15 0.023240
+     rmse        vies  max_abs limitrofes min_dist_desempate testam_k
+Limitrofes (|erro| > 0,045): 6 | faixa de |erro|: 0.0457 a 0.0489 

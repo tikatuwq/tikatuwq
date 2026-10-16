@@ -1,0 +1,19 @@
+== instalacao em biblioteca limpa e smoke (tarball e2a7e3973c1e72cb...)
+install: DONE
+tikatuwq 0.11.0 
+CETESB: 74.96 Boa 
+IGAM: 75.5 Bom bruto 75.479124819574 
+igual ao valor independente (Python): TRUE 
+erro sem nitrate_unit: sim 
+               method available reference_validated
+               CETESB      TRUE                TRUE
+                 IGAM      TRUE                TRUE
+ CETESB_legacy_approx      TRUE               FALSE
+           NSF_approx      TRUE               FALSE
+[1] Muito Ruim Medio      Excelente 
+Levels: Muito Ruim < Ruim < Medio < Bom < Excelente
+Santos V (2026). _tikatuwq: Water Quality Assessment and Environmental
+Compliance in Brazil_. doi:10.5281/zenodo.17407296
+<https://doi.org/10.5281/zenodo.17407296>, R package version 0.11.0
+(Zenodo concept DOI, all versions),
+<https://github.com/tikatuwq/tikatuwq>.
