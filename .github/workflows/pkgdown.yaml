@@ -3,10 +3,10 @@ name: pkgdown
 on:
   push: { branches: [main, master] }
 
+# Apenas constroi e valida o site. A publicacao e feita pelo GitHub Pages a
+# partir de main:/docs (Deploy from a branch); este workflow nao faz deploy.
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 jobs:
   pkgdown:
@@ -28,14 +28,11 @@ jobs:
             any::pkgdown
             local::.
 
-      - name: Build site
-        run: pkgdown::build_site_github_pages(new_process = FALSE, install = TRUE)
+      - name: Check site configuration
+        run: pkgdown::check_pkgdown()
         shell: Rscript {0}
 
-      - uses: actions/upload-pages-artifact@v3
-        # por padrão, este action pega a pasta "_site" gerada pelo build_site_github_pages
-
-      - uses: actions/deploy-pages@v4
-        if: github.ref == 'refs/heads/main'
-        with:
-          preview: false
+      # Constroi num diretorio temporario do runner: nada e commitado nem publicado.
+      - name: Build site (validation only)
+        run: pkgdown::build_site(new_process = FALSE, install = TRUE, override = list(destination = file.path(tempdir(), "site")))
+        shell: Rscript {0}

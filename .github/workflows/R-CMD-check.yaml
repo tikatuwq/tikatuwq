@@ -35,10 +35,11 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
+          # Os valores abaixo sao expressoes R (ver action.yaml do check-r-package@v2)
           args: 'c("--no-manual","--as-cran")'
-          build-args: '--no-manual'
-          error-on: 'warning'
-          check-dir: 'check'
+          build_args: '"--no-manual"'
+          error-on: '"warning"'
+          check-dir: '"check"'
 
       - name: Upload check results
         if: always()
